@@ -19,7 +19,7 @@
   <title>INSOLITO | Lifestyle Concierge</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link
-    href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Lato:wght@300;400;700&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Cormorant+SC:wght@300;400;500;600;700&family=Tenor+Sans&family=Outfit:wght@100;300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap"
     rel="stylesheet">
   <script>
     tailwind.config = {
@@ -48,9 +48,10 @@
             }
           },
           fontFamily: {
-            sans: ['Lato', 'sans-serif'],
+            display: ['Cormorant SC', 'serif'],
+            accent: ['Tenor Sans', 'sans-serif'],
+            sans: ['Outfit', 'sans-serif'],
             serif: ['Playfair Display', 'serif'],
-            display: ['Cinzel', 'serif'],
           },
           backgroundImage: {
             'noise': "url('data:image/svg+xml,%3Csvg viewBox=%220 0 200 200%22 xmlns=%22http://www.w3.org/2000/svg%22%3E%3Cfilter id=%22noiseFilter%22%3E%3CfeTurbulence type=%22fractalNoise%22 baseFrequency=%220.65%22 numOctaves=%223%22 stitchTiles=%22stitch%22/%3E%3C/filter%3E%3Crect width=%22100%25%22 height=%22100%25%22 filter=%22url(%23noiseFilter)%22 opacity=%220.05%22/%3E%3C/svg%3E')",
@@ -128,24 +129,51 @@
       width: 100%;
       height: 100%;
       pointer-events: none;
-      z-index: 5;
-      opacity: 0.07;
+      z-index: 9999;
+      opacity: 0.04;
       background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
     }
 
     .text-gold-gradient {
-      background: linear-gradient(to right, #F9F1D8, #D4AF37, #F9F1D8);
+      background: linear-gradient(to right, #F9F1D8, #D4AF37, #C59D24, #F9F1D8);
       -webkit-background-clip: text;
       background-clip: text;
       -webkit-text-fill-color: transparent;
       background-size: 200% auto;
-      animation: shine 5s linear infinite;
+      animation: shine 8s linear infinite;
     }
 
     @keyframes shine {
       to {
         background-position: 200% center;
       }
+    }
+
+    .glass-2026 {
+      background: rgba(8, 8, 10, 0.4);
+      backdrop-filter: blur(24px) saturate(180%);
+      -webkit-backdrop-filter: blur(24px) saturate(180%);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      box-shadow:
+        0 20px 50px rgba(0, 0, 0, 0.5),
+        inset 0 1px 1px rgba(255, 255, 255, 0.1);
+    }
+
+    .intelligent-border {
+      position: relative;
+    }
+
+    .intelligent-border::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border: 1px solid transparent;
+      background: linear-gradient(135deg, rgba(212, 175, 55, 0.2), transparent, rgba(212, 175, 55, 0.05)) border-box;
+      -webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
+      mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
+      -webkit-mask-composite: xor;
+      mask-composite: exclude;
+      pointer-events: none;
     }
 
     .glass-card {

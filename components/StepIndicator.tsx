@@ -15,53 +15,49 @@ export const StepIndicator: React.FC<StepIndicatorProps> = ({ currentStep }) => 
   const progressPercentage = ((currentStep - 1) / (steps.length - 1)) * 100;
 
   return (
-    <div className="bg-black/40 backdrop-blur-md border-b border-gold-900/50 sticky top-0 z-50">
-      {/* Progress Line */}
-      <div className="relative h-1 bg-gray-900 w-full">
-        <div
-          className="absolute h-full bg-gradient-to-r from-gold-600 to-gold-400 transition-all duration-700 ease-out shadow-[0_0_10px_rgba(212,175,55,0.5)]"
-          style={{ width: `${progressPercentage}%` }}
-        />
-      </div>
+    <div className="bg-[#050507]/80 backdrop-blur-3xl border-b border-white/5 sticky top-0 z-50">
+      <div className="max-w-5xl mx-auto px-8 py-8">
+        <div className="flex items-center justify-between relative">
 
-      <div className="px-4 md:px-12 py-6">
-        <div className="flex items-center justify-between max-w-4xl mx-auto">
+          {/* Background Path Line */}
+          <div className="absolute top-1/2 left-0 w-full h-px bg-white/5 -translate-y-1/2"></div>
+
+          {/* Active Digital Thread */}
+          <div
+            className="absolute top-1/2 left-0 h-px bg-gradient-to-r from-gold-600 via-gold-400 to-gold-200 -translate-y-1/2 transition-all duration-1000 ease-in-out shadow-[0_0_15px_rgba(212,175,55,0.3)]"
+            style={{ width: `${progressPercentage}%` }}
+          >
+            <div className="absolute right-0 top-1/2 -translate-y-1/2 w-1.5 h-1.5 rounded-full bg-gold-200 shadow-[0_0_10px_#D4AF37]"></div>
+          </div>
+
           {steps.map((step) => {
             const isActive = currentStep >= step.num;
             const isCurrent = currentStep === step.num;
 
             return (
-              <div key={step.num} className={`flex items-center flex-1 ${step.num === 4 ? 'flex-none' : ''}`}>
-                <div className="flex flex-col items-center relative group">
-                  <div
-                    className={`
-                      w-8 h-8 md:w-10 md:h-10 rounded-full flex items-center justify-center text-xs md:text-sm font-medium transition-all duration-500 border
-                      ${isActive 
-                        ? "bg-gold-400 text-black border-gold-400 shadow-[0_0_15px_rgba(212,175,55,0.4)]" 
-                        : "bg-black/80 text-gray-600 border-gray-800"
-                      }
-                      ${isCurrent ? "scale-110" : "scale-100"}
-                    `}
-                  >
-                    {step.num}
+              <div key={step.num} className="relative z-10 flex flex-col items-center">
+                <div
+                  className={`
+                    w-1.5 h-1.5 rounded-full transition-all duration-500
+                    ${isActive ? 'bg-gold-400 scale-125' : 'bg-gray-800 scale-100'}
+                    ${isCurrent ? 'ring-4 ring-gold-500/20' : ''}
+                  `}
+                />
+
+                <span
+                  className={`
+                    absolute top-6 text-[9px] md:text-[10px] font-accent uppercase tracking-[0.4em] whitespace-nowrap transition-all duration-500
+                    ${isActive ? 'text-gold-200 opacity-100' : 'text-gray-600 opacity-40'}
+                    ${isCurrent ? 'translate-y-[-2px] text-white' : ''}
+                  `}
+                >
+                  {step.label}
+                </span>
+
+                {isCurrent && (
+                  <div className="absolute -top-8 text-[8px] font-sans text-gold-500/40 uppercase tracking-[0.2em] animate-pulse">
+                    Step 0{step.num}
                   </div>
-                  <span
-                    className={`
-                      absolute top-12 text-[10px] md:text-xs font-serif tracking-widest uppercase whitespace-nowrap transition-colors duration-300
-                      ${isActive ? "text-gold-400" : "text-gray-600"}
-                    `}
-                  >
-                    {step.label}
-                  </span>
-                </div>
-                
-                {step.num < 4 && (
-                  <div className="flex-1 px-4 hidden md:block">
-                     <div className={`h-px w-full transition-colors duration-700 ${isActive && currentStep > step.num ? 'bg-gold-900' : 'bg-gray-900'}`} />
-                  </div>
-                )}
-                 {step.num < 4 && (
-                  <div className="flex-1 w-4 md:hidden" /> /* Spacer for mobile */
                 )}
               </div>
             );
