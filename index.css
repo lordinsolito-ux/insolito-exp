@@ -4,15 +4,15 @@
 
 @layer base {
   :root {
-    --gold-titan: #B8941E;
-    --ebony: #1A1A1A;
-    --pearl-warm: #FAF9F6;
-    --obsidian-deep: #0D0D0D;
-    --platinum-soft: #D1D1D1;
+    --obsidian-deep: #050505;
+    --ebony-rich: #0D0D0D;
+    --silver-refined: #C0C0C0;
+    --silver-glow: #E5E4E2;
+    --platinum-border: rgba(255, 255, 255, 0.08);
   }
 
   body {
-    @apply bg-[#080808] text-pearl-warm antialiased selection:bg-gold-titan/30 selection:text-white overflow-x-hidden;
+    @apply bg-[#050505] text-[#C0C0C0] antialiased selection:bg-white/10 selection:text-white overflow-x-hidden;
     font-family: 'Montserrat', sans-serif;
   }
 
@@ -26,41 +26,43 @@
 }
 
 @layer components {
-  .glass-2026 {
-    @apply backdrop-blur-[25px] saturate-[160%] bg-white/[0.02] border border-white/[0.06];
+  .glass-bento {
+    @apply backdrop-blur-[32px] saturate-[180%] bg-white/[0.015] border border-white/[0.08] rounded-[2rem];
     box-shadow:
-      inset 0 0 60px rgba(255, 255, 255, 0.01),
-      0 30px 60px rgba(0, 0, 0, 0.6);
+      inset 0 0 80px rgba(255, 255, 255, 0.01),
+      0 40px 100px rgba(0, 0, 0, 0.8);
+    transition: all 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
   }
 
-  .intelligent-border {
-    @apply relative border border-white/5;
+  .glass-bento:hover {
+    @apply border-white/20 bg-white/[0.03];
+    transform: translateY(-8px) scale(1.01);
+    box-shadow:
+      inset 0 0 100px rgba(255, 255, 255, 0.02),
+      0 60px 120px rgba(0, 0, 0, 0.9);
+  }
+
+  .silver-glow {
+    @apply relative overflow-hidden;
 
     &::after {
       content: '';
-      @apply absolute inset-0 pointer-events-none rounded-[inherit];
-      box-shadow: inset 0 0 10px rgba(184, 148, 30, 0.05);
-      /* Titanium Gold hint */
+      @apply absolute inset-0 pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-1000;
+      background: radial-gradient(circle at center, rgba(192, 192, 192, 0.05), transparent 70%);
     }
   }
 
   .glass-input-2026 {
-    @apply bg-white/[0.01] border border-white/5 focus:border-gold-titan/40 focus:bg-white/[0.03] transition-all duration-700 outline-none;
+    @apply bg-white/[0.01] border border-white/5 focus:border-white/20 focus:bg-white/[0.03] transition-all duration-700 outline-none;
   }
 
   .aura-bloom {
-    @apply absolute blur-[180px] opacity-10 pointer-events-none;
-    background: radial-gradient(circle at center, var(--gold-titan), transparent 75%);
+    @apply absolute blur-[200px] opacity-[0.03] pointer-events-none;
+    background: radial-gradient(circle at center, #C0C0C0, transparent 75%);
   }
 
-  .light-leak {
-    @apply absolute pointer-events-none mix-blend-screen opacity-[0.05];
-    background: linear-gradient(135deg, transparent, var(--gold-titan), transparent);
-    filter: blur(120px);
-  }
-
-  .btn-gold {
-    @apply bg-gold-titan text-ebony font-accent text-[10px] uppercase tracking-[0.3em] px-10 py-5 transition-all duration-700 hover:scale-[1.02] hover:shadow-[0_0_40px_rgba(184, 148, 30, 0.3)] active:scale-95;
+  .btn-silver {
+    @apply bg-white text-black font-accent text-[11px] uppercase tracking-[0.4em] px-12 py-5 transition-all duration-700 hover:scale-[1.05] hover:shadow-[0_0_50px_rgba(255, 255, 255, 0.2)] active:scale-95 rounded-sm;
   }
 }
 

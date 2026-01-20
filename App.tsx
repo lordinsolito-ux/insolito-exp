@@ -154,53 +154,51 @@ const IntroSplash: React.FC<{ onFinish: () => void }> = ({ onFinish }) => {
 const BrandStory: React.FC = () => {
   const { t } = useTranslation();
   return (
-    <section className="py-24 relative overflow-hidden">
+    <section className="py-32 relative overflow-hidden">
       <div className="max-w-7xl mx-auto px-12 relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-24 items-center">
-          <div className="space-y-12">
-            <div className="animate-fade-in">
-              <span className="text-gold-titan/40 font-accent text-[9px] uppercase tracking-[0.8em] mb-4 block">Founder & Visionary</span>
-              <h2 className="text-5xl md:text-7xl font-display text-transparent bg-clip-text bg-gradient-to-b from-pearl-warm via-pearl-warm to-gold-titan/30 tracking-[0.1em] mb-8">
+          <div className="space-y-16">
+            <div className="animate-fade-in space-y-6">
+              <span className="text-white/30 font-accent text-[10px] uppercase tracking-[1em] mb-4 block">Founder & Visionary</span>
+              <h2 className="text-6xl md:text-8xl font-display text-white tracking-[0.05em] leading-tight">
                 Michael Jara
               </h2>
-              <p className="text-pearl-warm/60 font-accent text-sm md:text-base leading-relaxed max-w-lg">
-                Architect of Experiences
+              <p className="text-[#C0C0C0]/40 font-accent text-sm md:text-base leading-relaxed max-w-lg tracking-widest">
+                ARCHITECT OF EXPERIENCES
               </p>
             </div>
 
-            <div className="space-y-8 animate-fade-in" style={{ animationDelay: '0.2s' }}>
+            <div className="space-y-10 animate-fade-in" style={{ animationDelay: '0.2s' }}>
               {BRAND_STORY.content.map((p, i) => (
-                <p key={i} className="text-platinum/40 text-[13px] md:text-sm font-light leading-relaxed italic border-l border-white/5 pl-8">
+                <p key={i} className="text-[#C0C0C0]/60 text-[14px] md:text-base font-light leading-relaxed italic border-l border-white/10 pl-10">
                   {p}
                 </p>
               ))}
             </div>
 
-            <div className="pt-8 animate-fade-in" style={{ animationDelay: '0.4s' }}>
-              <div className="flex items-center gap-6">
-                <div className="h-[1px] w-12 bg-gold-titan/20"></div>
-                <span className="text-[10px] text-gold-titan font-accent uppercase tracking-[0.5em]">The Signature of Excellence</span>
+            <div className="pt-12 animate-fade-in" style={{ animationDelay: '0.4s' }}>
+              <div className="flex items-center gap-8">
+                <div className="h-[1px] w-16 bg-white/20"></div>
+                <span className="text-[11px] text-white/60 font-accent uppercase tracking-[0.8em]">The Signature of Excellence</span>
               </div>
             </div>
           </div>
 
           <div className="relative group animate-fade-in" style={{ animationDelay: '0.6s' }}>
-            <div className="aspect-[4/5] rounded-[60px] overflow-hidden border border-white/5 relative">
-              <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-transparent to-transparent z-10"></div>
+            <div className="aspect-[4/5] rounded-[60px] overflow-hidden border border-white/10 relative shadow-[0_40px_100px_rgba(0,0,0,0.8)]">
               <img
                 src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=1974&auto=format&fit=crop"
                 alt="Michael Jara"
-                className="w-full h-full object-cover grayscale brightness-75 group-hover:scale-110 transition-transform duration-[3000ms] ease-out"
+                className="w-full h-full object-cover grayscale brightness-50 group-hover:scale-105 transition-transform duration-[4000ms] ease-out"
               />
-              <div className="absolute inset-x-0 bottom-12 px-12 z-20">
-                <blockquote className="text-pearl-warm/80 font-display text-2xl italic leading-tight tracking-wide">
+              <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-transparent to-transparent z-10"></div>
+              <div className="absolute inset-x-0 bottom-16 px-16 z-20">
+                <blockquote className="text-white/90 font-display text-3xl italic leading-tight tracking-wide">
                   "{BRAND_STORY.quote}"
                 </blockquote>
               </div>
             </div>
-            {/* DECORATIVE ELEMENTS */}
-            <div className="absolute -top-12 -right-12 w-64 h-64 aura-bloom opacity-[0.05] pointer-events-none"></div>
-            <div className="absolute -bottom-12 -left-12 w-48 h-48 aura-bloom opacity-[0.03] pointer-events-none" style={{ background: 'radial-gradient(circle, var(--gold-titan), transparent 75%)' }}></div>
+            <div className="absolute -top-12 -right-12 w-80 h-80 aura-bloom opacity-[0.04]"></div>
           </div>
         </div>
       </div>
@@ -444,7 +442,7 @@ const App: React.FC = () => {
       }
       const newBooking: BookingRecord = { ...formData, id: Date.now().toString(), timestamp: new Date().toISOString(), status: 'pending' };
       await saveBooking(newBooking, true);
-      const message = `*NEW BOOKING REQUEST* 👑\n*Client:* ${formData.name}\n*Service:* ${SERVICE_TYPES.find(s => s.id === formData.serviceType)?.name}\n*From:* ${formData.pickupLocation}\n*To:* ${formData.destination}\n*Date:* ${new Date(formData.date).toLocaleDateString()}\n*Time:* ${formData.time}\n*Total:* €${formData.estimatedPrice}`;
+      const message = `*NEW ASSISTANCE REQUEST* 👑\n*Client:* ${formData.name}\n*Concierge Services:* ${SERVICE_TYPES.find(s => s.id === formData.serviceType)?.name}\n*Pick-up:* ${formData.pickupLocation}\n*Destination:* ${formData.destination}\n*Date:* ${new Date(formData.date).toLocaleDateString()}\n*Time:* ${formData.time}\n*Total:* €${formData.estimatedPrice}`;
       window.location.href = `https://wa.me/393393522164?text=${encodeURIComponent(message)}`;
       setIsBookingConfirmed(true);
     } finally {
@@ -475,10 +473,9 @@ const App: React.FC = () => {
 
             {/* REFINED GRAIN & LEAKS */}
             <div className="absolute inset-0 bg-noise opacity-[0.03]"></div>
-            <div className="absolute top-[30%] left-[-5%] w-full h-[1px] light-leak rotate-[-5deg] scale-150"></div>
 
-            <img src="https://img.freepik.com/free-photo/reflective-photography-string-lights-river_413556-2.jpg?semt=ais_hybrid&w=740&q=80" alt="Milan" className="absolute inset-0 w-full h-full object-cover opacity-[0.05] grayscale mix-blend-screen" />
-            <div className="absolute inset-0 bg-gradient-to-b from-[#030303] via-transparent to-[#030303]"></div>
+            <img src="https://img.freepik.com/free-photo/reflective-photography-string-lights-river_413556-2.jpg?semt=ais_hybrid&amp;w=740&amp;q=80" alt="Milan" className="absolute inset-0 w-full h-full object-cover opacity-[0.03] grayscale mix-blend-soft-light" />
+            <div className="absolute inset-0 bg-gradient-to-b from-[#050505] via-transparent to-[#050505]"></div>
           </div>
 
           <header className="relative z-10 pt-32 pb-24 text-center">
@@ -494,13 +491,13 @@ const App: React.FC = () => {
             </div>
 
             <div className="relative inline-block mb-8">
-              <h1 className="text-8xl md:text-[11rem] font-display text-transparent bg-clip-text bg-gradient-to-b from-pearl via-platinum/60 to-platinum/10 tracking-[0.35em] drop-shadow-2xl">
+              <h1 className="text-8xl md:text-[11rem] font-display text-transparent bg-clip-text bg-gradient-to-b from-white via-white/80 to-[#C0C0C0]/20 tracking-[0.35em] drop-shadow-2xl">
                 INSOLITO
               </h1>
-              <div className="absolute -bottom-4 left-1/2 -translate-x-1/2 w-48 h-px bg-gradient-to-r from-transparent via-platinum/20 to-transparent"></div>
+              <div className="absolute -bottom-4 left-1/2 -translate-x-1/2 w-48 h-px bg-gradient-to-r from-transparent via-white/20 to-transparent"></div>
             </div>
 
-            <h2 className="text-[10px] md:text-xs font-accent text-platinum/30 tracking-[1.2em] uppercase italic mt-4">{t('hero.subtitle')}</h2>
+            <h2 className="text-[10px] md:text-xs font-accent text-[#C0C0C0]/30 tracking-[1.2em] uppercase italic mt-4">Elevated Concierge & Personal Assistance</h2>
           </header>
 
           <BrandStory />
@@ -517,30 +514,29 @@ const App: React.FC = () => {
               <StepIndicator currentStep={activeStep} />
               <div className="p-8 md:p-14">
                 {activeStep === 1 && (
-                  <div className="animate-fade-in space-y-20">
-                    <div className="text-center">
-                      <h3 className="text-5xl md:text-7xl font-display text-transparent bg-clip-text bg-gradient-to-b from-pearl via-pearl to-platinum/20 tracking-[0.25em] uppercase italic leading-tight">{t('booking.step1_title')}</h3>
-                      <p className="text-[11px] text-platinum/30 font-accent uppercase tracking-[1em] mt-6">{t('booking.step1_subtitle')}</p>
+                  <div className="animate-fade-in space-y-24">
+                    <div className="text-center space-y-8">
+                      <h3 className="text-6xl md:text-[5rem] font-display text-white tracking-[0.2em] uppercase italic leading-tight">{t('booking.step1_title')}</h3>
+                      <p className="text-[12px] text-[#C0C0C0]/40 font-accent uppercase tracking-[1.2em]">{t('booking.step1_subtitle')}</p>
                     </div>
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
-                      {SERVICE_TYPES.map(service => (
+
+                    {/* BENTO GRID - SERVICE SELECTION */}
+                    <div className="grid grid-cols-1 md:grid-cols-6 gap-10">
+                      {SERVICE_TYPES.map((service, idx) => (
                         <button
                           key={service.id}
                           onClick={() => handleServiceSelect(service.id)}
-                          className="group glass-2026 p-12 rounded-[48px] border border-white/5 hover:border-platinum/30 hover:bg-white/[0.04] transition-all duration-[1200ms] flex flex-col items-center text-center relative overflow-hidden"
+                          className={`group glass-bento p-16 flex flex-col items-center text-center relative overflow-hidden silver-glow ${idx === 0 ? 'md:col-span-3' : idx === 1 ? 'md:col-span-3' : 'md:col-span-6'
+                            }`}
                         >
-                          {/* INTERNAL GLOW */}
-                          <div className="absolute inset-0 bg-gradient-to-br from-platinum/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-1000"></div>
-
-                          <div className="w-20 h-20 rounded-3xl bg-white/[0.03] flex items-center justify-center mb-12 group-hover:text-pearl group-hover:scale-110 transition-all duration-1000 shadow-[0_0_40px_rgba(255,255,255,0.02)]">
-                            <service.icon strokeWidth={0.3} className="w-8 h-8 opacity-40 group-hover:opacity-100 transition-opacity" />
+                          <div className="w-24 h-24 rounded-full bg-white/[0.02] border border-white/5 flex items-center justify-center mb-10 group-hover:border-white/20 transition-all duration-700">
+                            <service.icon strokeWidth={0.5} className="w-10 h-10 text-white opacity-40 group-hover:opacity-100 transition-opacity" />
                           </div>
-                          <h4 className="font-display text-3xl text-pearl/90 mb-6 tracking-wide group-hover:text-white transition-colors">{t(`services.name_${service.id}`)}</h4>
-                          <p className="text-[12px] text-platinum/20 font-light italic leading-relaxed group-hover:text-platinum/40 transition-colors">{t(`services.desc_${service.id}`)}</p>
+                          <h4 className="font-display text-4xl text-white mb-6 tracking-[0.1em]">{t(`services.name_${service.id}`)}</h4>
+                          <p className="text-sm text-[#C0C0C0]/40 font-light italic leading-relaxed max-w-sm group-hover:text-[#C0C0C0] transition-colors">{t(`services.desc_${service.id}`)}</p>
 
-                          {/* BUTTON HINT */}
-                          <div className="mt-8 opacity-0 group-hover:opacity-100 transition-all duration-1000 translate-y-4 group-hover:translate-y-0">
-                            <span className="text-[9px] uppercase tracking-[0.5em] text-platinum/60 border-b border-platinum/20 pb-1">Select Experience</span>
+                          <div className="mt-12 opacity-0 group-hover:opacity-100 transition-all duration-700 translate-y-4 group-hover:translate-y-0">
+                            <span className="text-[10px] uppercase tracking-[0.6em] text-white border-b border-white/20 pb-2">Select Concierge Experience</span>
                           </div>
                         </button>
                       ))}
@@ -551,49 +547,28 @@ const App: React.FC = () => {
                 {activeStep === 2 && (
                   <div className="animate-fade-in grid grid-cols-1 lg:grid-cols-12 gap-12">
                     <div className="lg:col-span-7 space-y-8">
-                      <div className="glass-2026 rounded-[40px] p-10 space-y-12">
-                        <h4 className="text-[9px] font-accent text-gold-titan/40 uppercase tracking-[0.6em] flex items-center gap-4"><Map className="w-3 h-3" /> {t('booking.route_details')}</h4>
-                        <div className="space-y-6">
+                      <div className="glass-bento p-12 space-y-12">
+                        <h4 className="text-[10px] font-accent text-white/20 uppercase tracking-[0.8em] flex items-center gap-4"><Map className="w-3 h-3" /> {t('booking.route_details')}</h4>
+                        <div className="space-y-8">
                           <div className="relative group">
-                            <MapPin className="absolute left-6 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-700" strokeWidth={0.5} />
-                            <input type="text" value={formData.pickupLocation} onChange={(e) => handleLocationSearch('pickup', e.target.value)} onBlur={handleInputBlur} placeholder={t('booking.pickup')} className="w-full pl-16 pr-6 py-5 bg-white/[0.01] border border-white/5 rounded-[24px] text-gray-300 focus:outline-none focus:border-gold-500/20 transition-all" />
-                            {showPickupSugg && pickupSuggestions.length > 0 && (
-                              <div className="absolute top-full left-0 w-full mt-2 glass-2026 rounded-3xl z-50 overflow-hidden">
-                                {pickupSuggestions.map(s => <div key={s.id} onClick={() => selectPlace(s, 'pickup')} className="px-6 py-4 hover:bg-gold-500/5 cursor-pointer text-xs text-gray-400">{s.fullAddress}</div>)}
-                              </div>
-                            )}
+                            <MapPin className="absolute left-8 top-1/2 -translate-y-1/2 w-4 h-4 text-[#C0C0C0]/30" strokeWidth={1} />
+                            <input type="text" value={formData.pickupLocation} onChange={(e) => handleLocationSearch('pickup', e.target.value)} onBlur={handleInputBlur} placeholder={t('booking.pickup')} className="w-full pl-20 pr-8 py-6 glass-input-2026 rounded-3xl text-white" />
                           </div>
-                          {formData.stops.map((stop, i) => (
-                            <div key={i} className="relative group animate-fade-in">
-                              <MapPin className="absolute left-6 top-1/2 -translate-y-1/2 w-4 h-4 text-gold-500/30" strokeWidth={0.5} />
-                              <input type="text" value={stop} onChange={(e) => handleLocationSearch('stop', e.target.value, i)} placeholder={`${t('booking.stops')} ${i + 1}`} className="w-full pl-16 pr-12 py-5 bg-white/[0.005] border border-white/5 rounded-[24px] text-gray-400" />
-                              <button onClick={() => removeStop(i)} className="absolute right-6 top-1/2 -translate-y-1/2 text-red-900/40 hover:text-red-500Transition-all"><Trash2 className="w-4 h-4" /></button>
-                            </div>
-                          ))}
-                          {formData.stops.length < 2 && <button onClick={addStop} className="text-[9px] text-gray-700 hover:text-gold-500/80 uppercase tracking-widest pl-4 opacity-40">+ {t('booking.add_stop')}</button>}
                           <div className="relative group">
-                            <MapPin className="absolute left-6 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-700" strokeWidth={0.5} />
-                            <input type="text" value={formData.destination} onChange={(e) => handleLocationSearch('destination', e.target.value)} onBlur={handleInputBlur} placeholder={t('booking.destination')} className="w-full pl-16 pr-6 py-5 bg-white/[0.01] border border-white/5 rounded-[24px] text-gray-300 focus:outline-none focus:border-gold-500/20 transition-all" />
-                            {showDestSugg && destSuggestions.length > 0 && (
-                              <div className="absolute top-full left-0 w-full mt-2 glass-2026 rounded-3xl z-50 overflow-hidden">
-                                {destSuggestions.map(s => <div key={s.id} onClick={() => selectPlace(s, 'destination')} className="px-6 py-4 hover:bg-gold-500/5 cursor-pointer text-xs text-gray-400">{s.fullAddress}</div>)}
-                              </div>
-                            )}
+                            <MapPin className="absolute left-8 top-1/2 -translate-y-1/2 w-4 h-4 text-[#C0C0C0]/30" strokeWidth={1} />
+                            <input type="text" value={formData.destination} onChange={(e) => handleLocationSearch('destination', e.target.value)} onBlur={handleInputBlur} placeholder={t('booking.destination')} className="w-full pl-20 pr-8 py-6 glass-input-2026 rounded-3xl text-white" />
                           </div>
                         </div>
                       </div>
                     </div>
                     <div className="lg:col-span-5 space-y-10">
-                      <div className="glass-2026 rounded-[40px] p-10 space-y-10">
-                        <h4 className="text-[9px] font-accent text-gold-titan/40 uppercase tracking-[0.6em] flex items-center gap-4"><Calendar className="w-3 h-3" /> {t('booking.schedule_guests')}</h4>
-                        <div className="space-y-4">
-                          <input type="date" name="date" value={formData.date} onChange={handleInputChange} min={new Date().toISOString().split('T')[0]} className="w-full glass-input-2026 px-6 py-4 rounded-2xl text-xs text-gray-400" style={{ colorScheme: 'dark' }} />
-                          <select name="time" value={formData.time} onChange={handleInputChange} disabled={!formData.date} className="w-full glass-input-2026 px-6 py-4 rounded-2xl text-xs text-gray-400 appearance-none">
+                      <div className="glass-bento p-12 space-y-12">
+                        <h4 className="text-[10px] font-accent text-white/20 uppercase tracking-[0.8em] flex items-center gap-4"><Calendar className="w-3 h-3" /> Concierge Schedule</h4>
+                        <div className="space-y-6">
+                          <input type="date" name="date" value={formData.date} onChange={handleInputChange} min={new Date().toISOString().split('T')[0]} className="w-full glass-input-2026 px-8 py-5 rounded-2xl text-xs text-white" style={{ colorScheme: 'dark' }} />
+                          <select name="time" value={formData.time} onChange={handleInputChange} disabled={!formData.date} className="w-full glass-input-2026 px-8 py-5 rounded-2xl text-xs text-white appearance-none">
                             <option value="">{t('booking.time')}</option>
                             {availableSlots.map(s => <option key={s} value={s}>{s} {isNightService(s) ? '(Night)' : ''}</option>)}
-                          </select>
-                          <select name="passengers" value={formData.passengers} onChange={handleInputChange} className="w-full glass-input-2026 px-6 py-4 rounded-2xl text-xs text-gray-400 appearance-none">
-                            {[1, 2, 3, 4, 5, 6, 7].map(n => <option key={n} value={n}>{n} {t('booking.passengers')}</option>)}
                           </select>
                         </div>
                       </div>
@@ -604,24 +579,27 @@ const App: React.FC = () => {
                 {activeStep === 3 && (
                   <div className="animate-fade-in grid grid-cols-1 md:grid-cols-2 gap-12">
                     <div className="space-y-8">
-                      <div className="glass-2026 rounded-[40px] p-10 space-y-8">
-                        <h4 className="text-[9px] font-accent text-gold-titan/40 uppercase tracking-[0.6em] flex items-center gap-4"><User className="w-3 h-3" /> {t('booking.guest_info')}</h4>
-                        <div className="space-y-4">
-                          <input type="text" name="name" value={formData.name} onChange={handleInputChange} placeholder={t('booking.name')} className="w-full glass-input-2026 px-6 py-5 rounded-2xl text-xs" />
-                          <input type="email" name="email" value={formData.email} onChange={handleInputChange} placeholder={t('booking.email')} className="w-full glass-input-2026 px-6 py-5 rounded-2xl text-xs" />
-                          <div className="flex gap-2">
-                            <select name="countryCode" value={formData.countryCode} onChange={handleInputChange} className="w-24 glass-input-2026 px-2 py-5 rounded-2xl text-[10px]">{COUNTRY_CODES.map(c => <option key={c.code} value={c.code}>{c.code}</option>)}</select>
-                            <input type="tel" name="phone" value={formData.phone} onChange={handleInputChange} placeholder={t('booking.phone')} className="flex-1 glass-input-2026 px-6 py-5 rounded-2xl text-xs" />
+                      <div className="glass-bento p-12 space-y-12">
+                        <h4 className="text-[10px] font-accent text-white/20 uppercase tracking-[0.8em] flex items-center gap-4"><User className="w-3 h-3" /> {t('booking.guest_info')}</h4>
+                        <div className="space-y-6">
+                          <input type="text" name="name" value={formData.name} onChange={handleInputChange} placeholder={t('booking.name')} className="w-full glass-input-2026 px-8 py-6 rounded-2xl text-xs text-white" />
+                          <input type="email" name="email" value={formData.email} onChange={handleInputChange} placeholder={t('booking.email')} className="w-full glass-input-2026 px-8 py-6 rounded-2xl text-xs text-white" />
+                          <div className="flex gap-4">
+                            <select name="countryCode" value={formData.countryCode} onChange={handleInputChange} className="w-28 glass-input-2026 px-4 py-6 rounded-2xl text-[11px] text-white">
+                              {COUNTRY_CODES.map(c => <option key={c.code} value={c.code}>{c.code}</option>)}
+                            </select>
+                            <input type="tel" name="phone" value={formData.phone} onChange={handleInputChange} placeholder={t('booking.phone')} className="flex-1 glass-input-2026 px-8 py-6 rounded-2xl text-xs text-white" />
                           </div>
                         </div>
                       </div>
                     </div>
+                    {/* PAYMENT INFO CARD */}
                     <div className="space-y-8">
-                      <div className="glass-2026 rounded-[40px] p-10 space-y-8">
-                        <h4 className="text-[9px] font-accent text-gold-titan/40 uppercase tracking-[0.6em] flex items-center gap-4"><CreditCard className="w-3 h-3" /> {t('booking.payment_method')}</h4>
-                        <div className="grid grid-cols-2 gap-4">
+                      <div className="glass-bento p-12 space-y-12">
+                        <h4 className="text-[10px] font-accent text-white/20 uppercase tracking-[0.8em] flex items-center gap-4"><CreditCard className="w-3 h-3" /> {t('booking.payment_method')}</h4>
+                        <div className="grid grid-cols-2 gap-6">
                           {['cash', 'pos'].map(m => (
-                            <button key={m} onClick={() => setFormData(p => ({ ...p, paymentMethod: m as any }))} className={`p-6 border rounded-3xl text-[10px] uppercase tracking-widest transition-all ${formData.paymentMethod === m ? 'border-gold-titan/50 bg-gold-titan/5 text-pearl-warm' : 'border-white/5 text-platinum/20'}`}>
+                            <button key={m} onClick={() => setFormData(p => ({ ...p, paymentMethod: m as any }))} className={`p-8 border rounded-3xl text-[11px] uppercase tracking-widest transition-all ${formData.paymentMethod === m ? 'border-white/40 bg-white/5 text-white shadow-[0_0_30px_rgba(255,255,255,0.05)]' : 'border-white/5 text-[#C0C0C0]/20'}`}>
                               {m}
                             </button>
                           ))}
@@ -632,25 +610,25 @@ const App: React.FC = () => {
                 )}
 
                 {activeStep === 4 && (
-                  <div className="animate-fade-in max-w-2xl mx-auto space-y-12">
-                    <div className="text-center">
-                      <div className="inline-flex items-center justify-center w-16 h-16 rounded-3xl bg-gold-titan/10 mb-8 border border-gold-titan/20"><Star className="w-6 h-6 text-gold-titan/60" /></div>
-                      <h3 className="text-3xl font-display text-pearl-warm uppercase tracking-widest italic">{t('booking.step4_title')}</h3>
+                  <div className="animate-fade-in max-w-3xl mx-auto space-y-16">
+                    <div className="text-center space-y-6">
+                      <div className="inline-flex items-center justify-center w-20 h-20 rounded-full bg-white/[0.03] border border-white/10 mb-8"><Star className="w-8 h-8 text-white/40" /></div>
+                      <h3 className="text-5xl font-display text-white uppercase tracking-widest italic">{t('booking.step4_title')}</h3>
                     </div>
-                    <div className="glass-2026 rounded-[40px] p-10 space-y-8 divide-y divide-white/5">
-                      <div className="pb-8 grid grid-cols-2 gap-8">
-                        <div><p className="text-[8px] text-platinum/20 uppercase tracking-widest mb-1">{t('booking.guest')}</p><p className="text-sm italic">{formData.name}</p></div>
-                        <div className="text-right"><p className="text-[8px] text-platinum/20 uppercase tracking-widest mb-1">{t('booking.date')}</p><p className="text-sm italic">{new Date(formData.date).toLocaleDateString()} @ {formData.time}</p></div>
+                    <div className="glass-bento p-16 space-y-12 divide-y divide-white/5">
+                      <div className="pb-12 grid grid-cols-2 gap-12">
+                        <div><p className="text-[9px] text-[#C0C0C0]/20 uppercase tracking-[0.6em] mb-4">{t('booking.guest')}</p><p className="text-lg italic text-white">{formData.name}</p></div>
+                        <div className="text-right"><p className="text-[9px] text-[#C0C0C0]/20 uppercase tracking-[0.6em] mb-4">{t('booking.date')}</p><p className="text-lg italic text-white">{new Date(formData.date).toLocaleDateString()} @ {formData.time}</p></div>
                       </div>
-                      <div className="py-8"><p className="text-[8px] text-platinum/20 uppercase tracking-widest mb-4">{t('booking.service')}</p><p className="text-xl font-display text-gold-titan">{SERVICE_TYPES.find(s => s.id === formData.serviceType)?.name}</p></div>
-                      <div className="pt-8 flex justify-between items-end">
-                        <p className="text-[10px] text-gold-titan/40 uppercase tracking-[0.4em]">{t('booking.total')}</p>
-                        <p className="text-5xl font-display text-gold-titan">€{formData.estimatedPrice}</p>
+                      <div className="py-12"><p className="text-[9px] text-[#C0C0C0]/20 uppercase tracking-[0.6em] mb-6">{t('booking.service')}</p><p className="text-3xl font-display text-white tracking-widest">{SERVICE_TYPES.find(s => s.id === formData.serviceType)?.name}</p></div>
+                      <div className="pt-12 flex justify-between items-end">
+                        <p className="text-[11px] text-white/20 uppercase tracking-[0.8em]">{t('booking.total')}</p>
+                        <p className="text-6xl font-display text-white">€{formData.estimatedPrice}</p>
                       </div>
                     </div>
-                    <div className="flex items-center justify-center gap-3">
-                      <input type="checkbox" id="terms" checked={termsAccepted} onChange={e => setTermsAccepted(e.target.checked)} className="w-4 h-4 rounded-full border-white/10 bg-black text-gold-500" />
-                      <label htmlFor="terms" className="text-[10px] text-gray-500 font-accent tracking-wider">{t('booking.terms_agree')} <button onClick={() => setShowTerms(true)} className="text-gold-200 underline underline-offset-4">{t('booking.terms_link')}</button></label>
+                    <div className="flex items-center justify-center gap-4">
+                      <input type="checkbox" id="terms" checked={termsAccepted} onChange={e => setTermsAccepted(e.target.checked)} className="w-5 h-5 rounded border-white/10 bg-black text-white focus:ring-white/20" />
+                      <label htmlFor="terms" className="text-[11px] text-[#C0C0C0]/30 font-accent tracking-widest">{t('booking.terms_agree')} <button onClick={() => setShowTerms(true)} className="text-white/60 underline underline-offset-8 decoration-white/20 hover:text-white transition-colors">{t('booking.terms_link')}</button></label>
                     </div>
                   </div>
                 )}
@@ -667,40 +645,37 @@ const App: React.FC = () => {
             </div>
           </main>
 
-          <footer className="py-32 text-center border-t border-white/[0.03] mt-32 relative overflow-hidden">
-            {/* FOOTER BACKGROUND VIBE */}
-            <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-[1px] bg-gradient-to-r from-transparent via-platinum/10 to-transparent"></div>
-
-            <div className="max-w-5xl mx-auto px-12 relative z-10">
-              <div className="flex justify-center gap-24 mb-24">
+          <footer className="py-40 text-center border-t border-white/[0.03] mt-40 relative overflow-hidden bg-black/20">
+            <div className="max-w-5xl mx-auto px-16 relative z-10">
+              <div className="flex flex-wrap justify-center gap-24 mb-32">
                 {[
                   { icon: Instagram, label: `@${BUSINESS_INFO.instagram}`, href: `https://instagram.com/${BUSINESS_INFO.instagram}` },
-                  { icon: MessageCircle, label: '+39 3393522164', href: 'https://wa.me/393393522164' }
+                  { icon: MessageCircle, label: 'WHATSAPP CONCIERGE', href: 'https://wa.me/393393522164' }
                 ].map((s, i) => (
-                  <a key={i} href={s.href} target="_blank" rel="noopener noreferrer" className="group flex flex-col items-center gap-6 transition-all duration-1000">
-                    <div className="w-16 h-16 rounded-full border border-white/5 flex items-center justify-center group-hover:border-platinum/30 group-hover:bg-white/[0.02] transition-all duration-1000">
-                      <s.icon className="w-6 h-6 text-platinum/20 group-hover:text-pearl transition-colors" strokeWidth={0.5} />
+                  <a key={i} href={s.href} target="_blank" rel="noopener noreferrer" className="group flex flex-col items-center gap-8 transition-all duration-1000">
+                    <div className="w-20 h-20 rounded-full border border-white/5 flex items-center justify-center group-hover:border-white/30 group-hover:bg-white/[0.02] transition-all duration-1000 shadow-2xl">
+                      <s.icon className="w-8 h-8 text-white/20 group-hover:text-white transition-colors" strokeWidth={0.5} />
                     </div>
-                    <span className="text-[10px] text-platinum/10 group-hover:text-platinum/60 tracking-[0.4em] uppercase transition-colors duration-1000">{s.label}</span>
+                    <span className="text-[11px] text-white/10 group-hover:text-white/60 tracking-[0.8em] uppercase transition-colors duration-1000">{s.label}</span>
                   </a>
                 ))}
               </div>
 
-              <div className="flex flex-col items-center gap-10">
-                <div className="relative">
-                  <Crown className="w-8 h-8 text-platinum/5 mb-2" strokeWidth={0.5} />
-                  <div className="absolute inset-0 aura-bloom opacity-[0.02] scale-50"></div>
+              <div className="flex flex-col items-center gap-12">
+                <div className="relative mb-8">
+                  <Crown className="w-10 h-10 text-white/5" strokeWidth={0.5} />
+                  <div className="absolute inset-0 aura-bloom opacity-[0.05] scale-150"></div>
                 </div>
 
-                <div className="space-y-4">
-                  <h4 className="font-display text-2xl text-platinum/40 tracking-[0.6em] mb-4">{BUSINESS_INFO.name}</h4>
-                  <div className="flex flex-wrap justify-center gap-10 text-[9px] uppercase tracking-[0.6em] text-platinum/10 font-accent">
+                <div className="space-y-6">
+                  <h4 className="font-display text-3xl text-white tracking-[0.4em] mb-4">{BUSINESS_INFO.name}</h4>
+                  <div className="flex flex-wrap justify-center gap-12 text-[10px] uppercase tracking-[0.8em] text-white/10 font-accent">
                     <span>VAT: {BUSINESS_INFO.piva}</span>
-                    <span>HEADQUARTERS: {BUSINESS_INFO.address.split(',')[0]}</span>
+                    <span>MILAN HQ: {BUSINESS_INFO.address.split(',')[0]}</span>
                   </div>
                 </div>
 
-                <p className="text-[8px] text-platinum/5 tracking-[1em] mt-12">&copy; {new Date().getFullYear()} INSOLITO. ARCHITECTURAL LUXURY.</p>
+                <p className="text-[9px] text-white/5 tracking-[1.2em] mt-24 uppercase">&copy; {new Date().getFullYear()} INSOLITO EXPERIENCES. ARCHITECTURAL LUXURY ASSISTANCE.</p>
               </div>
             </div>
           </footer>
