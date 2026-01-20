@@ -30,19 +30,18 @@
               100: '#F5EBC0',
               200: '#EBD48B',
               300: '#Dfc064',
-              400: '#D4AF37', // Classic Gold
-              500: '#C59D24', // Richer Gold
+              400: '#D4AF37',
+              500: '#C59D24',
               600: '#A07E1D',
               700: '#7D6115',
               800: '#5C460F',
               900: '#3D2E0A',
-              // Metallic variants
               champagne: '#F7E7CE',
               bronze: '#CD7F32',
             },
             black: {
               DEFAULT: '#000000',
-              rich: '#050507', // Slightly blueish black for depth
+              rich: '#050507',
               card: '#0A0A0C',
               glass: 'rgba(10, 10, 12, 0.7)',
             }
@@ -97,7 +96,6 @@
     }
   </script>
   <style>
-    /* Custom Scrollbar for Webkit */
     ::-webkit-scrollbar {
       width: 6px;
     }
@@ -122,7 +120,6 @@
       -moz-osx-font-smoothing: grayscale;
     }
 
-    /* Cinematic Noise Overlay */
     .bg-noise {
       position: fixed;
       top: 0;
@@ -138,6 +135,7 @@
     .text-gold-gradient {
       background: linear-gradient(to right, #F9F1D8, #D4AF37, #F9F1D8);
       -webkit-background-clip: text;
+      background-clip: text;
       -webkit-text-fill-color: transparent;
       background-size: 200% auto;
       animation: shine 5s linear infinite;
@@ -169,25 +167,12 @@
       box-shadow: 0 4px 20px -5px rgba(212, 175, 55, 0.1);
     }
 
-    /* Force Dark Mode for Date/Time Inputs */
     ::-webkit-calendar-picker-indicator {
       filter: invert(1);
       opacity: 0.6;
       cursor: pointer;
     }
   </style>
-  <script type="importmap">
-{
-  "imports": {
-    "lucide-react": "https://aistudiocdn.com/lucide-react@^0.554.0",
-    "react": "https://aistudiocdn.com/react@^19.2.0",
-    "react/": "https://aistudiocdn.com/react@^19.2.0/",
-    "react-dom/": "https://aistudiocdn.com/react-dom@^19.2.0/",
-    "@vitejs/plugin-react": "https://aistudiocdn.com/@vitejs/plugin-react@^5.1.1",
-    "vite": "https://aistudiocdn.com/vite@^7.2.4"
-  }
-}
-</script>
   <link rel="stylesheet" href="/index.css">
 </head>
 
