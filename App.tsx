@@ -9,6 +9,7 @@ import {
   ChevronRight,
   ChevronLeft,
   Loader2,
+  History,
   Instagram,
   MessageCircle,
   Phone,
