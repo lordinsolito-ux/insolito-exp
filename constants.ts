@@ -9,44 +9,42 @@ import {
 } from 'lucide-react';
 import { ServiceType, ServiceTypeId, VehicleType, VehicleTypeId, LocationSuggestion } from './types';
 
+// Elite Service Definitions - INSOLITO EXPERIENCES
+// No public pricing (Bespoke Pricing model)
 export const SERVICE_TYPES: ServiceType[] = [
   {
     id: ServiceTypeId.CITY_TO_CITY,
-    name: 'Luxury Commuting Assistant',
-    description: 'Spostamenti a lungo raggio gestiti con la massima cura. Il tuo tempo diventa produttivo o rigenerante.',
+    name: 'Luxury Commuting Experience',
+    description: 'Long-distance journeys managed with meticulous care. Your travel time becomes productive or regenerative.',
     icon: MapIcon,
-    startingPrice: 25,
-    badge: 'Best Value'
+    badge: 'Signature'
   },
   {
     id: ServiceTypeId.AIRPORT_TRANSFER,
-    name: 'Airport Concierge & Greeting',
-    description: 'Assistente personale dedicato per i tuoi arrivi e partenze (MXP, LIN, BGY). Accoglienza senza stress.',
+    name: 'Airport Guest Support',
+    description: 'Eliminiamo ogni attrito al tuo arrivo. Un assistente dedicato gestisce la tua accoglienza e il coordinamento logistico, garantendo una transizione fluida verso la tua destinazione.',
     icon: Plane,
     popular: true,
-    startingPrice: 25,
-    badge: 'Most Popular'
+    badge: 'Most Requested'
   },
   {
     id: ServiceTypeId.HOURLY,
     name: 'Personal Concierge on Demand',
-    description: 'A tua disposizione per meeting, shopping o qualsiasi necessità personale.',
+    description: 'Il tuo assistente personale a disposizione per commissioni, incontri d\'affari o shopping tour. Flessibilità totale per adattarsi ai tuoi ritmi.',
     icon: Clock,
-    startingPrice: 60
   },
   {
     id: ServiceTypeId.EVENT,
-    name: 'Nightlife Guardian & Concierge',
-    description: 'Gestione totale della tua serata. Presidio costante per un rientro sicuro alle prime luci dell\'alba.',
+    name: 'Nightlife Guardian',
+    description: 'Vivi la notte di Milano e Bergamo senza compromessi. Presidio costante e assistenza dedicata per garantirti un\'esperienza esclusiva e un rientro protetto.',
     icon: GlassWater,
-    startingPrice: 90
+    badge: 'Elite'
   },
   {
     id: ServiceTypeId.WEDDING,
-    name: 'Wedding Experience',
-    description: 'Coordinamento esclusivo per il tuo grande giorno. Eleganza e precisione garantite.',
+    name: 'Bespoke Wedding Concierge',
+    description: 'Coordinamento esclusivo per il tuo grande giorno. Ogni dettaglio curato con eleganza e precisione impeccabile.',
     icon: Heart,
-    startingPrice: 250,
     badge: 'Premium'
   },
 ];
@@ -78,7 +76,7 @@ export const COUNTRY_CODES = [
   { code: '+31', country: 'NL', flag: '🇳🇱' },
 ];
 
-// Expanded location database for a better "fake" autocomplete experience
+// Location database for autocomplete
 export const MOCK_LOCATIONS: LocationSuggestion[] = [
   // Airports
   { id: 'mxp', shortAddress: 'Malpensa Airport (MXP)', fullAddress: 'Aeroporto di Milano-Malpensa, Ferno, VA', type: 'airport' },

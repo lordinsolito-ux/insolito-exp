@@ -1,15 +1,9 @@
-
 import { BookingFormData, BookingRecord } from "../types";
 import { supabase, isSupabaseConfigured, rowToBookingRecord, bookingToRow } from "./supabaseClient";
 
-// --- LEGACY CONFIGURATION (Fallback) ---
-const GOOGLE_SHEET_CSV_URL = "https://docs.google.com/spreadsheets/d/1cxvhABvAD5s_3bbSyrSrg6HsnOxs1fcdJc9CR4td2gY/gviz/tq?tqx=out:csv&sheet=booking";
-const MAKE_ADD_BOOKING_URL = "https://hook.eu2.make.com/4n3y7u6nannbgmqy6459f946gqc3xncf";
-const MAKE_NOTIFICATION_URL = "https://hook.eu2.make.com/mn9sc46ljtsh8nnx5tw6rpp4are8iol7";
-
 // Check data source
 export const isCloudConfigured = (): boolean => {
-  return isSupabaseConfigured() || !MAKE_ADD_BOOKING_URL.includes("YOUR_POST");
+  return isSupabaseConfigured();
 };
 
 export const isCloudSyncEnabled = (): boolean => {
@@ -79,13 +73,12 @@ const parseDateTime = (dateStr: string, timeStr: string): Date => {
   return new Date(`${dateStr}T${timeStr}:00`);
 };
 
-// --- CORE DATA FUNCTIONS (SUPABASE) ---
+// --- CORE DATA FUNCTIONS (SUPABASE ONLY) ---
 
 /**
  * Fetches all bookings from Supabase
  */
 export const fetchAllBookings = async (): Promise<BookingRecord[]> => {
-  // Try Supabase first
   if (isSupabaseConfigured()) {
     try {
       const { data, error } = await supabase
@@ -101,10 +94,12 @@ export const fetchAllBookings = async (): Promise<BookingRecord[]> => {
       if (data && data.length > 0) {
         console.log(`✅ Fetched ${data.length} bookings from Supabase`);
         const bookings = data.map(rowToBookingRecord);
-        // Cache locally
         localStorage.setItem('insolito_bookings', JSON.stringify(bookings));
         return bookings;
       }
+
+      // Return empty array if no data (not an error)
+      return [];
     } catch (e) {
       console.warn("Supabase fetch failed, using local backup", e);
     }
@@ -135,7 +130,6 @@ export const saveBooking = async (
       const row = bookingToRow(bookingWithTimestamp);
 
       if (isNewBooking) {
-        // Insert new booking
         const { data, error } = await supabase
           .from('bookings')
           .insert(row)
@@ -149,7 +143,6 @@ export const saveBooking = async (
 
         console.log(`✅ Saved new booking to Supabase:`, data?.id);
       } else {
-        // Update existing booking
         const { error } = await supabase
           .from('bookings')
           .update(row)
@@ -163,7 +156,7 @@ export const saveBooking = async (
         console.log(`✅ Updated booking in Supabase: ${booking.id}`);
       }
 
-      // Send notification
+      // Trigger notification (prepared for Resend integration)
       if (isNewBooking || forceCloudUpdate) {
         await sendBookingUpdateNotification(booking, booking.status as any, reason);
       }
@@ -172,7 +165,7 @@ export const saveBooking = async (
     }
   }
 
-  // Always update local cache
+  // Update local cache
   const currentList = await fetchAllBookings();
   const otherBookings = currentList.filter(b => b.id !== booking.id);
   const updatedList = [bookingWithTimestamp, ...otherBookings];
@@ -254,7 +247,8 @@ export const checkBookingConflict = (newBooking: BookingFormData, existingBookin
 };
 
 /**
- * Sends notifications (still uses Make.com for now, will migrate to Resend later)
+ * Sends notifications - Prepared for Resend integration
+ * Currently logs to console. Will send emails via Resend API when configured.
  */
 export const sendBookingUpdateNotification = async (
   booking: BookingRecord,
@@ -286,34 +280,32 @@ export const sendBookingUpdateNotification = async (
     subject = "📅 Proposta Modifica - INSOLITO Experiences";
   }
 
-  // Use Make.com for notifications (will migrate to Resend in Phase 3)
-  try {
-    const payload = {
-      phone: booking.countryCode + booking.phone,
-      email: booking.email,
-      clientName: booking.name,
-      pickup: booking.pickupLocation,
-      destination: booking.destination,
-      date: booking.date,
-      time: booking.time,
-      duration: booking.duration,
-      message: htmlMessage,
-      subject: subject,
-      status: status,
-      bookingId: booking.id,
-      referralCode: bookingCode
-    };
+  // TODO: Integrate with Resend API
+  // For now, log the notification details
+  console.log('📧 Notification Ready (Resend integration pending):', {
+    to: booking.email,
+    subject: subject,
+    status: status,
+    bookingId: booking.id
+  });
 
-    console.log('🚀 Sending Notification Payload:', payload);
-
-    await fetch(MAKE_NOTIFICATION_URL, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(payload)
-    });
-    return true;
-  } catch (e) {
-    console.error("Notification webhook failed", e);
-    return false;
+  // Store notification in Supabase for tracking
+  if (isSupabaseConfigured()) {
+    try {
+      await supabase
+        .from('notifications')
+        .insert({
+          booking_id: booking.id,
+          email: booking.email,
+          subject: subject,
+          status: status,
+          sent_at: new Date().toISOString()
+        });
+    } catch (e) {
+      // Table might not exist yet, that's ok
+      console.log('Notification tracking skipped (table not configured)');
+    }
   }
+
+  return true;
 };

@@ -1,14 +1,21 @@
 {
     "hero": {
         "title": "INSOLITO",
-        "subtitle": "LIFESTYLE CONCIERGE & ASISTENTE PERSONAL",
-        "cta": "SOLICITAR ASISTENCIA"
+        "subtitle": "PRIVATE LIFESTYLE MANAGEMENT",
+        "cta": "INQUIRE FOR AVAILABILITY"
     },
     "services": {
         "title": "Nuestros Servicios",
-        "airport": "Concierge de Aeropuerto",
-        "hourly": "Concierge Personal a Demanda",
-        "events": "Guardián Nocturno & Concierge"
+        "name_airport_transfer": "Airport Guest Support",
+        "desc_airport_transfer": "Eliminamos cualquier fricción a su llegada. Un asistente dedicado gestiona su bienvenida y la coordinación logística, garantizando una transición fluida hacia su destino.",
+        "name_hourly": "Personal Concierge on Demand",
+        "desc_hourly": "Su asistente personal a su disposición para trámites, reuniones de negocios o tours de compras. Flexibilidad total para adaptarse a sus ritmos.",
+        "name_event": "Nightlife Guardian",
+        "desc_event": "Viva la noche de Milán y Bérgamo sin compromisos. Presencia constante y asistencia dedicada para garantizarle una experiencia exclusiva y un regreso protegido.",
+        "name_city_to_city": "Luxury Commuting Experience",
+        "desc_city_to_city": "Desplazamientos de larga distancia gestionados con meticuloso cuidado. Su tiempo de viaje se vuelve productivo o regenerativo.",
+        "name_wedding": "Bespoke Wedding Concierge",
+        "desc_wedding": "Coordinación exclusiva para su gran día. Cada detalle cuidado con elegancia y precisión impecable."
     },
     "booking": {
         "title": "Solicitar Asistencia",
@@ -47,7 +54,7 @@
         "terms_link": "Términos y Condiciones",
         "back": "Atrás",
         "continue": "Continuar",
-        "request_booking": "Confirmar Solicitud",
+        "request_booking": "Inquire for Availability",
         "guest": "Cliente",
         "contact": "Contacto",
         "service": "Servicio",

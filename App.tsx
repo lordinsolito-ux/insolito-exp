@@ -38,7 +38,7 @@ import {
   Edit2
 } from 'lucide-react';
 import LegalModal from './components/LegalModal';
-import { LEGAL_CONTENT } from './legalContent';
+import { LEGAL_CONTENT, BUSINESS_INFO } from './legalContent';
 import { useTranslation } from 'react-i18next';
 import LanguageSwitcher from './components/LanguageSwitcher';
 import { StepIndicator } from './components/StepIndicator';
@@ -699,6 +699,48 @@ _Sent via INSOLITO Web App_
           </header>
 
           <main className="max-w-6xl mx-auto px-4 pb-20 relative z-10">
+            {/* REFERRAL ONLY BANNER */}
+            <div className="mb-12 animate-fade-in" style={{ animationDelay: '0.8s' }}>
+              <div className="relative group">
+                <div className="absolute -inset-0.5 bg-gradient-to-r from-gold-500/20 via-gold-500/40 to-gold-500/20 rounded-lg blur opacity-30 group-hover:opacity-100 transition duration-1000 group-hover:duration-200"></div>
+                <div className="relative flex flex-col md:flex-row items-center justify-between gap-4 px-8 py-4 bg-black/40 backdrop-blur-md border border-gold-500/20 rounded-lg">
+                  <div className="flex items-center gap-4">
+                    <div className="p-2 bg-gold-500/10 rounded-full">
+                      <Crown className="w-5 h-5 text-gold-400" />
+                    </div>
+                    <div>
+                      <p className="text-[10px] text-gold-500 font-bold uppercase tracking-[0.3em] mb-1">Elite Access Only</p>
+                      <p className="text-sm text-gray-300 font-light">Servizi accessibili esclusivamente su appuntamento o referenza diretta.</p>
+                    </div>
+                  </div>
+                  <div className="flex items-center gap-2 text-[9px] text-gold-500/60 font-bold uppercase tracking-widest border border-gold-500/20 px-4 py-2 rounded-full">
+                    <Star className="w-3 h-3 fill-gold-500/20" /> Referral Only
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* FOUNDER VISION SECTION */}
+            <section className="mb-20 text-center max-w-3xl mx-auto animate-fade-in" style={{ animationDelay: '1s' }}>
+              <div className="inline-block relative mb-6">
+                <div className="absolute inset-0 bg-gold-500/20 blur-xl rounded-full"></div>
+                <div className="relative w-16 h-16 rounded-full border border-gold-500/30 overflow-hidden flex items-center justify-center bg-black/50">
+                  <Crown className="w-8 h-8 text-gold-500/40" />
+                </div>
+              </div>
+              <h3 className="text-2xl md:text-3xl font-display text-gold-100 mb-6 tracking-widest uppercase">The Vision</h3>
+              <p className="text-gray-400 font-serif italic text-lg leading-relaxed mb-8">
+                "Insolito non è solo un servizio, è il custode del vostro bene più prezioso: il tempo.
+                Abbiamo creato un ecosistema dove la discrezione incontra l'eccellenza,
+                per chi non accetta compromessi tra produttività e serenità."
+              </p>
+              <div className="flex items-center justify-center gap-4">
+                <div className="h-px w-12 bg-gold-500/20"></div>
+                <span className="text-[10px] text-gold-500 uppercase tracking-[0.5em] font-bold">M.S. Jara • Founder</span>
+                <div className="h-px w-12 bg-gold-500/20"></div>
+              </div>
+            </section>
+
             <div
               ref={formCardRef}
               className="glass-card rounded-2xl shadow-2xl overflow-hidden relative border border-white/5 scroll-mt-24"
@@ -774,21 +816,19 @@ _Sent via INSOLITO Web App_
                           </div>
 
                           <h4 className={`font-display text-lg mb-2 tracking-wide transition-colors ${formData.serviceType === service.id ? 'text-gold-200' : 'text-gray-300 group-hover:text-white'}`}>
-                            {service.name}
+                            {t(`services.name_${service.id}`)}
                           </h4>
                           <p className="text-xs text-gray-500 font-light leading-relaxed group-hover:text-gray-400 transition-colors tracking-wide mb-4">
-                            {service.description}
+                            {t(`services.desc_${service.id}`)}
                           </p>
 
-                          {/* PRICE ANCHOR */}
-                          {service.startingPrice && (
-                            <div className={`mt-auto pt-4 border-t border-white/5 flex justify-between items-end transition-opacity duration-500 ${formData.serviceType === service.id ? 'border-gold-500/30' : ''}`}>
-                              <span className="text-[9px] text-gray-600 uppercase tracking-widest mb-1">From</span>
-                              <span className={`font-display text-xl ${formData.serviceType === service.id ? 'text-gold-300' : 'text-gray-400 group-hover:text-gold-400'} transition-colors`}>
-                                €{service.startingPrice}
-                              </span>
-                            </div>
-                          )}
+                          {/* BESPOKE PRICING ANCHOR */}
+                          <div className={`mt-auto pt-4 border-t border-white/5 flex justify-between items-end transition-opacity duration-500 ${formData.serviceType === service.id ? 'border-gold-500/30' : ''}`}>
+                            <span className="text-[9px] text-gray-600 uppercase tracking-widest mb-1">Pricing</span>
+                            <span className={`font-display text-xs tracking-widest uppercase ${formData.serviceType === service.id ? 'text-gold-300' : 'text-gray-400 group-hover:text-gold-400'} transition-colors`}>
+                              Bespoke
+                            </span>
+                          </div>
 
                           {/* Hover Gradient Overlay */}
                           <div className="absolute inset-0 bg-gradient-to-t from-gold-900/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"></div>
@@ -1398,58 +1438,71 @@ _Sent via INSOLITO Web App_
             </div>
           </main>
 
-          <footer className="relative z-10 py-12 text-center text-gray-600 text-[10px] tracking-widest uppercase border-t border-white/5 bg-black/50 backdrop-blur-sm mt-20">
-            <div className="flex justify-center gap-8 mb-8">
-              <a href="https://instagram.com/insolito.experiences" target="_blank" rel="noopener noreferrer" className="hover:text-gold-400 transition-colors duration-300 flex items-center gap-2 group">
-                <div className="p-2 border border-white/10 rounded-full group-hover:border-gold-500/50 transition-colors">
-                  <Instagram className="w-4 h-4" />
+          <footer className="relative z-10 py-16 text-center text-gray-600 text-[10px] tracking-widest uppercase border-t border-white/5 bg-black/90 backdrop-blur-md mt-20">
+            <div className="max-w-4xl mx-auto px-4">
+              <div className="flex justify-center gap-12 mb-12">
+                <a href={`https://instagram.com/${BUSINESS_INFO.instagram}`} target="_blank" rel="noopener noreferrer" className="hover:text-gold-400 transition-colors duration-300 flex flex-col items-center gap-3 group">
+                  <div className="p-3 border border-white/10 rounded-full group-hover:border-gold-500/50 transition-all group-hover:scale-110">
+                    <Instagram className="w-5 h-5" />
+                  </div>
+                  <span className="text-[9px] font-bold group-hover:tracking-widest transition-all">@{BUSINESS_INFO.instagram}</span>
+                </a>
+                <a href="https://wa.me/393393522164" target="_blank" rel="noopener noreferrer" className="hover:text-gold-400 transition-colors duration-300 flex flex-col items-center gap-3 group">
+                  <div className="p-3 border border-white/10 rounded-full group-hover:border-gold-500/50 transition-all group-hover:scale-110">
+                    <MessageCircle className="w-5 h-5" />
+                  </div>
+                  <span className="text-[9px] font-bold group-hover:tracking-widest transition-all">+39 3393522164</span>
+                </a>
+              </div>
+
+              {/* Legal Links */}
+              <div className="flex justify-center gap-8 mb-12 text-[9px] font-medium tracking-[0.2em]">
+                <button
+                  onClick={() => { setCurrentLegalContent(LEGAL_CONTENT.privacy); setShowLegalModal(true); }}
+                  className="hover:text-gold-400 transition-colors duration-300 relative group"
+                >
+                  Privacy Policy
+                  <span className="absolute -bottom-1 left-0 w-0 h-[1px] bg-gold-400 transition-all duration-300 group-hover:w-full"></span>
+                </button>
+                <button
+                  onClick={() => { setCurrentLegalContent(LEGAL_CONTENT.terms); setShowLegalModal(true); }}
+                  className="hover:text-gold-400 transition-colors duration-300 relative group"
+                >
+                  Termini e Condizioni
+                  <span className="absolute -bottom-1 left-0 w-0 h-[1px] bg-gold-400 transition-all duration-300 group-hover:w-full"></span>
+                </button>
+                <button
+                  onClick={() => { setCurrentLegalContent(LEGAL_CONTENT.cookies); setShowLegalModal(true); }}
+                  className="hover:text-gold-400 transition-colors duration-300 relative group"
+                >
+                  Cookies
+                  <span className="absolute -bottom-1 left-0 w-0 h-[1px] bg-gold-400 transition-all duration-300 group-hover:w-full"></span>
+                </button>
+              </div>
+
+              <div className="flex flex-col items-center gap-4 border-t border-white/5 pt-12 opacity-80">
+                <div className="mb-2">
+                  <Crown className="w-6 h-6 text-gold-500/20" />
                 </div>
-                <span className="hidden md:inline group-hover:translate-x-1 transition-transform">insolito.experiences</span>
-              </a>
-              <a href="https://wa.me/393393522164" target="_blank" rel="noopener noreferrer" className="hover:text-gold-400 transition-colors duration-300 flex items-center gap-2 group">
-                <div className="p-2 border border-white/10 rounded-full group-hover:border-gold-500/50 transition-colors">
-                  <MessageCircle className="w-4 h-4" />
+                <h4 className="text-[11px] font-display text-gold-100 tracking-[0.4em] mb-4">{BUSINESS_INFO.name}</h4>
+
+                <div className="flex flex-wrap justify-center gap-x-8 gap-y-2 text-[9px] leading-relaxed text-gray-500 max-w-2xl">
+                  <span>P.IVA: {BUSINESS_INFO.piva}</span>
+                  <span>ATECO: {BUSINESS_INFO.ateco} - {BUSINESS_INFO.atecoDescription}</span>
+                  <span>HQ: {BUSINESS_INFO.address}</span>
+                  <span>Contact: {BUSINESS_INFO.email}</span>
                 </div>
-                <span className="hidden md:inline group-hover:translate-x-1 transition-transform">+39 3393522164</span>
-              </a>
-            </div>
 
-            {/* Legal Links */}
-            <div className="flex justify-center gap-6 mb-8 text-[9px] font-medium">
-              <button
-                onClick={() => { setCurrentLegalContent(LEGAL_CONTENT.privacy); setShowLegalModal(true); }}
-                className="hover:text-gold-400 transition-colors duration-300 relative group"
-              >
-                Privacy Policy
-                <span className="absolute -bottom-1 left-0 w-0 h-[1px] bg-gold-400 transition-all duration-300 group-hover:w-full"></span>
-              </button>
-              <button
-                onClick={() => { setCurrentLegalContent(LEGAL_CONTENT.terms); setShowLegalModal(true); }}
-                className="hover:text-gold-400 transition-colors duration-300 relative group"
-              >
-                Termini e Condizioni
-                <span className="absolute -bottom-1 left-0 w-0 h-[1px] bg-gold-400 transition-all duration-300 group-hover:w-full"></span>
-              </button>
-              <button
-                onClick={() => { setCurrentLegalContent(LEGAL_CONTENT.cookies); setShowLegalModal(true); }}
-                className="hover:text-gold-400 transition-colors duration-300 relative group"
-              >
-                Cookies
-                <span className="absolute -bottom-1 left-0 w-0 h-[1px] bg-gold-400 transition-all duration-300 group-hover:w-full"></span>
-              </button>
-            </div>
+                <p className="mt-8 text-[8px] opacity-40">&copy; {new Date().getFullYear()} {BUSINESS_INFO.shortName}. Tutti i diritti riservati.</p>
 
-            <div className="flex flex-col items-center gap-2 opacity-60">
-              <p>&copy; {new Date().getFullYear()} Insolito Experiences. Tutti i diritti riservati.</p>
-              <p className="text-[9px]">ATECO 96.99.99 - Servizi alla Persona | P.IVA: IT14379200968 | Milano</p>
-
-              <button
-                onClick={() => setShowAdminLogin(true)}
-                className="hover:text-gold-500 transition-colors mt-2"
-                title={t('booking.admin_access')}
-              >
-                <Lock className="w-3 h-3" />
-              </button>
+                <button
+                  onClick={() => setShowAdminLogin(true)}
+                  className="hover:text-gold-500 transition-colors mt-6 opacity-40 hover:opacity-100"
+                  title={t('booking.admin_access')}
+                >
+                  <Lock className="w-3 h-3" />
+                </button>
+              </div>
             </div>
           </footer>
         </div>

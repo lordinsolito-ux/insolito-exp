@@ -1,14 +1,21 @@
 {
     "hero": {
         "title": "INSOLITO",
-        "subtitle": "LIFESTYLE CONCIERGE & PERSONAL ASSISTANT",
-        "cta": "REQUEST ASSISTANCE"
+        "subtitle": "PRIVATE LIFESTYLE MANAGEMENT",
+        "cta": "INQUIRE FOR AVAILABILITY"
     },
     "services": {
         "title": "Our Services",
-        "airport": "Airport Concierge & Greeting",
-        "hourly": "Personal Concierge on Demand",
-        "events": "Nightlife Guardian & Concierge"
+        "name_airport_transfer": "Airport Guest Support",
+        "desc_airport_transfer": "We eliminate every friction upon your arrival. A dedicated assistant manages your greeting and logistical coordination, ensuring a seamless transition to your destination.",
+        "name_hourly": "Personal Concierge on Demand",
+        "desc_hourly": "Your personal assistant at your disposal for errands, business meetings, or shopping tours. Total flexibility to adapt to your rhythms.",
+        "name_event": "Nightlife Guardian",
+        "desc_event": "Experience the night of Milan and Bergamo without compromise. Constant presence and dedicated assistance to guarantee an exclusive experience and a protected return.",
+        "name_city_to_city": "Luxury Commuting Experience",
+        "desc_city_to_city": "Long-distance journeys managed with meticulous care. Your travel time becomes productive or regenerative.",
+        "name_wedding": "Bespoke Wedding Concierge",
+        "desc_wedding": "Exclusive coordination for your big day. Every detail curated with elegance and impeccable precision."
     },
     "booking": {
         "title": "Request Assistance",
@@ -47,7 +54,7 @@
         "terms_link": "Terms and Conditions",
         "back": "Back",
         "continue": "Continue",
-        "request_booking": "Confirm Request",
+        "request_booking": "Inquire for Availability",
         "guest": "Client",
         "contact": "Contact",
         "service": "Service",
