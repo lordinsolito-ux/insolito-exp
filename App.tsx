@@ -64,7 +64,7 @@ const IntroSplash: React.FC<{ onFinish: () => void }> = ({ onFinish }) => {
   const audioSrc = "https://www.dropbox.com/scl/fi/trkgfjejfgayjdkgqvt75/Drive-in-Style.mp3?rlkey=ep7dkuq7hl7swnpys0m1p7c6a&e=1&st=ccy55v2q&raw=1";
 
   useEffect(() => {
-    const timer = setTimeout(() => setShowButton(true), 1000);
+    const timer = setTimeout(() => setShowButton(true), 1200);
     return () => clearTimeout(timer);
   }, []);
 
@@ -73,7 +73,7 @@ const IntroSplash: React.FC<{ onFinish: () => void }> = ({ onFinish }) => {
     setPlayShow(true);
 
     if (audioRef.current) {
-      audioRef.current.volume = 0.4;
+      audioRef.current.volume = 0.3;
       try {
         await audioRef.current.play();
       } catch (err) {
@@ -83,64 +83,64 @@ const IntroSplash: React.FC<{ onFinish: () => void }> = ({ onFinish }) => {
 
     setTimeout(() => {
       setIsExiting(true);
-      setTimeout(onFinish, 1500);
-    }, 3000);
+      setTimeout(onFinish, 1800);
+    }, 4500);
   };
 
   return (
-    <div className={`fixed inset-0 z-[100] bg-black flex flex-col items-center justify-center transition-opacity duration-1500 ease-in-out ${isExiting ? 'opacity-0 pointer-events-none' : 'opacity-100'}`}>
+    <div className={`fixed inset-0 z-[100] bg-[#050505] flex flex-col items-center justify-center transition-opacity duration-[2000ms] ease-in-out ${isExiting ? 'opacity-0 pointer-events-none' : 'opacity-100'}`}>
       <audio ref={audioRef} src={audioSrc} preload="auto" />
-      <div className="absolute inset-0 opacity-30 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-gold-900/30 via-black to-black"></div>
-      <div className="absolute inset-0 bg-noise opacity-50"></div>
+
+      {/* DINAMIC LAYERS */}
+      <div className="absolute inset-0 bg-noise opacity-[0.03] pointer-events-none"></div>
+      <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] aura-bloom opacity-[0.05] animate-pulse-slow"></div>
+      <div className="absolute bottom-[-10%] right-[-10%] w-[50%] h-[50%] aura-bloom opacity-[0.03] animate-pulse-slow font-accent" style={{ background: 'radial-gradient(circle, #F7E7CE, transparent 70%)' }}></div>
 
       {!playShow && (
-        <div className={`absolute inset-0 z-20 flex flex-col items-center justify-center transition-opacity duration-700 ${showButton ? 'opacity-100' : 'opacity-0'}`}>
-          <h1 className="text-3xl md:text-5xl font-display text-transparent bg-clip-text bg-gradient-to-b from-gold-100 to-gold-500 tracking-[0.2em] mb-12 drop-shadow-2xl animate-fade-in opacity-90">
+        <div className={`absolute inset-0 z-20 flex flex-col items-center justify-center transition-all duration-1000 ${showButton ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
+          <h1 className="text-4xl md:text-6xl font-display text-transparent bg-clip-text bg-gradient-to-b from-pearl via-platinum to-platinum/40 tracking-[0.3em] mb-16 drop-shadow-2xl italic">
             {t('hero.title')}
           </h1>
           <button
             onClick={handleEnter}
-            className="group relative px-10 py-5 bg-transparent overflow-hidden transition-all hover:scale-105 active:scale-95 cursor-pointer"
+            className="group relative px-12 py-6 bg-transparent overflow-hidden transition-all hover:scale-105 active:scale-95 cursor-pointer"
           >
-            <div className="absolute inset-0 border border-gold-500/20 group-hover:border-gold-500/60 transition-colors duration-700"></div>
-            <div className="absolute inset-0 bg-gold-500/0 group-hover:bg-gold-500/5 transition-colors duration-700"></div>
-            <div className="absolute top-0 left-1/2 -translate-x-1/2 w-1/3 h-[1px] bg-gold-500/50 group-hover:w-full transition-all duration-700"></div>
-            <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-1/3 h-[1px] bg-gold-500/50 group-hover:w-full transition-all duration-700"></div>
+            <div className="absolute inset-0 border border-white/10 group-hover:border-platinum/40 transition-colors duration-1000"></div>
+            <div className="absolute inset-0 bg-white/0 group-hover:bg-white/[0.02] transition-colors duration-1000"></div>
             <div className="flex flex-col items-center gap-2">
-              <span className="relative z-10 text-gold-100 font-display tracking-[0.3em] text-xs md:text-sm uppercase group-hover:text-white transition-colors">
+              <span className="relative z-10 text-platinum/60 font-accent tracking-[0.5em] text-[10px] md:text-xs uppercase group-hover:text-pearl transition-colors duration-700">
                 {t('hero.cta')}
               </span>
             </div>
-            <div className="absolute -inset-full top-0 block h-full w-1/2 -skew-x-12 bg-gradient-to-r from-transparent to-gold-500/20 opacity-40 group-hover:animate-shimmer" />
           </button>
         </div>
       )}
 
       {playShow && (
-        <div className="relative z-10 w-full max-w-7xl px-8 flex flex-col md:flex-row items-end justify-between gap-12">
-          <div className="md:w-1/2 text-left animate-fade-in" style={{ animationDelay: '0.8s' }}>
-            <p className="text-gold-200/40 font-accent text-[10px] uppercase tracking-[0.6em] mb-4">The Vision</p>
-            <h2 className="text-3xl md:text-5xl font-display text-gold-100/90 leading-tight tracking-wide italic mb-8">
-              "Il tempo è l'ultimo lusso. Noi ne siamo i custodi."
+        <div className="relative z-10 w-full max-w-7xl px-12 flex flex-col items-center justify-center min-h-screen">
+          {/* QUOTE - Top Leftish */}
+          <div className="absolute top-[20%] left-[10%] max-w-xl animate-fade-in" style={{ animationDelay: '0.4s' }}>
+            <p className="text-platinum/20 font-accent text-[9px] uppercase tracking-[0.8em] mb-6">The Legacy</p>
+            <h2 className="text-2xl md:text-4xl font-display text-platinum/60 leading-tight tracking-[0.1em] italic mb-10 border-l border-white/10 pl-8">
+              "Il tempo è l'ultimo lusso.<br />Noi ne siamo i custodi."
             </h2>
-            <div className="flex items-center gap-4">
-              <div className="h-px w-12 bg-gold-500/30"></div>
-              <span className="text-[9px] text-gold-500/60 uppercase tracking-[0.4em] font-medium">M.S. Jara • Founder</span>
+            <div className="flex items-center gap-6 opacity-30">
+              <div className="h-px w-16 bg-white/20"></div>
+              <span className="text-[10px] text-platinum uppercase tracking-[0.5em] font-medium">M.S. Jara</span>
             </div>
           </div>
-          <div className="md:w-1/2 flex flex-col items-center md:items-end text-center md:text-right">
-            <div className="relative mb-6 animate-zoom-out">
-              <div className="absolute inset-0 bg-gold-400 blur-[120px] opacity-20 animate-pulse-slow"></div>
-              <Crown className="w-20 h-20 md:w-24 md:h-24 text-gold-400/80 drop-shadow-[0_0_50px_rgba(212,175,55,0.2)]" strokeWidth={0.5} />
+
+          {/* BRAND - Bottom Rightish */}
+          <div className="absolute bottom-[20%] right-[10%] flex flex-col items-end text-right">
+            <div className="relative mb-8 animate-zoom-out">
+              <Crown className="w-16 h-16 text-platinum/40 drop-shadow-[0_0_30px_rgba(255,255,255,0.1)]" strokeWidth={0.5} />
             </div>
-            <h1 className="text-6xl md:text-9xl font-display text-transparent bg-clip-text bg-gradient-to-b from-gold-100 via-gold-300/80 to-gold-600/40 tracking-[0.25em] leading-none mb-4 drop-shadow-2xl">
+            <h1 className="text-7xl md:text-[10rem] font-display text-transparent bg-clip-text bg-gradient-to-b from-pearl via-platinum/80 to-platinum/20 tracking-[0.2em] leading-none mb-6 drop-shadow-2xl">
               INSOLITO
             </h1>
-            <div className="flex flex-col items-center md:items-end gap-2 animate-fade-in" style={{ animationDelay: '0.4s' }}>
-              <span className="text-xs md:text-sm font-accent text-gold-200/50 tracking-[0.8em] uppercase">
-                {t('hero.subtitle')}
-              </span>
-            </div>
+            <span className="text-[10px] md:text-xs font-accent text-platinum/30 tracking-[1em] uppercase pr-2">
+              {t('hero.subtitle')}
+            </span>
           </div>
         </div>
       )}
@@ -404,27 +404,43 @@ const App: React.FC = () => {
       {isBookingConfirmed ? (
         <BookingConfirmation formData={formData} onReset={handleResetApp} />
       ) : (
-        <div className={`min-h-screen bg-black text-gray-200 font-sans relative overflow-x-hidden transition-opacity duration-1000 ${showIntro ? 'opacity-0' : 'opacity-100'}`} ref={containerRef}>
-          {/* CINEMATIC BACKGROUND */}
-          <div className="fixed inset-0 z-0 pointer-events-none">
-            <div className="absolute inset-0 bg-black/60"></div>
-            <img src="https://img.freepik.com/free-photo/reflective-photography-string-lights-river_413556-2.jpg?semt=ais_hybrid&w=740&q=80" alt="Milan" className="absolute inset-0 w-full h-full object-cover opacity-10 mix-blend-overlay" />
-            <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-black/40"></div>
+        <div className={`min-h-screen bg-[#030303] text-pearl font-sans relative overflow-x-hidden transition-opacity duration-[2000ms] ${showIntro ? 'opacity-0' : 'opacity-100'}`} ref={containerRef}>
+          {/* CINEMATIC DYNAMIC BACKGROUND */}
+          <div className="fixed inset-0 z-0 pointer-events-none overflow-hidden">
+            <div className="absolute inset-0 bg-[#030303]"></div>
+
+            {/* VIBRANT LIGHT LAYERS */}
+            <div className="absolute top-[-20%] right-[-10%] w-[70vw] h-[70vw] aura-bloom opacity-[0.07] animate-pulse-slow"></div>
+            <div className="absolute bottom-[-10%] left-[-10%] w-[60vw] h-[60vw] aura-bloom opacity-[0.04] animate-pulse-slow" style={{ background: 'radial-gradient(circle, var(--champagne), transparent 70%)' }}></div>
+
+            {/* REFINED GRAIN & LEAKS */}
+            <div className="absolute inset-0 bg-noise opacity-[0.03]"></div>
+            <div className="absolute top-[30%] left-[-5%] w-full h-[1px] light-leak rotate-[-5deg] scale-150"></div>
+
+            <img src="https://img.freepik.com/free-photo/reflective-photography-string-lights-river_413556-2.jpg?semt=ais_hybrid&w=740&q=80" alt="Milan" className="absolute inset-0 w-full h-full object-cover opacity-[0.05] grayscale mix-blend-screen" />
+            <div className="absolute inset-0 bg-gradient-to-b from-[#030303] via-transparent to-[#030303]"></div>
           </div>
 
-          <header className="relative z-10 pt-28 pb-20 text-center">
-            <div className="flex items-center justify-between px-8 absolute top-8 left-0 w-full">
-              <div className="flex items-center gap-2 group cursor-pointer" onClick={() => setShowAdminLogin(true)}>
-                <Crown className="w-4 h-4 text-gold-500/30 group-hover:text-gold-400" />
-                <span className="text-[8px] text-gray-600 uppercase tracking-[0.4em]">Elite Access</span>
+          <header className="relative z-10 pt-32 pb-24 text-center">
+            <div className="flex items-center justify-between px-12 absolute top-10 left-0 w-full">
+              <div className="flex items-center gap-3 group cursor-pointer" onClick={() => setShowAdminLogin(true)}>
+                <Crown className="w-5 h-5 text-platinum/20 group-hover:text-platinum/60 transition-all duration-700" strokeWidth={0.5} />
+                <span className="text-[9px] text-platinum/10 uppercase tracking-[0.5em] group-hover:text-platinum/40 transition-all duration-700">Elite Panel</span>
               </div>
-              <div className="flex items-center gap-6">
-                <button onClick={() => setShowHistory(true)} className="text-gold-400/40 hover:text-white p-2"><History className="w-4 h-4" /></button>
+              <div className="flex items-center gap-8">
+                <button onClick={() => setShowHistory(true)} className="text-platinum/20 hover:text-pearl transition-all duration-700"><History className="w-5 h-5" strokeWidth={1} /></button>
                 <LanguageSwitcher />
               </div>
             </div>
-            <h1 className="text-7xl md:text-9xl font-display text-transparent bg-clip-text bg-gradient-to-b from-white via-gold-200 to-gold-600/50 tracking-[0.3em] drop-shadow-2xl mb-8">INSOLITO</h1>
-            <h2 className="text-[10px] md:text-xs font-accent text-gold-200/60 tracking-[0.8em] uppercase italic">{t('hero.subtitle')}</h2>
+
+            <div className="relative inline-block mb-8">
+              <h1 className="text-8xl md:text-[11rem] font-display text-transparent bg-clip-text bg-gradient-to-b from-pearl via-platinum/60 to-platinum/10 tracking-[0.35em] drop-shadow-2xl">
+                INSOLITO
+              </h1>
+              <div className="absolute -bottom-4 left-1/2 -translate-x-1/2 w-48 h-px bg-gradient-to-r from-transparent via-platinum/20 to-transparent"></div>
+            </div>
+
+            <h2 className="text-[10px] md:text-xs font-accent text-platinum/30 tracking-[1.2em] uppercase italic mt-4">{t('hero.subtitle')}</h2>
           </header>
 
           <main className="max-w-7xl mx-auto px-6 pb-24 relative z-10">

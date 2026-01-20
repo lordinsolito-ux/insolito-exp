@@ -1,3 +1,81 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+  :root {
+    --platinum: #E5E4E2;
+    --pearl: #FBFCF8;
+    --champagne: #F7E7CE;
+    --obsidian: #050505;
+    --gold-mute: #C5A059;
+  }
+
+  body {
+    @apply bg-[#030303] text-pearl antialiased selection:bg-platinum/30 selection:text-white overflow-x-hidden;
+    font-family: 'Outfit', sans-serif;
+  }
+
+  .font-display {
+    font-family: 'Cormorant SC', serif;
+  }
+
+  .font-accent {
+    font-family: 'Outfit', sans-serif;
+  }
+}
+
+@layer components {
+  .glass-2026 {
+    @apply backdrop-blur-[40px] saturate-[180%] bg-white/[0.02] border border-white/[0.05];
+    box-shadow: 
+      inset 0 0 80px rgba(255, 255, 255, 0.01),
+      0 20px 50px rgba(0, 0, 0, 0.5);
+  }
+
+  .intelligent-border {
+    @apply relative border border-white/5;
+    &::after {
+      content: '';
+      @apply absolute inset-0 pointer-events-none rounded-[inherit];
+      box-shadow: inset 0 0 15px rgba(235, 224, 210, 0.05); /* Pearl hint */
+    }
+  }
+
+  .glass-input-2026 {
+    @apply bg-white/[0.01] border border-white/5 focus:border-platinum/30 focus:bg-white/[0.03] transition-all duration-700 outline-none;
+  }
+
+  .aura-bloom {
+    @apply absolute blur-[160px] opacity-20 pointer-events-none;
+    background: radial-gradient(circle at center, var(--platinum), transparent 70%);
+  }
+
+  .light-leak {
+    @apply absolute pointer-events-none mix-blend-screen opacity-10;
+    background: linear-gradient(45deg, transparent, var(--champagne), transparent);
+    filter: blur(100px);
+  }
+}
+
+@keyframes shimmer {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+
+@keyframes pulse-slow {
+  0%, 100% { opacity: 0.15; transform: scale(1); }
+  50% { opacity: 0.25; transform: scale(1.05); }
+}
+
+.animate-shimmer {
+  animation: shimmer 3s infinite linear;
+}
+
+.animate-pulse-slow {
+  animation: pulse-slow 8s infinite ease-in-out;
+}
+
+.bg-noise {
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+}
