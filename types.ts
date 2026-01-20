@@ -1,0 +1,106 @@
+
+import { LucideIcon } from 'lucide-react';
+
+export enum ServiceTypeId {
+  AIRPORT_TRANSFER = 'airport_transfer',
+  HOURLY = 'hourly',
+  CITY_TO_CITY = 'city_to_city',
+  EVENT = 'event',
+  WEDDING = 'wedding'
+}
+
+export enum VehicleTypeId {
+  SUV_COMFORT = 'suv_comfort' // Changed to generic premium SUV
+}
+
+export interface ServiceType {
+  id: ServiceTypeId;
+  name: string;
+  description: string;
+  icon: LucideIcon;
+  popular?: boolean;
+  startingPrice?: number;
+  badge?: string;
+}
+
+export interface VehicleType {
+  id: VehicleTypeId;
+  name: string;
+  description: string;
+  capacity: number;
+  luggage: number;
+  basePriceMultiplier: number; // Multiplier for the base rate
+  imagePlaceholder: string;
+}
+
+export interface LocationSuggestion {
+  id: string;
+  shortAddress: string;
+  fullAddress: string;
+  type: 'airport' | 'city' | 'venue' | 'station' | 'landmark';
+}
+
+export interface RouteInfo {
+  distance: number; // in km
+  duration: number; // in minutes
+  traffic: 'low' | 'moderate' | 'heavy';
+  toll: boolean;
+  mapUrl: string;
+}
+
+export interface PriceBreakdown {
+  total: number;
+  baseFare: number;
+  distanceFare: number;
+  nightSurcharge: number;
+  stopFee: number; // New field for stop fees
+  petFee: number;
+  serviceMultiplier: number;
+}
+
+export interface BookingFormData {
+  clientCode?: string;
+  isVIP: boolean;
+  // Contact Details
+  name: string;
+  email: string;
+  countryCode: string; // New field for international prefix
+  phone: string;
+
+  serviceType: ServiceTypeId | null;
+  pickupLocation: string;
+  stops: string[]; // New field for extra stops
+  destination: string;
+  date: string;
+  time: string;
+  duration: number; // Duration in minutes (Crucial for overbooking check)
+  passengers: number;
+  vehiclePreference: VehicleTypeId | null;
+  specialRequests: string;
+
+  // New Fields
+  contactMethod: 'whatsapp' | 'sms' | 'call';
+  paymentMethod: 'link' | 'pos' | 'cash';
+  hasPets: boolean;
+
+  estimatedPrice: number;
+  priceBreakdown: PriceBreakdown; // Store detailed pricing
+}
+
+export interface BookingRecord extends BookingFormData {
+  id: string;
+  timestamp: string;
+  status: 'confirmed' | 'pending' | 'completed' | 'cancelled' | 'declined' | 'rescheduled';
+  needsInvoice?: boolean; // Optional: true if user needs formal invoice (fattura)
+}
+
+export interface ValidationErrors {
+  serviceType?: string;
+  pickupLocation?: string;
+  destination?: string;
+  date?: string;
+  time?: string;
+  name?: string;
+  email?: string;
+  phone?: string;
+}

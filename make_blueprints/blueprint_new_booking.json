@@ -1,0 +1,57 @@
+{
+    "name": "Insolito - NEW Booking (Minimal)",
+    "flow": [
+        {
+            "id": 1,
+            "module": "gateway:CustomWebhook",
+            "version": 1,
+            "parameters": {},
+            "mapper": {},
+            "metadata": {
+                "designer": {
+                    "x": 0,
+                    "y": 0
+                }
+            }
+        },
+        {
+            "id": 2,
+            "module": "google-sheets:addRow",
+            "version": 1,
+            "parameters": {},
+            "mapper": {},
+            "metadata": {
+                "designer": {
+                    "x": 300,
+                    "y": 0
+                }
+            }
+        },
+        {
+            "id": 3,
+            "module": "google-calendar:createEvent",
+            "version": 1,
+            "parameters": {},
+            "mapper": {},
+            "metadata": {
+                "designer": {
+                    "x": 600,
+                    "y": 0
+                }
+            }
+        },
+        {
+            "id": 4,
+            "module": "gateway:WebhookResponse",
+            "version": 1,
+            "parameters": {},
+            "mapper": {},
+            "metadata": {
+                "designer": {
+                    "x": 900,
+                    "y": 0
+                }
+            }
+        }
+    ]
+}

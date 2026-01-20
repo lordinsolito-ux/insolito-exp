@@ -1,0 +1,65 @@
+{
+    "name": "Insolito - NOTIFY Client",
+    "flow": [
+        {
+            "id": 1,
+            "module": "gateway:CustomWebhook",
+            "version": 1,
+            "parameters": {},
+            "mapper": {
+                "name": "Insolito NOTIFY Webhook"
+            },
+            "metadata": {
+                "designer": {
+                    "x": 0,
+                    "y": 0
+                }
+            }
+        },
+        {
+            "id": 2,
+            "module": "http:request",
+            "version": 1,
+            "parameters": {
+                "method": "post",
+                "url": "https://graph.facebook.com/v17.0/YOUR_PHONE_ID/messages",
+                "headers": [
+                    {
+                        "key": "Authorization",
+                        "value": "Bearer YOUR_ACCESS_TOKEN"
+                    },
+                    {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                    }
+                ]
+            },
+            "mapper": {
+                "data": "{\n  \"messaging_product\": \"whatsapp\",\n  \"to\": \"{{1.phone}}\",\n  \"type\": \"text\",\n  \"text\": { \"body\": \"{{1.message}}\" }\n}"
+            },
+            "metadata": {
+                "designer": {
+                    "x": 300,
+                    "y": 0
+                }
+            }
+        },
+        {
+            "id": 3,
+            "module": "gateway:WebhookResponse",
+            "version": 1,
+            "parameters": {
+                "status": 200
+            },
+            "mapper": {
+                "body": "Sent"
+            },
+            "metadata": {
+                "designer": {
+                    "x": 600,
+                    "y": 0
+                }
+            }
+        }
+    ]
+}

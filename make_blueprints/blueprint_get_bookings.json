@@ -1,0 +1,44 @@
+{
+    "name": "Insolito - GET Bookings (Minimal)",
+    "flow": [
+        {
+            "id": 1,
+            "module": "gateway:CustomWebhook",
+            "version": 1,
+            "parameters": {},
+            "mapper": {},
+            "metadata": {
+                "designer": {
+                    "x": 0,
+                    "y": 0
+                }
+            }
+        },
+        {
+            "id": 2,
+            "module": "google-sheets:searchRows",
+            "version": 2,
+            "parameters": {},
+            "mapper": {},
+            "metadata": {
+                "designer": {
+                    "x": 300,
+                    "y": 0
+                }
+            }
+        },
+        {
+            "id": 3,
+            "module": "gateway:WebhookResponse",
+            "version": 1,
+            "parameters": {},
+            "mapper": {},
+            "metadata": {
+                "designer": {
+                    "x": 600,
+                    "y": 0
+                }
+            }
+        }
+    ]
+}
