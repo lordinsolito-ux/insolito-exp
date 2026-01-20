@@ -4,78 +4,98 @@
 
 @layer base {
   :root {
-    --platinum: #E5E4E2;
-    --pearl: #FBFCF8;
-    --champagne: #F7E7CE;
-    --obsidian: #050505;
-    --gold-mute: #C5A059;
+    --gold-titan: #B8941E;
+    --ebony: #1A1A1A;
+    --pearl-warm: #FAF9F6;
+    --obsidian-deep: #0D0D0D;
+    --platinum-soft: #D1D1D1;
   }
 
   body {
-    @apply bg-[#030303] text-pearl antialiased selection:bg-platinum/30 selection:text-white overflow-x-hidden;
-    font-family: 'Outfit', sans-serif;
+    @apply bg-[#080808] text-pearl-warm antialiased selection:bg-gold-titan/30 selection:text-white overflow-x-hidden;
+    font-family: 'Montserrat', sans-serif;
   }
 
   .font-display {
-    font-family: 'Cormorant SC', serif;
+    font-family: 'Cormorant Garamond', serif;
   }
 
   .font-accent {
-    font-family: 'Outfit', sans-serif;
+    font-family: 'Montserrat', sans-serif;
   }
 }
 
 @layer components {
   .glass-2026 {
-    @apply backdrop-blur-[40px] saturate-[180%] bg-white/[0.02] border border-white/[0.05];
-    box-shadow: 
-      inset 0 0 80px rgba(255, 255, 255, 0.01),
-      0 20px 50px rgba(0, 0, 0, 0.5);
+    @apply backdrop-blur-[25px] saturate-[160%] bg-white/[0.02] border border-white/[0.06];
+    box-shadow:
+      inset 0 0 60px rgba(255, 255, 255, 0.01),
+      0 30px 60px rgba(0, 0, 0, 0.6);
   }
 
   .intelligent-border {
     @apply relative border border-white/5;
+
     &::after {
       content: '';
       @apply absolute inset-0 pointer-events-none rounded-[inherit];
-      box-shadow: inset 0 0 15px rgba(235, 224, 210, 0.05); /* Pearl hint */
+      box-shadow: inset 0 0 10px rgba(184, 148, 30, 0.05);
+      /* Titanium Gold hint */
     }
   }
 
   .glass-input-2026 {
-    @apply bg-white/[0.01] border border-white/5 focus:border-platinum/30 focus:bg-white/[0.03] transition-all duration-700 outline-none;
+    @apply bg-white/[0.01] border border-white/5 focus:border-gold-titan/40 focus:bg-white/[0.03] transition-all duration-700 outline-none;
   }
 
   .aura-bloom {
-    @apply absolute blur-[160px] opacity-20 pointer-events-none;
-    background: radial-gradient(circle at center, var(--platinum), transparent 70%);
+    @apply absolute blur-[180px] opacity-10 pointer-events-none;
+    background: radial-gradient(circle at center, var(--gold-titan), transparent 75%);
   }
 
   .light-leak {
-    @apply absolute pointer-events-none mix-blend-screen opacity-10;
-    background: linear-gradient(45deg, transparent, var(--champagne), transparent);
-    filter: blur(100px);
+    @apply absolute pointer-events-none mix-blend-screen opacity-[0.05];
+    background: linear-gradient(135deg, transparent, var(--gold-titan), transparent);
+    filter: blur(120px);
+  }
+
+  .btn-gold {
+    @apply bg-gold-titan text-ebony font-accent text-[10px] uppercase tracking-[0.3em] px-10 py-5 transition-all duration-700 hover:scale-[1.02] hover:shadow-[0_0_40px_rgba(184, 148, 30, 0.3)] active:scale-95;
   }
 }
 
 @keyframes shimmer {
-  0% { transform: translateX(-100%); }
-  100% { transform: translateX(100%); }
+  0% {
+    transform: translateX(-100%);
+  }
+
+  100% {
+    transform: translateX(100%);
+  }
 }
 
 @keyframes pulse-slow {
-  0%, 100% { opacity: 0.15; transform: scale(1); }
-  50% { opacity: 0.25; transform: scale(1.05); }
+
+  0%,
+  100% {
+    opacity: 0.1;
+    transform: scale(1);
+  }
+
+  50% {
+    opacity: 0.2;
+    transform: scale(1.08);
+  }
 }
 
 .animate-shimmer {
-  animation: shimmer 3s infinite linear;
+  animation: shimmer 4s infinite linear;
 }
 
 .animate-pulse-slow {
-  animation: pulse-slow 8s infinite ease-in-out;
+  animation: pulse-slow 10s infinite ease-in-out;
 }
 
 .bg-noise {
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
 }

@@ -23,10 +23,11 @@ import {
   Edit2,
   Trash2,
   Plus,
-  Lock
+  Lock,
+  ArrowRight
 } from 'lucide-react';
 import LegalModal from './components/LegalModal';
-import { LEGAL_CONTENT, BUSINESS_INFO } from './legalContent';
+import { LEGAL_CONTENT, BUSINESS_INFO, BRAND_STORY } from './legalContent';
 import { useTranslation } from 'react-i18next';
 import LanguageSwitcher from './components/LanguageSwitcher';
 import { StepIndicator } from './components/StepIndicator';
@@ -145,6 +146,65 @@ const IntroSplash: React.FC<{ onFinish: () => void }> = ({ onFinish }) => {
         </div>
       )}
     </div>
+  );
+};
+
+// --- BRAND STORY SECTION ---
+
+const BrandStory: React.FC = () => {
+  const { t } = useTranslation();
+  return (
+    <section className="py-24 relative overflow-hidden">
+      <div className="max-w-7xl mx-auto px-12 relative z-10">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-24 items-center">
+          <div className="space-y-12">
+            <div className="animate-fade-in">
+              <span className="text-gold-titan/40 font-accent text-[9px] uppercase tracking-[0.8em] mb-4 block">Founder & Visionary</span>
+              <h2 className="text-5xl md:text-7xl font-display text-transparent bg-clip-text bg-gradient-to-b from-pearl-warm via-pearl-warm to-gold-titan/30 tracking-[0.1em] mb-8">
+                Michael Jara
+              </h2>
+              <p className="text-pearl-warm/60 font-accent text-sm md:text-base leading-relaxed max-w-lg">
+                Architect of Experiences
+              </p>
+            </div>
+
+            <div className="space-y-8 animate-fade-in" style={{ animationDelay: '0.2s' }}>
+              {BRAND_STORY.content.map((p, i) => (
+                <p key={i} className="text-platinum/40 text-[13px] md:text-sm font-light leading-relaxed italic border-l border-white/5 pl-8">
+                  {p}
+                </p>
+              ))}
+            </div>
+
+            <div className="pt-8 animate-fade-in" style={{ animationDelay: '0.4s' }}>
+              <div className="flex items-center gap-6">
+                <div className="h-[1px] w-12 bg-gold-titan/20"></div>
+                <span className="text-[10px] text-gold-titan font-accent uppercase tracking-[0.5em]">The Signature of Excellence</span>
+              </div>
+            </div>
+          </div>
+
+          <div className="relative group animate-fade-in" style={{ animationDelay: '0.6s' }}>
+            <div className="aspect-[4/5] rounded-[60px] overflow-hidden border border-white/5 relative">
+              <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-transparent to-transparent z-10"></div>
+              <img
+                src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=1974&auto=format&fit=crop"
+                alt="Michael Jara"
+                className="w-full h-full object-cover grayscale brightness-75 group-hover:scale-110 transition-transform duration-[3000ms] ease-out"
+              />
+              <div className="absolute inset-x-0 bottom-12 px-12 z-20">
+                <blockquote className="text-pearl-warm/80 font-display text-2xl italic leading-tight tracking-wide">
+                  "{BRAND_STORY.quote}"
+                </blockquote>
+              </div>
+            </div>
+            {/* DECORATIVE ELEMENTS */}
+            <div className="absolute -top-12 -right-12 w-64 h-64 aura-bloom opacity-[0.05] pointer-events-none"></div>
+            <div className="absolute -bottom-12 -left-12 w-48 h-48 aura-bloom opacity-[0.03] pointer-events-none" style={{ background: 'radial-gradient(circle, var(--gold-titan), transparent 75%)' }}></div>
+          </div>
+        </div>
+      </div>
+    </section>
   );
 };
 
@@ -443,11 +503,13 @@ const App: React.FC = () => {
             <h2 className="text-[10px] md:text-xs font-accent text-platinum/30 tracking-[1.2em] uppercase italic mt-4">{t('hero.subtitle')}</h2>
           </header>
 
+          <BrandStory />
+
           <main className="max-w-7xl mx-auto px-6 pb-24 relative z-10">
             <div className="mb-12 flex justify-center">
-              <div className="glass-2026 px-6 py-2 rounded-full border border-gold-500/20 flex items-center gap-3">
-                <div className="w-1.5 h-1.5 rounded-full bg-gold-500 animate-pulse"></div>
-                <span className="text-[9px] text-gold-200/60 uppercase tracking-[0.4em]">Referral System Active</span>
+              <div className="glass-2026 px-6 py-2 rounded-full border border-gold-titan/20 flex items-center gap-3">
+                <div className="w-1.5 h-1.5 rounded-full bg-gold-titan animate-pulse"></div>
+                <span className="text-[9px] text-gold-titan/60 uppercase tracking-[0.4em]">Referral System Active</span>
               </div>
             </div>
 
@@ -455,19 +517,31 @@ const App: React.FC = () => {
               <StepIndicator currentStep={activeStep} />
               <div className="p-8 md:p-14">
                 {activeStep === 1 && (
-                  <div className="animate-fade-in space-y-16">
+                  <div className="animate-fade-in space-y-20">
                     <div className="text-center">
-                      <h3 className="text-4xl md:text-6xl font-display text-transparent bg-clip-text bg-gradient-to-b from-white to-white/40 tracking-[0.2em] uppercase italic leading-tight">{t('booking.step1_title')}</h3>
-                      <p className="text-[10px] text-gold-500/40 font-accent uppercase tracking-[0.5em] mt-4">{t('booking.step1_subtitle')}</p>
+                      <h3 className="text-5xl md:text-7xl font-display text-transparent bg-clip-text bg-gradient-to-b from-pearl via-pearl to-platinum/20 tracking-[0.25em] uppercase italic leading-tight">{t('booking.step1_title')}</h3>
+                      <p className="text-[11px] text-platinum/30 font-accent uppercase tracking-[1em] mt-6">{t('booking.step1_subtitle')}</p>
                     </div>
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
                       {SERVICE_TYPES.map(service => (
-                        <button key={service.id} onClick={() => handleServiceSelect(service.id)} className="group glass-2026 p-10 rounded-[40px] border border-white/5 hover:border-gold-500/40 transition-all duration-1000 flex flex-col items-center text-center">
-                          <div className="w-16 h-16 rounded-3xl bg-white/5 flex items-center justify-center mb-10 group-hover:text-gold-400 group-hover:scale-110 transition-all">
-                            <service.icon strokeWidth={0.5} />
+                        <button
+                          key={service.id}
+                          onClick={() => handleServiceSelect(service.id)}
+                          className="group glass-2026 p-12 rounded-[48px] border border-white/5 hover:border-platinum/30 hover:bg-white/[0.04] transition-all duration-[1200ms] flex flex-col items-center text-center relative overflow-hidden"
+                        >
+                          {/* INTERNAL GLOW */}
+                          <div className="absolute inset-0 bg-gradient-to-br from-platinum/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-1000"></div>
+
+                          <div className="w-20 h-20 rounded-3xl bg-white/[0.03] flex items-center justify-center mb-12 group-hover:text-pearl group-hover:scale-110 transition-all duration-1000 shadow-[0_0_40px_rgba(255,255,255,0.02)]">
+                            <service.icon strokeWidth={0.3} className="w-8 h-8 opacity-40 group-hover:opacity-100 transition-opacity" />
                           </div>
-                          <h4 className="font-display text-2xl text-gold-100 mb-4">{t(`services.name_${service.id}`)}</h4>
-                          <p className="text-[11px] text-gray-500 italic leading-relaxed">{t(`services.desc_${service.id}`)}</p>
+                          <h4 className="font-display text-3xl text-pearl/90 mb-6 tracking-wide group-hover:text-white transition-colors">{t(`services.name_${service.id}`)}</h4>
+                          <p className="text-[12px] text-platinum/20 font-light italic leading-relaxed group-hover:text-platinum/40 transition-colors">{t(`services.desc_${service.id}`)}</p>
+
+                          {/* BUTTON HINT */}
+                          <div className="mt-8 opacity-0 group-hover:opacity-100 transition-all duration-1000 translate-y-4 group-hover:translate-y-0">
+                            <span className="text-[9px] uppercase tracking-[0.5em] text-platinum/60 border-b border-platinum/20 pb-1">Select Experience</span>
+                          </div>
                         </button>
                       ))}
                     </div>
@@ -478,7 +552,7 @@ const App: React.FC = () => {
                   <div className="animate-fade-in grid grid-cols-1 lg:grid-cols-12 gap-12">
                     <div className="lg:col-span-7 space-y-8">
                       <div className="glass-2026 rounded-[40px] p-10 space-y-12">
-                        <h4 className="text-[9px] font-accent text-gold-500/40 uppercase tracking-[0.6em] flex items-center gap-4"><Map className="w-3 h-3" /> {t('booking.route_details')}</h4>
+                        <h4 className="text-[9px] font-accent text-gold-titan/40 uppercase tracking-[0.6em] flex items-center gap-4"><Map className="w-3 h-3" /> {t('booking.route_details')}</h4>
                         <div className="space-y-6">
                           <div className="relative group">
                             <MapPin className="absolute left-6 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-700" strokeWidth={0.5} />
@@ -511,7 +585,7 @@ const App: React.FC = () => {
                     </div>
                     <div className="lg:col-span-5 space-y-10">
                       <div className="glass-2026 rounded-[40px] p-10 space-y-10">
-                        <h4 className="text-[9px] font-accent text-gold-500/40 uppercase tracking-[0.6em] flex items-center gap-4"><Calendar className="w-3 h-3" /> {t('booking.schedule_guests')}</h4>
+                        <h4 className="text-[9px] font-accent text-gold-titan/40 uppercase tracking-[0.6em] flex items-center gap-4"><Calendar className="w-3 h-3" /> {t('booking.schedule_guests')}</h4>
                         <div className="space-y-4">
                           <input type="date" name="date" value={formData.date} onChange={handleInputChange} min={new Date().toISOString().split('T')[0]} className="w-full glass-input-2026 px-6 py-4 rounded-2xl text-xs text-gray-400" style={{ colorScheme: 'dark' }} />
                           <select name="time" value={formData.time} onChange={handleInputChange} disabled={!formData.date} className="w-full glass-input-2026 px-6 py-4 rounded-2xl text-xs text-gray-400 appearance-none">
@@ -531,7 +605,7 @@ const App: React.FC = () => {
                   <div className="animate-fade-in grid grid-cols-1 md:grid-cols-2 gap-12">
                     <div className="space-y-8">
                       <div className="glass-2026 rounded-[40px] p-10 space-y-8">
-                        <h4 className="text-[9px] font-accent text-gold-500/40 uppercase tracking-[0.6em] flex items-center gap-4"><User className="w-3 h-3" /> {t('booking.guest_info')}</h4>
+                        <h4 className="text-[9px] font-accent text-gold-titan/40 uppercase tracking-[0.6em] flex items-center gap-4"><User className="w-3 h-3" /> {t('booking.guest_info')}</h4>
                         <div className="space-y-4">
                           <input type="text" name="name" value={formData.name} onChange={handleInputChange} placeholder={t('booking.name')} className="w-full glass-input-2026 px-6 py-5 rounded-2xl text-xs" />
                           <input type="email" name="email" value={formData.email} onChange={handleInputChange} placeholder={t('booking.email')} className="w-full glass-input-2026 px-6 py-5 rounded-2xl text-xs" />
@@ -544,10 +618,10 @@ const App: React.FC = () => {
                     </div>
                     <div className="space-y-8">
                       <div className="glass-2026 rounded-[40px] p-10 space-y-8">
-                        <h4 className="text-[9px] font-accent text-gold-500/40 uppercase tracking-[0.6em] flex items-center gap-4"><CreditCard className="w-3 h-3" /> {t('booking.payment_method')}</h4>
+                        <h4 className="text-[9px] font-accent text-gold-titan/40 uppercase tracking-[0.6em] flex items-center gap-4"><CreditCard className="w-3 h-3" /> {t('booking.payment_method')}</h4>
                         <div className="grid grid-cols-2 gap-4">
                           {['cash', 'pos'].map(m => (
-                            <button key={m} onClick={() => setFormData(p => ({ ...p, paymentMethod: m as any }))} className={`p-6 border rounded-3xl text-[10px] uppercase tracking-widest transition-all ${formData.paymentMethod === m ? 'border-gold-500/50 bg-gold-500/5 text-gold-100' : 'border-white/5 text-gray-600'}`}>
+                            <button key={m} onClick={() => setFormData(p => ({ ...p, paymentMethod: m as any }))} className={`p-6 border rounded-3xl text-[10px] uppercase tracking-widest transition-all ${formData.paymentMethod === m ? 'border-gold-titan/50 bg-gold-titan/5 text-pearl-warm' : 'border-white/5 text-platinum/20'}`}>
                               {m}
                             </button>
                           ))}
@@ -560,18 +634,18 @@ const App: React.FC = () => {
                 {activeStep === 4 && (
                   <div className="animate-fade-in max-w-2xl mx-auto space-y-12">
                     <div className="text-center">
-                      <div className="inline-flex items-center justify-center w-16 h-16 rounded-3xl bg-gold-500/10 mb-8 border border-gold-500/20"><Star className="w-6 h-6 text-gold-400" /></div>
-                      <h3 className="text-3xl font-display text-gold-100 uppercase tracking-widest italic">{t('booking.step4_title')}</h3>
+                      <div className="inline-flex items-center justify-center w-16 h-16 rounded-3xl bg-gold-titan/10 mb-8 border border-gold-titan/20"><Star className="w-6 h-6 text-gold-titan/60" /></div>
+                      <h3 className="text-3xl font-display text-pearl-warm uppercase tracking-widest italic">{t('booking.step4_title')}</h3>
                     </div>
                     <div className="glass-2026 rounded-[40px] p-10 space-y-8 divide-y divide-white/5">
                       <div className="pb-8 grid grid-cols-2 gap-8">
-                        <div><p className="text-[8px] text-gray-700 uppercase tracking-widest mb-1">{t('booking.guest')}</p><p className="text-sm italic">{formData.name}</p></div>
-                        <div className="text-right"><p className="text-[8px] text-gray-700 uppercase tracking-widest mb-1">{t('booking.date')}</p><p className="text-sm italic">{new Date(formData.date).toLocaleDateString()} @ {formData.time}</p></div>
+                        <div><p className="text-[8px] text-platinum/20 uppercase tracking-widest mb-1">{t('booking.guest')}</p><p className="text-sm italic">{formData.name}</p></div>
+                        <div className="text-right"><p className="text-[8px] text-platinum/20 uppercase tracking-widest mb-1">{t('booking.date')}</p><p className="text-sm italic">{new Date(formData.date).toLocaleDateString()} @ {formData.time}</p></div>
                       </div>
-                      <div className="py-8"><p className="text-[8px] text-gray-700 uppercase tracking-widest mb-4">{t('booking.service')}</p><p className="text-xl font-display text-gold-400">{SERVICE_TYPES.find(s => s.id === formData.serviceType)?.name}</p></div>
+                      <div className="py-8"><p className="text-[8px] text-platinum/20 uppercase tracking-widest mb-4">{t('booking.service')}</p><p className="text-xl font-display text-gold-titan">{SERVICE_TYPES.find(s => s.id === formData.serviceType)?.name}</p></div>
                       <div className="pt-8 flex justify-between items-end">
-                        <p className="text-[10px] text-gold-500/40 uppercase tracking-[0.4em]">{t('booking.total')}</p>
-                        <p className="text-5xl font-display text-gold-400">€{formData.estimatedPrice}</p>
+                        <p className="text-[10px] text-gold-titan/40 uppercase tracking-[0.4em]">{t('booking.total')}</p>
+                        <p className="text-5xl font-display text-gold-titan">€{formData.estimatedPrice}</p>
                       </div>
                     </div>
                     <div className="flex items-center justify-center gap-3">
@@ -583,34 +657,50 @@ const App: React.FC = () => {
               </div>
 
               <div className="border-t border-white/5 p-8 flex justify-between items-center bg-black/40 backdrop-blur-3xl sticky bottom-0 z-40">
-                <button onClick={handlePrevStep} disabled={activeStep === 1} className={`text-[10px] uppercase tracking-[0.3em] font-accent transition-all ${activeStep === 1 ? 'opacity-0' : 'text-gray-500 hover:text-white'}`}>Back</button>
+                <button onClick={handlePrevStep} disabled={activeStep === 1} className={`text-[10px] uppercase tracking-[0.3em] font-accent transition-all ${activeStep === 1 ? 'opacity-0' : 'text-platinum/20 hover:text-white'}`}>Back</button>
                 {activeStep < 4 ? (
-                  <button onClick={handleNextStep} className="px-12 py-5 bg-gold-600 hover:bg-gold-500 text-black font-accent text-[11px] uppercase tracking-[0.4em] transition-all rounded-sm shadow-[0_0_30px_rgba(212,175,55,0.2)]">Continue</button>
+                  <button onClick={handleNextStep} className="px-12 py-5 bg-gold-titan hover:bg-gold-titan/80 text-ebony-rich font-accent text-[11px] uppercase tracking-[0.4em] transition-all rounded-sm shadow-[0_0_30px_rgba(var(--gold-titan-rgb),0.2)]">Continue</button>
                 ) : (
-                  <button onClick={handleSubmit} disabled={isLoading || !termsAccepted} className="px-12 py-5 bg-white hover:bg-gray-100 text-black font-accent text-[11px] uppercase tracking-[0.4em] transition-all rounded-sm shadow-[0_0_30px_rgba(255,255,255,0.2)] disabled:opacity-50">{isLoading ? <Loader2 className="animate-spin" /> : t('booking.request_booking')}</button>
+                  <button onClick={handleSubmit} disabled={isLoading || !termsAccepted} className="px-12 py-5 bg-pearl-warm hover:bg-white text-ebony-rich font-accent text-[11px] uppercase tracking-[0.4em] transition-all rounded-sm shadow-[0_0_30px_rgba(255,255,255,0.2)] disabled:opacity-50">{isLoading ? <Loader2 className="animate-spin" /> : t('booking.request_booking')}</button>
                 )}
               </div>
             </div>
           </main>
 
-          <footer className="py-24 text-center border-t border-white/5 mt-20">
-            <div className="max-w-4xl mx-auto px-6">
-              <div className="flex justify-center gap-16 mb-20">
-                {[{ icon: Instagram, label: `@${BUSINESS_INFO.instagram}`, href: `https://instagram.com/${BUSINESS_INFO.instagram}` }, { icon: MessageCircle, label: '+39 3393522164', href: 'https://wa.me/393393522164' }].map((s, i) => (
-                  <a key={i} href={s.href} className="group flex flex-col items-center gap-4 transition-all">
-                    <div className="w-12 h-12 rounded-full border border-white/5 flex items-center justify-center group-hover:border-gold-500/40 group-hover:scale-110 transition-all"><s.icon className="w-5 h-5 opacity-40 group-hover:opacity-100" strokeWidth={1} /></div>
-                    <span className="text-[10px] text-gray-600 group-hover:text-gold-500 tracking-[0.2em] transition-colors">{s.label}</span>
+          <footer className="py-32 text-center border-t border-white/[0.03] mt-32 relative overflow-hidden">
+            {/* FOOTER BACKGROUND VIBE */}
+            <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-[1px] bg-gradient-to-r from-transparent via-platinum/10 to-transparent"></div>
+
+            <div className="max-w-5xl mx-auto px-12 relative z-10">
+              <div className="flex justify-center gap-24 mb-24">
+                {[
+                  { icon: Instagram, label: `@${BUSINESS_INFO.instagram}`, href: `https://instagram.com/${BUSINESS_INFO.instagram}` },
+                  { icon: MessageCircle, label: '+39 3393522164', href: 'https://wa.me/393393522164' }
+                ].map((s, i) => (
+                  <a key={i} href={s.href} target="_blank" rel="noopener noreferrer" className="group flex flex-col items-center gap-6 transition-all duration-1000">
+                    <div className="w-16 h-16 rounded-full border border-white/5 flex items-center justify-center group-hover:border-platinum/30 group-hover:bg-white/[0.02] transition-all duration-1000">
+                      <s.icon className="w-6 h-6 text-platinum/20 group-hover:text-pearl transition-colors" strokeWidth={0.5} />
+                    </div>
+                    <span className="text-[10px] text-platinum/10 group-hover:text-platinum/60 tracking-[0.4em] uppercase transition-colors duration-1000">{s.label}</span>
                   </a>
                 ))}
               </div>
-              <div className="flex flex-col items-center gap-6 opacity-40 hover:opacity-100 transition-opacity">
-                <Crown className="w-6 h-6 text-gold-500/20" />
-                <h4 className="font-display text-gold-100 tracking-[0.5em]">{BUSINESS_INFO.name}</h4>
-                <div className="flex flex-wrap justify-center gap-6 text-[9px] uppercase tracking-widest text-gray-500">
-                  <span>P.IVA: {BUSINESS_INFO.piva}</span>
-                  <span>HQ: {BUSINESS_INFO.address}</span>
+
+              <div className="flex flex-col items-center gap-10">
+                <div className="relative">
+                  <Crown className="w-8 h-8 text-platinum/5 mb-2" strokeWidth={0.5} />
+                  <div className="absolute inset-0 aura-bloom opacity-[0.02] scale-50"></div>
                 </div>
-                <p className="text-[8px] text-gray-700">&copy; {new Date().getFullYear()} INSOLITO. ALL RIGHTS RESERVED.</p>
+
+                <div className="space-y-4">
+                  <h4 className="font-display text-2xl text-platinum/40 tracking-[0.6em] mb-4">{BUSINESS_INFO.name}</h4>
+                  <div className="flex flex-wrap justify-center gap-10 text-[9px] uppercase tracking-[0.6em] text-platinum/10 font-accent">
+                    <span>VAT: {BUSINESS_INFO.piva}</span>
+                    <span>HEADQUARTERS: {BUSINESS_INFO.address.split(',')[0]}</span>
+                  </div>
+                </div>
+
+                <p className="text-[8px] text-platinum/5 tracking-[1em] mt-12">&copy; {new Date().getFullYear()} INSOLITO. ARCHITECTURAL LUXURY.</p>
               </div>
             </div>
           </footer>

@@ -24,10 +24,10 @@ export const StepIndicator: React.FC<StepIndicatorProps> = ({ currentStep }) => 
 
           {/* Active Digital Thread */}
           <div
-            className="absolute top-1/2 left-0 h-px bg-gradient-to-r from-gold-600 via-gold-400 to-gold-200 -translate-y-1/2 transition-all duration-1000 ease-in-out shadow-[0_0_15px_rgba(212,175,55,0.3)]"
+            className="absolute top-1/2 left-0 h-px bg-gradient-to-r from-gold-titan via-platinum to-platinum/20 -translate-y-1/2 transition-all duration-1000 ease-in-out shadow-[0_0_15px_rgba(var(--gold-titan-rgb),0.3)]"
             style={{ width: `${progressPercentage}%` }}
           >
-            <div className="absolute right-0 top-1/2 -translate-y-1/2 w-1.5 h-1.5 rounded-full bg-gold-200 shadow-[0_0_10px_#D4AF37]"></div>
+            <div className="absolute right-0 top-1/2 -translate-y-1/2 w-1.5 h-1.5 rounded-full bg-platinum shadow-[0_0_10px_var(--gold-titan)]"></div>
           </div>
 
           {steps.map((step) => {
@@ -39,15 +39,15 @@ export const StepIndicator: React.FC<StepIndicatorProps> = ({ currentStep }) => 
                 <div
                   className={`
                     w-1.5 h-1.5 rounded-full transition-all duration-500
-                    ${isActive ? 'bg-gold-400 scale-125' : 'bg-gray-800 scale-100'}
-                    ${isCurrent ? 'ring-4 ring-gold-500/20' : ''}
+                    ${isActive ? 'bg-gold-titan scale-125' : 'bg-white/5 scale-100'}
+                    ${isCurrent ? 'ring-4 ring-gold-titan/20' : ''}
                   `}
                 />
 
                 <span
                   className={`
                     absolute top-6 text-[9px] md:text-[10px] font-accent uppercase tracking-[0.4em] whitespace-nowrap transition-all duration-500
-                    ${isActive ? 'text-gold-200 opacity-100' : 'text-gray-600 opacity-40'}
+                    ${isActive ? 'text-pearl-warm opacity-100' : 'text-platinum/10 opacity-40'}
                     ${isCurrent ? 'translate-y-[-2px] text-white' : ''}
                   `}
                 >
@@ -55,7 +55,7 @@ export const StepIndicator: React.FC<StepIndicatorProps> = ({ currentStep }) => 
                 </span>
 
                 {isCurrent && (
-                  <div className="absolute -top-8 text-[8px] font-sans text-gold-500/40 uppercase tracking-[0.2em] animate-pulse">
+                  <div className="absolute -top-8 text-[8px] font-sans text-gold-titan/40 uppercase tracking-[0.2em] animate-pulse">
                     Step 0{step.num}
                   </div>
                 )}
