@@ -55,7 +55,7 @@ import {
 } from './types';
 import { searchLocations, calculateRoute, calculatePrice } from './services/googleMapsService';
 import { getCachedRoute, cacheRoute } from './services/routeCache';
-import { generateTimeSlots, checkAvailability, checkBookingConflict, saveBooking, fetchAllBookings } from './services/bookingService';
+import { generateTimeSlots, checkAvailability, checkBookingConflict, saveBooking, fetchAllBookings } from './services/ bookingService';
 
 // --- INTRO COMPONENT ---
 const IntroSplash: React.FC<{ onFinish: () => void }> = ({ onFinish }) => {
@@ -243,15 +243,15 @@ const FloatingHeader: React.FC<{
 // --- MAGAZINE NARRATIVE SPREAD ---
 const NarrativeSpread: React.FC = () => {
   return (
-    <section id="essence" className="py-64 px-12 md:px-24 space-y-64 bg-transparent relative z-20 overflow-hidden">
+    <section id="essence" className="py-24 px-12 md:px-24 space-y-24 bg-transparent relative z-20 overflow-hidden">
       {/* Spread 1: The Vision */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 items-center max-w-7xl mx-auto">
-        <div className="lg:col-span-12 xl:col-span-5 space-y-12 animate-reveal">
+        <div className="lg:col-span-12 xl:col-span-5 space-y-8 animate-reveal">
           <span className="text-[var(--oro-lucido)]/40 font-accent text-[10px] uppercase tracking-[1em] block mb-4">The Philosophy</span>
           <h2 className="text-6xl md:text-8xl font-display text-[var(--bronzo-profondo)] italic leading-tight tracking-tight">
             L'Arte di<br /><span className="text-gold">Scomparire.</span>
           </h2>
-          <div className="space-y-8 py-12 border-y border-[var(--oro-lucido)]/10 max-w-xl">
+          <div className="space-y-6 py-8 border-y border-[var(--oro-lucido)]/10 max-w-xl">
             <p className="text-[var(--bronzo-profondo)] text-lg md:text-xl font-sans leading-relaxed text-justify">
               "La vera eccellenza non urla. Si manifesta in quell'ombra perfetta che anticipa ogni tua necessità, proteggendo il tuo tempo e la tua pace."
             </p>
@@ -273,9 +273,9 @@ const NarrativeSpread: React.FC = () => {
       </div>
 
       {/* Spread 2: What We Do */}
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-24 max-w-7xl mx-auto items-center">
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 max-w-7xl mx-auto items-center">
         <div className="lg:col-span-12 xl:col-span-5 order-2 xl:order-1 relative">
-          <div className="aspect-[3/4] overflow-hidden rounded-sm border border-[var(--oro-lucido)]/10 shadow-3xl">
+          <div className="aspect-[16/10] xl:aspect-[3/4] overflow-hidden rounded-sm border border-[var(--oro-lucido)]/10 shadow-3xl">
             <img
               src="/assets/narrative_lifestyle.png"
               alt="Milano Lifestyle"
@@ -283,9 +283,9 @@ const NarrativeSpread: React.FC = () => {
             />
           </div>
         </div>
-        <div className="lg:col-span-12 xl:col-span-7 flex flex-col justify-center space-y-16 xl:pl-24 order-1 xl:order-2">
+        <div className="lg:col-span-12 xl:col-span-7 flex flex-col justify-center space-y-12 xl:pl-24 order-1 xl:order-2">
           <h3 className="text-5xl md:text-7xl font-display text-[var(--bronzo-profondo)] tracking-tight italic">Servizio alla Persona,<br /><span className="text-gold">Elevato a Concierge.</span></h3>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 pt-8 border-t border-[var(--oro-lucido)]/10">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-10 pt-8 border-t border-[var(--oro-lucido)]/10">
             <div className="space-y-4">
               <h4 className="text-[var(--oro-lucido)] font-accent text-[10px] tracking-[0.5em] uppercase">Executive Guardian</h4>
               <p className="text-[var(--bronzo-profondo)]/70 text-[13px] leading-relaxed font-sans">Non siamo semplici vettori. Siamo il tuo sigillo legale e fisico a Milano, proteggendo il tuo tempo e la tua immagine con discrezione assoluta.</p>
@@ -629,80 +629,68 @@ const App: React.FC = () => {
             <NarrativeSpread />
 
             {/* THE SELECTION */}
-            <section ref={servicesRef} className="py-32 px-12 md:px-24 max-w-7xl mx-auto space-y-24">
+            <section ref={servicesRef} className="py-24 px-12 md:px-24 max-w-7xl mx-auto space-y-16">
               <div className="space-y-6 text-center max-w-2xl mx-auto">
                 <span className="text-[10px] text-[var(--oro-lucido)]/40 font-accent uppercase tracking-[1.5em] mb-4 block">The Portfolio</span>
                 <h3 className="text-6xl md:text-8xl font-display text-[var(--bronzo-profondo)] tracking-[0.1em] lowercase italic">Servizi.</h3>
-                <p className="text-[var(--bronzo-profondo)]/60 font-display text-xl md:text-2xl leading-relaxed italic pt-6 border-t border-[var(--oro-lucido)]/10 mt-12">
+                <p className="text-[var(--bronzo-profondo)]/60 font-display text-xl md:text-2xl leading-relaxed italic pt-6 border-t border-[var(--oro-lucido)]/10 mt-8">
                   "Ogni gesto è una promessa di eccellenza, scolpito per rispondere alle tue necessità più elevate."
                 </p>
               </div>
 
-              <div className="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-1 distribution-grid pt-16">
-                {SERVICE_TYPES.map((service, index) => {
-                  // Asymmetrical spans: 7/5, 4/8, 6/6
-                  const spans = index === 0 ? 'md:col-span-7' :
-                    index === 1 ? 'md:col-span-5' :
-                      index === 2 ? 'md:col-span-4' :
-                        index === 3 ? 'md:col-span-8' :
-                          'md:col-span-6';
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 pt-12">
+                {SERVICE_TYPES.map((service) => (
+                  <button
+                    key={service.id}
+                    onClick={() => handleServiceSelect(service.id)}
+                    className="group flex flex-col bg-white border border-[var(--oro-lucido)]/10 shadow-sm hover:shadow-2xl transition-all duration-700 min-h-[420px] rounded-sm overflow-hidden text-left"
+                  >
+                    <div className="h-44 overflow-hidden relative">
+                      <img src={service.image} alt={service.name} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-[6000ms]" />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
+                    </div>
 
-                  return (
-                    <button
-                      key={service.id}
-                      onClick={() => handleServiceSelect(service.id)}
-                      className={`group catalog-selector flex flex-col relative overflow-hidden text-left bg-white/95 border border-[var(--oro-lucido)]/10 shadow-sm hover:shadow-2xl transition-all duration-1000 ${spans} min-h-[450px]`}
-                    >
-                      <div className="absolute inset-0 overflow-hidden">
-                        <img src={service.image} alt={service.name} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-[6000ms] ease-out" />
-                        <div className="absolute inset-0 bg-gradient-to-t from-[var(--bronzo-profondo)]/80 via-[var(--bronzo-profondo)]/20 to-transparent"></div>
+                    <div className="p-8 md:p-10 space-y-4 flex-1 flex flex-col">
+                      <div className="space-y-1">
+                        <span className="text-[9px] font-accent text-gold tracking-[0.4em] uppercase opacity-70">{service.badge}</span>
+                        <h4 className="text-3xl font-display text-[var(--bronzo-profondo)] italic tracking-wide">{service.name}</h4>
                       </div>
-
-                      <div className="relative z-10 p-12 md:p-16 mt-auto space-y-6 transform translate-y-8 group-hover:translate-y-0 transition-transform duration-1000">
-                        <div className="flex items-center gap-6">
-                          <div className="h-[0.5px] w-8 bg-gold/50"></div>
-                          <span className="text-[10px] font-accent text-gold tracking-[1em] uppercase">{service.badge}</span>
-                        </div>
-                        <div className="space-y-4">
-                          <h4 className="text-4xl md:text-5xl font-display text-white italic tracking-wide">{service.name}</h4>
-                          <p className="text-white/70 text-[13px] leading-relaxed font-sans max-w-sm opacity-0 group-hover:opacity-100 transition-opacity duration-1000 delay-300">{service.description}</p>
-                        </div>
-                        <div className="pt-4 flex items-center gap-4 group/btn">
-                          <span className="text-[10px] font-accent text-gold tracking-[0.6em] uppercase">Request Access</span>
-                          <ArrowRight className="w-4 h-4 text-gold" />
-                        </div>
+                      <p className="text-[var(--bronzo-profondo)]/70 text-[12px] leading-relaxed font-sans line-clamp-3 italic">{service.description}</p>
+                      <div className="mt-auto pt-6 border-t border-[var(--oro-lucido)]/5 flex items-center justify-between">
+                        <span className="text-[9px] font-accent text-[var(--oro-lucido)]/40 tracking-[0.4em] uppercase">Private Booking</span>
+                        <ArrowRight className="w-4 h-4 text-gold group-hover:translate-x-2 transition-transform duration-700" />
                       </div>
-                    </button>
-                  );
-                })}
+                    </div>
+                  </button>
+                ))}
               </div>
             </section>
 
             {/* THE MONOLITH */}
-            <div className={`transition-all duration-1000 pb-32 ${activeStep > 1 ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-24 pointer-events-none'}`}>
+            <div className={`transition-all duration-1000 pb-24 ${activeStep > 1 ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-24 pointer-events-none'}`}>
               <div className="max-w-4xl mx-auto px-6">
                 <div ref={formCardRef} className="luxury-monolith rounded-sm overflow-hidden border border-[var(--oro-lucido)]/10 shadow-3xl bg-white/95">
                   <StepIndicator currentStep={activeStep} />
                   <div className="p-12 md:p-20">
                     {activeStep === 2 && (
-                      <div className="animate-reveal space-y-20">
+                      <div className="animate-reveal space-y-16">
                         <div className="space-y-6">
                           <h3 className="text-5xl md:text-6xl font-display text-[var(--bronzo-profondo)] tracking-widest italic">{t('booking.details')}</h3>
                           <div className="gold-line"></div>
                         </div>
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-16">
-                          <div className="space-y-12">
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
+                          <div className="space-y-8">
                             <h4 className="text-[9px] font-accent text-[var(--oro-lucido)]/40 uppercase tracking-[1em] mb-4">Itinerary</h4>
-                            <div className="space-y-6">
-                              <input type="text" value={formData.pickupLocation} onChange={(e) => handleLocationSearch('pickup', e.target.value)} onBlur={handleInputBlur} placeholder={t('booking.pickup')} className="w-full px-8 py-6 elite-input text-[11px] tracking-widest uppercase" />
-                              <input type="text" value={formData.destination} onChange={(e) => handleLocationSearch('destination', e.target.value)} onBlur={handleInputBlur} placeholder={t('booking.destination')} className="w-full px-8 py-6 elite-input text-[11px] tracking-widest uppercase" />
+                            <div className="space-y-4">
+                              <input type="text" value={formData.pickupLocation} onChange={(e) => handleLocationSearch('pickup', e.target.value)} onBlur={handleInputBlur} placeholder={t('booking.pickup')} className="w-full px-8 py-5 elite-input text-[11px] tracking-widest uppercase" />
+                              <input type="text" value={formData.destination} onChange={(e) => handleLocationSearch('destination', e.target.value)} onBlur={handleInputBlur} placeholder={t('booking.destination')} className="w-full px-8 py-5 elite-input text-[11px] tracking-widest uppercase" />
                             </div>
                           </div>
-                          <div className="space-y-12">
+                          <div className="space-y-8">
                             <h4 className="text-[9px] font-accent text-[var(--oro-lucido)]/40 uppercase tracking-[1em] mb-4">Reserved Schedule</h4>
-                            <div className="space-y-6">
-                              <input type="date" name="date" value={formData.date} onChange={handleInputChange} min={new Date().toISOString().split('T')[0]} className="w-full px-8 py-6 elite-input text-[11px] tracking-widest" style={{ colorScheme: 'light' }} />
-                              <select name="time" value={formData.time} onChange={handleInputChange} disabled={!formData.date} className="w-full px-8 py-6 elite-input text-[11px] tracking-widest uppercase appearance-none bg-white/10">
+                            <div className="space-y-4">
+                              <input type="date" name="date" value={formData.date} onChange={handleInputChange} min={new Date().toISOString().split('T')[0]} className="w-full px-8 py-5 elite-input text-[11px] tracking-widest" style={{ colorScheme: 'light' }} />
+                              <select name="time" value={formData.time} onChange={handleInputChange} disabled={!formData.date} className="w-full px-8 py-5 elite-input text-[11px] tracking-widest uppercase appearance-none bg-white/10">
                                 <option value="">{t('booking.time')}</option>
                                 {availableSlots.map(s => <option key={s} value={s}>{s} {isNightService(s) ? '(Night)' : ''}</option>)}
                               </select>
@@ -713,27 +701,27 @@ const App: React.FC = () => {
                     )}
 
                     {activeStep === 3 && (
-                      <div className="animate-reveal space-y-20">
+                      <div className="animate-reveal space-y-16">
                         <div className="space-y-6">
                           <h3 className="text-5xl md:text-6xl font-display text-[var(--bronzo-profondo)] tracking-widest italic">{t('booking.guest_info')}</h3>
                           <div className="gold-line"></div>
                         </div>
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-16">
-                          <div className="space-y-8">
-                            <input type="text" name="name" value={formData.name} onChange={handleInputChange} placeholder={t('booking.name')} className="w-full px-8 py-6 elite-input text-[11px] tracking-widest uppercase" />
-                            <input type="email" name="email" value={formData.email} onChange={handleInputChange} placeholder={t('booking.email')} className="w-full px-8 py-6 elite-input text-[11px] tracking-widest" />
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
+                          <div className="space-y-6">
+                            <input type="text" name="name" value={formData.name} onChange={handleInputChange} placeholder={t('booking.name')} className="w-full px-8 py-5 elite-input text-[11px] tracking-widest uppercase" />
+                            <input type="email" name="email" value={formData.email} onChange={handleInputChange} placeholder={t('booking.email')} className="w-full px-8 py-5 elite-input text-[11px] tracking-widest" />
                             <div className="flex gap-4">
-                              <select name="countryCode" value={formData.countryCode} onChange={handleInputChange} className="w-32 px-4 py-6 elite-input text-[11px] bg-white/10">
+                              <select name="countryCode" value={formData.countryCode} onChange={handleInputChange} className="w-32 px-4 py-5 elite-input text-[11px] bg-white/10">
                                 {COUNTRY_CODES.map(c => <option key={c.code} value={c.code}>{c.code}</option>)}
                               </select>
-                              <input type="tel" name="phone" value={formData.phone} onChange={handleInputChange} placeholder={t('booking.phone')} className="flex-1 px-8 py-6 elite-input text-[11px] tracking-widest" />
+                              <input type="tel" name="phone" value={formData.phone} onChange={handleInputChange} placeholder={t('booking.phone')} className="flex-1 px-8 py-5 elite-input text-[11px] tracking-widest" />
                             </div>
                           </div>
-                          <div className="space-y-12">
+                          <div className="space-y-8">
                             <h4 className="text-[9px] font-accent text-[var(--oro-lucido)]/40 uppercase tracking-[1em] mb-4">Reserved Settlement</h4>
                             <div className="grid grid-cols-2 gap-4">
                               {['cash', 'pos'].map(m => (
-                                <button key={m} onClick={() => setFormData(p => ({ ...p, paymentMethod: m as any }))} className={`py-6 border text-[9px] uppercase tracking-[0.4em] transition-all ${formData.paymentMethod === m ? 'border-[var(--oro-lucido)] text-[var(--oro-lucido)] bg-[var(--oro-lucido)]/5 font-bold' : 'border-[var(--oro-lucido)]/10 text-[var(--oro-lucido)]/40 hover:border-[var(--oro-lucido)]/30'}`}>
+                                <button key={m} onClick={() => setFormData(p => ({ ...p, paymentMethod: m as any }))} className={`py-5 border text-[9px] uppercase tracking-[0.4em] transition-all ${formData.paymentMethod === m ? 'border-[var(--oro-lucido)] text-[var(--oro-lucido)] bg-[var(--oro-lucido)]/5 font-bold' : 'border-[var(--oro-lucido)]/10 text-[var(--oro-lucido)]/40 hover:border-[var(--oro-lucido)]/30'}`}>
                                   {m}
                                 </button>
                               ))}
@@ -744,12 +732,12 @@ const App: React.FC = () => {
                     )}
 
                     {activeStep === 4 && (
-                      <div className="animate-reveal space-y-20 text-center">
-                        <div className="space-y-8">
+                      <div className="animate-reveal space-y-16 text-center">
+                        <div className="space-y-6">
                           <Star className="w-12 h-12 text-[var(--oro-lucido)]/30 mx-auto" strokeWidth={0.5} />
                           <h3 className="text-5xl font-display text-[var(--bronzo-profondo)] uppercase tracking-[0.3em] italic">{t('booking.step4_title')}</h3>
                         </div>
-                        <div className="max-w-xl mx-auto space-y-12 py-12 border-y border-[var(--oro-lucido)]/10 font-display">
+                        <div className="max-w-xl mx-auto space-y-10 py-10 border-y border-[var(--oro-lucido)]/10 font-display">
                           <div className="flex justify-between items-center text-[var(--oro-lucido)]/60 uppercase tracking-widest text-[10px]">
                             <span>Guest Member</span>
                             <span className="text-[var(--bronzo-profondo)] text-xl font-accent">{formData.name}</span>
@@ -758,7 +746,7 @@ const App: React.FC = () => {
                             <span>Reserved Experience</span>
                             <span className="text-[var(--bronzo-profondo)] text-xl tracking-widest uppercase font-accent">{SERVICE_TYPES.find(s => s.id === formData.serviceType)?.name}</span>
                           </div>
-                          <div className="flex justify-between items-end pt-12">
+                          <div className="flex justify-between items-end pt-8">
                             <span className="text-[var(--oro-lucido)]/30 text-[10px] uppercase tracking-[1em]">Estimated Excellence</span>
                             <span className="text-7xl text-gold">€{formData.estimatedPrice}</span>
                           </div>
@@ -774,7 +762,7 @@ const App: React.FC = () => {
                   </div>
 
                   {/* ACTION BAR */}
-                  <div className="p-12 border-t border-[var(--oro-lucido)]/5 flex flex-col md:flex-row justify-between items-center gap-8 bg-white/30">
+                  <div className="p-10 border-t border-[var(--oro-lucido)]/5 flex flex-col md:flex-row justify-between items-center gap-8 bg-white/30">
                     <button
                       onClick={handlePrevStep}
                       className={`text-[9px] uppercase tracking-[0.5em] text-[var(--oro-lucido)]/40 hover:text-[var(--oro-lucido)] transition-all ${activeStep > 2 ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}
@@ -798,36 +786,73 @@ const App: React.FC = () => {
 
           <footer className="relative py-24 px-12 md:px-24 bg-transparent border-t border-[var(--oro-lucido)]/10 overflow-hidden">
             <div className="absolute inset-0 bg-noise opacity-[0.05]"></div>
-            <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-16 md:gap-0">
-              <div className="flex flex-col items-center md:items-start gap-4">
-                <h2 className="text-2xl font-display text-gold tracking-[0.4em] italic leading-none">INSOLITO PRIVÉ</h2>
-                <div className="flex items-center gap-8 opacity-40">
-                  <a href="#" className="text-[10px] font-accent text-[var(--oro-lucido)] hover:text-gold tracking-[0.5em] transition-colors uppercase">Instagram</a>
-                  <a href="#" className="text-[10px] font-accent text-[var(--oro-lucido)] hover:text-gold tracking-[0.5em] transition-colors uppercase">WhatsApp</a>
+            <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-24 relative z-10">
+              <div className="space-y-12">
+                <div className="flex items-center gap-4">
+                  <Crown className="w-6 h-6 text-gold" strokeWidth={1} />
+                  <span className="text-xl font-display text-[var(--bronzo-profondo)] tracking-[0.2em]">INSOLITO</span>
+                </div>
+                <p className="text-[var(--bronzo-profondo)]/40 text-[11px] leading-loose tracking-widest uppercase font-accent">
+                  Architettura del Tempo & Discrezione Assoluta. Milano.
+                </p>
+                <div className="flex gap-8">
+                  <a href="#" className="text-[var(--oro-lucido)]/40 hover:text-gold transition-colors"><Instagram className="w-5 h-5" strokeWidth={1} /></a>
+                  <a href="#" className="text-[var(--oro-lucido)]/40 hover:text-gold transition-colors"><MessageCircle className="w-5 h-5" strokeWidth={1} /></a>
+                  <a href="#" className="text-[var(--oro-lucido)]/40 hover:text-gold transition-colors"><Mail className="w-5 h-5" strokeWidth={1} /></a>
                 </div>
               </div>
-
-              <div className="flex flex-col items-center md:items-end gap-6 text-center md:text-right">
-                <p className="text-[9px] font-accent text-[var(--oro-lucido)]/20 tracking-[1em] uppercase">Lifestyle Management Milano</p>
-                <div className="flex items-center gap-6">
-                  <button onClick={() => {
-                    setCurrentLegalContent({ title: 'Legal', content: `Michael Jara - ${BUSINESS_INFO.fullName}\n${BUSINESS_INFO.address}\nP.IVA: ${BUSINESS_INFO.piva}` });
-                    setShowLegalModal(true);
-                  }} className="text-[9px] font-accent text-[var(--oro-lucido)]/40 hover:text-[var(--oro-lucido)] tracking-[0.5em] uppercase transition-colors">Legal</button>
-                  <button onClick={() => setShowBrandStory(true)} className="text-[9px] font-accent text-[var(--oro-lucido)]/40 hover:text-[var(--oro-lucido)] tracking-[0.5em] uppercase transition-colors">Philosophy</button>
+              <div className="space-y-8">
+                <h4 className="text-[10px] font-accent text-gold tracking-[1em] uppercase">Maison</h4>
+                <div className="flex flex-col gap-6">
+                  <button onClick={() => setShowBrandStory(true)} className="text-[11px] text-[var(--bronzo-profondo)]/40 hover:text-[var(--oro-lucido)] tracking-widest uppercase transition-colors text-left">Our Story</button>
+                  <button onClick={() => setIsVisionOpen(true)} className="text-[11px] text-[var(--bronzo-profondo)]/40 hover:text-[var(--oro-lucido)] tracking-widest uppercase transition-colors text-left">The Vision</button>
+                  <button onClick={() => setCurrentLegalContent({ title: 'Privacy Policy', content: LEGAL_CONTENT.privacy })} className="text-[11px] text-[var(--bronzo-profondo)]/40 hover:text-[var(--oro-lucido)] tracking-widest uppercase transition-colors text-left">Privacy</button>
                 </div>
+              </div>
+              <div className="space-y-8">
+                <h4 className="text-[10px] font-accent text-gold tracking-[1em] uppercase">Concierge</h4>
+                <div className="flex flex-col gap-6">
+                  <a href={`tel:${BUSINESS_INFO.phone}`} className="text-[11px] text-[var(--bronzo-profondo)]/40 hover:text-[var(--oro-lucido)] tracking-widest uppercase transition-colors">Direct Line</a>
+                  <a href={`https://wa.me/${BUSINESS_INFO.whatsapp}`} className="text-[11px] text-[var(--bronzo-profondo)]/40 hover:text-[var(--oro-lucido)] tracking-widest uppercase transition-colors">WhatsApp Privé</a>
+                  <button onClick={() => setShowHistory(true)} className="text-[11px] text-[var(--bronzo-profondo)]/40 hover:text-[var(--oro-lucido)] tracking-widest uppercase transition-colors text-left">Reserved Archive</button>
+                </div>
+              </div>
+              <div className="space-y-8">
+                <h4 className="text-[10px] font-accent text-gold tracking-[1em] uppercase">Direct Inquiries</h4>
+                <div className="space-y-6">
+                  <p className="text-[11px] text-[var(--bronzo-profondo)]/40 tracking-widest uppercase">{BUSINESS_INFO.address}</p>
+                  <p className="text-[11px] text-[var(--bronzo-profondo)]/40 tracking-widest uppercase">{BUSINESS_INFO.email}</p>
+                  <div className="pt-4">
+                    <button
+                      onClick={() => setShowAdminLogin(true)}
+                      className="text-[9px] font-accent text-gold/20 hover:text-gold transition-colors tracking-[0.5em] uppercase"
+                    >
+                      Member Login
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className="mt-24 pt-12 border-t border-[var(--oro-lucido)]/5 flex flex-col md:flex-row justify-between items-center gap-8 relative z-10">
+              <span className="text-[9px] font-accent text-[var(--bronzo-profondo)]/20 tracking-[1em] uppercase">© 2024 Insolito Privé. All Rights Reserved.</span>
+              <div className="flex gap-12">
+                <span className="text-[9px] font-accent text-[var(--bronzo-profondo)]/20 tracking-[0.5em] uppercase">Milano</span>
+                <span className="text-[9px] font-accent text-[var(--bronzo-profondo)]/20 tracking-[0.5em] uppercase">Paris</span>
+                <span className="text-[9px] font-accent text-[var(--bronzo-profondo)]/20 tracking-[0.5em] uppercase">London</span>
               </div>
             </div>
           </footer>
         </div>
       )}
 
-      <LegalModal
-        isOpen={showLegalModal}
-        onClose={() => setShowLegalModal(false)}
-        title={currentLegalContent.title}
-        content={currentLegalContent.content}
-      />
+      {showLegalModal && (
+        <LegalModal
+          isOpen={showLegalModal}
+          onClose={() => setShowLegalModal(false)}
+          title={currentLegalContent.title}
+          content={currentLegalContent.content}
+        />
+      )}
     </>
   );
 };
