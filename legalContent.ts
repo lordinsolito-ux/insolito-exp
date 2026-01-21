@@ -1,11 +1,11 @@
 export const LEGAL_CONTENT = {
   terms: {
-    title: "Condizioni Generali del Servizio Privé",
-    content: "Il servizio INSOLITO PRIVÉ è operato su base strettamente fiduciaria e riservata. Ogni missione viene pianificata individualmente..."
+    title: "Contratto di Lifestyle Management & Assistenza",
+    content: "Il presente servizio è un contratto di ASSISTENZA ALLA PERSONA (Cod. Civ. 2222 e s.g.g.). Il Fornitore opera come Lifestyle Manager e non come vettore di trasporto. Il veicolo utilizzato è da intendersi esclusivamente come 'strumento di lavoro accessorio' di proprietà del prestatore per l'espletamento delle funzioni di assistenza, coordinamento e sicurezza personale. La tariffazione è calcolata su base oraria per la disponibilità professionale e non per chilometraggio o tratta. Accettando questo servizio, il Cliente dichiara di essere consapevole che NON sta usufruendo di un servizio di Noleggio Con Conducente (NCC) o Taxi, bensì di una consulenza logistica privata."
   },
   privacy: {
-    title: "Politica sulla Riservatezza",
-    content: "La privacy dei nostri membri è il nostro bene più prezioso. Non condividiamo dati con terze parti per scopi commerciali."
+    title: "Politica sulla Riservatezza Estrema",
+    content: "Insolito Privé opera sotto rigoroso vincolo di segretezza fiduciaria. Nessun dato relativo agli spostamenti, incontri o conversazioni avvenute durante il servizio sarà mai registrato, divulgato o ceduto a terzi, salvo obblighi di legge. La tua privacy è l'asset principale del nostro servizio."
   }
 };
 

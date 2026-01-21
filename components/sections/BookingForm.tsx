@@ -142,8 +142,8 @@ const BookingForm = forwardRef<HTMLDivElement, BookingFormProps>(({
                                 </div>
                                 <div className="flex items-center justify-center gap-6">
                                     <input type="checkbox" id="terms" checked={termsAccepted} onChange={e => onToggleTerms(e.target.checked)} className="w-4 h-4 rounded-none border-[var(--milano-bronzo)]/20 bg-transparent text-[var(--milano-bronzo)] focus:ring-0" />
-                                    <label htmlFor="terms" className="text-[10px] text-white/40 font-accent tracking-widest uppercase">
-                                        {t('booking.terms_agree')} <button onClick={onShowTerms} className="text-[var(--milano-bronzo)] hover:underline transition-colors">{t('booking.terms_link')}</button>
+                                    <label htmlFor="terms" className="text-[10px] text-white/40 font-accent tracking-widest uppercase text-left flex-1 md:flex-none">
+                                        Accetto il <button onClick={onShowTerms} className="text-[var(--milano-bronzo)] hover:underline transition-colors mx-1">Contratto di Lifestyle Management</button> e confermo che questo NON è un servizio NCC.
                                     </label>
                                 </div>
                             </div>
