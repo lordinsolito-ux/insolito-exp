@@ -72,10 +72,21 @@
 
   /* ELITE INPUTS */
   .elite-input {
-    @apply bg-transparent border-b border-white/10 text-[#F8F8F8] py-4 transition-all duration-700 outline-none;
-    @apply placeholder:text-white/20 focus:border-b-[var(--milano-bronzo)]/50 focus:placeholder-transparent;
+    @apply bg-white/5 border-b border-white/10 text-[#F8F8F8] py-5 px-6 transition-all duration-700 outline-none w-full block;
+    @apply placeholder:text-white/20 focus:border-b-[var(--milano-bronzo)] focus:bg-white/[0.08] focus:placeholder-transparent;
     font-family: 'IBM Plex Mono', monospace;
-    @apply text-[10px] uppercase tracking-widest;
+    @apply text-[11px] uppercase tracking-[0.2em];
+    appearance: none;
+    color: #F8F8F8 !important;
+    /* Force visibility */
+  }
+
+  .elite-input:-webkit-autofill,
+  .elite-input:-webkit-autofill:hover,
+  .elite-input:-webkit-autofill:focus {
+    -webkit-text-fill-color: #F8F8F8 !important;
+    -webkit-box-shadow: 0 0 0px 1000px #0a0a0a inset !important;
+    transition: background-color 5000s ease-in-out 0s;
   }
 
   /* DIVIDERS */
@@ -142,13 +153,27 @@
 }
 
 @keyframes shimmer {
-  0% { transform: translateX(-100%) skewX(-12deg); }
-  100% { transform: translateX(200%) skewX(-12deg); }
+  0% {
+    transform: translateX(-100%) skewX(-12deg);
+  }
+
+  100% {
+    transform: translateX(200%) skewX(-12deg);
+  }
 }
 
 @keyframes pulse-slow {
-  0%, 100% { opacity: 0.3; transform: scale(0.98); }
-  50% { opacity: 0.6; transform: scale(1.02); }
+
+  0%,
+  100% {
+    opacity: 0.3;
+    transform: scale(0.98);
+  }
+
+  50% {
+    opacity: 0.6;
+    transform: scale(1.02);
+  }
 }
 
 .animate-shimmer {
