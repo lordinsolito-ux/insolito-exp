@@ -16,7 +16,7 @@ export const SERVICE_TYPES: (ServiceType & { image: string })[] = [
   {
     id: ServiceTypeId.AIRPORT_TRANSFER,
     name: 'Privé Welcome',
-    description: 'Accoglienza prioritaria e coordinamento totale per una transizione fluida verso la tua destinazione d\'eccellenza a Milano.',
+    description: 'Malpensa, 04:23. Tu sei stanco. Noi siamo svegli. Il tuo arrivo non è un transito, è il primo respiro di Milano.',
     icon: Plane,
     badge: 'Luxury Transit',
     image: '/assets/service_welcome.png'
@@ -24,7 +24,7 @@ export const SERVICE_TYPES: (ServiceType & { image: string })[] = [
   {
     id: ServiceTypeId.CITY_TO_CITY,
     name: 'Privé Lounge',
-    description: 'Il comfort di un salotto privato in movimento. Trasforma ogni spostamento in un momento di pura riservatezza e relax.',
+    description: 'Il mondo fuori urla. Qui dentro no. Un salotto in movimento dove il silenzio vale più della velocità.',
     icon: MapIcon,
     badge: 'Signature',
     image: '/assets/service_lounge.png'
@@ -32,7 +32,7 @@ export const SERVICE_TYPES: (ServiceType & { image: string })[] = [
   {
     id: ServiceTypeId.HOURLY,
     name: 'Privé Assistant',
-    description: 'Un assistente dedicato a disposizione per shopping, meeting e ogni tua commissione più riservata a Milano.',
+    description: 'Le commissioni che non vuoi fare. I regali che non hai tempo di cercare. I dettagli che tutti dimenticano. Noi no.',
     icon: Clock,
     badge: 'Daily Shadow',
     image: '/assets/service_assistant.png'
@@ -40,7 +40,7 @@ export const SERVICE_TYPES: (ServiceType & { image: string })[] = [
   {
     id: ServiceTypeId.EVENT,
     name: 'Privé Night',
-    description: 'Sicurezza millimetrica e accesso esclusivo per vivere il prestigio della notte milanese senza compromessi.',
+    description: 'Sono le 3 del mattino. Hai fatto tardi. Zero giudizi. Zero attese. Solo la certezza di tornare a casa in sicurezza.',
     icon: GlassWater,
     badge: 'Midnight Elite',
     image: '/assets/service_night.png'
@@ -48,7 +48,7 @@ export const SERVICE_TYPES: (ServiceType & { image: string })[] = [
   {
     id: ServiceTypeId.WEDDING,
     name: 'Privé Wedding',
-    description: 'L\'eleganza assoluta per il tuo giorno più prezioso. Cura di ogni dettaglio con grazia e precisione millimetrica.',
+    description: 'Niente limousine bianche. Niente clichè. Solo eleganza invisibile per chi sa che il vero protagonista non è l\'auto.',
     icon: Heart,
     badge: 'Prestige',
     image: '/assets/service_wedding.png'
@@ -56,7 +56,7 @@ export const SERVICE_TYPES: (ServiceType & { image: string })[] = [
   {
     id: ServiceTypeId.EXECUTIVE,
     name: 'Privé Executive',
-    description: 'Discrezione, puntualità e un ambiente di lavoro mobile per i tuoi meeting e spostamenti istituzionali a Milano.',
+    description: 'Mentre prepari il deal della vita, noi prepariamo la strada. Discrezione assoluta. Quello che succede a bordo, resta a bordo.',
     icon: Briefcase,
     badge: 'Business Prive',
     image: '/assets/service_executive.png'

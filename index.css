@@ -3,13 +3,12 @@
 @tailwind utilities;
 
 :root {
-  --perla-dorata: #FAF9F6;
-  --oro-lucido: #BC9C62;
-  --oro-scuro: #8C6F3D;
-  --oro-rosa: #D4AF37;
-  --bronzo-profondo: #2D241E;
-  --bianco-puro: #FFFFFF;
-  --oro-soft: rgba(188, 156, 98, 0.15);
+  --milano-nero: #000000;
+  --milano-cemento: #3A3A3A;
+  --milano-bronzo: #8B7355;
+  --milano-ghiaccio: #F8F8F8;
+  --oro-lucido: var(--milano-bronzo);
+  --bronzo-profondo: var(--milano-ghiaccio);
 
   /* SPACING SYSTEM - CLAMP BASED */
   --space-xs: clamp(0.5rem, 1vw, 0.75rem);
@@ -21,28 +20,37 @@
 
 @layer base {
   * {
-    @apply border-[var(--oro-lucido)]/10;
+    @apply border-white/5;
   }
 
   body {
-    @apply bg-[var(--perla-dorata)] text-[var(--bronzo-profondo)] antialiased selection:bg-[var(--oro-lucido)] selection:text-white overflow-x-hidden;
-    font-family: 'Outfit', sans-serif;
-    font-weight: 400;
+    @apply bg-black text-[#F8F8F8] antialiased selection:bg-[var(--milano-bronzo)] selection:text-white overflow-x-hidden;
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 300;
   }
 
-  p,
-  span:not(.font-display) {
-    @apply leading-relaxed;
+  /* HEADLINES: GROTESK/SANS BOLD */
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  .font-accent {
+    font-family: 'Space Grotesk', sans-serif;
+    @apply font-bold uppercase tracking-tighter;
   }
 
+  /* BODY: SERIF DELICATO */
   .font-display {
     font-family: 'Cormorant Garamond', serif;
-    @apply leading-tight;
+    @apply leading-tight italic;
   }
 
-  .font-accent {
-    @apply font-medium tracking-[0.2em] uppercase;
-    font-family: 'Outfit', sans-serif;
+  /* ACCENT: MONOSPACE */
+  .font-mono {
+    font-family: 'IBM Plex Mono', monospace;
+    @apply tracking-[0.2em] uppercase;
   }
 }
 
@@ -51,58 +59,42 @@
   /* FLUID FLOATING HEADER */
   .floating-header {
     @apply fixed top-8 left-1/2 -translate-x-1/2 z-[150] w-[calc(100%-4rem)] max-w-4xl;
-    @apply backdrop-blur-xl bg-white/20 border border-[var(--oro-lucido)]/10 rounded-full px-8 py-3;
+    @apply backdrop-blur-xl bg-black/40 border border-white/10 rounded-full px-8 py-3;
     @apply flex items-center justify-between transition-all duration-700;
-    box-shadow: 0 10px 40px -20px rgba(188, 156, 98, 0.2);
+    box-shadow: 0 10px 40px -20px rgba(0, 0, 0, 0.5);
   }
 
-  /* EDITORIAL MONOLITH - GLASS LEVEL 2 */
+  /* EDITORIAL MONOLITH - RADICAL DARK */
   .luxury-monolith {
-    @apply backdrop-blur-[30px] bg-white/40 border border-[var(--oro-lucido)]/10 relative overflow-hidden;
-    box-shadow:
-      0 40px 100px -20px rgba(188, 156, 98, 0.12),
-      inset 0 0 40px rgba(255, 255, 255, 0.4);
-  }
-
-  /* MAGAZINE CATALOG SELECTOR */
-  .catalog-selector {
-    @apply relative overflow-hidden bg-white/60 border border-[var(--oro-lucido)]/5 transition-all duration-[1500ms] ease-[cubic-bezier(0.23, 1, 0.32, 1)];
-  }
-
-  .catalog-selector:hover {
-    @apply border-[var(--oro-lucido)]/20 bg-white/90;
-    transform: translateY(-8px);
+    @apply backdrop-blur-[30px] bg-black/80 border border-white/5 relative overflow-hidden;
+    box-shadow: 0 40px 100px -20px rgba(0, 0, 0, 0.8);
   }
 
   /* ELITE INPUTS */
   .elite-input {
-    @apply bg-transparent border-b border-[var(--oro-lucido)]/20 text-[var(--bronzo-profondo)] py-4 transition-all duration-700 outline-none;
-    @apply placeholder:text-[var(--oro-lucido)]/30 focus:border-b-[var(--oro-lucido)]/50 focus:placeholder-transparent;
-    font-family: 'Outfit', sans-serif;
+    @apply bg-transparent border-b border-white/10 text-[#F8F8F8] py-4 transition-all duration-700 outline-none;
+    @apply placeholder:text-white/20 focus:border-b-[var(--milano-bronzo)]/50 focus:placeholder-transparent;
+    font-family: 'IBM Plex Mono', monospace;
+    @apply text-[10px] uppercase tracking-widest;
   }
 
   /* DIVIDERS */
   .gold-line {
-    @apply h-[0.5px] w-full bg-gradient-to-r from-transparent via-[var(--oro-lucido)]/20 to-transparent my-8;
+    @apply h-[0.5px] w-full bg-gradient-to-r from-transparent via-[var(--milano-bronzo)]/20 to-transparent my-8;
   }
 
-  /* BUTTONS */
+  /* BUTTONS - BRUTALIST LUXURY */
   .btn-monumental {
-    @apply relative overflow-hidden bg-[var(--oro-lucido)] text-white font-accent text-[11px] px-12 py-5 transition-all duration-700 active:scale-95;
-    background: linear-gradient(135deg, #BC9C62 0%, #D4AF37 100%);
-    box-shadow: 0 10px 30px -10px rgba(188, 156, 98, 0.5);
+    @apply relative overflow-hidden bg-white text-black font-accent text-[10px] px-12 py-5 transition-all duration-700 active:scale-95 uppercase tracking-[0.5em];
   }
 
   .btn-monumental:hover {
-    @apply opacity-90;
-    box-shadow: 0 15px 40px -10px rgba(188, 156, 98, 0.6);
+    @apply bg-[var(--milano-bronzo)] text-white;
+    box-shadow: 0 15px 40px -10px rgba(139, 115, 85, 0.4);
   }
 
   .text-gold {
-    @apply text-[var(--oro-lucido)] bg-clip-text font-display;
-    background: linear-gradient(to bottom, #BC9C62, #8C6F3D);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+    @apply text-[var(--milano-bronzo)] font-display;
   }
 }
 
