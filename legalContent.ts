@@ -15,6 +15,7 @@ export const BUSINESS_INFO = {
   address: "Via Uboldo n. 8, 20063 Cernusco sul Naviglio (MI)",
   piva: "14379200968",
   phone: "+39 339 3522164",
+  whatsapp: "393393522164",
   email: "info@insolitoprive.it",
   instagram: "insolito_prive",
   ateco: "96.99.99 (Servizi alla Persona n.c.a.)"

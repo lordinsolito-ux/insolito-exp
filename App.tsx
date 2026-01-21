@@ -55,7 +55,7 @@ import {
 } from './types';
 import { searchLocations, calculateRoute, calculatePrice } from './services/googleMapsService';
 import { getCachedRoute, cacheRoute } from './services/routeCache';
-import { generateTimeSlots, checkAvailability, checkBookingConflict, saveBooking, fetchAllBookings } from './services/ bookingService';
+import { generateTimeSlots, checkAvailability, checkBookingConflict, saveBooking, fetchAllBookings } from './services/bookingService';
 
 // --- INTRO COMPONENT ---
 const IntroSplash: React.FC<{ onFinish: () => void }> = ({ onFinish }) => {
@@ -806,7 +806,7 @@ const App: React.FC = () => {
                 <div className="flex flex-col gap-6">
                   <button onClick={() => setShowBrandStory(true)} className="text-[11px] text-[var(--bronzo-profondo)]/40 hover:text-[var(--oro-lucido)] tracking-widest uppercase transition-colors text-left">Our Story</button>
                   <button onClick={() => setIsVisionOpen(true)} className="text-[11px] text-[var(--bronzo-profondo)]/40 hover:text-[var(--oro-lucido)] tracking-widest uppercase transition-colors text-left">The Vision</button>
-                  <button onClick={() => setCurrentLegalContent({ title: 'Privacy Policy', content: LEGAL_CONTENT.privacy })} className="text-[11px] text-[var(--bronzo-profondo)]/40 hover:text-[var(--oro-lucido)] tracking-widest uppercase transition-colors text-left">Privacy</button>
+                  <button onClick={() => { setCurrentLegalContent({ title: LEGAL_CONTENT.privacy.title, content: LEGAL_CONTENT.privacy.content }); setShowLegalModal(true); }} className="text-[11px] text-[var(--bronzo-profondo)]/40 hover:text-[var(--oro-lucido)] tracking-widest uppercase transition-colors text-left">Privacy</button>
                 </div>
               </div>
               <div className="space-y-8">
