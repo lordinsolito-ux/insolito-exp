@@ -243,11 +243,11 @@ const NarrativeSpread: React.FC = () => {
           </p>
           <div className="gold-line w-24"></div>
         </div>
-        <div className="relative aspect-[4/5] overflow-hidden rounded-sm grayscale group hover:grayscale-0 transition-all duration-[2000ms]">
+        <div className="relative aspect-[4/5] overflow-hidden rounded-sm group transition-all duration-[2000ms] shadow-2xl border border-[var(--oro-lucido)]/10">
           <img
-            src="https://images.unsplash.com/photo-1511216173030-66221a194af0?q=80&w=1974&auto=format&fit=crop"
-            alt="Luxury Lifestyle"
-            className="w-full h-full object-cover opacity-80 group-hover:scale-105 transition-transform duration-[4000ms]"
+            src="https://images.unsplash.com/photo-1542314831-068cc1ad4706?q=80&w=2070&auto=format&fit=crop"
+            alt="Elite Excellence"
+            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-[4000ms]"
           />
         </div>
       </div>
@@ -255,24 +255,24 @@ const NarrativeSpread: React.FC = () => {
       {/* Spread 2: What We Do */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 max-w-7xl mx-auto">
         <div className="lg:col-span-4 order-2 lg:order-1">
-          <div className="aspect-[3/4] overflow-hidden rounded-sm grayscale group-hover:grayscale-0 transition-all duration-[2000ms] border border-[var(--oro-lucido)]/10">
+          <div className="aspect-[3/4] overflow-hidden rounded-sm transition-all duration-[2000ms] border border-[var(--oro-lucido)]/20 shadow-xl">
             <img
-              src="https://images.unsplash.com/photo-1449130015084-2d48a3a5ee63?q=80&w=1974&auto=format&fit=crop"
+              src="https://images.unsplash.com/photo-1513581026335-113b1740c0cd?q=80&w=2070&auto=format&fit=crop"
               alt="Milano Excellence"
-              className="w-full h-full object-cover opacity-80"
+              className="w-full h-full object-cover"
             />
           </div>
         </div>
         <div className="lg:col-span-8 flex flex-col justify-center space-y-16 lg:pl-24 order-1 lg:order-2">
           <h3 className="text-4xl md:text-5xl font-display text-[var(--bronzo-profondo)] tracking-[0.1em] uppercase">Riservatezza & Cura d'Élite</h3>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
-            <div className="space-y-4 border-l border-[var(--oro-lucido)]/20 pl-8">
+            <div className="space-y-4 border-l border-[var(--oro-lucido)]/30 pl-8">
               <h4 className="text-[var(--oro-lucido)] font-accent text-[11px] uppercase tracking-[0.5em]">Executive Lifestyle</h4>
-              <p className="text-[var(--bronzo-profondo)]/60 text-sm leading-relaxed italic">Ogni dettaglio è pianificato per garantirti una presenza impeccabile, senza rumore e con la massima discrezione.</p>
+              <p className="text-[var(--bronzo-profondo)] text-sm leading-relaxed italic font-medium">Ogni dettaglio è pianificato per garantirti una presenza impeccabile, senza rumore e con la massima discrezione.</p>
             </div>
-            <div className="space-y-4 border-l border-[var(--oro-lucido)]/20 pl-8">
+            <div className="space-y-4 border-l border-[var(--oro-lucido)]/30 pl-8">
               <h4 className="text-[var(--oro-lucido)] font-accent text-[11px] uppercase tracking-[0.5em]">Personal Support</h4>
-              <p className="text-[var(--bronzo-profondo)]/60 text-sm leading-relaxed italic">Dall'accoglienza aeroportuale alla gestione di appuntamenti delicati, siamo il tuo sigillo di professionalità a Milano.</p>
+              <p className="text-[var(--bronzo-profondo)] text-sm leading-relaxed italic font-medium">Dall'accoglienza aeroportuale alla gestione di appuntamenti delicati, siamo il tuo sigillo di professionalità a Milano.</p>
             </div>
           </div>
         </div>
@@ -556,14 +556,14 @@ const App: React.FC = () => {
             <div className="relative text-center z-10 space-y-12 animate-mask-up">
               <p className="text-[10px] font-accent text-[var(--oro-lucido)]/30 tracking-[2em] uppercase mb-8 ml-[2em]">The Excellence of Privacy</p>
               <div className="relative group">
-                <h1 className="text-8xl md:text-[14rem] font-display text-gold tracking-[0.25em] leading-none group-hover:tracking-[0.3em] transition-all duration-[2000ms] cursor-default">
+                <h1 className="text-8xl md:text-[14rem] font-display text-gold tracking-[0.2em] leading-none cursor-default">
                   INSOLITO
-                  <span className="block text-4xl md:text-6xl tracking-[1.5em] mt-8 opacity-60">PRIVÉ</span>
+                  <span className="block text-4xl md:text-6xl tracking-[1em] mt-8 opacity-60">PRIVÉ</span>
                 </h1>
               </div>
               <div className="max-w-2xl mx-auto space-y-8 pt-12">
-                <p className="text-[12px] md:text-sm font-accent text-[var(--oro-lucido)]/40 tracking-[1.2em] uppercase leading-relaxed">
-                  Elite Assistance <span className="text-[var(--oro-lucido)]/10 px-4">|</span> Personal Concierge <span className="text-[var(--oro-lucido)]/10 px-4">|</span> Reserved Luxury
+                <p className="text-[12px] md:text-sm font-accent text-[var(--oro-lucido)]/60 tracking-[0.8em] uppercase leading-relaxed font-medium">
+                  Elite Assistance <span className="text-[var(--oro-lucido)]/20 px-4">|</span> Personal Concierge <span className="text-[var(--oro-lucido)]/20 px-4">|</span> Reserved Luxury
                 </p>
                 <div className="gold-line max-w-xs mx-auto mt-12 opacity-50"></div>
               </div>
@@ -576,7 +576,7 @@ const App: React.FC = () => {
             </div>
           </header>
 
-          <main className="bg-[#0A0A0A] relative z-10">
+          <main className="bg-transparent relative z-10">
             <NarrativeSpread />
 
             <div className="max-w-4xl mx-auto px-6 pb-48">
@@ -600,11 +600,11 @@ const App: React.FC = () => {
                           <button
                             key={service.id}
                             onClick={() => handleServiceSelect(service.id)}
-                            className="group catalog-selector flex flex-col md:flex-row items-center gap-0 overflow-hidden text-left bg-white/40 border border-[var(--oro-lucido)]/5"
+                            className="group catalog-selector flex flex-col md:flex-row items-center gap-0 overflow-hidden text-left bg-white/95 border border-[var(--oro-lucido)]/20 shadow-lg hover:shadow-2xl"
                           >
-                            <div className="w-full md:w-2/5 aspect-[16/9] md:aspect-[4/3] relative overflow-hidden grayscale group-hover:grayscale-0 transition-all duration-[2000ms]">
-                              <img src={service.image} alt={service.name} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-[4000ms] opacity-80 group-hover:opacity-100" />
-                              <div className="absolute inset-0 bg-gradient-to-r from-white via-transparent to-transparent opacity-40"></div>
+                            <div className="w-full md:w-2/5 aspect-[16/9] md:aspect-[4/3] relative overflow-hidden transition-all duration-[2000ms] border-r border-[var(--oro-lucido)]/10">
+                              <img src={service.image} alt={service.name} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-[4000ms]" />
+                              <div className="absolute inset-0 bg-gradient-to-r from-white/40 via-transparent to-transparent"></div>
                             </div>
 
                             <div className="w-full md:w-3/5 p-12 md:p-16 flex flex-col justify-center space-y-8">
@@ -613,10 +613,10 @@ const App: React.FC = () => {
                                 <span className="text-[9px] font-accent text-[var(--oro-lucido)] uppercase tracking-[1em]">{service.badge || 'Privé'}</span>
                               </div>
                               <div className="space-y-4">
-                                <h4 className="font-display text-4xl md:text-5xl text-[var(--bronzo-profondo)] tracking-[0.05em] leading-tight group-hover:translate-x-4 transition-transform duration-700">
+                                <h4 className="font-display text-4xl md:text-5xl text-[var(--bronzo-profondo)] tracking-[0.05em] leading-tight">
                                   {service.name}
                                 </h4>
-                                <p className="text-[13px] text-[var(--bronzo-profondo)]/60 font-display italic leading-relaxed max-w-md tracking-wide">
+                                <p className="text-[13px] text-[var(--bronzo-profondo)]/80 font-display italic leading-relaxed max-w-md tracking-wide font-medium">
                                   {service.description}
                                 </p>
                               </div>

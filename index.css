@@ -78,7 +78,7 @@
 
   /* MAGAZINE BUTTONS */
   .btn-monumental {
-    @apply relative overflow-hidden bg-[var(--oro-lucido)] text-white font-accent text-[10px] uppercase tracking-[0.6em] px-16 py-6 transition-all duration-700 hover:tracking-[0.8em] active:scale-95 shadow-xl;
+    @apply relative overflow-hidden bg-[var(--oro-lucido)] text-white font-accent text-[10px] uppercase tracking-[0.6em] px-16 py-6 transition-all duration-700 active:scale-95 shadow-xl;
     background: linear-gradient(135deg, #C5A059 0%, #D4AF37 50%, #C5A059 100%);
     background-size: 200% auto;
   }
