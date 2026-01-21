@@ -732,15 +732,6 @@ const App: React.FC = () => {
             </div>
           </main>
 
-          <footer className="py-12 border-t border-[var(--oro-lucido)]/10 z-20">
-            <div className="max-w-7xl mx-auto px-12 flex flex-col md:flex-row justify-between items-center gap-12">
-              <div className="flex flex-col items-center md:items-start gap-4">
-                <h4 className="font-display text-xl text-gold tracking-[0.3em]">{BUSINESS_INFO.name}</h4>
-                <div className="flex items-center gap-6">
-                  {[
-                    { icon: Instagram, label: 'IG', href: `https://instagram.com/${BUSINESS_INFO.instagram}` },
-                    { icon: MessageCircle, label: 'WA', href: 'https://wa.me/393393522164' }
-                  ].map((s, i) => (
           <footer className="py-24 border-t border-[var(--oro-lucido)]/10 bg-transparent relative z-20">
             <div className="max-w-7xl mx-auto px-12 flex flex-col items-center gap-16 text-center">
               <div className="space-y-4">
@@ -760,14 +751,14 @@ const App: React.FC = () => {
               </div>
 
               <div className="flex flex-col md:flex-row items-center gap-12 pt-12 border-t border-[var(--oro-lucido)]/5 w-full justify-center">
-                <button 
+                <button
                   onClick={() => {
-                    setCurrentLegalContent({ 
-                      title: 'Corporate Identity', 
-                      content: `${BUSINESS_INFO.fullName}\n${BUSINESS_INFO.address}\nP.IVA: ${BUSINESS_INFO.piva}\nATECO: ${BUSINESS_INFO.ateco}` 
+                    setCurrentLegalContent({
+                      title: 'Corporate Identity',
+                      content: `${BUSINESS_INFO.fullName}\n${BUSINESS_INFO.address}\nP.IVA: ${BUSINESS_INFO.piva}\nATECO: ${BUSINESS_INFO.ateco}`
                     });
                     setShowLegalModal(true);
-                  }} 
+                  }}
                   className="text-[9px] text-[var(--oro-lucido)]/40 hover:text-[var(--oro-lucido)] tracking-[0.5em] uppercase font-accent transition-colors"
                 >
                   Legal Details
@@ -786,14 +777,14 @@ const App: React.FC = () => {
         </div>
       )}
 
-                <LegalModal
-                  isOpen={showLegalModal}
-                  onClose={() => setShowLegalModal(false)}
-                  title={currentLegalContent.title}
-                  content={currentLegalContent.content}
-                />
-              </>
-              );
+      <LegalModal
+        isOpen={showLegalModal}
+        onClose={() => setShowLegalModal(false)}
+        title={currentLegalContent.title}
+        content={currentLegalContent.content}
+      />
+    </>
+  );
 };
 
-              export default App;
+export default App;
