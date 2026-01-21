@@ -24,7 +24,8 @@ import {
   Trash2,
   Plus,
   Lock,
-  ArrowRight
+  ArrowRight,
+  X
 } from 'lucide-react';
 import LegalModal from './components/LegalModal';
 import { LEGAL_CONTENT, BUSINESS_INFO, BRAND_STORY } from './legalContent';
@@ -151,60 +152,7 @@ const IntroSplash: React.FC<{ onFinish: () => void }> = ({ onFinish }) => {
 
 // --- BRAND STORY SECTION ---
 
-const BrandStory: React.FC = () => {
-  const { t } = useTranslation();
-  return (
-    <section className="py-32 relative overflow-hidden">
-      <div className="max-w-7xl mx-auto px-12 relative z-10">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-24 items-center">
-          <div className="space-y-16">
-            <div className="animate-fade-in space-y-6">
-              <span className="text-white/30 font-accent text-[10px] uppercase tracking-[1em] mb-4 block">Founder & Visionary</span>
-              <h2 className="text-6xl md:text-8xl font-display text-white tracking-[0.05em] leading-tight">
-                Michael Jara
-              </h2>
-              <p className="text-[#C0C0C0]/40 font-accent text-sm md:text-base leading-relaxed max-w-lg tracking-widest">
-                ARCHITECT OF EXPERIENCES
-              </p>
-            </div>
-
-            <div className="space-y-10 animate-fade-in" style={{ animationDelay: '0.2s' }}>
-              {BRAND_STORY.content.map((p, i) => (
-                <p key={i} className="text-[#C0C0C0]/60 text-[14px] md:text-base font-light leading-relaxed italic border-l border-white/10 pl-10">
-                  {p}
-                </p>
-              ))}
-            </div>
-
-            <div className="pt-12 animate-fade-in" style={{ animationDelay: '0.4s' }}>
-              <div className="flex items-center gap-8">
-                <div className="h-[1px] w-16 bg-white/20"></div>
-                <span className="text-[11px] text-white/60 font-accent uppercase tracking-[0.8em]">The Signature of Excellence</span>
-              </div>
-            </div>
-          </div>
-
-          <div className="relative group animate-fade-in" style={{ animationDelay: '0.6s' }}>
-            <div className="aspect-[4/5] rounded-[60px] overflow-hidden border border-white/10 relative shadow-[0_40px_100px_rgba(0,0,0,0.8)]">
-              <img
-                src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=1974&auto=format&fit=crop"
-                alt="Michael Jara"
-                className="w-full h-full object-cover grayscale brightness-50 group-hover:scale-105 transition-transform duration-[4000ms] ease-out"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-transparent to-transparent z-10"></div>
-              <div className="absolute inset-x-0 bottom-16 px-16 z-20">
-                <blockquote className="text-white/90 font-display text-3xl italic leading-tight tracking-wide">
-                  "{BRAND_STORY.quote}"
-                </blockquote>
-              </div>
-            </div>
-            <div className="absolute -top-12 -right-12 w-80 h-80 aura-bloom opacity-[0.04]"></div>
-          </div>
-        </div>
-      </div>
-    </section>
-  );
-};
+// BrandStory removed
 
 // --- MAIN APP COMPONENT ---
 
@@ -231,6 +179,65 @@ const INITIAL_FORM_STATE: BookingFormData = {
   priceBreakdown: { total: 0, baseFare: 0, distanceFare: 0, nightSurcharge: 0, petFee: 0, stopFee: 0, serviceMultiplier: 1 }
 };
 
+const BrandStoryModal: React.FC<{ isOpen: boolean; onClose: () => void }> = ({ isOpen, onClose }) => {
+  if (!isOpen) return null;
+
+  return (
+    <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 md:p-8">
+      <div className="absolute inset-0 bg-black/90 backdrop-blur-2xl" onClick={onClose} />
+
+      <div className="relative w-full max-w-6xl max-h-full overflow-y-auto glass-bento p-12 md:p-20 grid grid-cols-1 lg:grid-cols-2 gap-20 items-center animate-fade-in shadow-2xl border border-white/10">
+        <button onClick={onClose} className="absolute top-8 right-8 text-white/50 hover:text-white transition-colors">
+          <X className="w-8 h-8" />
+        </button>
+
+        <div className="space-y-12">
+          <div className="space-y-6">
+            <span className="text-white/60 font-accent text-[11px] uppercase tracking-[1em] mb-4 block">Founder & Visionary</span>
+            <h2 className="text-5xl md:text-7xl font-display text-white tracking-[0.05em] leading-tight">
+              Michael Jara
+            </h2>
+            <p className="text-[#E5E4E2] font-accent text-sm md:text-base leading-relaxed tracking-widest uppercase opacity-80">
+              Architect of Experiences
+            </p>
+          </div>
+
+          <div className="space-y-8">
+            {BRAND_STORY.content.map((p, i) => (
+              <p key={i} className="text-[#E5E4E2] text-[15px] md:text-base font-light leading-relaxed italic border-l border-white/30 pl-8 opacity-90">
+                {p}
+              </p>
+            ))}
+          </div>
+
+          <div className="pt-8">
+            <div className="flex items-center gap-6">
+              <div className="h-[1px] w-16 bg-white/40"></div>
+              <span className="text-[12px] text-white/80 font-accent uppercase tracking-[0.8em]">The Signature of Excellence</span>
+            </div>
+          </div>
+        </div>
+
+        <div className="relative group hidden lg:block">
+          <div className="aspect-[4/5] rounded-[40px] overflow-hidden border border-white/20 relative shadow-2xl">
+            <img
+              src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=1974&auto=format&fit=crop"
+              alt="Michael Jara"
+              className="w-full h-full object-cover grayscale brightness-75 group-hover:scale-105 transition-transform duration-[4000ms] ease-out"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-transparent to-transparent z-10"></div>
+            <div className="absolute inset-x-0 bottom-12 px-12 z-20">
+              <blockquote className="text-white font-display text-2xl italic leading-tight tracking-wide drop-shadow-lg">
+                "{BRAND_STORY.quote}"
+              </blockquote>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
 const App: React.FC = () => {
   const { t } = useTranslation();
   const [showIntro, setShowIntro] = useState(true);
@@ -241,6 +248,7 @@ const App: React.FC = () => {
   const [showLegalModal, setShowLegalModal] = useState(false);
   const [currentLegalContent, setCurrentLegalContent] = useState({ title: '', content: '' });
   const [showAdminDashboard, setShowAdminDashboard] = useState(false);
+  const [showBrandStory, setShowBrandStory] = useState(false);
   const [isBookingConfirmed, setIsBookingConfirmed] = useState(false);
 
   const [activeStep, setActiveStep] = useState(1);
@@ -500,8 +508,6 @@ const App: React.FC = () => {
             <h2 className="text-[10px] md:text-xs font-accent text-[#C0C0C0]/30 tracking-[1.2em] uppercase italic mt-4">Elevated Concierge & Personal Assistance</h2>
           </header>
 
-          <BrandStory />
-
           <main className="max-w-7xl mx-auto px-6 pb-24 relative z-10">
             <div className="mb-12 flex justify-center">
               <div className="glass-2026 px-6 py-2 rounded-full border border-gold-titan/20 flex items-center gap-3">
@@ -661,24 +667,28 @@ const App: React.FC = () => {
                 ))}
               </div>
 
-              <div className="flex flex-col items-center gap-12">
-                <div className="relative mb-8">
-                  <Crown className="w-10 h-10 text-white/5" strokeWidth={0.5} />
-                  <div className="absolute inset-0 aura-bloom opacity-[0.05] scale-150"></div>
-                </div>
-
-                <div className="space-y-6">
-                  <h4 className="font-display text-3xl text-white tracking-[0.4em] mb-4">{BUSINESS_INFO.name}</h4>
-                  <div className="flex flex-wrap justify-center gap-12 text-[10px] uppercase tracking-[0.8em] text-white/10 font-accent">
-                    <span>VAT: {BUSINESS_INFO.piva}</span>
-                    <span>MILAN HQ: {BUSINESS_INFO.address.split(',')[0]}</span>
-                  </div>
-                </div>
-
-                <p className="text-[9px] text-white/5 tracking-[1.2em] mt-24 uppercase">&copy; {new Date().getFullYear()} INSOLITO EXPERIENCES. ARCHITECTURAL LUXURY ASSISTANCE.</p>
+              <div className="relative mb-12">
+                <Crown className="w-12 h-12 text-white/10" strokeWidth={0.5} />
               </div>
+
+              <div className="space-y-8">
+                <h4 className="font-display text-4xl text-white tracking-[0.4em] mb-4 opacity-90">{BUSINESS_INFO.name}</h4>
+                <div className="flex flex-wrap justify-center gap-12 text-[11px] uppercase tracking-[0.8em] text-[#E5E4E2] font-accent opacity-60">
+                  <span>VAT: {BUSINESS_INFO.piva}</span>
+                  <span>MILAN HQ: {BUSINESS_INFO.address.split(',')[0]}</span>
+                </div>
+
+                {/* ABOUT TRIGGER */}
+                <button onClick={() => setShowBrandStory(true)} className="mt-8 text-[10px] uppercase tracking-[1em] text-white/40 hover:text-white transition-colors border-b border-transparent hover:border-white/20 pb-1">
+                  Meet The Architect
+                </button>
+              </div>
+
+              <p className="text-[10px] text-white/20 tracking-[1.2em] mt-32 uppercase">&copy; {new Date().getFullYear()} INSOLITO EXPERIENCES. ARCHITECTURAL LUXURY ASSISTANCE.</p>
             </div>
           </footer>
+
+          <BrandStoryModal isOpen={showBrandStory} onClose={() => setShowBrandStory(false)} />
         </div>
       )}
 
