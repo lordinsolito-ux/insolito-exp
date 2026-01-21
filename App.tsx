@@ -243,9 +243,9 @@ const FloatingHeader: React.FC<{
 // --- MAGAZINE NARRATIVE SPREAD ---
 const NarrativeSpread: React.FC = () => {
   return (
-    <section id="essence" className="py-24 px-12 md:px-24 space-y-24 bg-transparent relative z-20 overflow-hidden">
+    <section id="essence" className="py-16 px-12 md:px-24 space-y-16 bg-transparent relative z-20 overflow-hidden">
       {/* Spread 1: The Vision */}
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 items-center max-w-7xl mx-auto">
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center max-w-7xl mx-auto">
         <div className="lg:col-span-12 xl:col-span-5 space-y-8 animate-reveal">
           <span className="text-[var(--oro-lucido)]/40 font-accent text-[10px] uppercase tracking-[1em] block mb-4">The Philosophy</span>
           <h2 className="text-6xl md:text-8xl font-display text-[var(--bronzo-profondo)] italic leading-tight tracking-tight">
@@ -260,7 +260,7 @@ const NarrativeSpread: React.FC = () => {
             </p>
           </div>
         </div>
-        <div className="lg:col-span-12 xl:col-span-7 xl:pl-24 relative">
+        <div className="lg:col-span-12 xl:col-span-7 relative">
           <div className="relative aspect-[16/10] overflow-hidden rounded-sm shadow-3xl group transition-all duration-[3000ms] border border-[var(--oro-lucido)]/10">
             <img
               src="/assets/korando_2014.png"
@@ -273,7 +273,7 @@ const NarrativeSpread: React.FC = () => {
       </div>
 
       {/* Spread 2: What We Do */}
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 max-w-7xl mx-auto items-center">
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 max-w-7xl mx-auto items-center">
         <div className="lg:col-span-12 xl:col-span-5 order-2 xl:order-1 relative">
           <div className="aspect-[16/10] xl:aspect-[3/4] overflow-hidden rounded-sm border border-[var(--oro-lucido)]/10 shadow-3xl">
             <img
@@ -283,7 +283,7 @@ const NarrativeSpread: React.FC = () => {
             />
           </div>
         </div>
-        <div className="lg:col-span-12 xl:col-span-7 flex flex-col justify-center space-y-12 xl:pl-24 order-1 xl:order-2">
+        <div className="lg:col-span-12 xl:col-span-7 flex flex-col justify-center space-y-12 order-1 xl:order-2">
           <h3 className="text-5xl md:text-7xl font-display text-[var(--bronzo-profondo)] tracking-tight italic">Servizio alla Persona,<br /><span className="text-gold">Elevato a Concierge.</span></h3>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-10 pt-8 border-t border-[var(--oro-lucido)]/10">
             <div className="space-y-4">
@@ -607,8 +607,8 @@ const App: React.FC = () => {
               </div>
             </nav>
 
-            <div className="relative z-10 flex flex-col items-center text-center px-12 space-y-16 animate-reveal">
-              <div className="w-px h-32 bg-gradient-to-b from-transparent via-[var(--oro-lucido)]/20 to-transparent"></div>
+            <div className="relative z-10 flex flex-col items-center text-center px-12 space-y-10 animate-reveal">
+              <div className="w-px h-16 bg-gradient-to-b from-transparent via-[var(--oro-lucido)]/20 to-transparent"></div>
               <div className="space-y-4">
                 <p className="text-[10px] font-accent text-[var(--oro-lucido)]/60 tracking-[1.5em] uppercase">Lifestyle Management Milano</p>
                 <h1 className="text-7xl md:text-[12rem] font-display text-gold tracking-[-0.02em] leading-none italic">
@@ -629,7 +629,7 @@ const App: React.FC = () => {
             <NarrativeSpread />
 
             {/* THE SELECTION */}
-            <section ref={servicesRef} className="py-24 px-12 md:px-24 max-w-7xl mx-auto space-y-16">
+            <section ref={servicesRef} className="py-12 px-12 md:px-24 max-w-7xl mx-auto space-y-10">
               <div className="space-y-6 text-center max-w-2xl mx-auto">
                 <span className="text-[10px] text-[var(--oro-lucido)]/40 font-accent uppercase tracking-[1.5em] mb-4 block">The Portfolio</span>
                 <h3 className="text-6xl md:text-8xl font-display text-[var(--bronzo-profondo)] tracking-[0.1em] lowercase italic">Servizi.</h3>
