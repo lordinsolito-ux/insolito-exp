@@ -90,60 +90,41 @@ const IntroSplash: React.FC<{ onFinish: () => void }> = ({ onFinish }) => {
   };
 
   return (
-    <div className={`fixed inset-0 z-[100] bg-[#050505] flex flex-col items-center justify-center transition-opacity duration-[2000ms] ease-in-out ${isExiting ? 'opacity-0 pointer-events-none' : 'opacity-100'}`}>
+    <div className={`fixed inset-0 z-[100] bg-[#050505] flex flex-col items-center justify-center transition-opacity duration-[2000ms] ${isExiting ? 'opacity-0 pointer-events-none' : 'opacity-100'}`}>
       <audio ref={audioRef} src={audioSrc} preload="auto" />
-
-      {/* DINAMIC LAYERS */}
-      <div className="absolute inset-0 bg-noise opacity-[0.03] pointer-events-none"></div>
-      <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] aura-bloom opacity-[0.05] animate-pulse-slow"></div>
-      <div className="absolute bottom-[-10%] right-[-10%] w-[50%] h-[50%] aura-bloom opacity-[0.03] animate-pulse-slow font-accent" style={{ background: 'radial-gradient(circle, #F7E7CE, transparent 70%)' }}></div>
+      <div className="absolute inset-0 bg-noise opacity-[0.03]"></div>
 
       {!playShow && (
-        <div className={`absolute inset-0 z-20 flex flex-col items-center justify-center transition-all duration-1000 ${showButton ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
-          <h1 className="text-4xl md:text-6xl font-display text-transparent bg-clip-text bg-gradient-to-b from-pearl via-platinum to-platinum/40 tracking-[0.3em] mb-16 drop-shadow-2xl italic">
-            {t('hero.title')}
+        <div className={`flex flex-col items-center transition-all duration-[1500ms] ${showButton ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
+          <Crown className="w-12 h-12 text-white/10 mb-12" strokeWidth={0.5} />
+          <h1 className="text-5xl md:text-7xl font-display text-white tracking-[0.4em] mb-16 italic opacity-90">
+            INSOLITO
           </h1>
           <button
             onClick={handleEnter}
-            className="group relative px-12 py-6 bg-transparent overflow-hidden transition-all hover:scale-105 active:scale-95 cursor-pointer"
+            className="group relative px-16 py-6 bg-transparent transition-all hover:scale-105 active:scale-95"
           >
-            <div className="absolute inset-0 border border-white/10 group-hover:border-platinum/40 transition-colors duration-1000"></div>
-            <div className="absolute inset-0 bg-white/0 group-hover:bg-white/[0.02] transition-colors duration-1000"></div>
-            <div className="flex flex-col items-center gap-2">
-              <span className="relative z-10 text-platinum/60 font-accent tracking-[0.5em] text-[10px] md:text-xs uppercase group-hover:text-pearl transition-colors duration-700">
-                {t('hero.cta')}
-              </span>
-            </div>
+            <div className="absolute inset-0 border border-white/10 group-hover:border-white/40 transition-colors duration-700"></div>
+            <span className="relative z-10 text-white/40 font-accent tracking-[0.6em] text-[10px] uppercase group-hover:text-white transition-colors duration-700">
+              {t('hero.cta')}
+            </span>
           </button>
         </div>
       )}
 
       {playShow && (
-        <div className="relative z-10 w-full max-w-7xl px-12 flex flex-col items-center justify-center min-h-screen">
-          {/* QUOTE - Top Leftish */}
-          <div className="absolute top-[20%] left-[10%] max-w-xl animate-fade-in" style={{ animationDelay: '0.4s' }}>
-            <p className="text-platinum/20 font-accent text-[9px] uppercase tracking-[0.8em] mb-6">The Legacy</p>
-            <h2 className="text-2xl md:text-4xl font-display text-platinum/60 leading-tight tracking-[0.1em] italic mb-10 border-l border-white/10 pl-8">
-              "Il tempo è l'ultimo lusso.<br />Noi ne siamo i custodi."
-            </h2>
-            <div className="flex items-center gap-6 opacity-30">
-              <div className="h-px w-16 bg-white/20"></div>
-              <span className="text-[10px] text-platinum uppercase tracking-[0.5em] font-medium">M.S. Jara</span>
-            </div>
-          </div>
-
-          {/* BRAND - Bottom Rightish */}
-          <div className="absolute bottom-[20%] right-[10%] flex flex-col items-end text-right">
-            <div className="relative mb-8 animate-zoom-out">
-              <Crown className="w-16 h-16 text-platinum/40 drop-shadow-[0_0_30px_rgba(255,255,255,0.1)]" strokeWidth={0.5} />
-            </div>
-            <h1 className="text-7xl md:text-[10rem] font-display text-transparent bg-clip-text bg-gradient-to-b from-pearl via-platinum/80 to-platinum/20 tracking-[0.2em] leading-none mb-6 drop-shadow-2xl">
-              INSOLITO
-            </h1>
-            <span className="text-[10px] md:text-xs font-accent text-platinum/30 tracking-[1em] uppercase pr-2">
-              {t('hero.subtitle')}
-            </span>
-          </div>
+        <div className="relative z-10 flex flex-col items-center text-center px-12 animate-elite-fade">
+          <p className="text-white/20 font-accent text-[10px] uppercase tracking-[1em] mb-8">Architectural Luxury Assistance</p>
+          <h2 className="text-3xl md:text-5xl font-display text-white leading-tight tracking-[0.1em] italic mb-12 border-l border-white/20 pl-10 max-w-2xl text-left">
+            "Il tempo è l'ultimo lusso.<br />Noi ne siamo i custodi."
+          </h2>
+          <div className="w-12 h-px bg-white/20 mb-20"></div>
+          <h1 className="text-7xl md:text-[10rem] font-display text-white tracking-[0.4em] leading-none mb-4 opacity-95">
+            INSOLITO
+          </h1>
+          <span className="text-[11px] font-accent text-white/30 tracking-[1.4em] uppercase">
+            {t('hero.subtitle')}
+          </span>
         </div>
       )}
     </div>
@@ -183,51 +164,51 @@ const BrandStoryModal: React.FC<{ isOpen: boolean; onClose: () => void }> = ({ i
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 md:p-8">
-      <div className="absolute inset-0 bg-black/90 backdrop-blur-2xl" onClick={onClose} />
+    <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 md:p-12">
+      <div className="absolute inset-0 bg-black/95 backdrop-blur-2xl" onClick={onClose} />
 
-      <div className="relative w-full max-w-6xl max-h-full overflow-y-auto glass-bento p-12 md:p-20 grid grid-cols-1 lg:grid-cols-2 gap-20 items-center animate-fade-in shadow-2xl border border-white/10">
-        <button onClick={onClose} className="absolute top-8 right-8 text-white/50 hover:text-white transition-colors">
-          <X className="w-8 h-8" />
+      <div className="relative w-full max-w-6xl max-h-full overflow-y-auto luxury-monolith p-12 md:p-24 grid grid-cols-1 lg:grid-cols-2 gap-24 items-center animate-elite-fade border-white/10 shadow-3xl">
+        <button onClick={onClose} className="absolute top-10 right-10 text-white/20 hover:text-white transition-colors">
+          <X className="w-6 h-6" />
         </button>
 
-        <div className="space-y-12">
-          <div className="space-y-6">
-            <span className="text-white/60 font-accent text-[11px] uppercase tracking-[1em] mb-4 block">Founder & Visionary</span>
-            <h2 className="text-5xl md:text-7xl font-display text-white tracking-[0.05em] leading-tight">
+        <div className="space-y-16">
+          <div className="space-y-8">
+            <span className="text-white/20 font-accent text-[10px] uppercase tracking-[1.2em] mb-4 block">Founder & Visionary</span>
+            <h2 className="text-6xl md:text-8xl font-display text-white tracking-[0.1em] leading-tight opacity-95">
               Michael Jara
             </h2>
-            <p className="text-[#E5E4E2] font-accent text-sm md:text-base leading-relaxed tracking-widest uppercase opacity-80">
+            <p className="text-white/40 font-accent text-[11px] leading-relaxed tracking-[1.5em] uppercase pl-1">
               Architect of Experiences
             </p>
           </div>
 
-          <div className="space-y-8">
+          <div className="space-y-10 border-l border-white/5 pl-12">
             {BRAND_STORY.content.map((p, i) => (
-              <p key={i} className="text-[#E5E4E2] text-[15px] md:text-base font-light leading-relaxed italic border-l border-white/30 pl-8 opacity-90">
+              <p key={i} className="text-white/60 text-[15px] md:text-base font-light font-display italic leading-relaxed tracking-widest">
                 {p}
               </p>
             ))}
           </div>
 
-          <div className="pt-8">
-            <div className="flex items-center gap-6">
-              <div className="h-[1px] w-16 bg-white/40"></div>
-              <span className="text-[12px] text-white/80 font-accent uppercase tracking-[0.8em]">The Signature of Excellence</span>
+          <div className="pt-12">
+            <div className="flex items-center gap-12">
+              <div className="h-[0.5px] w-24 bg-white/10"></div>
+              <span className="text-[10px] text-white/20 font-accent uppercase tracking-[1em]">Signature of Excellence</span>
             </div>
           </div>
         </div>
 
-        <div className="relative group hidden lg:block">
-          <div className="aspect-[4/5] rounded-[40px] overflow-hidden border border-white/20 relative shadow-2xl">
+        <div className="relative group hidden lg:block overflow-hidden">
+          <div className="aspect-[4/6] rounded-sm overflow-hidden border border-white/5 relative bg-white/[0.02] grayscale contrast-125">
             <img
               src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=1974&auto=format&fit=crop"
               alt="Michael Jara"
-              className="w-full h-full object-cover grayscale brightness-75 group-hover:scale-105 transition-transform duration-[4000ms] ease-out"
+              className="w-full h-full object-cover opacity-60 group-hover:scale-105 transition-transform duration-[6000ms] ease-out"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-transparent to-transparent z-10"></div>
-            <div className="absolute inset-x-0 bottom-12 px-12 z-20">
-              <blockquote className="text-white font-display text-2xl italic leading-tight tracking-wide drop-shadow-lg">
+            <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-80"></div>
+            <div className="absolute inset-x-0 bottom-16 px-16 text-center">
+              <blockquote className="text-white font-display text-3xl italic leading-tight tracking-wide opacity-90 drop-shadow-2xl">
                 "{BRAND_STORY.quote}"
               </blockquote>
             </div>
@@ -486,64 +467,58 @@ const App: React.FC = () => {
             <div className="absolute inset-0 bg-gradient-to-b from-[#050505] via-transparent to-[#050505]"></div>
           </div>
 
-          <header className="relative z-10 pt-32 pb-24 text-center">
-            <div className="flex items-center justify-between px-12 absolute top-10 left-0 w-full">
-              <div className="flex items-center gap-3 group cursor-pointer" onClick={() => setShowAdminLogin(true)}>
-                <Crown className="w-5 h-5 text-platinum/20 group-hover:text-platinum/60 transition-all duration-700" strokeWidth={0.5} />
-                <span className="text-[9px] text-platinum/10 uppercase tracking-[0.5em] group-hover:text-platinum/40 transition-all duration-700">Elite Panel</span>
+          <header className="relative z-10 pt-48 pb-32 text-center overflow-hidden">
+            <div className="flex items-center justify-between px-16 absolute top-12 left-0 w-full">
+              <div className="flex items-center gap-4 group cursor-pointer" onClick={() => setShowAdminLogin(true)}>
+                <Crown className="w-4 h-4 text-white/20 group-hover:text-white transition-all duration-700" strokeWidth={1} />
+                <span className="text-[9px] text-white/10 uppercase tracking-[0.6em] group-hover:text-white/40 transition-all duration-700">Management</span>
               </div>
-              <div className="flex items-center gap-8">
-                <button onClick={() => setShowHistory(true)} className="text-platinum/20 hover:text-pearl transition-all duration-700"><History className="w-5 h-5" strokeWidth={1} /></button>
+              <div className="flex items-center gap-12">
+                <button onClick={() => setShowHistory(true)} className="text-white/20 hover:text-white transition-all duration-700 underline underline-offset-8 decoration-white/5 hover:decoration-white/20 text-[10px] uppercase tracking-widest">Archive</button>
                 <LanguageSwitcher />
               </div>
             </div>
 
-            <div className="relative inline-block mb-8">
-              <h1 className="text-8xl md:text-[11rem] font-display text-transparent bg-clip-text bg-gradient-to-b from-white via-white/80 to-[#C0C0C0]/20 tracking-[0.35em] drop-shadow-2xl">
+            <div className="relative inline-block mb-12">
+              <h1 className="text-8xl md:text-[13rem] font-display text-white tracking-[0.4em] leading-none opacity-95">
                 INSOLITO
               </h1>
-              <div className="absolute -bottom-4 left-1/2 -translate-x-1/2 w-48 h-px bg-gradient-to-r from-transparent via-white/20 to-transparent"></div>
+              <div className="absolute -bottom-8 left-1/2 -translate-x-1/2 w-64 h-px bg-gradient-to-r from-transparent via-white/20 to-transparent"></div>
             </div>
 
-            <h2 className="text-[10px] md:text-xs font-accent text-[#C0C0C0]/30 tracking-[1.2em] uppercase italic mt-4">Elevated Concierge & Personal Assistance</h2>
+            <p className="text-[11px] md:text-sm font-accent text-white/30 tracking-[1.8em] uppercase mt-8 pl-[1.8em]">Private Concierge & Elite Management</p>
           </header>
 
-          <main className="max-w-7xl mx-auto px-6 pb-24 relative z-10">
-            <div className="mb-12 flex justify-center">
-              <div className="glass-2026 px-6 py-2 rounded-full border border-gold-titan/20 flex items-center gap-3">
-                <div className="w-1.5 h-1.5 rounded-full bg-gold-titan animate-pulse"></div>
-                <span className="text-[9px] text-gold-titan/60 uppercase tracking-[0.4em]">Referral System Active</span>
-              </div>
-            </div>
-
-            <div ref={formCardRef} className="glass-2026 rounded-[40px] shadow-2xl overflow-hidden relative border border-white/5 max-w-5xl mx-auto">
+          <main className="max-w-4xl mx-auto px-6 pb-48 relative z-10">
+            {/* THE MONOLITH: A Single, Sweeping Experience */}
+            <div ref={formCardRef} className="luxury-monolith rounded-sm overflow-hidden animate-elite-fade">
               <StepIndicator currentStep={activeStep} />
-              <div className="p-8 md:p-14">
+
+              <div className="p-12 md:p-20">
                 {activeStep === 1 && (
-                  <div className="animate-fade-in space-y-24">
-                    <div className="text-center space-y-8">
-                      <h3 className="text-6xl md:text-[5rem] font-display text-white tracking-[0.2em] uppercase italic leading-tight">{t('booking.step1_title')}</h3>
-                      <p className="text-[12px] text-[#C0C0C0]/40 font-accent uppercase tracking-[1.2em]">{t('booking.step1_subtitle')}</p>
+                  <div className="animate-fade-in space-y-20">
+                    <div className="space-y-6">
+                      <h3 className="text-5xl md:text-7xl font-display text-white tracking-[0.2em] uppercase italic">{t('booking.step1_title')}</h3>
+                      <p className="text-[10px] text-white/20 font-accent uppercase tracking-[1em]">{t('booking.step1_subtitle')}</p>
                     </div>
 
-                    {/* BENTO GRID - SERVICE SELECTION */}
-                    <div className="grid grid-cols-1 md:grid-cols-6 gap-10">
-                      {SERVICE_TYPES.map((service, idx) => (
+                    <div className="space-y-4">
+                      {SERVICE_TYPES.map((service) => (
                         <button
                           key={service.id}
                           onClick={() => handleServiceSelect(service.id)}
-                          className={`group glass-bento p-16 flex flex-col items-center text-center relative overflow-hidden silver-glow ${idx === 0 ? 'md:col-span-3' : idx === 1 ? 'md:col-span-3' : 'md:col-span-6'
-                            }`}
+                          className="w-full elite-selector p-10 flex flex-col md:flex-row items-center justify-between text-left group"
                         >
-                          <div className="w-24 h-24 rounded-full bg-white/[0.02] border border-white/5 flex items-center justify-center mb-10 group-hover:border-white/20 transition-all duration-700">
-                            <service.icon strokeWidth={0.5} className="w-10 h-10 text-white opacity-40 group-hover:opacity-100 transition-opacity" />
+                          <div className="flex flex-col md:flex-row items-center gap-10">
+                            <div className="w-16 h-16 rounded-full border border-white/5 flex items-center justify-center opacity-40 group-hover:opacity-100 transition-all duration-700">
+                              <service.icon strokeWidth={0.5} className="w-8 h-8 text-white" />
+                            </div>
+                            <div>
+                              <h4 className="font-display text-3xl text-white tracking-widest mb-1">{t(`services.name_${service.id}`)}</h4>
+                              <p className="text-[11px] text-white/30 font-accent uppercase tracking-widest">{t(`services.desc_${service.id}`)}</p>
+                            </div>
                           </div>
-                          <h4 className="font-display text-4xl text-white mb-6 tracking-[0.1em]">{t(`services.name_${service.id}`)}</h4>
-                          <p className="text-sm text-[#C0C0C0]/40 font-light italic leading-relaxed max-w-sm group-hover:text-[#C0C0C0] transition-colors">{t(`services.desc_${service.id}`)}</p>
-
-                          <div className="mt-12 opacity-0 group-hover:opacity-100 transition-all duration-700 translate-y-4 group-hover:translate-y-0">
-                            <span className="text-[10px] uppercase tracking-[0.6em] text-white border-b border-white/20 pb-2">Select Concierge Experience</span>
-                          </div>
+                          <ArrowRight className="w-6 h-6 text-white/10 group-hover:text-white group-hover:translate-x-2 transition-all duration-700 hidden md:block" strokeWidth={0.5} />
                         </button>
                       ))}
                     </div>
@@ -551,28 +526,25 @@ const App: React.FC = () => {
                 )}
 
                 {activeStep === 2 && (
-                  <div className="animate-fade-in grid grid-cols-1 lg:grid-cols-12 gap-12">
-                    <div className="lg:col-span-7 space-y-8">
-                      <div className="glass-bento p-12 space-y-12">
-                        <h4 className="text-[10px] font-accent text-white/20 uppercase tracking-[0.8em] flex items-center gap-4"><Map className="w-3 h-3" /> {t('booking.route_details')}</h4>
-                        <div className="space-y-8">
-                          <div className="relative group">
-                            <MapPin className="absolute left-8 top-1/2 -translate-y-1/2 w-4 h-4 text-[#C0C0C0]/30" strokeWidth={1} />
-                            <input type="text" value={formData.pickupLocation} onChange={(e) => handleLocationSearch('pickup', e.target.value)} onBlur={handleInputBlur} placeholder={t('booking.pickup')} className="w-full pl-20 pr-8 py-6 glass-input-2026 rounded-3xl text-white" />
-                          </div>
-                          <div className="relative group">
-                            <MapPin className="absolute left-8 top-1/2 -translate-y-1/2 w-4 h-4 text-[#C0C0C0]/30" strokeWidth={1} />
-                            <input type="text" value={formData.destination} onChange={(e) => handleLocationSearch('destination', e.target.value)} onBlur={handleInputBlur} placeholder={t('booking.destination')} className="w-full pl-20 pr-8 py-6 glass-input-2026 rounded-3xl text-white" />
-                          </div>
+                  <div className="animate-fade-in space-y-20">
+                    <div className="space-y-6">
+                      <h3 className="text-5xl md:text-6xl font-display text-white tracking-widest italic">Experience Details</h3>
+                      <div className="silver-line"></div>
+                    </div>
+
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-16">
+                      <div className="space-y-12">
+                        <h4 className="text-[9px] font-accent text-white/20 uppercase tracking-[1em] mb-4">Itinerary</h4>
+                        <div className="space-y-6">
+                          <input type="text" value={formData.pickupLocation} onChange={(e) => handleLocationSearch('pickup', e.target.value)} onBlur={handleInputBlur} placeholder={t('booking.pickup')} className="w-full px-8 py-6 elite-input text-[11px] tracking-widest uppercase" />
+                          <input type="text" value={formData.destination} onChange={(e) => handleLocationSearch('destination', e.target.value)} onBlur={handleInputBlur} placeholder={t('booking.destination')} className="w-full px-8 py-6 elite-input text-[11px] tracking-widest uppercase" />
                         </div>
                       </div>
-                    </div>
-                    <div className="lg:col-span-5 space-y-10">
-                      <div className="glass-bento p-12 space-y-12">
-                        <h4 className="text-[10px] font-accent text-white/20 uppercase tracking-[0.8em] flex items-center gap-4"><Calendar className="w-3 h-3" /> Concierge Schedule</h4>
+                      <div className="space-y-12">
+                        <h4 className="text-[9px] font-accent text-white/20 uppercase tracking-[1em] mb-4">Precision Schedule</h4>
                         <div className="space-y-6">
-                          <input type="date" name="date" value={formData.date} onChange={handleInputChange} min={new Date().toISOString().split('T')[0]} className="w-full glass-input-2026 px-8 py-5 rounded-2xl text-xs text-white" style={{ colorScheme: 'dark' }} />
-                          <select name="time" value={formData.time} onChange={handleInputChange} disabled={!formData.date} className="w-full glass-input-2026 px-8 py-5 rounded-2xl text-xs text-white appearance-none">
+                          <input type="date" name="date" value={formData.date} onChange={handleInputChange} min={new Date().toISOString().split('T')[0]} className="w-full px-8 py-6 elite-input text-[11px] tracking-widest" style={{ colorScheme: 'dark' }} />
+                          <select name="time" value={formData.time} onChange={handleInputChange} disabled={!formData.date} className="w-full px-8 py-6 elite-input text-[11px] tracking-widest uppercase appearance-none">
                             <option value="">{t('booking.time')}</option>
                             {availableSlots.map(s => <option key={s} value={s}>{s} {isNightService(s) ? '(Night)' : ''}</option>)}
                           </select>
@@ -583,29 +555,28 @@ const App: React.FC = () => {
                 )}
 
                 {activeStep === 3 && (
-                  <div className="animate-fade-in grid grid-cols-1 md:grid-cols-2 gap-12">
-                    <div className="space-y-8">
-                      <div className="glass-bento p-12 space-y-12">
-                        <h4 className="text-[10px] font-accent text-white/20 uppercase tracking-[0.8em] flex items-center gap-4"><User className="w-3 h-3" /> {t('booking.guest_info')}</h4>
-                        <div className="space-y-6">
-                          <input type="text" name="name" value={formData.name} onChange={handleInputChange} placeholder={t('booking.name')} className="w-full glass-input-2026 px-8 py-6 rounded-2xl text-xs text-white" />
-                          <input type="email" name="email" value={formData.email} onChange={handleInputChange} placeholder={t('booking.email')} className="w-full glass-input-2026 px-8 py-6 rounded-2xl text-xs text-white" />
-                          <div className="flex gap-4">
-                            <select name="countryCode" value={formData.countryCode} onChange={handleInputChange} className="w-28 glass-input-2026 px-4 py-6 rounded-2xl text-[11px] text-white">
-                              {COUNTRY_CODES.map(c => <option key={c.code} value={c.code}>{c.code}</option>)}
-                            </select>
-                            <input type="tel" name="phone" value={formData.phone} onChange={handleInputChange} placeholder={t('booking.phone')} className="flex-1 glass-input-2026 px-8 py-6 rounded-2xl text-xs text-white" />
-                          </div>
+                  <div className="animate-fade-in space-y-20">
+                    <div className="space-y-6">
+                      <h3 className="text-5xl md:text-6xl font-display text-white tracking-widest italic">{t('booking.guest_info')}</h3>
+                      <div className="silver-line"></div>
+                    </div>
+
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-16">
+                      <div className="space-y-8">
+                        <input type="text" name="name" value={formData.name} onChange={handleInputChange} placeholder={t('booking.name')} className="w-full px-8 py-6 elite-input text-[11px] tracking-widest uppercase" />
+                        <input type="email" name="email" value={formData.email} onChange={handleInputChange} placeholder={t('booking.email')} className="w-full px-8 py-6 elite-input text-[11px] tracking-widest" />
+                        <div className="flex gap-4">
+                          <select name="countryCode" value={formData.countryCode} onChange={handleInputChange} className="w-32 px-4 py-6 elite-input text-[11px]">
+                            {COUNTRY_CODES.map(c => <option key={c.code} value={c.code}>{c.code}</option>)}
+                          </select>
+                          <input type="tel" name="phone" value={formData.phone} onChange={handleInputChange} placeholder={t('booking.phone')} className="flex-1 px-8 py-6 elite-input text-[11px] tracking-widest" />
                         </div>
                       </div>
-                    </div>
-                    {/* PAYMENT INFO CARD */}
-                    <div className="space-y-8">
-                      <div className="glass-bento p-12 space-y-12">
-                        <h4 className="text-[10px] font-accent text-white/20 uppercase tracking-[0.8em] flex items-center gap-4"><CreditCard className="w-3 h-3" /> {t('booking.payment_method')}</h4>
-                        <div className="grid grid-cols-2 gap-6">
+                      <div className="space-y-12">
+                        <h4 className="text-[9px] font-accent text-white/20 uppercase tracking-[1em] mb-4">Settlement</h4>
+                        <div className="grid grid-cols-2 gap-4">
                           {['cash', 'pos'].map(m => (
-                            <button key={m} onClick={() => setFormData(p => ({ ...p, paymentMethod: m as any }))} className={`p-8 border rounded-3xl text-[11px] uppercase tracking-widest transition-all ${formData.paymentMethod === m ? 'border-white/40 bg-white/5 text-white shadow-[0_0_30px_rgba(255,255,255,0.05)]' : 'border-white/5 text-[#C0C0C0]/20'}`}>
+                            <button key={m} onClick={() => setFormData(p => ({ ...p, paymentMethod: m as any }))} className={`py-6 border text-[9px] uppercase tracking-[0.4em] transition-all ${formData.paymentMethod === m ? 'border-white text-white' : 'border-white/5 text-white/20'}`}>
                               {m}
                             </button>
                           ))}
@@ -616,75 +587,80 @@ const App: React.FC = () => {
                 )}
 
                 {activeStep === 4 && (
-                  <div className="animate-fade-in max-w-3xl mx-auto space-y-16">
-                    <div className="text-center space-y-6">
-                      <div className="inline-flex items-center justify-center w-20 h-20 rounded-full bg-white/[0.03] border border-white/10 mb-8"><Star className="w-8 h-8 text-white/40" /></div>
-                      <h3 className="text-5xl font-display text-white uppercase tracking-widest italic">{t('booking.step4_title')}</h3>
+                  <div className="animate-fade-in space-y-20 text-center">
+                    <div className="space-y-8">
+                      <Star className="w-12 h-12 text-white/20 mx-auto" strokeWidth={0.5} />
+                      <h3 className="text-5xl font-display text-white uppercase tracking-[0.3em] italic">{t('booking.step4_title')}</h3>
                     </div>
-                    <div className="glass-bento p-16 space-y-12 divide-y divide-white/5">
-                      <div className="pb-12 grid grid-cols-2 gap-12">
-                        <div><p className="text-[9px] text-[#C0C0C0]/20 uppercase tracking-[0.6em] mb-4">{t('booking.guest')}</p><p className="text-lg italic text-white">{formData.name}</p></div>
-                        <div className="text-right"><p className="text-[9px] text-[#C0C0C0]/20 uppercase tracking-[0.6em] mb-4">{t('booking.date')}</p><p className="text-lg italic text-white">{new Date(formData.date).toLocaleDateString()} @ {formData.time}</p></div>
+
+                    <div className="max-w-xl mx-auto space-y-12 py-12 border-y border-white/5 font-display">
+                      <div className="flex justify-between items-center text-white/40 uppercase tracking-widest text-[10px]">
+                        <span>Guest</span>
+                        <span className="text-white text-xl">{formData.name}</span>
                       </div>
-                      <div className="py-12"><p className="text-[9px] text-[#C0C0C0]/20 uppercase tracking-[0.6em] mb-6">{t('booking.service')}</p><p className="text-3xl font-display text-white tracking-widest">{SERVICE_TYPES.find(s => s.id === formData.serviceType)?.name}</p></div>
-                      <div className="pt-12 flex justify-between items-end">
-                        <p className="text-[11px] text-white/20 uppercase tracking-[0.8em]">{t('booking.total')}</p>
-                        <p className="text-6xl font-display text-white">€{formData.estimatedPrice}</p>
+                      <div className="flex justify-between items-center text-white/40 uppercase tracking-widest text-[10px]">
+                        <span>Experience</span>
+                        <span className="text-white text-xl tracking-widest">{SERVICE_TYPES.find(s => s.id === formData.serviceType)?.name}</span>
+                      </div>
+                      <div className="flex justify-between items-end pt-12">
+                        <span className="text-white/20 text-[10px] uppercase tracking-[1em]">Estimated Total</span>
+                        <span className="text-7xl text-white">€{formData.estimatedPrice}</span>
                       </div>
                     </div>
-                    <div className="flex items-center justify-center gap-4">
-                      <input type="checkbox" id="terms" checked={termsAccepted} onChange={e => setTermsAccepted(e.target.checked)} className="w-5 h-5 rounded border-white/10 bg-black text-white focus:ring-white/20" />
-                      <label htmlFor="terms" className="text-[11px] text-[#C0C0C0]/30 font-accent tracking-widest">{t('booking.terms_agree')} <button onClick={() => setShowTerms(true)} className="text-white/60 underline underline-offset-8 decoration-white/20 hover:text-white transition-colors">{t('booking.terms_link')}</button></label>
+
+                    <div className="flex items-center justify-center gap-6">
+                      <input type="checkbox" id="terms" checked={termsAccepted} onChange={e => setTermsAccepted(e.target.checked)} className="w-4 h-4 rounded-none border-white/20 bg-transparent text-white focus:ring-0" />
+                      <label htmlFor="terms" className="text-[10px] text-white/30 font-accent tracking-widest uppercase">
+                        {t('booking.terms_agree')} <button onClick={() => setShowTerms(true)} className="text-white hover:underline transition-colors">{t('booking.terms_link')}</button>
+                      </label>
                     </div>
                   </div>
                 )}
               </div>
 
-              <div className="border-t border-white/5 p-8 flex justify-between items-center bg-black/40 backdrop-blur-3xl sticky bottom-0 z-40">
-                <button onClick={handlePrevStep} disabled={activeStep === 1} className={`text-[10px] uppercase tracking-[0.3em] font-accent transition-all ${activeStep === 1 ? 'opacity-0' : 'text-platinum/20 hover:text-white'}`}>Back</button>
-                {activeStep < 4 ? (
-                  <button onClick={handleNextStep} className="px-12 py-5 bg-gold-titan hover:bg-gold-titan/80 text-ebony-rich font-accent text-[11px] uppercase tracking-[0.4em] transition-all rounded-sm shadow-[0_0_30px_rgba(var(--gold-titan-rgb),0.2)]">Continue</button>
-                ) : (
-                  <button onClick={handleSubmit} disabled={isLoading || !termsAccepted} className="px-12 py-5 bg-pearl-warm hover:bg-white text-ebony-rich font-accent text-[11px] uppercase tracking-[0.4em] transition-all rounded-sm shadow-[0_0_30px_rgba(255,255,255,0.2)] disabled:opacity-50">{isLoading ? <Loader2 className="animate-spin" /> : t('booking.request_booking')}</button>
-                )}
+              {/* ACTION BAR */}
+              <div className="p-12 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-8">
+                <button onClick={handlePrevStep} disabled={activeStep === 1} className={`text-[9px] uppercase tracking-[0.5em] text-white/20 hover:text-white transition-all ${activeStep === 1 ? 'opacity-0' : 'opacity-100'}`}>
+                  Retrace Steps
+                </button>
+                <div className="flex gap-4">
+                  {activeStep < 4 ? (
+                    <button onClick={handleNextStep} className="btn-monumental">Continue</button>
+                  ) : (
+                    <button onClick={handleSubmit} disabled={isLoading || !termsAccepted} className="btn-monumental disabled:opacity-20">
+                      {isLoading ? <Loader2 className="animate-spin w-4 h-4" /> : "Request Assistance"}
+                    </button>
+                  )}
+                </div>
               </div>
             </div>
           </main>
 
-          <footer className="py-40 text-center border-t border-white/[0.03] mt-40 relative overflow-hidden bg-black/20">
-            <div className="max-w-5xl mx-auto px-16 relative z-10">
-              <div className="flex flex-wrap justify-center gap-24 mb-32">
+          <footer className="py-48 text-center border-t border-white/[0.03] mt-24">
+            <div className="max-w-4xl mx-auto px-16 space-y-32">
+              <div className="flex justify-center gap-24">
                 {[
-                  { icon: Instagram, label: `@${BUSINESS_INFO.instagram}`, href: `https://instagram.com/${BUSINESS_INFO.instagram}` },
-                  { icon: MessageCircle, label: 'WHATSAPP CONCIERGE', href: 'https://wa.me/393393522164' }
+                  { icon: Instagram, label: 'INSTAGRAM', href: `https://instagram.com/${BUSINESS_INFO.instagram}` },
+                  { icon: MessageCircle, label: 'WHATSAPP', href: 'https://wa.me/393393522164' }
                 ].map((s, i) => (
-                  <a key={i} href={s.href} target="_blank" rel="noopener noreferrer" className="group flex flex-col items-center gap-8 transition-all duration-1000">
-                    <div className="w-20 h-20 rounded-full border border-white/5 flex items-center justify-center group-hover:border-white/30 group-hover:bg-white/[0.02] transition-all duration-1000 shadow-2xl">
-                      <s.icon className="w-8 h-8 text-white/20 group-hover:text-white transition-colors" strokeWidth={0.5} />
-                    </div>
-                    <span className="text-[11px] text-white/10 group-hover:text-white/60 tracking-[0.8em] uppercase transition-colors duration-1000">{s.label}</span>
+                  <a key={i} href={s.href} target="_blank" rel="noopener noreferrer" className="text-[10px] text-white/20 hover:text-white tracking-[0.5em] uppercase transition-colors duration-700">
+                    {s.label}
                   </a>
                 ))}
               </div>
 
-              <div className="relative mb-12">
-                <Crown className="w-12 h-12 text-white/10" strokeWidth={0.5} />
-              </div>
-
-              <div className="space-y-8">
-                <h4 className="font-display text-4xl text-white tracking-[0.4em] mb-4 opacity-90">{BUSINESS_INFO.name}</h4>
-                <div className="flex flex-wrap justify-center gap-12 text-[11px] uppercase tracking-[0.8em] text-[#E5E4E2] font-accent opacity-60">
+              <div className="space-y-12">
+                <h4 className="font-display text-5xl text-white tracking-[0.5em] opacity-90">{BUSINESS_INFO.name}</h4>
+                <div className="flex justify-center gap-12 text-[9px] uppercase tracking-[0.8em] text-white/40">
                   <span>VAT: {BUSINESS_INFO.piva}</span>
-                  <span>MILAN HQ: {BUSINESS_INFO.address.split(',')[0]}</span>
+                  <span className="hidden md:inline">MILAN HQ: {BUSINESS_INFO.address.split(',')[0]}</span>
                 </div>
-
-                {/* ABOUT TRIGGER */}
-                <button onClick={() => setShowBrandStory(true)} className="mt-8 text-[10px] uppercase tracking-[1em] text-white/40 hover:text-white transition-colors border-b border-transparent hover:border-white/20 pb-1">
+                <button onClick={() => setShowBrandStory(true)} className="btn-outline-elite mt-12">
                   Meet The Architect
                 </button>
               </div>
 
-              <p className="text-[10px] text-white/20 tracking-[1.2em] mt-32 uppercase">&copy; {new Date().getFullYear()} INSOLITO EXPERIENCES. ARCHITECTURAL LUXURY ASSISTANCE.</p>
+              <p className="text-[9px] text-white/10 tracking-[1.4em] uppercase">&copy; {new Date().getFullYear()} INSOLITO experiencias ARCHITECTURAL ASSISTANCE</p>
             </div>
           </footer>
 
