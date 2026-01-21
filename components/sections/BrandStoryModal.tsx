@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { X } from 'lucide-react';
 import { BRAND_STORY } from '../../legalContent';
 
@@ -8,6 +8,17 @@ interface BrandStoryModalProps {
 }
 
 const BrandStoryModal: React.FC<BrandStoryModalProps> = ({ isOpen, onClose }) => {
+    // Imperial Scroll Lock
+    useEffect(() => {
+        if (isOpen) {
+            const originalStyle = window.getComputedStyle(document.body).overflow;
+            document.body.style.overflow = 'hidden';
+            return () => {
+                document.body.style.overflow = originalStyle;
+            };
+        }
+    }, [isOpen]);
+
     if (!isOpen) return null;
 
     return (
@@ -32,10 +43,10 @@ const BrandStoryModal: React.FC<BrandStoryModalProps> = ({ isOpen, onClose }) =>
                 </div>
             </button>
 
-            {/* MODAL CONTAINER */}
-            <div className="relative w-full h-[100dvh] md:h-[90vh] md:max-w-7xl md:luxury-monolith overflow-y-auto md:overflow-y-auto bg-black md:bg-black/60 shadow-2xl animate-reveal custom-scrollbar">
+            {/* MODAL CONTAINER - RESTORED TO 5XL ELEGANCE */}
+            <div className="relative w-full h-[100dvh] md:h-auto md:max-w-5xl md:luxury-monolith overflow-y-auto md:overflow-visible bg-black md:bg-black/60 shadow-2xl animate-reveal custom-scrollbar">
 
-                <div className="p-8 md:p-24 grid grid-cols-1 lg:grid-cols-2 gap-16 md:gap-24 items-start md:items-center">
+                <div className="p-8 md:p-20 grid grid-cols-1 lg:grid-cols-2 gap-12 md:gap-16 items-start md:items-center">
 
                     {/* VISION TEXT */}
                     <div className="space-y-12 md:space-y-20 pt-20 md:pt-0">

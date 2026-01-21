@@ -130,13 +130,15 @@ const BookingForm = forwardRef<HTMLDivElement, BookingFormProps>(({
                                                         value={formData.time}
                                                         onChange={onInputChange}
                                                         disabled={!formData.date}
-                                                        className="elite-input bg-black/20"
+                                                        className={`elite-input ${!formData.date ? 'opacity-30 cursor-not-allowed' : 'bg-[#0a0a0a]'}`}
                                                     >
-                                                        <option value="" className="bg-[#0a0a0a]">SELEZIONA ORARIO</option>
+                                                        <option value="" className="bg-[#0a0a0a]">
+                                                            {!formData.date ? 'SBLOCCA ORARI SCEGLIENDO UNA DATA' : 'SELEZIONA ORARIO'}
+                                                        </option>
                                                         {availableSlots.map(s => <option key={s} value={s} className="bg-[#0a0a0a]">{s} {isNightService(s) ? '(NIGHT)' : ''}</option>)}
                                                     </select>
                                                     <div className="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none">
-                                                        <Clock className="w-4 h-4 text-white/10" />
+                                                        <Clock className={`w-4 h-4 ${!formData.date ? 'text-white/5' : 'text-[var(--milano-bronzo)]/40'}`} />
                                                     </div>
                                                     {validationErrors.time && <p className="text-red-500/80 text-[9px] mt-2 font-mono uppercase tracking-widest">{validationErrors.time}</p>}
                                                 </div>

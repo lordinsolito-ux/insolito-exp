@@ -70,23 +70,43 @@
     box-shadow: 0 40px 100px -20px rgba(0, 0, 0, 0.8);
   }
 
-  /* ELITE INPUTS */
+  /* ELITE INPUTS - IMPERIAL OVERRIDE */
   .elite-input {
-    @apply bg-white/5 border-b border-white/10 text-[#F8F8F8] py-5 px-6 transition-all duration-700 outline-none w-full block;
-    @apply placeholder:text-white/20 focus:border-b-[var(--milano-bronzo)] focus:bg-white/[0.08] focus:placeholder-transparent;
+    @apply border-b border-white/10 py-5 px-6 transition-all duration-700 outline-none w-full block;
+    background-color: #0a0a0a !important;
+    /* Force black background */
+    color: #F8F8F8 !important;
+    /* Force ivory text */
     font-family: 'IBM Plex Mono', monospace;
     @apply text-[11px] uppercase tracking-[0.2em];
     appearance: none;
-    color: #F8F8F8 !important;
-    /* Force visibility */
+    -webkit-appearance: none;
+    border-radius: 0;
   }
 
+  .elite-input:focus {
+    background-color: #111111 !important;
+    border-b-color: var(--milano-bronzo) !important;
+  }
+
+  .elite-input::placeholder {
+    color: rgba(248, 248, 248, 0.2) !important;
+  }
+
+  /* Browser Autofill Fix */
   .elite-input:-webkit-autofill,
   .elite-input:-webkit-autofill:hover,
   .elite-input:-webkit-autofill:focus {
     -webkit-text-fill-color: #F8F8F8 !important;
     -webkit-box-shadow: 0 0 0px 1000px #0a0a0a inset !important;
     transition: background-color 5000s ease-in-out 0s;
+  }
+
+  /* Date/Time Picker Imperial Icons */
+  input[type="date"]::-webkit-calendar-picker-indicator,
+  input[type="time"]::-webkit-calendar-picker-indicator {
+    filter: invert(1) sepia(100%) saturate(1000%) hue-rotate(30deg);
+    cursor: pointer;
   }
 
   /* DIVIDERS */
