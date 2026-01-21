@@ -66,7 +66,7 @@ const IntroSplash: React.FC<{ onFinish: () => void }> = ({ onFinish }) => {
   const audioSrc = "https://www.dropbox.com/scl/fi/trkgfjejfgayjdkgqvt75/Drive-in-Style.mp3?rlkey=ep7dkuq7hl7swnpys0m1p7c6a&e=1&st=ccy55v2q&raw=1";
 
   useEffect(() => {
-    const timer = setTimeout(() => setShowButton(true), 1200);
+    const timer = setTimeout(() => setShowButton(true), 1500);
     return () => clearTimeout(timer);
   }, []);
 
@@ -75,7 +75,7 @@ const IntroSplash: React.FC<{ onFinish: () => void }> = ({ onFinish }) => {
     setPlayShow(true);
 
     if (audioRef.current) {
-      audioRef.current.volume = 0.3;
+      audioRef.current.volume = 0.2;
       try {
         await audioRef.current.play();
       } catch (err) {
@@ -85,53 +85,51 @@ const IntroSplash: React.FC<{ onFinish: () => void }> = ({ onFinish }) => {
 
     setTimeout(() => {
       setIsExiting(true);
-      setTimeout(onFinish, 1800);
-    }, 4500);
+      setTimeout(onFinish, 2000);
+    }, 5000);
   };
 
   return (
-    <div className={`fixed inset-0 z-[100] bg-[var(--perla-dorata)] flex flex-col items-center justify-center transition-opacity duration-[2000ms] ${isExiting ? 'opacity-0 pointer-events-none' : 'opacity-100'}`}>
+    <div className={`fixed inset-0 z-[200] bg-[var(--perla-dorata)] flex flex-col items-center justify-center transition-all duration-[2500ms] ease-in-out ${isExiting ? 'opacity-0 scale-105 pointer-events-none' : 'opacity-100'}`}>
       <audio ref={audioRef} src={audioSrc} preload="auto" />
-      <div className="absolute inset-0 bg-noise opacity-[0.2]"></div>
-
-      {/* Privé Marker */}
-      <div className="absolute top-12 left-12 flex flex-col gap-4 opacity-20 font-accent text-[9px] tracking-[1.5em] uppercase text-[var(--oro-lucido)]">
-        <span>MEMBERS ONLY</span>
-        <span>ACCESS GRANTED</span>
-      </div>
+      <div className="absolute inset-0 bg-noise"></div>
 
       {!playShow && (
-        <div className={`flex flex-col items-center transition-all duration-[2000ms] ${showButton ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'}`}>
-          <div className="w-px h-24 bg-gradient-to-b from-transparent via-[var(--oro-lucido)]/20 to-transparent mb-12"></div>
-          <h1 className="text-6xl md:text-8xl font-display text-gold tracking-[0.5em] mb-20 italic opacity-95">
+        <div className={`flex flex-col items-center max-w-xl text-center px-12 transition-all duration-[2500ms] ${showButton ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
+          <div className="w-px h-32 bg-gradient-to-b from-transparent via-[var(--oro-lucido)]/30 to-transparent mb-16"></div>
+          <h1 className="text-5xl md:text-7xl font-display text-gold tracking-[0.3em] mb-12 italic opacity-90">
             INSOLITO PRIVÉ
           </h1>
+          <p className="text-[10px] font-accent text-[var(--oro-lucido)]/50 tracking-[1.2em] mb-20 uppercase">
+            Lifestyle Management
+          </p>
           <button
             onClick={handleEnter}
-            className="btn-monumental"
+            className="btn-prive group"
           >
             <span className="relative z-10">
-              {t('hero.cta')}
+              Inquire for Access
             </span>
           </button>
         </div>
       )}
 
       {playShow && (
-        <div className="relative z-10 flex flex-col items-center text-center px-12 animate-mask-up">
-          <p className="text-[var(--oro-lucido)]/40 font-accent text-[10px] uppercase tracking-[1.5em] mb-12">Elite Personal Assistance on Reference</p>
-          <div className="max-w-4xl space-y-16">
-            <h2 className="text-4xl md:text-6xl font-display text-[var(--bronzo-profondo)] leading-tight tracking-[0.05em] italic">
-              "L'accesso è un privilegio,<br />
-              <span className="text-[var(--oro-lucido)]">la riservatezza è il nostro sigillo."</span>
-            </h2>
-            <div className="gold-line max-w-xs mx-auto opacity-30"></div>
+        <div className="relative z-10 flex flex-col items-center text-center px-12 animate-fade">
+          <div className="flex flex-col gap-4 mb-24 opacity-30">
+            <span className="text-[9px] font-accent tracking-[1.5em] uppercase">Private Access Only</span>
           </div>
-          <h1 className="text-8xl md:text-[14rem] font-display text-gold tracking-[0.3em] leading-none mt-32 opacity-95">
+          <div className="max-w-3xl space-y-12">
+            <h2 className="text-3xl md:text-5xl font-display text-[var(--bronzo-profondo)] leading-relaxed italic tracking-wide">
+              "L'architettura del tempo,<br />
+              <span className="text-[var(--oro-lucido)]">la maestria della discrezione."</span>
+            </h2>
+          </div>
+          <h1 className="text-6xl md:text-[10rem] font-display text-gold tracking-[0.3em] leading-none mt-32">
             INSOLITO
           </h1>
-          <span className="text-[11px] font-accent text-[var(--oro-lucido)]/40 tracking-[2em] uppercase mt-8">
-            PERSONAL LIFESTYLE PRIVÉ
+          <span className="text-[10px] font-accent text-[var(--oro-lucido)]/40 tracking-[2em] uppercase mt-12">
+            Personal Lifestyle Concierge
           </span>
         </div>
       )}
@@ -230,49 +228,51 @@ const BrandStoryModal: React.FC<{ isOpen: boolean; onClose: () => void }> = ({ i
 const NarrativeSpread: React.FC = () => {
   const { t } = useTranslation();
   return (
-    <section className="py-48 px-6 md:px-16 space-y-48 bg-transparent relative z-20">
+    <section className="py-64 px-12 md:px-24 space-y-64 bg-transparent relative z-20 overflow-hidden">
       {/* Spread 1: The Vision */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-24 items-center max-w-7xl mx-auto">
-        <div className="space-y-12 animate-reveal">
-          <span className="text-[var(--oro-lucido)]/40 font-accent text-[10px] uppercase tracking-[1em]">The Privé Chapter</span>
-          <h2 className="text-5xl md:text-7xl font-display text-[var(--bronzo-profondo)] italic leading-tight tracking-wide">
-            L'Arte di<br /><span className="text-gold">Essere Altrove.</span>
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 items-center max-w-7xl mx-auto">
+        <div className="lg:col-span-12 xl:col-span-5 space-y-16 animate-reveal">
+          <span className="text-[var(--oro-lucido)]/40 font-accent text-[10px] uppercase tracking-[1em] block mb-8">The Philosophy</span>
+          <h2 className="text-5xl md:text-8xl font-display text-[var(--bronzo-profondo)] italic leading-[1.1] tracking-tight">
+            L'Arte di<br /><span className="text-gold">Scomparire.</span>
           </h2>
-          <p className="text-[var(--bronzo-profondo)] font-display text-xl md:text-2xl leading-relaxed italic max-w-xl">
-            "Non offriamo solo logistica. Gestiamo l'accesso riservato ai tuoi momenti più importanti."
+          <p className="text-[var(--bronzo-profondo)]/80 font-display text-2xl md:text-3xl leading-relaxed italic max-w-xl py-12 border-y border-[var(--oro-lucido)]/10">
+            "La vera eccellenza non urla. Si manifesta in quell'ombra perfetta che anticipa ogni tua necessità, proteggendo il tuo tempo e la tua pace."
           </p>
-          <div className="gold-line w-24"></div>
         </div>
-        <div className="relative aspect-[4/5] overflow-hidden rounded-sm group transition-all duration-[2000ms] shadow-2xl border border-[var(--oro-lucido)]/10">
-          <img
-            src="https://images.unsplash.com/photo-1542314831-068cc1ad4706?q=80&w=2070&auto=format&fit=crop"
-            alt="Elite Excellence"
-            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-[4000ms]"
-          />
+        <div className="lg:col-span-12 xl:col-span-7 xl:pl-24 relative">
+          <div className="relative aspect-[16/10] overflow-hidden rounded-[2px] shadow-3xl group transition-all duration-[3000ms]">
+            <img
+              src="https://images.unsplash.com/photo-1542314831-068cc1ad4706?q=85&w=2600&auto=format&fit=crop"
+              alt="Elite Discretion"
+              className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-[6000ms] ease-out"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-[var(--bronzo-profondo)]/20 to-transparent"></div>
+          </div>
         </div>
       </div>
 
       {/* Spread 2: What We Do */}
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 max-w-7xl mx-auto">
-        <div className="lg:col-span-4 order-2 lg:order-1">
-          <div className="aspect-[3/4] overflow-hidden rounded-sm transition-all duration-[2000ms] border border-[var(--oro-lucido)]/20 shadow-xl">
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-24 max-w-7xl mx-auto items-center">
+        <div className="lg:col-span-12 xl:col-span-5 order-2 xl:order-1 relative">
+          <div className="aspect-[3/4] overflow-hidden rounded-[2px] border border-[var(--oro-lucido)]/10 shadow-3xl">
             <img
-              src="https://images.unsplash.com/photo-1513581026335-113b1740c0cd?q=80&w=2070&auto=format&fit=crop"
-              alt="Milano Excellence"
+              src="https://images.unsplash.com/photo-1513581026335-113b1740c0cd?q=85&w=2600&auto=format&fit=crop"
+              alt="Milano Lifestyle"
               className="w-full h-full object-cover"
             />
           </div>
         </div>
-        <div className="lg:col-span-8 flex flex-col justify-center space-y-16 lg:pl-24 order-1 lg:order-2">
-          <h3 className="text-4xl md:text-5xl font-display text-[var(--bronzo-profondo)] tracking-[0.1em] uppercase">Riservatezza & Cura d'Élite</h3>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
-            <div className="space-y-4 border-l border-[var(--oro-lucido)]/30 pl-8">
-              <h4 className="text-[var(--oro-lucido)] font-accent text-[11px] uppercase tracking-[0.5em]">Executive Lifestyle</h4>
-              <p className="text-[var(--bronzo-profondo)] text-sm leading-relaxed italic font-medium">Ogni dettaglio è pianificato per garantirti una presenza impeccabile, senza rumore e con la massima discrezione.</p>
+        <div className="lg:col-span-12 xl:col-span-7 flex flex-col justify-center space-y-20 xl:pl-24 order-1 xl:order-2">
+          <h3 className="text-4xl md:text-6xl font-display text-[var(--bronzo-profondo)] tracking-tight italic">Servizio alla Persona,<br /><span className="text-gold">Elevato a Concierge.</span></h3>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-16 pt-8">
+            <div className="space-y-6">
+              <h4 className="text-[var(--oro-lucido)] font-accent text-[10px] tracking-[0.5em] uppercase">Executive Guardian</h4>
+              <p className="text-[var(--bronzo-profondo)] text-sm leading-relaxed font-light font-accent">Non siamo semplici vettori. Siamo il tuo sigillo legale e fisico a Milano, proteggendo il tuo tempo e la tua immagine.</p>
             </div>
-            <div className="space-y-4 border-l border-[var(--oro-lucido)]/30 pl-8">
-              <h4 className="text-[var(--oro-lucido)] font-accent text-[11px] uppercase tracking-[0.5em]">Personal Support</h4>
-              <p className="text-[var(--bronzo-profondo)] text-sm leading-relaxed italic font-medium">Dall'accoglienza aeroportuale alla gestione di appuntamenti delicati, siamo il tuo sigillo di professionalità a Milano.</p>
+            <div className="space-y-6">
+              <h4 className="text-[var(--oro-lucido)] font-accent text-[10px] tracking-[0.5em] uppercase">Private Logistics</h4>
+              <p className="text-[var(--bronzo-profondo)] text-sm leading-relaxed font-light font-accent">Ogni rientro, ogni spostamento è una missione di sicurezza e assistenza millimetrica, riservata a pochi.</p>
             </div>
           </div>
         </div>
@@ -527,52 +527,41 @@ const App: React.FC = () => {
             <div className="absolute inset-0 bg-gradient-to-b from-white/20 via-transparent to-white/20"></div>
           </div>
 
-          <header className="relative min-h-screen flex flex-col justify-center items-center overflow-hidden bg-transparent">
-            {/* Glossy Overlay */}
-            <div className="absolute inset-0 bg-gradient-to-tr from-[var(--oro-lucido)]/5 via-transparent to-white/40 pointer-events-none"></div>
-
+          <header className="relative min-h-screen flex flex-col justify-center items-center overflow-hidden bg-transparent py-24">
             {/* Magazine Cover Navigation */}
-            <div className="flex items-center justify-between px-16 absolute top-12 left-0 w-full z-20">
+            <nav className="flex items-center justify-between px-12 md:px-24 absolute top-12 left-0 w-full z-20">
               <div className="flex items-center gap-6 group cursor-pointer" onClick={() => setShowAdminLogin(true)}>
-                <div className="w-8 h-8 rounded-full border border-[var(--oro-lucido)]/20 flex items-center justify-center group-hover:border-[var(--oro-lucido)] transition-all duration-700">
-                  <Crown className="w-3 h-3 text-[var(--oro-lucido)]/40 group-hover:text-[var(--oro-lucido)]" strokeWidth={1} />
+                <div className="w-8 h-8 rounded-full border border-[var(--oro-lucido)]/20 flex items-center justify-center transition-all duration-700">
+                  <Crown className="w-4 h-4 text-[var(--oro-lucido)]/40 group-hover:text-[var(--oro-lucido)]" strokeWidth={1} />
                 </div>
-                <span className="text-[10px] text-[var(--oro-lucido)]/40 uppercase tracking-[1em] group-hover:text-[var(--oro-lucido)] transition-all duration-700 font-accent">Privé Index</span>
+                <span className="text-[10px] text-[var(--oro-lucido)]/40 uppercase tracking-[0.8em] group-hover:text-[var(--oro-lucido)] transition-all duration-700 font-accent hidden md:block">Privé Index</span>
               </div>
-              <div className="flex items-center gap-16">
-                <button onClick={() => setShowHistory(true)} className="text-[var(--oro-lucido)]/40 hover:text-[var(--oro-lucido)] border-b border-[var(--oro-lucido)]/10 hover:border-[var(--oro-lucido)] transition-all duration-700 text-[10px] uppercase tracking-[0.6em] font-accent pb-1">Archive</button>
+              <div className="flex items-center gap-12">
+                <button onClick={() => setShowHistory(true)} className="text-[10px] text-[var(--oro-lucido)]/40 hover:text-[var(--oro-lucido)] border-none tracking-[0.6em] font-accent">Archive</button>
                 <LanguageSwitcher />
               </div>
-            </div>
-
-            {/* Vertical Editorial Markers */}
-            <div className="absolute right-12 top-1/2 -translate-y-1/2 flex flex-col gap-20 opacity-30">
-              <span className="vol-marker">MEMBERS ONLY</span>
-              <div className="w-px h-32 bg-[var(--oro-lucido)]/20 mx-auto"></div>
-              <span className="vol-marker">ACCESS GRANTED</span>
-            </div>
+            </nav>
 
             {/* Main Cover Title */}
-            <div className="relative text-center z-10 space-y-12 animate-mask-up">
-              <p className="text-[10px] font-accent text-[var(--oro-lucido)]/30 tracking-[2em] uppercase mb-8 ml-[2em]">The Excellence of Privacy</p>
-              <div className="relative group">
-                <h1 className="text-8xl md:text-[14rem] font-display text-gold tracking-[0.2em] leading-none cursor-default">
+            <div className="relative text-center z-10 space-y-16 animate-reveal">
+              <p className="text-[10px] font-accent text-[var(--oro-lucido)]/40 tracking-[2em] uppercase mb-4 ml-[2em]">The Excellence of Privacy</p>
+              <div className="relative">
+                <h1 className="text-7xl md:text-[13rem] font-display text-gold tracking-[0.1em] leading-none mb-4">
                   INSOLITO
-                  <span className="block text-4xl md:text-6xl tracking-[1em] mt-8 opacity-60">PRIVÉ</span>
                 </h1>
+                <span className="block text-3xl md:text-5xl font-display text-[var(--oro-lucido)]/60 tracking-[1.5em] mt-8">PRIVÉ</span>
               </div>
-              <div className="max-w-2xl mx-auto space-y-8 pt-12">
-                <p className="text-[12px] md:text-sm font-accent text-[var(--oro-lucido)]/60 tracking-[0.8em] uppercase leading-relaxed font-medium">
+              <div className="max-w-2xl mx-auto space-y-12 pt-16">
+                <p className="text-[11px] md:text-xs font-accent text-[var(--oro-lucido)]/60 tracking-[0.8em] uppercase leading-relaxed font-light">
                   Elite Assistance <span className="text-[var(--oro-lucido)]/20 px-4">|</span> Personal Concierge <span className="text-[var(--oro-lucido)]/20 px-4">|</span> Reserved Luxury
                 </p>
-                <div className="gold-line max-w-xs mx-auto mt-12 opacity-50"></div>
               </div>
             </div>
 
             {/* Scroll Hint */}
-            <div className="absolute bottom-16 left-1/2 -translate-x-1/2 flex flex-col items-center gap-6 animate-bounce opacity-40">
+            <div className="absolute bottom-16 left-1/2 -translate-x-1/2 flex flex-col items-center gap-8 animate-fade opacity-40">
               <span className="text-[9px] font-accent text-[var(--oro-lucido)] tracking-[1em] uppercase vertical-text">Enter the Vitrine</span>
-              <div className="w-px h-12 bg-[var(--oro-lucido)]"></div>
+              <div className="w-px h-16 bg-gradient-to-b from-[var(--oro-lucido)] to-transparent"></div>
             </div>
           </header>
 
@@ -752,24 +741,43 @@ const App: React.FC = () => {
                     { icon: Instagram, label: 'IG', href: `https://instagram.com/${BUSINESS_INFO.instagram}` },
                     { icon: MessageCircle, label: 'WA', href: 'https://wa.me/393393522164' }
                   ].map((s, i) => (
-                    <a key={i} href={s.href} target="_blank" rel="noopener noreferrer" className="text-[9px] text-[var(--oro-lucido)]/50 hover:text-[var(--oro-lucido)] tracking-[0.4em] uppercase transition-colors font-accent">
-                      {s.label}
-                    </a>
-                  ))}
-                  <button onClick={() => setShowBrandStory(true)} className="text-[9px] text-[var(--oro-lucido)]/50 hover:text-[var(--oro-lucido)] tracking-[0.4em] uppercase transition-colors font-accent border-l border-[var(--oro-lucido)]/10 pl-6">
-                    Philosophy
-                  </button>
-                </div>
+          <footer className="py-24 border-t border-[var(--oro-lucido)]/10 bg-transparent relative z-20">
+            <div className="max-w-7xl mx-auto px-12 flex flex-col items-center gap-16 text-center">
+              <div className="space-y-4">
+                <h4 className="font-display text-4xl text-gold tracking-[0.2em] uppercase">{BUSINESS_INFO.name}</h4>
+                <p className="text-[10px] font-accent text-[var(--oro-lucido)]/40 tracking-[1em] uppercase">Lifestyle Management & Personal Concierge</p>
               </div>
 
-              <div className="flex flex-col items-center md:items-end gap-3 text-[8px] uppercase tracking-[0.4em] text-[var(--bronzo-profondo)]/40 font-accent max-w-2xl text-center md:text-right">
-                <div className="flex flex-wrap justify-center md:justify-end gap-x-6 gap-y-2 opacity-60">
-                  <span className="normal-case">{BUSINESS_INFO.fullName}</span>
-                  <span className="normal-case border-l border-[var(--oro-lucido)]/10 pl-6">{BUSINESS_INFO.address}</span>
-                  <span className="border-l border-[var(--oro-lucido)]/10 pl-6">P.IVA: {BUSINESS_INFO.piva}</span>
-                  <span className="border-l border-[var(--oro-lucido)]/10 pl-6">ATECO: {BUSINESS_INFO.ateco}</span>
-                </div>
-                <p className="opacity-40">&copy; {new Date().getFullYear()} {BUSINESS_INFO.name} | Reserved Excellence</p>
+              <div className="flex items-center gap-12">
+                {[
+                  { icon: Instagram, label: 'Instagram', href: `https://instagram.com/${BUSINESS_INFO.instagram}` },
+                  { icon: MessageCircle, label: 'WhatsApp', href: 'https://wa.me/393393522164' }
+                ].map((s, i) => (
+                  <a key={i} href={s.href} target="_blank" rel="noopener noreferrer" className="text-[10px] text-[var(--oro-lucido)]/60 hover:text-[var(--oro-lucido)] tracking-[0.4em] uppercase transition-colors font-accent border border-[var(--oro-lucido)]/10 px-8 py-3 hover:bg-[var(--oro-lucido)]/5">
+                    {s.label}
+                  </a>
+                ))}
+              </div>
+
+              <div className="flex flex-col md:flex-row items-center gap-12 pt-12 border-t border-[var(--oro-lucido)]/5 w-full justify-center">
+                <button 
+                  onClick={() => {
+                    setCurrentLegalContent({ 
+                      title: 'Corporate Identity', 
+                      content: `${BUSINESS_INFO.fullName}\n${BUSINESS_INFO.address}\nP.IVA: ${BUSINESS_INFO.piva}\nATECO: ${BUSINESS_INFO.ateco}` 
+                    });
+                    setShowLegalModal(true);
+                  }} 
+                  className="text-[9px] text-[var(--oro-lucido)]/40 hover:text-[var(--oro-lucido)] tracking-[0.5em] uppercase font-accent transition-colors"
+                >
+                  Legal Details
+                </button>
+                <button onClick={() => setShowBrandStory(true)} className="text-[9px] text-[var(--oro-lucido)]/40 hover:text-[var(--oro-lucido)] tracking-[0.5em] uppercase font-accent transition-colors">
+                  Our Philosophy
+                </button>
+                <span className="text-[9px] text-[var(--bronzo-profondo)]/20 tracking-[0.5em] uppercase font-accent">
+                  &copy; {new Date().getFullYear()} Elite Excellence
+                </span>
               </div>
             </div>
           </footer>
@@ -778,14 +786,14 @@ const App: React.FC = () => {
         </div>
       )}
 
-      <LegalModal
-        isOpen={showLegalModal}
-        onClose={() => setShowLegalModal(false)}
-        title={currentLegalContent.title}
-        content={currentLegalContent.content}
-      />
-    </>
-  );
+                <LegalModal
+                  isOpen={showLegalModal}
+                  onClose={() => setShowLegalModal(false)}
+                  title={currentLegalContent.title}
+                  content={currentLegalContent.content}
+                />
+              </>
+              );
 };
 
-export default App;
+              export default App;

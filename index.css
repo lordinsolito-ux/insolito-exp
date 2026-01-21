@@ -3,13 +3,20 @@
 @tailwind utilities;
 
 :root {
-  --perla-dorata: #F9F7F2;
-  --oro-lucido: #C5A059;
+  --perla-dorata: #FAF9F6;
+  --oro-lucido: #BC9C62;
   --oro-scuro: #8C6F3D;
   --oro-rosa: #D4AF37;
-  --bronzo-profondo: #4A3728;
+  --bronzo-profondo: #2D241E;
   --bianco-puro: #FFFFFF;
-  --perla-riflesso: #FFFDF9;
+  --oro-soft: rgba(188, 156, 98, 0.15);
+
+  /* SPACING SYSTEM - CLAMP BASED */
+  --space-xs: clamp(0.5rem, 1vw, 0.75rem);
+  --space-s: clamp(1rem, 2vw, 1.5rem);
+  --space-m: clamp(2rem, 4vw, 3rem);
+  --space-l: clamp(4rem, 8vw, 6rem);
+  --space-xl: clamp(6rem, 12vw, 10rem);
 }
 
 @layer base {
@@ -19,7 +26,7 @@
 
   body {
     @apply bg-[var(--perla-dorata)] text-[var(--bronzo-profondo)] antialiased selection:bg-[var(--oro-lucido)] selection:text-white overflow-x-hidden;
-    font-family: 'Montserrat', sans-serif;
+    font-family: 'Outfit', sans-serif;
   }
 
   .font-display {
@@ -27,136 +34,106 @@
   }
 
   .font-accent {
-    font-family: 'Montserrat', sans-serif;
+    @apply font-light tracking-[0.2em] uppercase;
+    font-family: 'Outfit', sans-serif;
   }
 }
 
 @layer components {
 
-  /* EDITORIAL MONOLITH - LIGHT MODE GOLDEN GLASS */
+  /* EDITORIAL MONOLITH - GLASS LEVEL 2 */
   .luxury-monolith {
-    @apply backdrop-blur-[40px] bg-white/70 border border-[var(--oro-lucido)]/15 relative overflow-hidden;
+    @apply backdrop-blur-[30px] bg-white/40 border border-[var(--oro-lucido)]/10 relative overflow-hidden;
     box-shadow:
-      0 30px 60px -12px rgba(197, 160, 89, 0.1),
-      0 18px 36px -18px rgba(0, 0, 0, 0.05),
-      inset 0 0 80px rgba(255, 255, 255, 0.5);
+      0 40px 100px -20px rgba(188, 156, 98, 0.12),
+      inset 0 0 40px rgba(255, 255, 255, 0.4);
   }
 
-  /* MAGAZINE CATALOG SELECTOR - GLOSSY */
+  /* MAGAZINE CATALOG SELECTOR */
   .catalog-selector {
-    @apply relative overflow-hidden bg-white/40 border border-[var(--oro-lucido)]/10 transition-all duration-[1200ms] ease-[cubic-bezier(0.2, 0.8, 0.2, 1)];
+    @apply relative overflow-hidden bg-white/60 border border-[var(--oro-lucido)]/5 transition-all duration-[1500ms] ease-[cubic-bezier(0.23, 1, 0.32, 1)];
   }
 
   .catalog-selector:hover {
-    @apply border-[var(--oro-lucido)]/40 bg-white/80;
-    transform: translateY(-4px) scale(1.005);
+    @apply border-[var(--oro-lucido)]/20 bg-white/90;
+    transform: translateY(-8px);
   }
 
-  .card-gloss {
-    @apply relative overflow-hidden;
-  }
-
-  .card-gloss::after {
-    content: '';
-    @apply absolute inset-0 -translate-x-full;
-    background: linear-gradient(90deg,
-        transparent,
-        rgba(255, 255, 255, 0.6),
-        transparent);
-    animation: shimmer 6s infinite;
-  }
-
-  /* EDITORIAL INPUTS */
+  /* ELITE INPUTS */
   .elite-input {
-    @apply bg-transparent border-b border-[var(--oro-lucido)]/20 text-[var(--bronzo-profondo)] placeholder-[var(--oro-lucido)]/30 focus:border-[var(--oro-lucido)] focus:placeholder-transparent transition-all duration-700 outline-none;
+    @apply bg-transparent border-b border-[var(--oro-lucido)]/20 text-[var(--bronzo-profondo)] py-4 transition-all duration-700 outline-none;
+    @apply placeholder:text-[var(--oro-lucido)]/30 focus:border-b-[var(--oro-lucido)]/50 focus:placeholder-transparent;
+    font-family: 'Outfit', sans-serif;
   }
 
   /* DIVIDERS */
   .gold-line {
-    @apply h-[0.5px] w-full bg-gradient-to-r from-transparent via-[var(--oro-lucido)]/30 to-transparent;
+    @apply h-[0.5px] w-full bg-gradient-to-r from-transparent via-[var(--oro-lucido)]/20 to-transparent my-8;
   }
 
-  /* MAGAZINE BUTTONS */
+  /* BUTTONS */
   .btn-monumental {
-    @apply relative overflow-hidden bg-[var(--oro-lucido)] text-white font-accent text-[10px] uppercase tracking-[0.6em] px-16 py-6 transition-all duration-700 active:scale-95 shadow-xl;
-    background: linear-gradient(135deg, #C5A059 0%, #D4AF37 50%, #C5A059 100%);
-    background-size: 200% auto;
+    @apply relative overflow-hidden bg-[var(--oro-lucido)] text-white font-accent text-[11px] px-12 py-5 transition-all duration-700 active:scale-95;
+    background: linear-gradient(135deg, #BC9C62 0%, #D4AF37 100%);
+    box-shadow: 0 10px 30px -10px rgba(188, 156, 98, 0.5);
   }
 
   .btn-monumental:hover {
-    background-position: right center;
-    @apply shadow-2xl;
-  }
-
-  .btn-prive {
-    @apply px-10 py-4 border border-[var(--oro-lucido)]/30 text-[var(--oro-lucido)] font-accent text-[9px] uppercase tracking-[0.5em] transition-all duration-700 hover:bg-[var(--oro-lucido)] hover:text-white;
-  }
-
-  /* EDITORIAL MARKERS */
-  .vol-marker {
-    @apply text-[9px] font-accent text-[var(--oro-lucido)]/30 uppercase tracking-[1.5em] rotate-180 [writing-mode:vertical-rl];
+    @apply opacity-90;
+    box-shadow: 0 15px 40px -10px rgba(188, 156, 98, 0.6);
   }
 
   .text-gold {
     @apply text-[var(--oro-lucido)] bg-clip-text font-display;
-    background: linear-gradient(to bottom, #C5A059, #8C6F3D);
+    background: linear-gradient(to bottom, #BC9C62, #8C6F3D);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
   }
 }
 
-/* MAGAZINE ANIMATIONS */
-@keyframes shimmer {
-  0% {
-    transform: translateX(-100%);
-  }
-
-  20%,
-  100% {
-    transform: translateX(100%);
-  }
-}
-
+/* ANIMATIONS */
 @keyframes editorial-reveal {
   from {
     opacity: 0;
-    transform: translateY(30px) scale(0.98);
+    transform: translateY(20px);
     filter: blur(10px);
   }
 
   to {
     opacity: 1;
-    transform: translateY(0) scale(1);
+    transform: translateY(0);
     filter: blur(0);
   }
 }
 
-@keyframes mask-reveal-up {
+@keyframes cinematic-fade {
   from {
-    clip-path: inset(100% 0 0 0);
-    transform: translateY(20px);
+    opacity: 0;
   }
 
   to {
-    clip-path: inset(0 0 0 0);
-    transform: translateY(0);
+    opacity: 1;
   }
 }
 
 .animate-reveal {
-  animation: editorial-reveal 2s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+  animation: editorial-reveal 2s cubic-bezier(0.23, 1, 0.32, 1) forwards;
 }
 
-.animate-mask-up {
-  animation: mask-reveal-up 2.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+.animate-fade {
+  animation: cinematic-fade 3s ease-in-out forwards;
 }
 
 .bg-noise {
-  background-image: url("https://www.transparenttextures.com/patterns/asfalt-light.png");
-  @apply opacity-[0.4];
+  background-image: url("https://www.transparenttextures.com/patterns/natural-paper.png");
+  @apply fixed inset-0 pointer-events-none opacity-[0.3] mix-blend-multiply;
 }
 
-/* SCROLLBAR */
+/* REMOVE GLITCHY MARKERS */
+.vol-marker {
+  @apply hidden;
+}
+
 ::-webkit-scrollbar {
   width: 4px;
 }
@@ -167,5 +144,5 @@
 
 ::-webkit-scrollbar-thumb {
   background: var(--oro-lucido);
-  @apply opacity-20 hover:opacity-100;
+  @apply opacity-20;
 }
