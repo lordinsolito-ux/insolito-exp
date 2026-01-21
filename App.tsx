@@ -37,6 +37,7 @@ import BookingForm from './components/sections/BookingForm';
 import Footer from './components/sections/Footer';
 import GhostModeOverlay from './components/sections/GhostModeOverlay';
 import TheGuardian from './components/sections/TheGuardian';
+import Investment from './components/sections/Investment';
 
 // Services
 import { searchLocations, calculateRoute, calculatePrice } from './services/googleMapsService';
@@ -320,6 +321,7 @@ const App: React.FC = () => {
             <NarrativeSpread />
             <TheGuardian onStoryClick={() => setShowBrandStory(true)} />
             <AntiLuxury />
+            <Investment onBookClick={() => formCardRef.current?.scrollIntoView({ behavior: 'smooth' })} />
             <ServiceSelection ref={servicesRef} onServiceSelect={handleServiceSelect} />
             <BookingForm
               ref={formCardRef}

@@ -42,7 +42,7 @@ const Hero: React.FC<HeroProps> = ({ isScrolled, onAdminLogin, onArchiveClick, o
                     onClick={onEnterClick}
                     className="group flex flex-col items-center gap-6 pt-12"
                 >
-                    <span className="text-[10px] font-mono text-white/20 group-hover:text-white tracking-[1em] uppercase transition-all italic">Enter the Silence</span>
+                    <span className="text-[10px] font-mono text-white/20 group-hover:text-white tracking-[1em] uppercase transition-all italic">L'Arte di Scomparire</span>
                     <ChevronDown className="w-6 h-6 text-white/10 group-hover:text-[var(--milano-bronzo)] group-hover:translate-y-2 transition-all duration-700" strokeWidth={1} />
                 </button>
             </div>
