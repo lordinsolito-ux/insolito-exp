@@ -19,7 +19,7 @@ export const SERVICE_TYPES: (ServiceType & { image: string })[] = [
     icon: Plane,
     popular: true,
     badge: 'Elite Entry',
-    image: 'https://images.unsplash.com/photo-1436491865332-7a61a109c0f0?q=80&w=2070&auto=format&fit=crop'
+    image: 'https://images.unsplash.com/photo-1542314831-068cc1ad4706?q=80&w=2070&auto=format&fit=crop'
   },
   {
     id: ServiceTypeId.CITY_TO_CITY,
@@ -27,14 +27,14 @@ export const SERVICE_TYPES: (ServiceType & { image: string })[] = [
     description: 'Il comfort di un salotto privato in movimento. Trasforma ogni chilometro in un momento di puro relax o produttività riservata.',
     icon: MapIcon,
     badge: 'Signature',
-    image: 'https://images.unsplash.com/photo-1544620347-c4fd4a3d5962?q=80&w=2070&auto=format&fit=crop'
+    image: 'https://images.unsplash.com/photo-1511216173030-66221a194af0?q=80&w=1974&auto=format&fit=crop'
   },
   {
     id: ServiceTypeId.HOURLY,
     name: 'Privé Assistant',
     description: 'La tua ombra professionale. Un assistente dedicato a disposizione per shopping, meeting e ogni tua commissione più riservata.',
     icon: Clock,
-    image: 'https://images.unsplash.com/photo-1441986300917-64674bd600d8?q=80&w=2070&auto=format&fit=crop'
+    image: 'https://images.unsplash.com/photo-1513581026335-113b1740c0cd?q=80&w=2070&auto=format&fit=crop'
   },
   {
     id: ServiceTypeId.EVENT,
@@ -42,7 +42,7 @@ export const SERVICE_TYPES: (ServiceType & { image: string })[] = [
     description: 'Il prestigio della notte milanese senza compromessi. Sicurezza millimetrica e accesso esclusivo per vivere la città al massimo.',
     icon: GlassWater,
     badge: 'Exquisite',
-    image: 'https://images.unsplash.com/photo-1514525253361-9034af3c2242?q=80&w=1974&auto=format&fit=crop'
+    image: 'https://images.unsplash.com/photo-1574091678382-7285514120ec?q=80&w=1974&auto=format&fit=crop'
   },
   {
     id: ServiceTypeId.WEDDING,
@@ -50,7 +50,7 @@ export const SERVICE_TYPES: (ServiceType & { image: string })[] = [
     description: 'L\'eleganza assoluta per il tuo giorno più prezioso. Cura di ogni dettaglio con una grazia e precisione che restano nel tempo.',
     icon: Heart,
     badge: 'Prestige',
-    image: 'https://images.unsplash.com/photo-1519225421980-715cb0215aed?q=80&w=2070&auto=format&fit=crop'
+    image: 'https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=2070&auto=format&fit=crop'
   },
 ];
 

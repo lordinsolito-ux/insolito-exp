@@ -519,8 +519,8 @@ const App: React.FC = () => {
             <div className="absolute inset-0 bg-[var(--perla-dorata)]"></div>
 
             {/* VIBRANT GOLD LAYERS */}
-            <div className="absolute top-[-20%] right-[-10%] w-[70vw] h-[70vw] opacity-[0.1] animate-pulse-slow" style={{ background: 'radial-gradient(circle, var(--oro-lucido), transparent 70%)' }}></div>
-            <div className="absolute bottom-[-10%] left-[-10%] w-[60vw] h-[60vw] opacity-[0.05] animate-pulse-slow" style={{ background: 'radial-gradient(circle, var(--oro-rosa), transparent 70%)' }}></div>
+            <div className="absolute top-[-20%] right-[-10%] w-[70vw] h-[70vw] opacity-[0.1]" style={{ background: 'radial-gradient(circle, var(--oro-lucido), transparent 70%)' }}></div>
+            <div className="absolute bottom-[-10%] left-[-10%] w-[60vw] h-[60vw] opacity-[0.05]" style={{ background: 'radial-gradient(circle, var(--oro-rosa), transparent 70%)' }}></div>
 
             {/* REFINED GRAIN */}
             <div className="absolute inset-0 bg-noise opacity-[0.15]"></div>
