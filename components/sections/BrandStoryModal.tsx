@@ -13,7 +13,8 @@ const BrandStoryModal: React.FC<BrandStoryModalProps> = ({ isOpen, onClose }) =>
         <div className="fixed inset-0 z-[200] flex items-center justify-center p-6">
             <div className="absolute inset-0 bg-black/95 backdrop-blur-3xl" onClick={onClose} />
             <div className="relative w-full max-w-6xl luxury-monolith p-12 md:p-24 grid grid-cols-1 lg:grid-cols-2 gap-24 items-center animate-reveal border border-white/10 shadow-3xl bg-black rounded-sm">
-                <button onClick={onClose} className="absolute top-10 right-10 text-white/40 hover:text-white transition-colors z-50">
+                <button onClick={onClose} className="absolute top-8 right-8 text-[var(--milano-bronzo)] hover:text-white transition-colors z-50 flex items-center gap-2 group">
+                    <span className="text-[9px] uppercase tracking-widest opacity-0 group-hover:opacity-100 transition-opacity font-mono">Chiudi</span>
                     <X className="w-8 h-8" />
                 </button>
                 <div className="space-y-16">
@@ -22,9 +23,9 @@ const BrandStoryModal: React.FC<BrandStoryModalProps> = ({ isOpen, onClose }) =>
                         <h2 className="text-6xl md:text-8xl font-display text-white italic leading-tight">Michael Jara</h2>
                         <p className="text-white/40 font-accent text-[11px] leading-relaxed tracking-[1.5em] uppercase pl-1">INSOLITO PRIVÉ</p>
                     </div>
-                    <div className="space-y-10 border-l border-[var(--milano-bronzo)]/20 pl-12">
+                    <div className="space-y-8 border-l border-[var(--milano-bronzo)]/20 pl-8 md:pl-12">
                         {BRAND_STORY.content.map((p, i) => (
-                            <p key={i} className="text-white/80 text-[15px] md:text-base font-light font-display italic leading-relaxed tracking-widest">{p}</p>
+                            <p key={i} className="text-white/90 text-lg md:text-xl font-display italic leading-relaxed tracking-wide first-letter:text-3xl first-letter:text-[var(--milano-bronzo)] first-letter:font-normal">{p}</p>
                         ))}
                     </div>
                     <div className="pt-12">
