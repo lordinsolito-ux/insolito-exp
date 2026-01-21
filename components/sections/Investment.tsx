@@ -62,9 +62,12 @@ const Investment: React.FC<InvestmentProps> = ({ onBookClick }) => {
             <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-3 gap-8 mb-32 relative z-10">
 
                 {/* TIER 1 - ESSENTIALS */}
-                <div className="bg-white/[0.02] border border-white/10 p-8 hover:border-[var(--milano-bronzo)]/30 transition-all duration-500 group">
+                <div className="bg-white/[0.02] border border-white/10 p-8 hover:border-[var(--milano-bronzo)]/30 transition-all duration-500 group relative overflow-hidden">
+                    <div className="absolute top-0 right-0 bg-[var(--milano-bronzo)] text-black text-[9px] font-bold px-3 py-1 uppercase tracking-widest z-10 animate-pulse">
+                        ⚡ First Time -30%
+                    </div>
                     <div className="mb-8">
-                        <span className="inline-block py-1 px-3 bg-white/5 text-[9px] font-mono tracking-widest text-green-400 uppercase rounded-sm mb-4">🌱 Entry Point</span>
+                        <span className="inline-block py-1 px-3 bg-white/5 text-[9px] font-mono tracking-widest text-white/60 uppercase rounded-sm mb-4">Start Here</span>
                         <h3 className="text-3xl font-accent uppercase tracking-wide mb-2">Essentials</h3>
                         <p className="text-[11px] font-mono text-white/40 uppercase tracking-widest leading-relaxed">Per Chi Inizia a Capire Cosa Vuol Dire Non Guidare.</p>
                     </div>
@@ -122,7 +125,7 @@ const Investment: React.FC<InvestmentProps> = ({ onBookClick }) => {
                         Prenota Signature
                     </button>
                     <p className="mt-4 text-[9px] text-center text-white/30 font-mono uppercase tracking-wider">
-                        *Code: FIRSTSILENCE per -€50 <button onClick={onBookClick} className="underline hover:text-white ml-2">Inseriscilo Qui</button>
+                        *Code: FIRSTINSOLITO per -30% <button onClick={onBookClick} className="underline hover:text-white ml-2">Inseriscilo Qui</button>
                     </p>
                 </div>
 
@@ -154,6 +157,40 @@ const Investment: React.FC<InvestmentProps> = ({ onBookClick }) => {
                         Richiedi Elite
                     </button>
                     <p className="mt-4 text-[9px] text-center text-white/30 font-mono uppercase tracking-wider">Disponibili: 7 Slot</p>
+                </div>
+            </div>
+
+            {/* VALUE COMPARISON - ROI ANALYSIS */}
+            <div className="max-w-4xl mx-auto mb-32 relative z-10 border-y border-white/5 bg-white/[0.01] p-12">
+                <div className="flex flex-col md:flex-row items-center justify-between gap-12">
+                    <div className="space-y-6 flex-1 text-center md:text-left">
+                        <h4 className="text-[var(--milano-bronzo)] font-mono text-[10px] tracking-[0.4em] uppercase">Market Reality Check</h4>
+                        <h3 className="text-3xl font-accent uppercase tracking-wide text-white">Perché Insolito<br />costa il doppio?</h3>
+                        <p className="text-white/60 text-sm font-display italic leading-relaxed">
+                            Un NCC standard ti porta da A a B. Noi ti restituiamo il tempo che perdi nel mezzo. Se il tuo tempo vale €200/ora, con noi sei già in profitto.
+                        </p>
+                    </div>
+
+                    <div className="w-full md:w-auto flex-1 bg-black/40 border border-white/5 p-8 space-y-6">
+                        <div className="flex justify-between items-center text-[10px] font-mono uppercase tracking-widest border-b border-white/10 pb-4">
+                            <span className="text-white/40">NCC Standard</span>
+                            <span className="text-white/40">~€80/ora</span>
+                        </div>
+                        <div className="flex justify-between items-center text-[11px] font-mono uppercase tracking-widest pb-2">
+                            <span className="text-[var(--milano-bronzo)] font-bold">INSOLITO Essentials</span>
+                            <span className="text-[var(--milano-bronzo)] font-bold">€180/ora</span>
+                        </div>
+                        <ul className="space-y-2 text-[10px] text-white/60 font-mono uppercase tracking-wider pl-4 border-l border-[var(--milano-bronzo)]/30">
+                            <li>+ Assistenza Logistica</li>
+                            <li>+ Coordinamento Pre-Arrivo</li>
+                            <li>+ Gestione Comunicazioni</li>
+                            <li>+ Puntualità Garantita (-20% rimb)</li>
+                        </ul>
+                        <div className="pt-4 mt-4 border-t border-white/10 text-center">
+                            <p className="text-[9px] text-[var(--milano-bronzo)] uppercase tracking-[0.2em] mb-1">Il tuo ROI</p>
+                            <p className="text-white font-display italic text-sm">"Recuperi ~45 min di stress per servizio"</p>
+                        </div>
+                    </div>
                 </div>
             </div>
 
