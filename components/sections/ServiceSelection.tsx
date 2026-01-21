@@ -16,6 +16,9 @@ const ServiceSelection = forwardRef<HTMLDivElement, ServiceSelectionProps>(({ on
                 <p className="text-white/60 font-display text-xl md:text-2xl leading-relaxed italic pt-6 border-t border-[var(--milano-bronzo)]/20 mt-8">
                     "Non vendiamo passaggi. Creiamo assenze. Scegli come vuoi sparire oggi."
                 </p>
+                <p className="text-[10px] font-mono text-[var(--milano-bronzo)] uppercase tracking-[0.2em] mt-8 opacity-80">
+                    *Tutte le esperienze sono accessibili con i Tier Essentials e Signature.
+                </p>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 pt-12">

@@ -320,9 +320,9 @@ const App: React.FC = () => {
           <main className="bg-transparent relative z-10">
             <NarrativeSpread />
             <TheGuardian onStoryClick={() => setShowBrandStory(true)} />
+            <ServiceSelection ref={servicesRef} onServiceSelect={handleServiceSelect} />
             <AntiLuxury />
             <Investment onBookClick={() => formCardRef.current?.scrollIntoView({ behavior: 'smooth' })} />
-            <ServiceSelection ref={servicesRef} onServiceSelect={handleServiceSelect} />
             <BookingForm
               ref={formCardRef}
               activeStep={activeStep}
