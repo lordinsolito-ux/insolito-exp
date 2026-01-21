@@ -36,14 +36,15 @@ export const StepIndicator: React.FC<StepIndicatorProps> = ({ currentStep }) => 
                 <div
                   className={`
                     w-1 h-1 transition-all duration-1000
-                    ${isActive ? 'bg-white' : 'bg-white/10'}
+                    ${isActive ? 'bg-white' : 'bg-white/5'}
+                    ${isCurrent ? 'scale-[2.5] bg-white' : ''}
                   `}
                 />
 
                 <span className={`
                   absolute top-8 text-[9px] font-accent uppercase tracking-[1em] transition-all duration-1000 whitespace-nowrap
-                  ${isActive ? 'text-white' : 'text-white/10'}
-                  ${isCurrent ? 'opacity-100' : 'opacity-40'}
+                  ${isActive ? 'text-white' : 'text-white/5'}
+                  ${isCurrent ? 'opacity-100 text-white' : 'opacity-20'}
                 `}>
                   {step.label}
                 </span>

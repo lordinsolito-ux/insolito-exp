@@ -11,13 +11,14 @@ import { ServiceType, ServiceTypeId, VehicleType, VehicleTypeId, LocationSuggest
 
 // Elite Service Definitions - INSOLITO EXPERIENCES
 // No public pricing (Bespoke Pricing model)
-export const SERVICE_TYPES: ServiceType[] = [
+export const SERVICE_TYPES: (ServiceType & { image: string })[] = [
   {
     id: ServiceTypeId.CITY_TO_CITY,
     name: 'Luxury Commuting Experience',
     description: 'Long-distance journeys managed with meticulous care. Your travel time becomes productive or regenerative.',
     icon: MapIcon,
-    badge: 'Signature'
+    badge: 'Signature',
+    image: 'https://images.unsplash.com/photo-1544620347-c4fd4a3d5962?q=80&w=2070&auto=format&fit=crop'
   },
   {
     id: ServiceTypeId.AIRPORT_TRANSFER,
@@ -25,27 +26,31 @@ export const SERVICE_TYPES: ServiceType[] = [
     description: 'Eliminiamo ogni attrito al tuo arrivo. Un assistente dedicato gestisce la tua accoglienza e il coordinamento logistico, garantendo una transizione fluida verso la tua destinazione.',
     icon: Plane,
     popular: true,
-    badge: 'Most Requested'
+    badge: 'Most Requested',
+    image: 'https://images.unsplash.com/photo-1436491865332-7a61a109c0f0?q=80&w=2070&auto=format&fit=crop'
   },
   {
     id: ServiceTypeId.HOURLY,
     name: 'Personal Concierge on Demand',
     description: 'Il tuo assistente personale a disposizione per commissioni, incontri d\'affari o shopping tour. Flessibilità totale per adattarsi ai tuoi ritmi.',
     icon: Clock,
+    image: 'https://images.unsplash.com/photo-1441986300917-64674bd600d8?q=80&w=2070&auto=format&fit=crop'
   },
   {
     id: ServiceTypeId.EVENT,
     name: 'Nightlife Guardian',
     description: 'Vivi la notte di Milano e Bergamo senza compromessi. Presidio costante e assistenza dedicata per garantirti un\'esperienza esclusiva e un rientro protetto.',
     icon: GlassWater,
-    badge: 'Elite'
+    badge: 'Elite',
+    image: 'https://images.unsplash.com/photo-1514525253361-9034af3c2242?q=80&w=1974&auto=format&fit=crop'
   },
   {
     id: ServiceTypeId.WEDDING,
     name: 'Bespoke Wedding Concierge',
     description: 'Coordinamento esclusivo per il tuo grande giorno. Ogni dettaglio curato con eleganza e precisione impeccabile.',
     icon: Heart,
-    badge: 'Premium'
+    badge: 'Premium',
+    image: 'https://images.unsplash.com/photo-1519225421980-715cb0215aed?q=80&w=2070&auto=format&fit=crop'
   },
 ];
 
