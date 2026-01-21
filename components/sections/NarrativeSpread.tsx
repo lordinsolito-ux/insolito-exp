@@ -45,16 +45,16 @@ const NarrativeSpread: React.FC = () => {
                     </div>
                 </div>
                 <div className="lg:col-span-12 xl:col-span-7 relative">
-                    {/* TWEAK #1: Cinematic Car Visuals */}
+                    {/* TWEAK #1: Cinematic Car Visuals - TIGHT CROP VARIATION */}
                     <div className="relative aspect-[16/10] overflow-hidden rounded-sm shadow-3xl group transition-all duration-[3000ms] border border-white/5">
                         <img
                             src="/assets/korando_2014.png"
-                            alt="Elite Discretion"
-                            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-[8000ms] ease-out grayscale hover:grayscale-0 brightness-75"
+                            alt="Elite Detail"
+                            className="w-full h-full object-cover scale-[1.6] object-center group-hover:scale-[1.7] transition-transform duration-[8000ms] ease-out grayscale hover:grayscale-0 brightness-75"
                         />
-                        <div className="absolute inset-0 bg-black/60 mix-blend-multiply transition-opacity duration-1000 group-hover:opacity-40"></div>
-                        <div className="absolute inset-0 bg-noise opacity-30 mix-blend-overlay pointer-events-none"></div>
-                        <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-80"></div>
+                        {/* Kept atmospheric layers but focus is now on the crop */}
+                        <div className="absolute inset-0 bg-black/50 mix-blend-multiply pointer-events-none"></div>
+                        <div className="absolute inset-0 bg-noise opacity-20 mix-blend-overlay pointer-events-none"></div>
                     </div>
                 </div>
             </div>
