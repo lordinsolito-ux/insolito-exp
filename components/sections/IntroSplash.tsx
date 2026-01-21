@@ -60,8 +60,13 @@ const IntroSplash: React.FC<IntroSplashProps> = ({ onFinish }) => {
                     <div className="w-20 h-20 rounded-full border border-white/5 flex items-center justify-center group-hover:border-[var(--milano-bronzo)]/30 transition-all duration-1000">
                         <div className="w-1 h-1 bg-white group-hover:bg-[var(--milano-bronzo)] rounded-full transition-all duration-700"></div>
                     </div>
-                    <span className="text-[10px] font-mono text-white/20 tracking-[1em] uppercase group-hover:text-white/40 transition-all">Scomparire.</span>
-                    <span className="absolute -bottom-12 text-[9px] font-display italic text-[var(--milano-bronzo)] animate-pulse tracking-widest">[ Clicca per entrare ]</span>
+                    <span className="text-[10px] font-mono text-[var(--milano-bronzo)]/40 tracking-[1.2rem] uppercase group-hover:text-[var(--milano-bronzo)] transition-all duration-700">Scomparire.</span>
+                    <span className="absolute -bottom-16 text-[10px] font-display italic text-[var(--milano-bronzo)] tracking-[0.2em] px-6 py-2">
+                        <span className="relative z-10">[ Clicca per entrare ]</span>
+                        {/* Shimmer/Glossy Glow Effect */}
+                        <span className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent skew-x-12 -translate-x-full animate-shimmer pointer-events-none"></span>
+                        <span className="absolute inset-0 bg-[var(--milano-bronzo)]/10 blur-xl animate-pulse-slow"></span>
+                    </span>
                 </button>
             )}
 
@@ -81,7 +86,7 @@ const IntroSplash: React.FC<IntroSplashProps> = ({ onFinish }) => {
                     <div className="flex flex-col items-center gap-4">
                         <h1 className="text-6xl md:text-8xl font-accent text-white tracking-[0.4em] mb-4">INSOLITO</h1>
                         <div className="h-px w-24 bg-gradient-to-r from-transparent via-[var(--milano-bronzo)]/30 to-transparent"></div>
-                        <p className="text-[10px] font-mono text-[var(--milano-bronzo)]/50 tracking-[1.5em] uppercase">L'Arte di Scomparire</p>
+                        <p className="text-[10px] font-mono text-[var(--milano-bronzo)] tracking-[1.5em] uppercase drop-shadow-[0_0_8px_rgba(212,175,55,0.3)]">L'Arte di Scomparire</p>
                     </div>
                 </div>
             )}
