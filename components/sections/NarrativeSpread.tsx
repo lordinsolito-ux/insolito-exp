@@ -45,16 +45,17 @@ const NarrativeSpread: React.FC = () => {
                     </div>
                 </div>
                 <div className="lg:col-span-12 xl:col-span-7 relative">
-                    {/* TWEAK #1: Cinematic Car Visuals - TIGHT CROP VARIATION */}
+                    {/* TWEAK #1: Cinematic Car Visuals - PRIVACY EDIT */}
                     <div className="relative aspect-[16/10] overflow-hidden rounded-sm shadow-3xl group transition-all duration-[3000ms] border border-white/5">
                         <img
                             src="/assets/korando_2014.png"
                             alt="Elite Detail"
-                            className="w-full h-full object-cover scale-[1.6] object-center group-hover:scale-[1.7] transition-transform duration-[8000ms] ease-out grayscale hover:grayscale-0 brightness-75"
+                            className="w-full h-full object-cover scale-[1.7] object-center group-hover:scale-[1.8] transition-transform duration-[8000ms] ease-out grayscale brightness-[0.6] contrast-[1.2]"
                         />
-                        {/* Kept atmospheric layers but focus is now on the crop */}
-                        <div className="absolute inset-0 bg-black/50 mix-blend-multiply pointer-events-none"></div>
-                        <div className="absolute inset-0 bg-noise opacity-20 mix-blend-overlay pointer-events-none"></div>
+                        {/* Heavy Privacy Layers */}
+                        <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-black/20 mix-blend-multiply pointer-events-none"></div>
+                        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_transparent_20%,_black_100%)] opacity-80 pointer-events-none"></div>
+                        <div className="absolute inset-0 bg-noise opacity-[0.15] mix-blend-overlay pointer-events-none"></div>
                     </div>
                 </div>
             </div>
