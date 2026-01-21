@@ -2,22 +2,23 @@
 @tailwind components;
 @tailwind utilities;
 
-@layer base {
-  :root {
-    --obsidian: #050505;
-    --graphite: #1A1A1A;
-    --bone: #F2F2F2;
-    --silver: #C0C0C0;
-    --slate: #2A2A2A;
-    --glass-border: rgba(255, 255, 255, 0.05);
-  }
+:root {
+  --perla-dorata: #F9F7F2;
+  --oro-lucido: #C5A059;
+  --oro-scuro: #8C6F3D;
+  --oro-rosa: #D4AF37;
+  --bronzo-profondo: #4A3728;
+  --bianco-puro: #FFFFFF;
+  --perla-riflesso: #FFFDF9;
+}
 
+@layer base {
   * {
-    @apply border-white/5;
+    @apply border-[var(--oro-lucido)]/10;
   }
 
   body {
-    @apply bg-[#050505] text-white antialiased selection:bg-white/10 selection:text-white overflow-x-hidden;
+    @apply bg-[var(--perla-dorata)] text-[var(--bronzo-profondo)] antialiased selection:bg-[var(--oro-lucido)] selection:text-white overflow-x-hidden;
     font-family: 'Montserrat', sans-serif;
   }
 
@@ -32,107 +33,139 @@
 
 @layer components {
 
-  /* EDITORIAL MONOLITH */
+  /* EDITORIAL MONOLITH - LIGHT MODE GOLDEN GLASS */
   .luxury-monolith {
-    @apply backdrop-blur-[64px] bg-[#121212]/80 border border-white/[0.05] relative;
+    @apply backdrop-blur-[40px] bg-white/70 border border-[var(--oro-lucido)]/15 relative overflow-hidden;
     box-shadow:
-      inset 0 0 100px rgba(255, 255, 255, 0.01),
-      0 40px 100px rgba(0, 0, 0, 0.9);
+      0 30px 60px -12px rgba(197, 160, 89, 0.1),
+      0 18px 36px -18px rgba(0, 0, 0, 0.05),
+      inset 0 0 80px rgba(255, 255, 255, 0.5);
   }
 
-  /* MAGAZINE CATALOG SELECTOR */
+  /* MAGAZINE CATALOG SELECTOR - GLOSSY */
   .catalog-selector {
-    @apply relative overflow-hidden bg-[#1A1A1A] border border-white/[0.03] transition-all duration-[800ms] ease-[cubic-bezier(0.2, 0.8, 0.2, 1)];
+    @apply relative overflow-hidden bg-white/40 border border-[var(--oro-lucido)]/10 transition-all duration-[1200ms] ease-[cubic-bezier(0.2, 0.8, 0.2, 1)];
   }
 
   .catalog-selector:hover {
-    @apply border-white/20 bg-[#222222];
-    transform: translateY(-8px) scale(1.01);
+    @apply border-[var(--oro-lucido)]/40 bg-white/80;
+    transform: translateY(-4px) scale(1.005);
+  }
+
+  .card-gloss {
+    @apply relative overflow-hidden;
+  }
+
+  .card-gloss::after {
+    content: '';
+    @apply absolute inset-0 -translate-x-full;
+    background: linear-gradient(90deg,
+        transparent,
+        rgba(255, 255, 255, 0.6),
+        transparent);
+    animation: shimmer 6s infinite;
   }
 
   /* EDITORIAL INPUTS */
   .elite-input {
-    @apply bg-transparent border-b border-white/10 text-white placeholder-white/20 focus:border-white focus:placeholder-transparent transition-all duration-700 outline-none;
+    @apply bg-transparent border-b border-[var(--oro-lucido)]/20 text-[var(--bronzo-profondo)] placeholder-[var(--oro-lucido)]/30 focus:border-[var(--oro-lucido)] focus:placeholder-transparent transition-all duration-700 outline-none;
   }
 
   /* DIVIDERS */
-  .silver-line {
-    @apply h-[0.5px] w-full bg-gradient-to-r from-transparent via-white/20 to-transparent;
+  .gold-line {
+    @apply h-[0.5px] w-full bg-gradient-to-r from-transparent via-[var(--oro-lucido)]/30 to-transparent;
   }
 
   /* MAGAZINE BUTTONS */
   .btn-monumental {
-    @apply relative overflow-hidden bg-white text-black font-accent text-[10px] uppercase tracking-[0.6em] px-20 py-7 transition-all duration-700 hover:tracking-[0.8em] active:scale-95;
-    box-shadow: 0 10px 40px rgba(255, 255, 255, 0.05);
+    @apply relative overflow-hidden bg-[var(--oro-lucido)] text-white font-accent text-[10px] uppercase tracking-[0.6em] px-16 py-6 transition-all duration-700 hover:tracking-[0.8em] active:scale-95 shadow-xl;
+    background: linear-gradient(135deg, #C5A059 0%, #D4AF37 50%, #C5A059 100%);
+    background-size: 200% auto;
   }
 
-  .btn-editorial {
-    @apply border border-white/10 text-white/40 font-accent text-[9px] uppercase tracking-[0.5em] px-12 py-5 transition-all duration-700 hover:border-white hover:text-white;
+  .btn-monumental:hover {
+    background-position: right center;
+    @apply shadow-2xl;
+  }
+
+  .btn-prive {
+    @apply px-10 py-4 border border-[var(--oro-lucido)]/30 text-[var(--oro-lucido)] font-accent text-[9px] uppercase tracking-[0.5em] transition-all duration-700 hover:bg-[var(--oro-lucido)] hover:text-white;
   }
 
   /* EDITORIAL MARKERS */
   .vol-marker {
-    @apply text-[9px] font-accent text-white/10 uppercase tracking-[1.5em] rotate-180 [writing-mode:vertical-rl];
+    @apply text-[9px] font-accent text-[var(--oro-lucido)]/30 uppercase tracking-[1.5em] rotate-180 [writing-mode:vertical-rl];
+  }
+
+  .text-gold {
+    @apply text-[var(--oro-lucido)] bg-clip-text font-display;
+    background: linear-gradient(to bottom, #C5A059, #8C6F3D);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
   }
 }
 
 /* MAGAZINE ANIMATIONS */
-@keyframes editorial-reveal {
-  from {
-    clip-path: inset(0 100% 0 0);
-    opacity: 0;
-    transform: translateX(20px);
+@keyframes shimmer {
+  0% {
+    transform: translateX(-100%);
   }
 
-  to {
-    clip-path: inset(0 0 0 0);
-    opacity: 1;
-    transform: translateX(0);
+  20%,
+  100% {
+    transform: translateX(100%);
   }
 }
 
-.animate-reveal {
-  animation: editorial-reveal 1.5s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+@keyframes editorial-reveal {
+  from {
+    opacity: 0;
+    transform: translateY(30px) scale(0.98);
+    filter: blur(10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    filter: blur(0);
+  }
 }
 
 @keyframes mask-reveal-up {
   from {
     clip-path: inset(100% 0 0 0);
-    opacity: 0;
+    transform: translateY(20px);
   }
 
   to {
     clip-path: inset(0 0 0 0);
-    opacity: 1;
+    transform: translateY(0);
   }
 }
 
+.animate-reveal {
+  animation: editorial-reveal 2s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+}
+
 .animate-mask-up {
-  animation: mask-reveal-up 1.8s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+  animation: mask-reveal-up 2.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
 .bg-noise {
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
-}
-
-/* MASKING EFFECTS */
-.editorial-mask {
-  mask-image: linear-gradient(to bottom, black 80%, transparent 100%);
+  background-image: url("https://www.transparenttextures.com/patterns/asfalt-light.png");
+  @apply opacity-[0.4];
 }
 
 /* SCROLLBAR */
 ::-webkit-scrollbar {
-  width: 3px;
+  width: 4px;
 }
 
 ::-webkit-scrollbar-track {
-  background: #050505;
+  background: var(--perla-dorata);
 }
 
 ::-webkit-scrollbar-thumb {
-  background: rgba(255, 255, 255, 0.05);
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: rgba(255, 255, 255, 0.15);
+  background: var(--oro-lucido);
+  @apply opacity-20 hover:opacity-100;
 }

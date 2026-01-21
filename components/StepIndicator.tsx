@@ -15,16 +15,19 @@ export const StepIndicator: React.FC<StepIndicatorProps> = ({ currentStep }) => 
   const progressPercentage = ((currentStep - 1) / (steps.length - 1)) * 100;
 
   return (
-    <div className="bg-transparent border-b border-white/[0.03] backdrop-blur-3xl">
+    <div className="bg-transparent border-b border-[var(--oro-lucido)]/10 backdrop-blur-3xl">
       <div className="max-w-4xl mx-auto px-12 py-12">
         <div className="flex items-center justify-between relative">
           {/* Architectural Baseline */}
-          <div className="absolute top-1/2 left-0 w-full h-[0.5px] bg-white/5 -translate-y-1/2"></div>
+          <div className="absolute top-1/2 left-0 w-full h-[0.5px] bg-[var(--oro-lucido)]/10 -translate-y-1/2"></div>
 
-          {/* Precision Digital Line */}
+          {/* Precision Liquid Gold Line */}
           <div
-            className="absolute top-1/2 left-0 h-[0.5px] bg-white transition-all duration-1000 ease-in-out"
-            style={{ width: `${progressPercentage}%` }}
+            className="absolute top-1/2 left-0 h-[0.5px] bg-gold-gradient transition-all duration-1000 ease-in-out shadow-[0_0_15px_rgba(197,160,89,0.3)]"
+            style={{
+              width: `${progressPercentage}%`,
+              background: 'linear-gradient(90deg, var(--oro-lucido), var(--oro-rosa))'
+            }}
           />
 
           {steps.map((step) => {
@@ -36,15 +39,15 @@ export const StepIndicator: React.FC<StepIndicatorProps> = ({ currentStep }) => 
                 <div
                   className={`
                     w-1 h-1 transition-all duration-1000
-                    ${isActive ? 'bg-white' : 'bg-white/5'}
-                    ${isCurrent ? 'scale-[2.5] bg-white' : ''}
+                    ${isActive ? 'bg-[var(--oro-lucido)]' : 'bg-[var(--oro-lucido)]/10'}
+                    ${isCurrent ? 'scale-[2.5] bg-[var(--oro-lucido)] shadow-glow-gold' : ''}
                   `}
                 />
 
                 <span className={`
                   absolute top-8 text-[9px] font-accent uppercase tracking-[1em] transition-all duration-1000 whitespace-nowrap
-                  ${isActive ? 'text-white' : 'text-white/5'}
-                  ${isCurrent ? 'opacity-100 text-white' : 'opacity-20'}
+                  ${isActive ? 'text-[var(--oro-lucido)] font-bold' : 'text-[var(--oro-lucido)]/20'}
+                  ${isCurrent ? 'opacity-100 text-[var(--oro-lucido)]' : 'opacity-40'}
                 `}>
                   {step.label}
                 </span>

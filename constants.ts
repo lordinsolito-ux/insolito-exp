@@ -13,43 +13,43 @@ import { ServiceType, ServiceTypeId, VehicleType, VehicleTypeId, LocationSuggest
 // No public pricing (Bespoke Pricing model)
 export const SERVICE_TYPES: (ServiceType & { image: string })[] = [
   {
+    id: ServiceTypeId.AIRPORT_TRANSFER,
+    name: 'Privé Welcome',
+    description: 'L\'esperienza di arrivo ridefinita. Accoglienza prioritaria e coordinamento totale per una transizione fluida verso la tua eccellenza.',
+    icon: Plane,
+    popular: true,
+    badge: 'Elite Entry',
+    image: 'https://images.unsplash.com/photo-1436491865332-7a61a109c0f0?q=80&w=2070&auto=format&fit=crop'
+  },
+  {
     id: ServiceTypeId.CITY_TO_CITY,
-    name: 'Luxury Commuting Experience',
-    description: 'Long-distance journeys managed with meticulous care. Your travel time becomes productive or regenerative.',
+    name: 'Privé Lounge on Road',
+    description: 'Il comfort di un salotto privato in movimento. Trasforma ogni chilometro in un momento di puro relax o produttività riservata.',
     icon: MapIcon,
     badge: 'Signature',
     image: 'https://images.unsplash.com/photo-1544620347-c4fd4a3d5962?q=80&w=2070&auto=format&fit=crop'
   },
   {
-    id: ServiceTypeId.AIRPORT_TRANSFER,
-    name: 'Airport Guest Support',
-    description: 'Eliminiamo ogni attrito al tuo arrivo. Un assistente dedicato gestisce la tua accoglienza e il coordinamento logistico, garantendo una transizione fluida verso la tua destinazione.',
-    icon: Plane,
-    popular: true,
-    badge: 'Most Requested',
-    image: 'https://images.unsplash.com/photo-1436491865332-7a61a109c0f0?q=80&w=2070&auto=format&fit=crop'
-  },
-  {
     id: ServiceTypeId.HOURLY,
-    name: 'Personal Concierge on Demand',
-    description: 'Il tuo assistente personale a disposizione per commissioni, incontri d\'affari o shopping tour. Flessibilità totale per adattarsi ai tuoi ritmi.',
+    name: 'Privé Assistant',
+    description: 'La tua ombra professionale. Un assistente dedicato a disposizione per shopping, meeting e ogni tua commissione più riservata.',
     icon: Clock,
     image: 'https://images.unsplash.com/photo-1441986300917-64674bd600d8?q=80&w=2070&auto=format&fit=crop'
   },
   {
     id: ServiceTypeId.EVENT,
-    name: 'Nightlife Guardian',
-    description: 'Vivi la notte di Milano e Bergamo senza compromessi. Presidio costante e assistenza dedicata per garantirti un\'esperienza esclusiva e un rientro protetto.',
+    name: 'Privé Night',
+    description: 'Il prestigio della notte milanese senza compromessi. Sicurezza millimetrica e accesso esclusivo per vivere la città al massimo.',
     icon: GlassWater,
-    badge: 'Elite',
+    badge: 'Exquisite',
     image: 'https://images.unsplash.com/photo-1514525253361-9034af3c2242?q=80&w=1974&auto=format&fit=crop'
   },
   {
     id: ServiceTypeId.WEDDING,
-    name: 'Bespoke Wedding Concierge',
-    description: 'Coordinamento esclusivo per il tuo grande giorno. Ogni dettaglio curato con eleganza e precisione impeccabile.',
+    name: 'Privé Wedding',
+    description: 'L\'eleganza assoluta per il tuo giorno più prezioso. Cura di ogni dettaglio con una grazia e precisione che restano nel tempo.',
     icon: Heart,
-    badge: 'Premium',
+    badge: 'Prestige',
     image: 'https://images.unsplash.com/photo-1519225421980-715cb0215aed?q=80&w=2070&auto=format&fit=crop'
   },
 ];

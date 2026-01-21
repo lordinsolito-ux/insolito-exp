@@ -90,27 +90,27 @@ const IntroSplash: React.FC<{ onFinish: () => void }> = ({ onFinish }) => {
   };
 
   return (
-    <div className={`fixed inset-0 z-[100] bg-[#0A0A0A] flex flex-col items-center justify-center transition-opacity duration-[2000ms] ${isExiting ? 'opacity-0 pointer-events-none' : 'opacity-100'}`}>
+    <div className={`fixed inset-0 z-[100] bg-[var(--perla-dorata)] flex flex-col items-center justify-center transition-opacity duration-[2000ms] ${isExiting ? 'opacity-0 pointer-events-none' : 'opacity-100'}`}>
       <audio ref={audioRef} src={audioSrc} preload="auto" />
-      <div className="absolute inset-0 bg-noise opacity-[0.05]"></div>
+      <div className="absolute inset-0 bg-noise opacity-[0.2]"></div>
 
-      {/* Magazine Edition Marker */}
-      <div className="absolute top-12 left-12 flex flex-col gap-4 opacity-10 font-accent text-[9px] tracking-[1em] uppercase">
-        <span>Vol. XXIV</span>
-        <span>Issue 01</span>
+      {/* Privé Marker */}
+      <div className="absolute top-12 left-12 flex flex-col gap-4 opacity-20 font-accent text-[9px] tracking-[1.5em] uppercase text-[var(--oro-lucido)]">
+        <span>MEMBERS ONLY</span>
+        <span>ACCESS GRANTED</span>
       </div>
 
       {!playShow && (
         <div className={`flex flex-col items-center transition-all duration-[2000ms] ${showButton ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'}`}>
-          <div className="w-px h-24 bg-gradient-to-b from-transparent via-white/20 to-transparent mb-12"></div>
-          <h1 className="text-6xl md:text-8xl font-display text-white tracking-[0.5em] mb-20 italic opacity-95">
-            INSOLITO
+          <div className="w-px h-24 bg-gradient-to-b from-transparent via-[var(--oro-lucido)]/20 to-transparent mb-12"></div>
+          <h1 className="text-6xl md:text-8xl font-display text-gold tracking-[0.5em] mb-20 italic opacity-95">
+            INSOLITO PRIVÉ
           </h1>
           <button
             onClick={handleEnter}
-            className="group relative px-20 py-7 bg-white text-black transition-all hover:scale-105 active:scale-95"
+            className="btn-monumental"
           >
-            <span className="relative z-10 font-accent tracking-[0.6em] text-[10px] uppercase">
+            <span className="relative z-10">
               {t('hero.cta')}
             </span>
           </button>
@@ -119,19 +119,19 @@ const IntroSplash: React.FC<{ onFinish: () => void }> = ({ onFinish }) => {
 
       {playShow && (
         <div className="relative z-10 flex flex-col items-center text-center px-12 animate-mask-up">
-          <p className="text-white/20 font-accent text-[10px] uppercase tracking-[1.5em] mb-12">Architectural Lifestyle Concierge</p>
+          <p className="text-[var(--oro-lucido)]/40 font-accent text-[10px] uppercase tracking-[1.5em] mb-12">Elite Personal Assistance on Reference</p>
           <div className="max-w-4xl space-y-16">
-            <h2 className="text-4xl md:text-6xl font-display text-white leading-tight tracking-[0.05em] italic">
-              "In un mondo di rumore,<br />
-              <span className="text-white/40">il silenzio è il massimo lusso."</span>
+            <h2 className="text-4xl md:text-6xl font-display text-[var(--bronzo-profondo)] leading-tight tracking-[0.05em] italic">
+              "L'accesso è un privilegio,<br />
+              <span className="text-[var(--oro-lucido)]">la riservatezza è il nostro sigillo."</span>
             </h2>
-            <div className="silver-line max-w-xs mx-auto opacity-30"></div>
+            <div className="gold-line max-w-xs mx-auto opacity-30"></div>
           </div>
-          <h1 className="text-8xl md:text-[14rem] font-display text-white tracking-[0.3em] leading-none mt-32 opacity-95">
+          <h1 className="text-8xl md:text-[14rem] font-display text-gold tracking-[0.3em] leading-none mt-32 opacity-95">
             INSOLITO
           </h1>
-          <span className="text-[11px] font-accent text-white/20 tracking-[2em] uppercase mt-8">
-            {t('hero.subtitle')}
+          <span className="text-[11px] font-accent text-[var(--oro-lucido)]/40 tracking-[2em] uppercase mt-8">
+            PERSONAL LIFESTYLE PRIVÉ
           </span>
         </div>
       )}
@@ -173,27 +173,27 @@ const BrandStoryModal: React.FC<{ isOpen: boolean; onClose: () => void }> = ({ i
 
   return (
     <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 md:p-12">
-      <div className="absolute inset-0 bg-black/95 backdrop-blur-2xl" onClick={onClose} />
+      <div className="absolute inset-0 bg-[var(--perla-dorata)]/95 backdrop-blur-2xl" onClick={onClose} />
 
-      <div className="relative w-full max-w-6xl max-h-full overflow-y-auto luxury-monolith p-12 md:p-24 grid grid-cols-1 lg:grid-cols-2 gap-24 items-center animate-elite-fade border-white/10 shadow-3xl">
-        <button onClick={onClose} className="absolute top-10 right-10 text-white/20 hover:text-white transition-colors">
+      <div className="relative w-full max-w-6xl max-h-full overflow-y-auto luxury-monolith p-12 md:p-24 grid grid-cols-1 lg:grid-cols-2 gap-24 items-center animate-reveal border-[var(--oro-lucido)]/10 shadow-3xl bg-white/90">
+        <button onClick={onClose} className="absolute top-10 right-10 text-[var(--oro-lucido)]/20 hover:text-[var(--oro-lucido)] transition-colors">
           <X className="w-6 h-6" />
         </button>
 
         <div className="space-y-16">
           <div className="space-y-8">
-            <span className="text-white/20 font-accent text-[10px] uppercase tracking-[1.2em] mb-4 block">Founder & Visionary</span>
-            <h2 className="text-6xl md:text-8xl font-display text-white tracking-[0.1em] leading-tight opacity-95">
+            <span className="text-[var(--oro-lucido)]/40 font-accent text-[10px] uppercase tracking-[1.2em] mb-4 block">Founder & Visionary</span>
+            <h2 className="text-6xl md:text-8xl font-display text-gold tracking-[0.1em] leading-tight opacity-95">
               Michael Jara
             </h2>
-            <p className="text-white/40 font-accent text-[11px] leading-relaxed tracking-[1.5em] uppercase pl-1">
-              Architect of Experiences
+            <p className="text-[var(--oro-lucido)] font-accent text-[11px] leading-relaxed tracking-[1.5em] uppercase pl-1">
+              INSOLITO PRIVÉ
             </p>
           </div>
 
-          <div className="space-y-10 border-l border-white/5 pl-12">
+          <div className="space-y-10 border-l border-[var(--oro-lucido)]/10 pl-12">
             {BRAND_STORY.content.map((p, i) => (
-              <p key={i} className="text-white/60 text-[15px] md:text-base font-light font-display italic leading-relaxed tracking-widest">
+              <p key={i} className="text-[var(--bronzo-profondo)] text-[15px] md:text-base font-light font-display italic leading-relaxed tracking-widest">
                 {p}
               </p>
             ))}
@@ -201,22 +201,21 @@ const BrandStoryModal: React.FC<{ isOpen: boolean; onClose: () => void }> = ({ i
 
           <div className="pt-12">
             <div className="flex items-center gap-12">
-              <div className="h-[0.5px] w-24 bg-white/10"></div>
-              <span className="text-[10px] text-white/20 font-accent uppercase tracking-[1em]">Signature of Excellence</span>
+              <div className="h-[0.5px] w-24 bg-[var(--oro-lucido)]/20"></div>
+              <span className="text-[10px] text-[var(--oro-lucido)]/40 font-accent uppercase tracking-[1em]">L'Eccellenza della Riservatezza</span>
             </div>
           </div>
         </div>
 
         <div className="relative group hidden lg:block overflow-hidden">
-          <div className="aspect-[4/6] rounded-sm overflow-hidden border border-white/5 relative bg-white/[0.02] grayscale contrast-125">
+          <div className="aspect-[4/6] rounded-sm overflow-hidden border border-[var(--oro-lucido)]/10 relative bg-white/[0.02] grayscale contrast-125">
             <img
               src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=1974&auto=format&fit=crop"
               alt="Michael Jara"
-              className="w-full h-full object-cover opacity-60 group-hover:scale-105 transition-transform duration-[6000ms] ease-out"
+              className="w-full h-full object-cover opacity-60 group-hover:scale-105 transition-transform duration-[6000ms] ease-out group-hover:grayscale-0"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-80"></div>
             <div className="absolute inset-x-0 bottom-16 px-16 text-center">
-              <blockquote className="text-white font-display text-3xl italic leading-tight tracking-wide opacity-90 drop-shadow-2xl">
+              <blockquote className="text-[var(--bronzo-profondo)] font-display text-3xl italic leading-tight tracking-wide opacity-90">
                 "{BRAND_STORY.quote}"
               </blockquote>
             </div>
@@ -231,50 +230,49 @@ const BrandStoryModal: React.FC<{ isOpen: boolean; onClose: () => void }> = ({ i
 const NarrativeSpread: React.FC = () => {
   const { t } = useTranslation();
   return (
-    <section className="py-48 px-6 md:px-16 space-y-48 bg-[#0A0A0A] relative z-20">
+    <section className="py-48 px-6 md:px-16 space-y-48 bg-transparent relative z-20">
       {/* Spread 1: The Vision */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-24 items-center max-w-7xl mx-auto">
         <div className="space-y-12 animate-reveal">
-          <span className="text-white/20 font-accent text-[10px] uppercase tracking-[1em]">The Visionary Chapter</span>
-          <h2 className="text-5xl md:text-7xl font-display text-white italic leading-tight tracking-wide">
-            L'Architettura<br />del Servizio.
+          <span className="text-[var(--oro-lucido)]/40 font-accent text-[10px] uppercase tracking-[1em]">The Privé Chapter</span>
+          <h2 className="text-5xl md:text-7xl font-display text-[var(--bronzo-profondo)] italic leading-tight tracking-wide">
+            L'Arte di<br /><span className="text-gold">Essere Altrove.</span>
           </h2>
-          <p className="text-white/40 font-display text-xl md:text-2xl leading-relaxed italic max-w-xl">
-            "Non trasportiamo persone. Gestiamo il bene più prezioso dei nostri ospiti: il loro tempo."
+          <p className="text-[var(--bronzo-profondo)] font-display text-xl md:text-2xl leading-relaxed italic max-w-xl">
+            "Non offriamo solo logistica. Gestiamo l'accesso riservato ai tuoi momenti più importanti."
           </p>
-          <div className="w-12 h-[0.5px] bg-white/20"></div>
+          <div className="gold-line w-24"></div>
         </div>
-        <div className="relative aspect-[4/5] overflow-hidden rounded-sm grayscale group">
+        <div className="relative aspect-[4/5] overflow-hidden rounded-sm grayscale group hover:grayscale-0 transition-all duration-[2000ms]">
           <img
             src="https://images.unsplash.com/photo-1511216173030-66221a194af0?q=80&w=1974&auto=format&fit=crop"
-            alt="Luxury Architecture"
-            className="w-full h-full object-cover opacity-60 group-hover:scale-105 transition-transform duration-[4000ms]"
+            alt="Luxury Lifestyle"
+            className="w-full h-full object-cover opacity-80 group-hover:scale-105 transition-transform duration-[4000ms]"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-[#0A0A0A] via-transparent to-transparent"></div>
         </div>
       </div>
 
       {/* Spread 2: What We Do */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 max-w-7xl mx-auto">
         <div className="lg:col-span-4 order-2 lg:order-1">
-          <div className="aspect-[3/4] overflow-hidden rounded-sm grayscale contrast-125">
+          <div className="aspect-[3/4] overflow-hidden rounded-sm grayscale group-hover:grayscale-0 transition-all duration-[2000ms] border border-[var(--oro-lucido)]/10">
             <img
               src="https://images.unsplash.com/photo-1449130015084-2d48a3a5ee63?q=80&w=1974&auto=format&fit=crop"
-              alt="Milano Architecture"
-              className="w-full h-full object-cover opacity-50"
+              alt="Milano Excellence"
+              className="w-full h-full object-cover opacity-80"
             />
           </div>
         </div>
         <div className="lg:col-span-8 flex flex-col justify-center space-y-16 lg:pl-24 order-1 lg:order-2">
-          <h3 className="text-4xl md:text-5xl font-display text-white tracking-[0.1em] uppercase">Private Concierge & Elite Handling</h3>
+          <h3 className="text-4xl md:text-5xl font-display text-[var(--bronzo-profondo)] tracking-[0.1em] uppercase">Riservatezza & Cura d'Élite</h3>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
-            <div className="space-y-4 border-l border-white/10 pl-8">
-              <h4 className="text-white/80 font-accent text-[11px] uppercase tracking-[0.5em]">Executive Comfort</h4>
-              <p className="text-white/30 text-sm leading-relaxed">Trasferimenti in totale privacy, gestiti con precisione architettonica attraverso le vie più esclusive di Milano.</p>
+            <div className="space-y-4 border-l border-[var(--oro-lucido)]/20 pl-8">
+              <h4 className="text-[var(--oro-lucido)] font-accent text-[11px] uppercase tracking-[0.5em]">Executive Lifestyle</h4>
+              <p className="text-[var(--bronzo-profondo)]/60 text-sm leading-relaxed italic">Ogni dettaglio è pianificato per garantirti una presenza impeccabile, senza rumore e con la massima discrezione.</p>
             </div>
-            <div className="space-y-4 border-l border-white/10 pl-8">
-              <h4 className="text-white/80 font-accent text-[11px] uppercase tracking-[0.5em]">Global Support</h4>
-              <p className="text-white/30 text-sm leading-relaxed">Assistenza ospiti internazionali e gestione logistica di eventi privati di alto profilo.</p>
+            <div className="space-y-4 border-l border-[var(--oro-lucido)]/20 pl-8">
+              <h4 className="text-[var(--oro-lucido)] font-accent text-[11px] uppercase tracking-[0.5em]">Personal Support</h4>
+              <p className="text-[var(--bronzo-profondo)]/60 text-sm leading-relaxed italic">Dall'accoglienza aeroportuale alla gestione di appuntamenti delicati, siamo il tuo sigillo di professionalità a Milano.</p>
             </div>
           </div>
         </div>
@@ -515,67 +513,66 @@ const App: React.FC = () => {
       {isBookingConfirmed ? (
         <BookingConfirmation formData={formData} onReset={handleResetApp} />
       ) : (
-        <div className={`min-h-screen bg-[#030303] text-pearl font-sans relative overflow-x-hidden transition-opacity duration-[2000ms] ${showIntro ? 'opacity-0' : 'opacity-100'}`} ref={containerRef}>
-          {/* CINEMATIC DYNAMIC BACKGROUND */}
+        <div className={`min-h-screen bg-[var(--perla-dorata)] text-[var(--bronzo-profondo)] font-sans relative overflow-x-hidden transition-opacity duration-[2000ms] ${showIntro ? 'opacity-0' : 'opacity-100'}`} ref={containerRef}>
+          {/* CINEMATIC RADIANT BACKGROUND */}
           <div className="fixed inset-0 z-0 pointer-events-none overflow-hidden">
-            <div className="absolute inset-0 bg-[#030303]"></div>
+            <div className="absolute inset-0 bg-[var(--perla-dorata)]"></div>
 
-            {/* VIBRANT LIGHT LAYERS */}
-            <div className="absolute top-[-20%] right-[-10%] w-[70vw] h-[70vw] aura-bloom opacity-[0.07] animate-pulse-slow"></div>
-            <div className="absolute bottom-[-10%] left-[-10%] w-[60vw] h-[60vw] aura-bloom opacity-[0.04] animate-pulse-slow" style={{ background: 'radial-gradient(circle, var(--champagne), transparent 70%)' }}></div>
+            {/* VIBRANT GOLD LAYERS */}
+            <div className="absolute top-[-20%] right-[-10%] w-[70vw] h-[70vw] opacity-[0.1] animate-pulse-slow" style={{ background: 'radial-gradient(circle, var(--oro-lucido), transparent 70%)' }}></div>
+            <div className="absolute bottom-[-10%] left-[-10%] w-[60vw] h-[60vw] opacity-[0.05] animate-pulse-slow" style={{ background: 'radial-gradient(circle, var(--oro-rosa), transparent 70%)' }}></div>
 
-            {/* REFINED GRAIN & LEAKS */}
-            <div className="absolute inset-0 bg-noise opacity-[0.03]"></div>
-
-            <img src="https://img.freepik.com/free-photo/reflective-photography-string-lights-river_413556-2.jpg?semt=ais_hybrid&amp;w=740&amp;q=80" alt="Milan" className="absolute inset-0 w-full h-full object-cover opacity-[0.03] grayscale mix-blend-soft-light" />
-            <div className="absolute inset-0 bg-gradient-to-b from-[#050505] via-transparent to-[#050505]"></div>
+            {/* REFINED GRAIN */}
+            <div className="absolute inset-0 bg-noise opacity-[0.15]"></div>
+            <div className="absolute inset-0 bg-gradient-to-b from-white/20 via-transparent to-white/20"></div>
           </div>
 
-          <header className="relative min-h-screen flex flex-col justify-center items-center overflow-hidden bg-[#0A0A0A]">
-            <div className="absolute inset-0 bg-noise opacity-[0.04]"></div>
+          <header className="relative min-h-screen flex flex-col justify-center items-center overflow-hidden bg-transparent">
+            {/* Glossy Overlay */}
+            <div className="absolute inset-0 bg-gradient-to-tr from-[var(--oro-lucido)]/5 via-transparent to-white/40 pointer-events-none"></div>
 
             {/* Magazine Cover Navigation */}
             <div className="flex items-center justify-between px-16 absolute top-12 left-0 w-full z-20">
               <div className="flex items-center gap-6 group cursor-pointer" onClick={() => setShowAdminLogin(true)}>
-                <div className="w-8 h-8 rounded-full border border-white/10 flex items-center justify-center group-hover:border-white transition-all duration-700">
-                  <Crown className="w-3 h-3 text-white/30 group-hover:text-white" strokeWidth={1} />
+                <div className="w-8 h-8 rounded-full border border-[var(--oro-lucido)]/20 flex items-center justify-center group-hover:border-[var(--oro-lucido)] transition-all duration-700">
+                  <Crown className="w-3 h-3 text-[var(--oro-lucido)]/40 group-hover:text-[var(--oro-lucido)]" strokeWidth={1} />
                 </div>
-                <span className="text-[10px] text-white/20 uppercase tracking-[1em] group-hover:text-white transition-all duration-700 font-accent">Index</span>
+                <span className="text-[10px] text-[var(--oro-lucido)]/40 uppercase tracking-[1em] group-hover:text-[var(--oro-lucido)] transition-all duration-700 font-accent">Privé Index</span>
               </div>
               <div className="flex items-center gap-16">
-                <button onClick={() => setShowHistory(true)} className="text-white/30 hover:text-white border-b border-white/10 hover:border-white transition-all duration-700 text-[10px] uppercase tracking-[0.6em] font-accent pb-1">Archive</button>
+                <button onClick={() => setShowHistory(true)} className="text-[var(--oro-lucido)]/40 hover:text-[var(--oro-lucido)] border-b border-[var(--oro-lucido)]/10 hover:border-[var(--oro-lucido)] transition-all duration-700 text-[10px] uppercase tracking-[0.6em] font-accent pb-1">Archive</button>
                 <LanguageSwitcher />
               </div>
             </div>
 
             {/* Vertical Editorial Markers */}
-            <div className="absolute right-12 top-1/2 -translate-y-1/2 flex flex-col gap-20 opacity-20">
-              <span className="vol-marker">Vol. XXIV</span>
-              <div className="w-px h-32 bg-white/40 mx-auto"></div>
-              <span className="vol-marker">ISS. 01</span>
+            <div className="absolute right-12 top-1/2 -translate-y-1/2 flex flex-col gap-20 opacity-30">
+              <span className="vol-marker">MEMBERS ONLY</span>
+              <div className="w-px h-32 bg-[var(--oro-lucido)]/20 mx-auto"></div>
+              <span className="vol-marker">ACCESS GRANTED</span>
             </div>
 
             {/* Main Cover Title */}
             <div className="relative text-center z-10 space-y-12 animate-mask-up">
-              <p className="text-[10px] font-accent text-white/30 tracking-[2em] uppercase mb-8 ml-[2em]">The Editorial of Excess</p>
+              <p className="text-[10px] font-accent text-[var(--oro-lucido)]/30 tracking-[2em] uppercase mb-8 ml-[2em]">The Excellence of Privacy</p>
               <div className="relative group">
-                <h1 className="text-9xl md:text-[16rem] font-display text-white tracking-[0.2em] leading-none opacity-95 group-hover:tracking-[0.25em] transition-all duration-[2000ms] cursor-default">
+                <h1 className="text-8xl md:text-[14rem] font-display text-gold tracking-[0.25em] leading-none group-hover:tracking-[0.3em] transition-all duration-[2000ms] cursor-default">
                   INSOLITO
+                  <span className="block text-4xl md:text-6xl tracking-[1.5em] mt-8 opacity-60">PRIVÉ</span>
                 </h1>
-                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full bg-white/5 blur-[120px] rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-[3000ms] pointer-events-none"></div>
               </div>
               <div className="max-w-2xl mx-auto space-y-8 pt-12">
-                <p className="text-[12px] md:text-sm font-accent text-white/40 tracking-[1.2em] uppercase leading-relaxed">
-                  Private Concierge <span className="text-white/10 px-4">|</span> Elite Management <span className="text-white/10 px-4">|</span> Architectural Experiences
+                <p className="text-[12px] md:text-sm font-accent text-[var(--oro-lucido)]/40 tracking-[1.2em] uppercase leading-relaxed">
+                  Elite Assistance <span className="text-[var(--oro-lucido)]/10 px-4">|</span> Personal Concierge <span className="text-[var(--oro-lucido)]/10 px-4">|</span> Reserved Luxury
                 </p>
-                <div className="w-16 h-[0.5px] bg-white/20 mx-auto mt-12"></div>
+                <div className="gold-line max-w-xs mx-auto mt-12 opacity-50"></div>
               </div>
             </div>
 
             {/* Scroll Hint */}
-            <div className="absolute bottom-16 left-1/2 -translate-x-1/2 flex flex-col items-center gap-6 animate-bounce opacity-25">
-              <span className="text-[9px] font-accent tracking-[1em] uppercase vertical-text">Scroll to Browse</span>
-              <div className="w-px h-12 bg-white"></div>
+            <div className="absolute bottom-16 left-1/2 -translate-x-1/2 flex flex-col items-center gap-6 animate-bounce opacity-40">
+              <span className="text-[9px] font-accent text-[var(--oro-lucido)] tracking-[1em] uppercase vertical-text">Enter the Vitrine</span>
+              <div className="w-px h-12 bg-[var(--oro-lucido)]"></div>
             </div>
           </header>
 
@@ -591,10 +588,10 @@ const App: React.FC = () => {
                   {activeStep === 1 && (
                     <div className="animate-reveal space-y-24">
                       <div className="space-y-6 text-center max-w-2xl mx-auto">
-                        <span className="text-[10px] text-white/20 font-accent uppercase tracking-[1.5em] mb-4 block">The Collection</span>
-                        <h3 className="text-6xl md:text-8xl font-display text-white tracking-[0.1em] lowercase italic">Seleziona.</h3>
-                        <p className="text-white/40 font-display text-xl md:text-2xl leading-relaxed italic pt-6 px-12 border-t border-white/5 mt-12">
-                          "Curiamo ogni dettaglio per trasformare il tuo viaggio in un’opera di design."
+                        <span className="text-[10px] text-[var(--oro-lucido)]/40 font-accent uppercase tracking-[1.5em] mb-4 block">The Selection</span>
+                        <h3 className="text-6xl md:text-8xl font-display text-[var(--bronzo-profondo)] tracking-[0.1em] lowercase italic">Seleziona.</h3>
+                        <p className="text-[var(--bronzo-profondo)]/60 font-display text-xl md:text-2xl leading-relaxed italic pt-6 px-12 border-t border-[var(--oro-lucido)]/10 mt-12">
+                          "Costruiamo l'accesso riservato ai tuoi desideri, con una cura che non lascia spazio all'incertezza."
                         </p>
                       </div>
 
@@ -603,29 +600,29 @@ const App: React.FC = () => {
                           <button
                             key={service.id}
                             onClick={() => handleServiceSelect(service.id)}
-                            className="group catalog-selector flex flex-col md:flex-row items-center gap-0 overflow-hidden text-left"
+                            className="group catalog-selector flex flex-col md:flex-row items-center gap-0 overflow-hidden text-left bg-white/40 border border-[var(--oro-lucido)]/5"
                           >
                             <div className="w-full md:w-2/5 aspect-[16/9] md:aspect-[4/3] relative overflow-hidden grayscale group-hover:grayscale-0 transition-all duration-[2000ms]">
-                              <img src={service.image} alt={service.name} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-[4000ms] opacity-60 group-hover:opacity-100" />
-                              <div className="absolute inset-0 bg-gradient-to-r from-[#1A1A1A] via-transparent to-transparent opacity-60"></div>
+                              <img src={service.image} alt={service.name} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-[4000ms] opacity-80 group-hover:opacity-100" />
+                              <div className="absolute inset-0 bg-gradient-to-r from-white via-transparent to-transparent opacity-40"></div>
                             </div>
 
                             <div className="w-full md:w-3/5 p-12 md:p-16 flex flex-col justify-center space-y-8">
                               <div className="flex items-center gap-6">
-                                <div className="h-[0.5px] w-8 bg-white/20 group-hover:w-16 transition-all duration-700"></div>
-                                <span className="text-[9px] font-accent text-white/20 uppercase tracking-[1em]">{service.badge || 'Archive'}</span>
+                                <div className="h-[0.5px] w-8 bg-[var(--oro-lucido)]/30 group-hover:w-16 transition-all duration-700"></div>
+                                <span className="text-[9px] font-accent text-[var(--oro-lucido)] uppercase tracking-[1em]">{service.badge || 'Privé'}</span>
                               </div>
                               <div className="space-y-4">
-                                <h4 className="font-display text-4xl md:text-5xl text-white tracking-[0.05em] leading-tight group-hover:translate-x-4 transition-transform duration-700">
+                                <h4 className="font-display text-4xl md:text-5xl text-[var(--bronzo-profondo)] tracking-[0.05em] leading-tight group-hover:translate-x-4 transition-transform duration-700">
                                   {service.name}
                                 </h4>
-                                <p className="text-[13px] text-white/40 font-display italic leading-relaxed max-w-md tracking-wide">
-                                  {t(`services.desc_${service.id}`)}
+                                <p className="text-[13px] text-[var(--bronzo-profondo)]/60 font-display italic leading-relaxed max-w-md tracking-wide">
+                                  {service.description}
                                 </p>
                               </div>
                               <div className="flex items-center gap-4 pt-4 opacity-0 group-hover:opacity-100 transition-opacity duration-1000">
-                                <span className="text-[10px] text-white font-accent uppercase tracking-[0.6em]">Inquire for availability</span>
-                                <ArrowRight className="w-4 h-4 text-white" />
+                                <span className="text-[10px] text-[var(--oro-lucido)] font-accent uppercase tracking-[0.6em]">Request Reserved Access</span>
+                                <ArrowRight className="w-4 h-4 text-[var(--oro-lucido)]" />
                               </div>
                             </div>
                           </button>
@@ -635,25 +632,25 @@ const App: React.FC = () => {
                   )}
 
                   {activeStep === 2 && (
-                    <div className="animate-fade-in space-y-20">
+                    <div className="animate-reveal space-y-20">
                       <div className="space-y-6">
-                        <h3 className="text-5xl md:text-6xl font-display text-white tracking-widest italic">Experience Details</h3>
-                        <div className="silver-line"></div>
+                        <h3 className="text-5xl md:text-6xl font-display text-[var(--bronzo-profondo)] tracking-widest italic">{t('booking.details')}</h3>
+                        <div className="gold-line"></div>
                       </div>
 
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-16">
                         <div className="space-y-12">
-                          <h4 className="text-[9px] font-accent text-white/20 uppercase tracking-[1em] mb-4">Itinerary</h4>
+                          <h4 className="text-[9px] font-accent text-[var(--oro-lucido)]/40 uppercase tracking-[1em] mb-4">Itinerary</h4>
                           <div className="space-y-6">
                             <input type="text" value={formData.pickupLocation} onChange={(e) => handleLocationSearch('pickup', e.target.value)} onBlur={handleInputBlur} placeholder={t('booking.pickup')} className="w-full px-8 py-6 elite-input text-[11px] tracking-widest uppercase" />
                             <input type="text" value={formData.destination} onChange={(e) => handleLocationSearch('destination', e.target.value)} onBlur={handleInputBlur} placeholder={t('booking.destination')} className="w-full px-8 py-6 elite-input text-[11px] tracking-widest uppercase" />
                           </div>
                         </div>
                         <div className="space-y-12">
-                          <h4 className="text-[9px] font-accent text-white/20 uppercase tracking-[1em] mb-4">Precision Schedule</h4>
+                          <h4 className="text-[9px] font-accent text-[var(--oro-lucido)]/40 uppercase tracking-[1em] mb-4">Reserved Schedule</h4>
                           <div className="space-y-6">
-                            <input type="date" name="date" value={formData.date} onChange={handleInputChange} min={new Date().toISOString().split('T')[0]} className="w-full px-8 py-6 elite-input text-[11px] tracking-widest" style={{ colorScheme: 'dark' }} />
-                            <select name="time" value={formData.time} onChange={handleInputChange} disabled={!formData.date} className="w-full px-8 py-6 elite-input text-[11px] tracking-widest uppercase appearance-none">
+                            <input type="date" name="date" value={formData.date} onChange={handleInputChange} min={new Date().toISOString().split('T')[0]} className="w-full px-8 py-6 elite-input text-[11px] tracking-widest" style={{ colorScheme: 'light' }} />
+                            <select name="time" value={formData.time} onChange={handleInputChange} disabled={!formData.date} className="w-full px-8 py-6 elite-input text-[11px] tracking-widest uppercase appearance-none bg-white/10">
                               <option value="">{t('booking.time')}</option>
                               {availableSlots.map(s => <option key={s} value={s}>{s} {isNightService(s) ? '(Night)' : ''}</option>)}
                             </select>
@@ -664,10 +661,10 @@ const App: React.FC = () => {
                   )}
 
                   {activeStep === 3 && (
-                    <div className="animate-fade-in space-y-20">
+                    <div className="animate-reveal space-y-20">
                       <div className="space-y-6">
-                        <h3 className="text-5xl md:text-6xl font-display text-white tracking-widest italic">{t('booking.guest_info')}</h3>
-                        <div className="silver-line"></div>
+                        <h3 className="text-5xl md:text-6xl font-display text-[var(--bronzo-profondo)] tracking-widest italic">{t('booking.guest_info')}</h3>
+                        <div className="gold-line"></div>
                       </div>
 
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-16">
@@ -675,17 +672,17 @@ const App: React.FC = () => {
                           <input type="text" name="name" value={formData.name} onChange={handleInputChange} placeholder={t('booking.name')} className="w-full px-8 py-6 elite-input text-[11px] tracking-widest uppercase" />
                           <input type="email" name="email" value={formData.email} onChange={handleInputChange} placeholder={t('booking.email')} className="w-full px-8 py-6 elite-input text-[11px] tracking-widest" />
                           <div className="flex gap-4">
-                            <select name="countryCode" value={formData.countryCode} onChange={handleInputChange} className="w-32 px-4 py-6 elite-input text-[11px]">
+                            <select name="countryCode" value={formData.countryCode} onChange={handleInputChange} className="w-32 px-4 py-6 elite-input text-[11px] bg-white/10">
                               {COUNTRY_CODES.map(c => <option key={c.code} value={c.code}>{c.code}</option>)}
                             </select>
                             <input type="tel" name="phone" value={formData.phone} onChange={handleInputChange} placeholder={t('booking.phone')} className="flex-1 px-8 py-6 elite-input text-[11px] tracking-widest" />
                           </div>
                         </div>
                         <div className="space-y-12">
-                          <h4 className="text-[9px] font-accent text-white/20 uppercase tracking-[1em] mb-4">Settlement</h4>
+                          <h4 className="text-[9px] font-accent text-[var(--oro-lucido)]/40 uppercase tracking-[1em] mb-4">Reserved Settlement</h4>
                           <div className="grid grid-cols-2 gap-4">
                             {['cash', 'pos'].map(m => (
-                              <button key={m} onClick={() => setFormData(p => ({ ...p, paymentMethod: m as any }))} className={`py-6 border text-[9px] uppercase tracking-[0.4em] transition-all ${formData.paymentMethod === m ? 'border-white text-white' : 'border-white/5 text-white/20'}`}>
+                              <button key={m} onClick={() => setFormData(p => ({ ...p, paymentMethod: m as any }))} className={`py-6 border text-[9px] uppercase tracking-[0.4em] transition-all ${formData.paymentMethod === m ? 'border-[var(--oro-lucido)] text-[var(--oro-lucido)] bg-[var(--oro-lucido)]/5 font-bold' : 'border-[var(--oro-lucido)]/10 text-[var(--oro-lucido)]/40 hover:border-[var(--oro-lucido)]/30'}`}>
                                 {m}
                               </button>
                             ))}
@@ -696,31 +693,31 @@ const App: React.FC = () => {
                   )}
 
                   {activeStep === 4 && (
-                    <div className="animate-fade-in space-y-20 text-center">
+                    <div className="animate-reveal space-y-20 text-center">
                       <div className="space-y-8">
-                        <Star className="w-12 h-12 text-white/20 mx-auto" strokeWidth={0.5} />
-                        <h3 className="text-5xl font-display text-white uppercase tracking-[0.3em] italic">{t('booking.step4_title')}</h3>
+                        <Star className="w-12 h-12 text-[var(--oro-lucido)]/30 mx-auto" strokeWidth={0.5} />
+                        <h3 className="text-5xl font-display text-[var(--bronzo-profondo)] uppercase tracking-[0.3em] italic">{t('booking.step4_title')}</h3>
                       </div>
 
-                      <div className="max-w-xl mx-auto space-y-12 py-12 border-y border-white/5 font-display">
-                        <div className="flex justify-between items-center text-white/40 uppercase tracking-widest text-[10px]">
-                          <span>Guest</span>
-                          <span className="text-white text-xl">{formData.name}</span>
+                      <div className="max-w-xl mx-auto space-y-12 py-12 border-y border-[var(--oro-lucido)]/10 font-display">
+                        <div className="flex justify-between items-center text-[var(--oro-lucido)]/60 uppercase tracking-widest text-[10px]">
+                          <span>Guest Member</span>
+                          <span className="text-[var(--bronzo-profondo)] text-xl font-accent">{formData.name}</span>
                         </div>
-                        <div className="flex justify-between items-center text-white/40 uppercase tracking-widest text-[10px]">
-                          <span>Experience</span>
-                          <span className="text-white text-xl tracking-widest">{SERVICE_TYPES.find(s => s.id === formData.serviceType)?.name}</span>
+                        <div className="flex justify-between items-center text-[var(--oro-lucido)]/60 uppercase tracking-widest text-[10px]">
+                          <span>Reserved Experience</span>
+                          <span className="text-[var(--bronzo-profondo)] text-xl tracking-widest uppercase font-accent">{SERVICE_TYPES.find(s => s.id === formData.serviceType)?.name}</span>
                         </div>
                         <div className="flex justify-between items-end pt-12">
-                          <span className="text-white/20 text-[10px] uppercase tracking-[1em]">Estimated Total</span>
-                          <span className="text-7xl text-white">€{formData.estimatedPrice}</span>
+                          <span className="text-[var(--oro-lucido)]/30 text-[10px] uppercase tracking-[1em]">Estimated Excellence</span>
+                          <span className="text-7xl text-gold">€{formData.estimatedPrice}</span>
                         </div>
                       </div>
 
                       <div className="flex items-center justify-center gap-6">
-                        <input type="checkbox" id="terms" checked={termsAccepted} onChange={e => setTermsAccepted(e.target.checked)} className="w-4 h-4 rounded-none border-white/20 bg-transparent text-white focus:ring-0" />
-                        <label htmlFor="terms" className="text-[10px] text-white/30 font-accent tracking-widest uppercase">
-                          {t('booking.terms_agree')} <button onClick={() => setShowTerms(true)} className="text-white hover:underline transition-colors">{t('booking.terms_link')}</button>
+                        <input type="checkbox" id="terms" checked={termsAccepted} onChange={e => setTermsAccepted(e.target.checked)} className="w-4 h-4 rounded-none border-[var(--oro-lucido)]/20 bg-transparent text-[var(--oro-lucido)] focus:ring-0" />
+                        <label htmlFor="terms" className="text-[10px] text-[var(--bronzo-profondo)]/40 font-accent tracking-widest uppercase">
+                          {t('booking.terms_agree')} <button onClick={() => setShowTerms(true)} className="text-[var(--oro-lucido)] hover:underline transition-colors">{t('booking.terms_link')}</button>
                         </label>
                       </div>
                     </div>
@@ -728,16 +725,16 @@ const App: React.FC = () => {
                 </div>
 
                 {/* ACTION BAR */}
-                <div className="p-12 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-8">
-                  <button onClick={handlePrevStep} disabled={activeStep === 1} className={`text-[9px] uppercase tracking-[0.5em] text-white/20 hover:text-white transition-all ${activeStep === 1 ? 'opacity-0' : 'opacity-100'}`}>
-                    Retrace Steps
+                <div className="p-12 border-t border-[var(--oro-lucido)]/5 flex flex-col md:flex-row justify-between items-center gap-8 bg-white/30">
+                  <button onClick={handlePrevStep} disabled={activeStep === 1} className={`text-[9px] uppercase tracking-[0.5em] text-[var(--oro-lucido)]/40 hover:text-[var(--oro-lucido)] transition-all ${activeStep === 1 ? 'opacity-0' : 'opacity-100'}`}>
+                    Torna Indietro
                   </button>
                   <div className="flex gap-4">
                     {activeStep < 4 ? (
-                      <button onClick={handleNextStep} className="btn-monumental">Continue</button>
+                      <button onClick={handleNextStep} className="btn-monumental">Prosegui</button>
                     ) : (
                       <button onClick={handleSubmit} disabled={isLoading || !termsAccepted} className="btn-monumental disabled:opacity-20">
-                        {isLoading ? <Loader2 className="animate-spin w-4 h-4" /> : "Request Assistance"}
+                        {isLoading ? <Loader2 className="animate-spin w-4 h-4" /> : "Richiedi Accesso Privé"}
                       </button>
                     )}
                   </div>
@@ -746,31 +743,52 @@ const App: React.FC = () => {
             </div>
           </main>
 
-          <footer className="py-48 text-center border-t border-white/[0.03] mt-24">
-            <div className="max-w-4xl mx-auto px-16 space-y-32">
+          <footer className="py-48 text-center border-t border-[var(--oro-lucido)]/10 mt-24 bg-white/30">
+            <div className="max-w-6xl mx-auto px-16 space-y-32">
               <div className="flex justify-center gap-24">
                 {[
                   { icon: Instagram, label: 'INSTAGRAM', href: `https://instagram.com/${BUSINESS_INFO.instagram}` },
                   { icon: MessageCircle, label: 'WHATSAPP', href: 'https://wa.me/393393522164' }
                 ].map((s, i) => (
-                  <a key={i} href={s.href} target="_blank" rel="noopener noreferrer" className="text-[10px] text-white/20 hover:text-white tracking-[0.5em] uppercase transition-colors duration-700">
+                  <a key={i} href={s.href} target="_blank" rel="noopener noreferrer" className="text-[10px] text-[var(--oro-lucido)]/50 hover:text-[var(--oro-lucido)] tracking-[0.5em] uppercase transition-colors duration-700 font-accent">
                     {s.label}
                   </a>
                 ))}
               </div>
 
-              <div className="space-y-12">
-                <h4 className="font-display text-5xl text-white tracking-[0.5em] opacity-90">{BUSINESS_INFO.name}</h4>
-                <div className="flex justify-center gap-12 text-[9px] uppercase tracking-[0.8em] text-white/40">
-                  <span>VAT: {BUSINESS_INFO.piva}</span>
-                  <span className="hidden md:inline">MILAN HQ: {BUSINESS_INFO.address.split(',')[0]}</span>
+              <div className="space-y-16">
+                <div className="flex flex-col items-center gap-6">
+                  <h4 className="font-display text-6xl text-gold tracking-[0.3em]">{BUSINESS_INFO.name}</h4>
+                  <div className="gold-line max-w-xs opacity-20"></div>
                 </div>
-                <button onClick={() => setShowBrandStory(true)} className="btn-outline-elite mt-12">
-                  Meet The Architect
-                </button>
+
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 text-[10px] uppercase tracking-[0.6em] text-[var(--bronzo-profondo)]/60 font-accent leading-relaxed max-w-5xl mx-auto">
+                  <div className="space-y-2">
+                    <span className="block text-[var(--oro-lucido)] mb-2">Denominazione</span>
+                    <span className="normal-case tracking-widest">{BUSINESS_INFO.fullName}</span>
+                  </div>
+                  <div className="space-y-2">
+                    <span className="block text-[var(--oro-lucido)] mb-2">Sede Legale</span>
+                    <span className="normal-case tracking-widest">{BUSINESS_INFO.address}</span>
+                  </div>
+                  <div className="space-y-2">
+                    <span className="block text-[var(--oro-lucido)] mb-2">Sigillo Fiscale</span>
+                    <span>P.IVA: {BUSINESS_INFO.piva}</span>
+                  </div>
+                  <div className="space-y-2">
+                    <span className="block text-[var(--oro-lucido)] mb-2">Codice ATECO</span>
+                    <span>{BUSINESS_INFO.ateco}</span>
+                  </div>
+                </div>
+
+                <div className="pt-16">
+                  <button onClick={() => setShowBrandStory(true)} className="btn-prive">
+                    Philosophy & Vision
+                  </button>
+                </div>
               </div>
 
-              <p className="text-[9px] text-white/10 tracking-[1.4em] uppercase">&copy; {new Date().getFullYear()} INSOLITO experiencias ARCHITECTURAL ASSISTANCE</p>
+              <p className="text-[9px] text-[var(--oro-lucido)]/30 tracking-[1.4em] uppercase">&copy; {new Date().getFullYear()} {BUSINESS_INFO.name} | Reserved Excellence</p>
             </div>
           </footer>
 
