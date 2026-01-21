@@ -61,6 +61,7 @@ const IntroSplash: React.FC<IntroSplashProps> = ({ onFinish }) => {
                         <div className="w-1 h-1 bg-white group-hover:bg-[var(--milano-bronzo)] rounded-full transition-all duration-700"></div>
                     </div>
                     <span className="text-[10px] font-mono text-white/20 tracking-[1em] uppercase group-hover:text-white/40 transition-all">Scomparire.</span>
+                    <span className="absolute -bottom-12 text-[9px] font-display italic text-white/30 animate-pulse tracking-widest">[ Clicca per entrare ]</span>
                 </button>
             )}
 
