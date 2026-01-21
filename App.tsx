@@ -122,6 +122,20 @@ const App: React.FC = () => {
     };
   }, [showIntro, isBookingConfirmed]);
 
+  // Scroll Lock during Intro
+  useEffect(() => {
+    if (showIntro) {
+      document.body.style.overflow = 'hidden';
+      // Ensure we are at the top when starting
+      window.scrollTo(0, 0);
+    } else {
+      document.body.style.overflow = '';
+    }
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [showIntro]);
+
   // Scroll Monitor
   useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 400);

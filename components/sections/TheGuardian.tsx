@@ -29,49 +29,61 @@ const TheGuardian: React.FC<TheGuardianProps> = ({ onStoryClick }) => {
 
             <div className="max-w-[1600px] mx-auto grid grid-cols-1 md:grid-cols-12 gap-12 md:gap-24 items-center relative z-10">
 
-                {/* LEFT COLUMN - TEXT CONTENT */}
+                {/* LEFT COLUMN - BRAND VISION & WHY */}
                 <motion.div
-                    className="md:col-span-7 space-y-16 md:pr-12"
+                    className="md:col-span-7 space-y-12 md:pr-12"
                     style={{ y: yText, opacity: opacityInitial }}
                 >
-                    {/* Monumental Name */}
-                    <div className="space-y-2">
-                        <h2 className="text-6xl md:text-[8vw] leading-[0.8] font-thin tracking-tighter text-black uppercase font-accent">
-                            Michael<br />Jara
+                    {/* Brand Origin Title */}
+                    <div className="space-y-4">
+                        <span className="text-[#D4AF37] font-mono text-xs uppercase tracking-[0.5em] block">Genesi del Progetto</span>
+                        <h2 className="text-4xl md:text-6xl font-accent text-black uppercase tracking-tighter leading-[0.9]">
+                            Perché Esiste<br />Insolito Privé.
                         </h2>
                         <div className="h-px w-24 bg-[#D4AF37] mt-8"></div>
-                        <p className="text-[#D4AF37] font-mono text-xs uppercase tracking-[0.4em] pt-4">Insolito Privé Founder</p>
                     </div>
 
-                    {/* Manifesto */}
+                    {/* Manifesto / Why */}
                     <div className="space-y-8 max-w-xl">
-                        <h3 className="text-2xl md:text-3xl font-display italic text-[#1a1a1a] leading-tight">
-                            L'Architetto del Tempo.
-                        </h3>
-
                         <div className="space-y-6 text-[#1a1a1a]/80 font-serif text-lg leading-relaxed md:text-xl">
-                            <p>
-                                <span className="font-bold text-black">"Il vero lusso non è farsi notare, ma essere ovunque senza lasciare traccia."</span>
+                            <p className="font-display italic text-black text-2xl">
+                                "Il vero lusso non è farsi notare, ma essere ovunque senza lasciare traccia."
                             </p>
                             <p>
-                                Michael Jara ha fondato Insolito Privé con una missione radicale: restituire ai suoi clienti la risorsa più scarsa al mondo, la tranquillità.
+                                Insolito Privé non è nato per essere un'altra opzione di trasporto d'élite. È nato da una necessità radicale: restituire ai nostri membri la risorsa più preziosa e scarsa al mondo — <span className="text-black font-bold">la totale tranquillità.</span>
                             </p>
                             <p>
-                                Non è solo una questione di logistica d’élite. È la creazione di un’ombra professionale e silenziosa che anticipa ogni necessità. Dalla gestione millimetrica degli arrivi aeroportuali alla protezione discreta nel cuore della notte, Michael Jara firma ogni servizio con la promessa di un’assistenza che trascende il visibile.
+                                Abbiamo costruito un sistema di assistenza che opera nell'ombra, anticipando ogni variabile logistica prima ancora che si manifesti. Dalla gestione millimetrica degli arrivi alla sicurezza privata nel cuore della notte, la nostra missione è proteggere il tuo tempo e la tua riservatezza con precisione chirurgica.
                             </p>
-                            <p className="text-[#1a1a1a] font-medium border-l-2 border-[#D4AF37] pl-4">
-                                Operiamo esclusivamente su referenza, perché la fiducia è il primo requisito dell'eccellenza.
-                            </p>
+                        </div>
+
+                        {/* SUBTLE INTERACTIVE FOUNDER SIGNATURE */}
+                        <div className="pt-8">
+                            <button
+                                onClick={onStoryClick}
+                                className="group relative flex flex-col items-start gap-1 transition-all duration-700"
+                            >
+                                <span className="text-[10px] font-mono text-[#D4AF37] uppercase tracking-[0.3em] opacity-60 group-hover:opacity-100 transition-opacity">CEO & Fondatore</span>
+                                <div className="relative">
+                                    <span className="text-2xl md:text-3xl font-accent text-black uppercase tracking-wider group-hover:text-[#D4AF37] transition-all duration-700 group-hover:drop-shadow-[0_0_15px_rgba(212,175,55,0.4)]">
+                                        Michael Jara
+                                    </span>
+                                    <div className="absolute -bottom-1 left-0 w-0 h-px bg-[#D4AF37] group-hover:w-full transition-all duration-700"></div>
+                                </div>
+                                <span className="text-[9px] font-display italic text-[#1a1a1a]/40 mt-2 opacity-0 group-hover:opacity-100 transition-opacity duration-700 underline underline-offset-4 decoration-[#D4AF37]/30">
+                                    Clicca per la visione completa
+                                </span>
+                            </button>
                         </div>
                     </div>
 
                     {/* Legal Seal (Desktop) */}
-                    <div className="hidden md:block pt-12 opacity-60">
+                    <div className="hidden md:block pt-12 opacity-40">
                         <LegalSeal />
                     </div>
                 </motion.div>
 
-                {/* RIGHT COLUMN - IMAGE */}
+                {/* RIGHT COLUMN - CINEMATIC IMAGE */}
                 <motion.div
                     className="md:col-span-5 relative"
                     style={{ y: yImage, opacity: opacityInitial }}
@@ -86,15 +98,15 @@ const TheGuardian: React.FC<TheGuardianProps> = ({ onStoryClick }) => {
                         <div className="absolute inset-0 bg-gradient-to-tr from-white/20 to-transparent mix-blend-soft-light pointer-events-none"></div>
                         <div className="absolute inset-0 ring-1 ring-inset ring-black/5 pointer-events-none"></div>
 
-                        {/* Interactive Hint */}
-                        <div className="absolute bottom-6 right-6 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-white/90 backdrop-blur px-4 py-2 text-[10px] uppercase tracking-widest text-black font-mono">
-                            Leggi la storia
+                        {/* Subtle Interactive Hint */}
+                        <div className="absolute bottom-6 right-6 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-white/90 backdrop-blur px-4 py-2 text-[9px] uppercase tracking-widest text-black font-mono">
+                            Visione d'Élite
                         </div>
                     </div>
                 </motion.div>
 
                 {/* Legal Seal (Mobile) */}
-                <div className="md:hidden col-span-1 pt-8 opacity-60 border-t border-black/5">
+                <div className="md:hidden col-span-1 pt-12 opacity-40 border-t border-black/5">
                     <LegalSeal />
                 </div>
 
@@ -105,7 +117,7 @@ const TheGuardian: React.FC<TheGuardianProps> = ({ onStoryClick }) => {
 
 const LegalSeal = () => (
     <div className="text-[9px] text-[#8C8C8C] font-sans font-medium leading-relaxed max-w-sm tracking-wide">
-        <p className="uppercase text-[#D4AF37] mb-1 tracking-widest">Legal Seal</p>
+        <p className="uppercase text-[#D4AF37] mb-1 tracking-widest">Digital Seal</p>
         <p>INSOLITO PRIVÉ è un marchio di INSOLITO EXPERIENCES DI JARA LLOCTUN MICHAEL SERGIO.</p>
         <p>P.IVA 14379200968 | Sede Legale: Via Uboldo 8, Cernusco sul Naviglio (MI).</p>
         <p>Servizi alla Persona n.c.a. (ATECO 96.99.99).</p>
