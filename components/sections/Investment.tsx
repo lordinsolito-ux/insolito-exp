@@ -121,7 +121,9 @@ const Investment: React.FC<InvestmentProps> = ({ onBookClick }) => {
                     >
                         Prenota Signature
                     </button>
-                    <p className="mt-4 text-[9px] text-center text-white/30 font-mono uppercase tracking-wider">*Code: FIRSTSILENCE per -€50</p>
+                    <p className="mt-4 text-[9px] text-center text-white/30 font-mono uppercase tracking-wider">
+                        *Code: FIRSTSILENCE per -€50 <button onClick={onBookClick} className="underline hover:text-white ml-2">Inseriscilo Qui</button>
+                    </p>
                 </div>
 
                 {/* TIER 3 - ELITE RETAINER */}
@@ -244,9 +246,9 @@ const Investment: React.FC<InvestmentProps> = ({ onBookClick }) => {
                 >
                     Parla con Michael
                 </button>
-                <div className="mt-12 space-y-2">
-                    <p className="text-[10px] font-mono text-white/30 uppercase tracking-widest">+39 339 352 2164 (WhatsApp)</p>
-                    <p className="text-[10px] font-mono text-white/30 uppercase tracking-widest">info@insolitoprive.it</p>
+                <div className="mt-12 space-y-2 flex flex-col items-center">
+                    <a href="https://wa.me/393393522164" target="_blank" rel="noopener noreferrer" className="text-[10px] font-mono text-white/30 uppercase tracking-widest hover:text-[var(--milano-bronzo)] transition-colors">+39 339 352 2164 (WhatsApp)</a>
+                    <a href="mailto:info@insolitoprive.it" className="text-[10px] font-mono text-white/30 uppercase tracking-widest hover:text-[var(--milano-bronzo)] transition-colors">info@insolitoprive.it</a>
                 </div>
             </div>
 

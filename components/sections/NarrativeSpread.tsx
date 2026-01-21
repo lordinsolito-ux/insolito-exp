@@ -40,7 +40,9 @@ const NarrativeSpread: React.FC = () => {
                         </div>
                         <div className="mt-4 pt-3 border-t border-white/5 flex items-center gap-2">
                             <div className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse"></div>
-                            <span className="text-[8px] font-mono text-white/30 uppercase tracking-widest">Dati aggiornati in tempo reale</span>
+                            <span className="text-[8px] font-mono text-white/30 uppercase tracking-widest">
+                                Aggiornato: {new Date().toLocaleDateString('it-IT', { day: 'numeric', month: 'long', year: 'numeric' })}
+                            </span>
                         </div>
                     </div>
                 </div>

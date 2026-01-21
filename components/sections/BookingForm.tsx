@@ -137,6 +137,9 @@ const BookingForm = forwardRef<HTMLDivElement, BookingFormProps>(({
                                         <span className="text-7xl text-gold">€{formData.estimatedPrice}</span>
                                     </div>
                                 </div>
+                                <div className="max-w-xs mx-auto mb-8">
+                                    <input type="text" placeholder="Promo Code (Optional)" className="w-full bg-transparent border-b border-white/20 text-center text-[11px] uppercase tracking-widest py-2 text-gold focus:border-gold focus:outline-none" />
+                                </div>
                                 <div className="flex items-center justify-center gap-6">
                                     <input type="checkbox" id="terms" checked={termsAccepted} onChange={e => onToggleTerms(e.target.checked)} className="w-4 h-4 rounded-none border-[var(--milano-bronzo)]/20 bg-transparent text-[var(--milano-bronzo)] focus:ring-0" />
                                     <label htmlFor="terms" className="text-[10px] text-white/40 font-accent tracking-widest uppercase">
