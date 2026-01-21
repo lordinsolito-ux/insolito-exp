@@ -20,7 +20,7 @@ const TheGuardian: React.FC<TheGuardianProps> = ({ onStoryClick }) => {
     return (
         <section
             ref={containerRef}
-            className="relative py-20 md:py-48 px-6 md:px-24 overflow-hidden bg-[#F9F7F4] text-[#1a1a1a] transition-colors duration-1000"
+            className="relative py-12 md:py-32 px-6 md:px-24 overflow-hidden bg-[#F9F7F4] text-[#1a1a1a] transition-colors duration-1000"
         >
             {/* Background Texture - Subtle Paper Grain */}
             <div className="absolute inset-0 opacity-[0.03] pointer-events-none mix-blend-multiply"
@@ -31,22 +31,22 @@ const TheGuardian: React.FC<TheGuardianProps> = ({ onStoryClick }) => {
 
                 {/* CENTERED CONTENT - BRAND VISION & WHY */}
                 <motion.div
-                    className="space-y-12 md:space-y-16"
-                    style={{ y: yText, opacity: opacityInitial }}
+                    className="space-y-8 md:space-y-12"
+                    style={{ opacity: opacityInitial }}
                 >
                     {/* Brand Origin Title */}
-                    <div className="space-y-4 md:space-y-6">
-                        <span className="text-[#D4AF37] font-mono text-[9px] md:text-xs uppercase tracking-[0.4em] md:tracking-[0.5em] block">Genesi del Progetto</span>
-                        <h2 className="text-3xl md:text-7xl font-accent text-black uppercase tracking-tighter leading-[0.9]">
+                    <div className="space-y-3 md:space-y-4">
+                        <span className="text-[#D4AF37] font-mono text-[9px] md:text-[10px] uppercase tracking-[0.4em] md:tracking-[0.5em] block">The Guardian Section & About Me</span>
+                        <h2 className="text-2xl md:text-5xl font-accent text-black uppercase tracking-tighter leading-[0.9]">
                             Perché Esiste<br />Insolito Privé.
                         </h2>
-                        <div className="h-px w-16 md:w-24 bg-[#D4AF37] mx-auto mt-6 md:mt-8"></div>
+                        <div className="h-px w-12 md:w-16 bg-[#D4AF37] mx-auto mt-4 md:mt-6"></div>
                     </div>
 
                     {/* Manifesto / Why */}
-                    <div className="space-y-10 md:space-y-12 max-w-2xl mx-auto">
-                        <div className="space-y-6 md:space-y-8 text-[#1a1a1a]/80 font-serif text-base leading-relaxed md:text-xl">
-                            <p className="font-display italic text-black text-xl md:text-4xl leading-tight">
+                    <div className="space-y-8 md:space-y-10 max-w-2xl mx-auto">
+                        <div className="space-y-4 md:space-y-6 text-[#1a1a1a]/80 font-serif text-sm md:text-lg leading-relaxed">
+                            <p className="font-display italic text-black text-lg md:text-2xl leading-tight">
                                 "Il vero lusso non è farsi notare, ma essere ovunque senza lasciare traccia."
                             </p>
                             <p className="px-2 md:px-0">
@@ -58,17 +58,17 @@ const TheGuardian: React.FC<TheGuardianProps> = ({ onStoryClick }) => {
                         </div>
 
                         {/* SUBTLE INTERACTIVE FOUNDER SIGNATURE */}
-                        <div className="pt-10 md:pt-12 border-t border-black/5">
+                        <div className="pt-8 md:pt-10 border-t border-black/5">
                             <button
                                 onClick={onStoryClick}
                                 className="group relative flex flex-col items-center gap-2 transition-all duration-700 mx-auto"
                             >
-                                <span className="text-[9px] md:text-[10px] font-mono text-[#D4AF37] uppercase tracking-[0.3em] opacity-60 group-hover:opacity-100 transition-opacity">CEO & Fondatore</span>
+                                <span className="text-[8px] md:text-[9px] font-mono text-[#D4AF37] uppercase tracking-[0.3em] opacity-60 group-hover:opacity-100 transition-opacity">CEO & Fondatore</span>
                                 <div className="relative">
-                                    <span className="text-2xl md:text-4xl font-accent text-black uppercase tracking-wider group-hover:text-[#D4AF37] transition-all duration-700 group-hover:drop-shadow-[0_0_20px_rgba(212,175,55,0.4)]">
+                                    <span className="text-xl md:text-3xl font-accent text-black uppercase tracking-wider group-hover:text-[#D4AF37] transition-all duration-700 group-hover:drop-shadow-[0_0_20px_rgba(212,175,55,0.4)]">
                                         Michael Jara
                                     </span>
-                                    <div className="absolute -bottom-1 md:-bottom-2 left-1/2 -translate-x-1/2 w-0 h-px bg-[#D4AF37] group-hover:w-full transition-all duration-700"></div>
+                                    <div className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-0 h-px bg-[#D4AF37] group-hover:w-full transition-all duration-700"></div>
                                 </div>
                                 <div className="mt-2 md:mt-4 flex flex-col items-center gap-2">
                                     <span className="text-[9px] md:text-[10px] font-display italic text-[#1a1a1a]/40 opacity-0 group-hover:opacity-100 transition-opacity duration-700">
