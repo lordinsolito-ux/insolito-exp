@@ -27,19 +27,34 @@
   body {
     @apply bg-[var(--perla-dorata)] text-[var(--bronzo-profondo)] antialiased selection:bg-[var(--oro-lucido)] selection:text-white overflow-x-hidden;
     font-family: 'Outfit', sans-serif;
+    font-weight: 400;
+  }
+
+  p,
+  span:not(.font-display) {
+    @apply leading-relaxed;
   }
 
   .font-display {
     font-family: 'Cormorant Garamond', serif;
+    @apply leading-tight;
   }
 
   .font-accent {
-    @apply font-light tracking-[0.2em] uppercase;
+    @apply font-medium tracking-[0.2em] uppercase;
     font-family: 'Outfit', sans-serif;
   }
 }
 
 @layer components {
+
+  /* FLUID FLOATING HEADER */
+  .floating-header {
+    @apply fixed top-8 left-1/2 -translate-x-1/2 z-[150] w-[calc(100%-4rem)] max-w-4xl;
+    @apply backdrop-blur-xl bg-white/20 border border-[var(--oro-lucido)]/10 rounded-full px-8 py-3;
+    @apply flex items-center justify-between transition-all duration-700;
+    box-shadow: 0 10px 40px -20px rgba(188, 156, 98, 0.2);
+  }
 
   /* EDITORIAL MONOLITH - GLASS LEVEL 2 */
   .luxury-monolith {

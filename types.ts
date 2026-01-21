@@ -6,7 +6,8 @@ export enum ServiceTypeId {
   HOURLY = 'hourly',
   CITY_TO_CITY = 'city_to_city',
   EVENT = 'event',
-  WEDDING = 'wedding'
+  WEDDING = 'wedding',
+  EXECUTIVE = 'executive'
 }
 
 export enum VehicleTypeId {

@@ -4,8 +4,9 @@ import {
   Clock,
   Map as MapIcon,
   GlassWater,
-  Heart,
   Sparkles,
+  Briefcase,
+  Heart
 } from 'lucide-react';
 import { ServiceType, ServiceTypeId, VehicleType, VehicleTypeId, LocationSuggestion } from './types';
 
@@ -15,54 +16,62 @@ export const SERVICE_TYPES: (ServiceType & { image: string })[] = [
   {
     id: ServiceTypeId.AIRPORT_TRANSFER,
     name: 'Privé Welcome',
-    description: 'L\'esperienza di arrivo ridefinita. Accoglienza prioritaria e coordinamento totale per una transizione fluida verso la tua eccellenza.',
+    description: 'Accoglienza prioritaria e coordinamento totale per una transizione fluida verso la tua destinazione d\'eccellenza a Milano.',
     icon: Plane,
-    popular: true,
-    badge: 'Elite Entry',
-    image: 'https://images.unsplash.com/photo-1542314831-068cc1ad4706?q=80&w=2070&auto=format&fit=crop'
+    badge: 'Luxury Transit',
+    image: '/assets/service_welcome.png'
   },
   {
     id: ServiceTypeId.CITY_TO_CITY,
-    name: 'Privé Lounge on Road',
-    description: 'Il comfort di un salotto privato in movimento. Trasforma ogni chilometro in un momento di puro relax o produttività riservata.',
+    name: 'Privé Lounge',
+    description: 'Il comfort di un salotto privato in movimento. Trasforma ogni spostamento in un momento di pura riservatezza e relax.',
     icon: MapIcon,
     badge: 'Signature',
-    image: 'https://images.unsplash.com/photo-1511216173030-66221a194af0?q=80&w=1974&auto=format&fit=crop'
+    image: '/assets/service_lounge.png'
   },
   {
     id: ServiceTypeId.HOURLY,
     name: 'Privé Assistant',
-    description: 'La tua ombra professionale. Un assistente dedicato a disposizione per shopping, meeting e ogni tua commissione più riservata.',
+    description: 'Un assistente dedicato a disposizione per shopping, meeting e ogni tua commissione più riservata a Milano.',
     icon: Clock,
-    image: 'https://images.unsplash.com/photo-1513581026335-113b1740c0cd?q=80&w=2070&auto=format&fit=crop'
+    badge: 'Daily Shadow',
+    image: '/assets/service_assistant.png'
   },
   {
     id: ServiceTypeId.EVENT,
     name: 'Privé Night',
-    description: 'Il prestigio della notte milanese senza compromessi. Sicurezza millimetrica e accesso esclusivo per vivere la città al massimo.',
+    description: 'Sicurezza millimetrica e accesso esclusivo per vivere il prestigio della notte milanese senza compromessi.',
     icon: GlassWater,
-    badge: 'Exquisite',
-    image: 'https://images.unsplash.com/photo-1574091678382-7285514120ec?q=80&w=1974&auto=format&fit=crop'
+    badge: 'Midnight Elite',
+    image: '/assets/service_night.png'
   },
   {
     id: ServiceTypeId.WEDDING,
     name: 'Privé Wedding',
-    description: 'L\'eleganza assoluta per il tuo giorno più prezioso. Cura di ogni dettaglio con una grazia e precisione che restano nel tempo.',
+    description: 'L\'eleganza assoluta per il tuo giorno più prezioso. Cura di ogni dettaglio con grazia e precisione millimetrica.',
     icon: Heart,
     badge: 'Prestige',
-    image: 'https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=2070&auto=format&fit=crop'
+    image: '/assets/service_wedding.png'
+  },
+  {
+    id: ServiceTypeId.EXECUTIVE,
+    name: 'Privé Executive',
+    description: 'Discrezione, puntualità e un ambiente di lavoro mobile per i tuoi meeting e spostamenti istituzionali a Milano.',
+    icon: Briefcase,
+    badge: 'Business Prive',
+    image: '/assets/service_executive.png'
   },
 ];
 
 export const VEHICLE_TYPES: VehicleType[] = [
   {
     id: VehicleTypeId.SUV_COMFORT,
-    name: 'Premium SUV Experience',
-    description: 'Ambiente riservato e confortevole, perfetto per chi desidera privacy e spazio. Ideale per ogni occasione.',
+    name: 'Korando Premium Experience',
+    description: 'Ambiente riservato e confortevole (Model 2014 Metal Gray Pearl), perfetto per chi desidera privacy e spazio. Ideale per ogni occasione.',
     capacity: 4,
     luggage: 4,
     basePriceMultiplier: 1.0,
-    imagePlaceholder: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQpOvoID-6ooDrZNQzwdPhLQmtUHLwHwLjX9g&s',
+    imagePlaceholder: '/assets/korando_2014.png',
   }
 ];
 

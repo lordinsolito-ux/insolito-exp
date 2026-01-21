@@ -197,7 +197,7 @@ const BrandStoryModal: React.FC<{ isOpen: boolean; onClose: () => void }> = ({ i
           </div>
         </div>
         <div className="relative group hidden lg:block overflow-hidden rounded-sm border border-[var(--oro-lucido)]/10">
-          <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=1600" alt="Michael Jara" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-[8000ms]" />
+          <img src="/assets/founder_michael_jara.jpg" alt="Michael Jara" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-[8000ms]" />
           <div className="absolute inset-x-0 bottom-16 px-16 text-center">
             <blockquote className="text-[var(--bronzo-profondo)] font-display text-3xl italic leading-tight tracking-wide opacity-90">"{BRAND_STORY.quote}"</blockquote>
           </div>
@@ -263,7 +263,7 @@ const NarrativeSpread: React.FC = () => {
         <div className="lg:col-span-12 xl:col-span-7 xl:pl-24 relative">
           <div className="relative aspect-[16/10] overflow-hidden rounded-sm shadow-3xl group transition-all duration-[3000ms] border border-[var(--oro-lucido)]/10">
             <img
-              src="https://images.unsplash.com/photo-1542314831-068cc1ad4706?auto=format&fit=crop&q=80&w=1600"
+              src="/assets/korando_2014.png"
               alt="Elite Discretion"
               className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-[8000ms] ease-out"
             />
@@ -277,7 +277,7 @@ const NarrativeSpread: React.FC = () => {
         <div className="lg:col-span-12 xl:col-span-5 order-2 xl:order-1 relative">
           <div className="aspect-[3/4] overflow-hidden rounded-sm border border-[var(--oro-lucido)]/10 shadow-3xl">
             <img
-              src="https://images.unsplash.com/photo-1513581026335-113b1740c0cd?auto=format&fit=crop&q=80&w=1600"
+              src="/assets/narrative_lifestyle.png"
               alt="Milano Lifestyle"
               className="w-full h-full object-cover"
             />
@@ -638,33 +638,43 @@ const App: React.FC = () => {
                 </p>
               </div>
 
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-12 pt-16">
-                {SERVICE_TYPES.map((service) => (
-                  <button
-                    key={service.id}
-                    onClick={() => handleServiceSelect(service.id)}
-                    className="group catalog-selector flex flex-col md:flex-row items-center gap-0 overflow-hidden text-left bg-white/95 border border-[var(--oro-lucido)]/20 shadow-lg hover:shadow-2xl transition-all duration-1000"
-                  >
-                    <div className="w-full md:w-2/5 aspect-[16/9] md:aspect-[4/3] relative overflow-hidden transition-all duration-[2000ms] border-r border-[var(--oro-lucido)]/10">
-                      <img src={service.image} alt={service.name} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-[4000ms]" />
-                      <div className="absolute inset-0 bg-gradient-to-r from-white/40 via-transparent to-transparent"></div>
-                    </div>
-                    <div className="w-full md:w-3/5 p-12 md:p-16 flex flex-col justify-center space-y-8">
-                      <div className="flex items-center gap-6">
-                        <div className="h-[0.5px] w-8 bg-[var(--oro-lucido)]/30 group-hover:w-16 transition-all duration-700"></div>
-                        <span className="text-[9px] font-accent text-[var(--oro-lucido)] uppercase tracking-[1em]">{service.badge || 'Privé'}</span>
+              <div className="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-1 distribution-grid pt-16">
+                {SERVICE_TYPES.map((service, index) => {
+                  // Asymmetrical spans: 7/5, 4/8, 6/6
+                  const spans = index === 0 ? 'md:col-span-7' :
+                    index === 1 ? 'md:col-span-5' :
+                      index === 2 ? 'md:col-span-4' :
+                        index === 3 ? 'md:col-span-8' :
+                          'md:col-span-6';
+
+                  return (
+                    <button
+                      key={service.id}
+                      onClick={() => handleServiceSelect(service.id)}
+                      className={`group catalog-selector flex flex-col relative overflow-hidden text-left bg-white/95 border border-[var(--oro-lucido)]/10 shadow-sm hover:shadow-2xl transition-all duration-1000 ${spans} min-h-[450px]`}
+                    >
+                      <div className="absolute inset-0 overflow-hidden">
+                        <img src={service.image} alt={service.name} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-[6000ms] ease-out" />
+                        <div className="absolute inset-0 bg-gradient-to-t from-[var(--bronzo-profondo)]/80 via-[var(--bronzo-profondo)]/20 to-transparent"></div>
                       </div>
-                      <div className="space-y-4">
-                        <h4 className="font-display text-4xl md:text-5xl text-[var(--bronzo-profondo)] tracking-[0.05em] leading-tight">{service.name}</h4>
-                        <p className="text-[13px] text-[var(--bronzo-profondo)]/80 font-sans leading-relaxed max-w-md tracking-wide">{service.description}</p>
+
+                      <div className="relative z-10 p-12 md:p-16 mt-auto space-y-6 transform translate-y-8 group-hover:translate-y-0 transition-transform duration-1000">
+                        <div className="flex items-center gap-6">
+                          <div className="h-[0.5px] w-8 bg-gold/50"></div>
+                          <span className="text-[10px] font-accent text-gold tracking-[1em] uppercase">{service.badge}</span>
+                        </div>
+                        <div className="space-y-4">
+                          <h4 className="text-4xl md:text-5xl font-display text-white italic tracking-wide">{service.name}</h4>
+                          <p className="text-white/70 text-[13px] leading-relaxed font-sans max-w-sm opacity-0 group-hover:opacity-100 transition-opacity duration-1000 delay-300">{service.description}</p>
+                        </div>
+                        <div className="pt-4 flex items-center gap-4 group/btn">
+                          <span className="text-[10px] font-accent text-gold tracking-[0.6em] uppercase">Request Access</span>
+                          <ArrowRight className="w-4 h-4 text-gold" />
+                        </div>
                       </div>
-                      <div className="flex items-center gap-4 pt-4 opacity-0 group-hover:opacity-100 transition-opacity duration-1000">
-                        <span className="text-[10px] text-[var(--oro-lucido)] font-accent uppercase tracking-[0.6em]">Request Reserved Access</span>
-                        <ArrowRight className="w-4 h-4 text-[var(--oro-lucido)]" />
-                      </div>
-                    </div>
-                  </button>
-                ))}
+                    </button>
+                  );
+                })}
               </div>
             </section>
 
