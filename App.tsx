@@ -743,52 +743,34 @@ const App: React.FC = () => {
             </div>
           </main>
 
-          <footer className="py-12 text-center border-t border-[var(--oro-lucido)]/10 bg-white/30 backdrop-blur-3xl z-20">
-            <div className="max-w-6xl mx-auto px-16 space-y-16">
-              <div className="flex justify-center gap-24">
-                {[
-                  { icon: Instagram, label: 'INSTAGRAM', href: `https://instagram.com/${BUSINESS_INFO.instagram}` },
-                  { icon: MessageCircle, label: 'WHATSAPP', href: 'https://wa.me/393393522164' }
-                ].map((s, i) => (
-                  <a key={i} href={s.href} target="_blank" rel="noopener noreferrer" className="text-[10px] text-[var(--oro-lucido)]/50 hover:text-[var(--oro-lucido)] tracking-[0.5em] uppercase transition-colors duration-700 font-accent">
-                    {s.label}
-                  </a>
-                ))}
-              </div>
-
-              <div className="space-y-8">
-                <div className="flex flex-col items-center gap-4">
-                  <h4 className="font-display text-2xl text-gold tracking-[0.2em]">{BUSINESS_INFO.name}</h4>
-                  <div className="gold-line max-w-[100px] opacity-20"></div>
-                </div>
-
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 text-[10px] uppercase tracking-[0.6em] text-[var(--bronzo-profondo)]/60 font-accent leading-relaxed max-w-5xl mx-auto">
-                  <div className="space-y-2">
-                    <span className="block text-[var(--oro-lucido)] mb-2">Denominazione</span>
-                    <span className="normal-case tracking-widest">{BUSINESS_INFO.fullName}</span>
-                  </div>
-                  <div className="space-y-2">
-                    <span className="block text-[var(--oro-lucido)] mb-2">Sede Legale</span>
-                    <span className="normal-case tracking-widest">{BUSINESS_INFO.address}</span>
-                  </div>
-                  <div className="space-y-2">
-                    <span className="block text-[var(--oro-lucido)] mb-2">Sigillo Fiscale</span>
-                    <span>P.IVA: {BUSINESS_INFO.piva}</span>
-                  </div>
-                  <div className="space-y-2">
-                    <span className="block text-[var(--oro-lucido)] mb-2">Codice ATECO</span>
-                    <span>{BUSINESS_INFO.ateco}</span>
-                  </div>
-                </div>
-
-                <div className="pt-8">
-                  <button onClick={() => setShowBrandStory(true)} className="text-[9px] text-[var(--oro-lucido)]/60 hover:text-[var(--oro-lucido)] border border-[var(--oro-lucido)]/20 px-6 py-2 uppercase tracking-[0.4em] transition-all font-accent">
-                    Philosophy & Vision
+          <footer className="py-12 border-t border-[var(--oro-lucido)]/10 z-20">
+            <div className="max-w-7xl mx-auto px-12 flex flex-col md:flex-row justify-between items-center gap-12">
+              <div className="flex flex-col items-center md:items-start gap-4">
+                <h4 className="font-display text-xl text-gold tracking-[0.3em]">{BUSINESS_INFO.name}</h4>
+                <div className="flex items-center gap-6">
+                  {[
+                    { icon: Instagram, label: 'IG', href: `https://instagram.com/${BUSINESS_INFO.instagram}` },
+                    { icon: MessageCircle, label: 'WA', href: 'https://wa.me/393393522164' }
+                  ].map((s, i) => (
+                    <a key={i} href={s.href} target="_blank" rel="noopener noreferrer" className="text-[9px] text-[var(--oro-lucido)]/50 hover:text-[var(--oro-lucido)] tracking-[0.4em] uppercase transition-colors font-accent">
+                      {s.label}
+                    </a>
+                  ))}
+                  <button onClick={() => setShowBrandStory(true)} className="text-[9px] text-[var(--oro-lucido)]/50 hover:text-[var(--oro-lucido)] tracking-[0.4em] uppercase transition-colors font-accent border-l border-[var(--oro-lucido)]/10 pl-6">
+                    Philosophy
                   </button>
                 </div>
               </div>
 
-              <p className="text-[8px] text-[var(--oro-lucido)]/30 tracking-[1em] uppercase pt-8">&copy; {new Date().getFullYear()} {BUSINESS_INFO.name} | Reserved Excellence</p>
+              <div className="flex flex-col items-center md:items-end gap-3 text-[8px] uppercase tracking-[0.4em] text-[var(--bronzo-profondo)]/40 font-accent max-w-2xl text-center md:text-right">
+                <div className="flex flex-wrap justify-center md:justify-end gap-x-6 gap-y-2 opacity-60">
+                  <span className="normal-case">{BUSINESS_INFO.fullName}</span>
+                  <span className="normal-case border-l border-[var(--oro-lucido)]/10 pl-6">{BUSINESS_INFO.address}</span>
+                  <span className="border-l border-[var(--oro-lucido)]/10 pl-6">P.IVA: {BUSINESS_INFO.piva}</span>
+                  <span className="border-l border-[var(--oro-lucido)]/10 pl-6">ATECO: {BUSINESS_INFO.ateco}</span>
+                </div>
+                <p className="opacity-40">&copy; {new Date().getFullYear()} {BUSINESS_INFO.name} | Reserved Excellence</p>
+              </div>
             </div>
           </footer>
 
