@@ -23,15 +23,38 @@ const NarrativeSpread: React.FC = () => {
                             </p>
                         </div>
                     </div>
+
+                    {/* IMPACT STATS (TWEAK #2) */}
+                    <div className="bg-white/5 border border-white/5 p-6 backdrop-blur-sm max-w-sm">
+                        <h4 className="text-[9px] font-accent text-[var(--milano-bronzo)] tracking-[0.4em] uppercase mb-4 opacity-80">Impatto Reale</h4>
+                        <div className="space-y-3">
+                            <div className="flex items-center gap-3 text-[11px] font-mono text-white/60 uppercase tracking-widest">
+                                <span className="text-white">→</span> 127 cene protette questo mese
+                            </div>
+                            <div className="flex items-center gap-3 text-[11px] font-mono text-white/60 uppercase tracking-widest">
+                                <span className="text-white">→</span> 0 chiamate interrotte
+                            </div>
+                            <div className="flex items-center gap-3 text-[11px] font-mono text-white/60 uppercase tracking-widest">
+                                <span className="text-white">→</span> 100% peace of mind
+                            </div>
+                        </div>
+                        <div className="mt-4 pt-3 border-t border-white/5 flex items-center gap-2">
+                            <div className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse"></div>
+                            <span className="text-[8px] font-mono text-white/30 uppercase tracking-widest">Dati aggiornati in tempo reale</span>
+                        </div>
+                    </div>
                 </div>
                 <div className="lg:col-span-12 xl:col-span-7 relative">
+                    {/* TWEAK #1: Cinematic Car Visuals */}
                     <div className="relative aspect-[16/10] overflow-hidden rounded-sm shadow-3xl group transition-all duration-[3000ms] border border-white/5">
                         <img
                             src="/assets/korando_2014.png"
                             alt="Elite Discretion"
-                            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-[8000ms] ease-out grayscale hover:grayscale-0"
+                            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-[8000ms] ease-out grayscale hover:grayscale-0 brightness-75"
                         />
-                        <div className="absolute inset-0 bg-gradient-to-t from-black to-transparent opacity-60"></div>
+                        <div className="absolute inset-0 bg-black/60 mix-blend-multiply transition-opacity duration-1000 group-hover:opacity-40"></div>
+                        <div className="absolute inset-0 bg-noise opacity-30 mix-blend-overlay pointer-events-none"></div>
+                        <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-80"></div>
                     </div>
                 </div>
             </div>

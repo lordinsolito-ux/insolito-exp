@@ -36,6 +36,7 @@ import ServiceSelection from './components/sections/ServiceSelection';
 import BookingForm from './components/sections/BookingForm';
 import Footer from './components/sections/Footer';
 import GhostModeOverlay from './components/sections/GhostModeOverlay';
+import TheGuardian from './components/sections/TheGuardian';
 
 // Services
 import { searchLocations, calculateRoute, calculatePrice } from './services/googleMapsService';
@@ -317,6 +318,7 @@ const App: React.FC = () => {
 
           <main className="bg-transparent relative z-10">
             <NarrativeSpread />
+            <TheGuardian onStoryClick={() => setShowBrandStory(true)} />
             <AntiLuxury />
             <ServiceSelection ref={servicesRef} onServiceSelect={handleServiceSelect} />
             <BookingForm
