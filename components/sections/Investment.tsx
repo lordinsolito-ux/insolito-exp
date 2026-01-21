@@ -56,15 +56,16 @@ const Investment: React.FC<InvestmentProps> = ({ onBookClick }) => {
                 </p>
             </div>
 
-            {/* TIERS */}
-            <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 mb-24 md:mb-40 relative z-10">
+            {/* TIERS GRID */}
+            <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-24 md:mb-40 relative z-10 items-stretch">
 
                 {/* TIER 1 - ESSENTIALS */}
-                <div className="bg-white/[0.02] border border-white/10 p-8 md:p-10 hover:border-[var(--milano-bronzo)]/30 transition-all duration-500 group relative overflow-hidden rounded-sm flex flex-col justify-between">
+                <div className="bg-white/[0.02] border border-white/10 p-8 md:p-10 hover:border-[var(--milano-bronzo)]/30 transition-all duration-500 group relative overflow-hidden rounded-sm flex flex-col h-full">
                     <div className="absolute top-0 right-0 bg-[var(--milano-bronzo)] text-black text-[9px] font-bold px-3 py-1 uppercase tracking-widest z-10">
                         ⚡ First Time -30%
                     </div>
-                    <div>
+
+                    <div className="flex-grow">
                         <div className="mb-8">
                             <span className="inline-block py-1 px-3 bg-white/5 text-[9px] font-mono tracking-widest text-white/60 uppercase rounded-sm mb-4">Start Here</span>
                             <h3 className="text-2xl md:text-3xl font-accent uppercase tracking-wide mb-2">Essentials</h3>
@@ -84,20 +85,23 @@ const Investment: React.FC<InvestmentProps> = ({ onBookClick }) => {
                         </ul>
                     </div>
 
-                    <button
-                        onClick={handleBookNow}
-                        className="w-full py-5 border border-white/20 text-[10px] font-mono uppercase tracking-[0.2em] hover:bg-white hover:text-black transition-all duration-500 active:bg-white active:text-black touch-manipulation font-bold"
-                    >
-                        Prenota Essential
-                    </button>
+                    <div className="mt-auto pt-8">
+                        <button
+                            onClick={handleBookNow}
+                            className="w-full py-5 bg-[var(--milano-bronzo)]/10 border border-[var(--milano-bronzo)]/30 text-[10px] font-mono uppercase tracking-[0.2em] text-[var(--milano-bronzo)] hover:bg-[var(--milano-bronzo)] hover:text-black transition-all duration-500 active:scale-[0.98] touch-manipulation font-bold cursor-pointer relative z-30"
+                        >
+                            Prenota Essential
+                        </button>
+                    </div>
                 </div>
 
                 {/* TIER 2 - SIGNATURE */}
-                <div className="bg-[var(--milano-bronzo)]/[0.05] border border-[var(--milano-bronzo)]/30 p-8 md:p-10 relative lg:transform lg:-translate-y-6 shadow-[0_0_50px_-20px_rgba(139,115,85,0.2)] rounded-sm flex flex-col justify-between">
+                <div className="bg-[var(--milano-bronzo)]/[0.05] border border-[var(--milano-bronzo)]/40 p-8 md:p-10 relative shadow-[0_0_50px_-20px_rgba(139,115,85,0.2)] rounded-sm flex flex-col h-full transform transition-all duration-500 hover:border-[var(--milano-bronzo)]">
                     <div className="absolute top-0 right-0 p-2">
                         <span className="text-[8px] font-mono bg-[var(--milano-bronzo)] text-black px-2 py-1 uppercase tracking-widest font-bold">💎 73% Clienti</span>
                     </div>
-                    <div>
+
+                    <div className="flex-grow">
                         <div className="mb-8">
                             <h3 className="text-2xl md:text-3xl font-accent uppercase tracking-wide mb-2 text-[var(--milano-bronzo)]">Signature</h3>
                             <p className="text-[10px] md:text-[11px] font-mono text-white/40 uppercase tracking-widest leading-relaxed">Per Chi Ha Capito Che l'Imprevisto Costa Più del Previsto.</p>
@@ -116,22 +120,22 @@ const Investment: React.FC<InvestmentProps> = ({ onBookClick }) => {
                         </ul>
                     </div>
 
-                    <div className="space-y-4">
+                    <div className="mt-auto pt-8 space-y-4">
                         <button
                             onClick={handleBookNow}
-                            className="w-full py-5 bg-[var(--milano-bronzo)] text-black text-[10px] font-mono uppercase tracking-[0.2em] hover:bg-white transition-all duration-500 font-bold active:bg-white touch-manipulation"
+                            className="w-full py-5 bg-[var(--milano-bronzo)] text-black text-[10px] font-mono uppercase tracking-[0.2em] hover:bg-white transition-all duration-500 font-bold active:scale-[0.98] touch-manipulation cursor-pointer relative z-30 shadow-[0_0_30px_rgba(212,175,55,0.2)]"
                         >
                             Prenota Signature
                         </button>
                         <p className="text-[8px] md:text-[9px] text-center text-white/30 font-mono uppercase tracking-wider">
-                            *Code: FIRSTINSOLITO per -30% <button onClick={handleBookNow} className="underline hover:text-white ml-2">Inseriscilo Qui</button>
+                            *First Time: -30% <button onClick={handleBookNow} className="underline hover:text-white ml-1">Usa Codice</button>
                         </p>
                     </div>
                 </div>
 
                 {/* TIER 3 - ELITE RETAINER */}
-                <div className="bg-white/[0.02] border border-white/10 p-8 md:p-10 hover:border-[var(--milano-bronzo)]/30 transition-all duration-500 rounded-sm flex flex-col justify-between">
-                    <div>
+                <div className="bg-white/[0.02] border border-white/10 p-8 md:p-10 hover:border-[var(--milano-bronzo)]/30 transition-all duration-500 rounded-sm flex flex-col h-full">
+                    <div className="flex-grow">
                         <div className="mb-8">
                             <span className="inline-block py-1 px-3 bg-white/5 text-[9px] font-mono tracking-widest text-[var(--milano-bronzo)] uppercase rounded-sm mb-4">👑 Invitation Only</span>
                             <h3 className="text-2xl md:text-3xl font-accent uppercase tracking-wide mb-2">Elite Retainer</h3>
@@ -150,10 +154,10 @@ const Investment: React.FC<InvestmentProps> = ({ onBookClick }) => {
                         </ul>
                     </div>
 
-                    <div className="space-y-4">
+                    <div className="mt-auto pt-8 space-y-4">
                         <button
                             onClick={() => handleWhatsApp("Sono interessato al Tier ELITE RETAINER.")}
-                            className="w-full py-5 border border-white/20 text-[10px] font-mono uppercase tracking-[0.2em] hover:bg-white hover:text-black transition-all duration-500 active:bg-white active:text-black touch-manipulation font-bold"
+                            className="w-full py-5 border border-white/20 text-[10px] font-mono uppercase tracking-[0.2em] hover:bg-white hover:text-black transition-all duration-500 active:scale-[0.98] touch-manipulation font-bold cursor-pointer relative z-30"
                         >
                             Richiedi Elite
                         </button>
@@ -178,7 +182,7 @@ const Investment: React.FC<InvestmentProps> = ({ onBookClick }) => {
                             <span className="text-white/40">NCC Standard</span>
                             <span className="text-white/40">~€80/ora</span>
                         </div>
-                        <div className="flex justify-between items-center text-[11px] font-mono uppercase tracking-widest pb-2 text-[var(--milano-bronzo)] bold">
+                        <div className="flex justify-between items-center text-[11px] font-mono uppercase tracking-widest pb-2 text-[var(--milano-bronzo)] font-bold">
                             <span>INSOLITO Essentials</span>
                             <span>€180/ora</span>
                         </div>
@@ -225,7 +229,7 @@ const Investment: React.FC<InvestmentProps> = ({ onBookClick }) => {
                         { q: "Perché voi e non Uber Black?", a: "Uber è un'app, io sono un custode. Io proteggo il tuo tempo e la tua privacy. Se per te è lo stesso, prendi Uber." },
                     ].map((item, i) => (
                         <div key={i} className="border-b border-white/10">
-                            <button onClick={() => toggleFaq(i)} className="w-full py-6 flex justify-between items-center text-left hover:text-[var(--milano-bronzo)] transition-colors">
+                            <button onClick={() => toggleFaq(i)} className="w-full py-6 flex justify-between items-center text-left hover:text-[var(--milano-bronzo)] transition-colors group">
                                 <span className="text-[12px] md:text-[13px] font-mono uppercase tracking-[0.1em]">{item.q}</span>
                                 <ChevronDown className={`w-4 h-4 transition-transform duration-300 ${openFaq === i ? 'rotate-180' : ''}`} />
                             </button>
@@ -248,7 +252,7 @@ const Investment: React.FC<InvestmentProps> = ({ onBookClick }) => {
                 <div className="flex flex-col items-center gap-8">
                     <button
                         onClick={() => handleWhatsApp()}
-                        className="w-full md:w-auto px-16 py-6 bg-white text-black text-[12px] font-mono uppercase tracking-[0.3em] hover:bg-[var(--milano-bronzo)] hover:text-white transition-all duration-500 font-bold active:bg-[var(--milano-bronzo)] touch-manipulation"
+                        className="w-full md:w-auto px-16 py-6 bg-white text-black text-[12px] font-mono uppercase tracking-[0.3em] hover:bg-[var(--milano-bronzo)] hover:text-white transition-all duration-500 font-bold active:scale-[0.98] touch-manipulation cursor-pointer relative z-30"
                     >
                         Parla con Michael
                     </button>

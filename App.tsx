@@ -336,7 +336,12 @@ const App: React.FC = () => {
             <TheGuardian onStoryClick={() => setShowBrandStory(true)} />
             <ServiceSelection ref={servicesRef} onServiceSelect={handleServiceSelect} />
             <AntiLuxury />
-            <Investment onBookClick={() => formCardRef.current?.scrollIntoView({ behavior: 'smooth' })} />
+            <Investment onBookClick={() => {
+              setActiveStep(2);
+              setTimeout(() => {
+                formCardRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+              }, 100);
+            }} />
             <BookingForm
               ref={formCardRef}
               activeStep={activeStep}
