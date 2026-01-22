@@ -1,67 +1,27 @@
+// --- SERVICE TYPES ---
+export type ServiceTypeId =
+  | 'airport_transfer'
+  | 'hourly_disposal'
+  | 'city_to_city'
+  | 'event_coverage'
+  | 'wedding'
+  | 'executive';
 
-import { LucideIcon } from 'lucide-react';
+export type VehicleTypeId =
+  | 'sedan_luxury'
+  | 'suv_comfort'
+  | 'van_group';
 
-// TIER-BASED SYSTEM (Essentials/Signature/Elite)
+// --- TIER TYPES ---
 export enum TierType {
   ESSENTIALS = 'essentials',
   SIGNATURE = 'signature',
   ELITE = 'elite'
 }
 
-export interface TierInfo {
-  type: TierType;
-  hours: number;
-  hourlyRate: number;
-  totalPrice: number;
-  minHours: number;
-}
-
-// LEGACY: Maintained for backward compatibility during migration
-export enum ServiceTypeId {
-  AIRPORT_TRANSFER = 'airport_transfer',
-  HOURLY = 'hourly',
-  CITY_TO_CITY = 'city_to_city',
-  EVENT = 'event',
-  WEDDING = 'wedding',
-  EXECUTIVE = 'executive'
-}
-
-export enum VehicleTypeId {
-  SUV_COMFORT = 'suv_comfort' // Changed to generic premium SUV
-}
-
-export interface ServiceType {
-  id: ServiceTypeId;
-  name: string;
-  description: string;
-  icon: LucideIcon;
-  popular?: boolean;
-  startingPrice?: number;
-  badge?: string;
-}
-
-export interface VehicleType {
-  id: VehicleTypeId;
-  name: string;
-  description: string;
-  capacity: number;
-  luggage: number;
-  basePriceMultiplier: number; // Multiplier for the base rate
-  imagePlaceholder: string;
-}
-
-export interface LocationSuggestion {
-  id: string;
-  shortAddress: string;
-  fullAddress: string;
-  type: 'airport' | 'city' | 'venue' | 'station' | 'landmark';
-}
-
 export interface RouteInfo {
-  distance: number; // in km
-  duration: number; // in minutes
-  traffic: 'low' | 'moderate' | 'heavy';
-  toll: boolean;
+  distance: number;
+  duration: number;
   mapUrl: string;
 }
 
@@ -89,6 +49,9 @@ export interface BookingFormData {
   hours?: number; // Duration of assignment in hours
   hourlyRate?: number; // €180 (Essentials), €280 (Signature), or €6000/month (Elite)
 
+  // TIER-BASED: Free description (replaces pickup/destination)
+  assistanceDescription?: string; // What needs to be managed/coordinated
+
   // LEGACY: Maintained for backward compatibility
   serviceType: ServiceTypeId | null;
   pickupLocation: string;
@@ -112,20 +75,15 @@ export interface BookingFormData {
 
 export interface BookingRecord extends BookingFormData {
   id: string;
-  timestamp: string;
-  status: 'confirmed' | 'pending' | 'completed' | 'cancelled' | 'declined' | 'rescheduled';
-  needsInvoice?: boolean; // Optional: true if user needs formal invoice (fattura)
+  status: 'pending' | 'confirmed' | 'declined' | 'rescheduled' | 'cancelled';
+  timestamp?: string;
 }
 
 export interface ValidationErrors {
-  tier?: string;
-  hours?: string;
-  serviceType?: string;
-  pickupLocation?: string;
-  destination?: string;
-  date?: string;
-  time?: string;
-  name?: string;
-  email?: string;
-  phone?: string;
+  [key: string]: string;
+}
+
+export interface LocationSuggestion {
+  description: string;
+  place_id?: string;
 }
