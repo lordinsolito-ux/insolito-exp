@@ -69,18 +69,19 @@ const Investment: React.FC<InvestmentProps> = ({ onBookClick }) => {
                         <div className="mb-8">
                             <span className="inline-block py-1 px-3 bg-white/5 text-[9px] font-mono tracking-widest text-white/60 uppercase rounded-sm mb-4">Start Here</span>
                             <h3 className="text-2xl md:text-3xl font-accent uppercase tracking-wide mb-2">Essentials</h3>
-                            <p className="text-[10px] md:text-[11px] font-mono text-white/40 uppercase tracking-widest leading-relaxed">Per Chi Inizia a Capire Cosa Vuol Dire Non Guidare.</p>
+                            <p className="text-[10px] md:text-[11px] font-mono text-white/40 uppercase tracking-widest leading-relaxed">Per chi esige un coordinamento impeccabile delle proprie necessità quotidiane.</p>
                         </div>
 
-                        <div className="mb-8 p-6 bg-black/40 border border-white/5 text-center">
+                        <div className="mb-6 p-6 bg-black/40 border border-white/5 text-center">
                             <span className="block text-2xl md:text-3xl font-bold text-white mb-1">€180/ora</span>
                             <span className="text-[9px] md:text-[10px] uppercase tracking-widest text-white/40">Minimo 3h consecutive</span>
                         </div>
+                        <p className="text-[7px] text-white/15 text-center font-sans leading-tight mb-8 px-2">Le tariffe si intendono per servizi di assistenza alla persona e coordinamento logistico. L'eventuale supporto alla mobilità è incluso a titolo accessorio.</p>
 
                         <ul className="space-y-4 mb-12">
-                            <li className="flex items-start gap-3 text-xs md:text-sm text-white/70"><Check className="w-4 h-4 text-green-500 mt-0.5 shrink-0" /> Assistenza logistica coordinata</li>
-                            <li className="flex items-start gap-3 text-xs md:text-sm text-white/70"><Check className="w-4 h-4 text-green-500 mt-0.5 shrink-0" /> Prenotazione 24h anticipo</li>
-                            <li className="flex items-start gap-3 text-xs md:text-sm text-white/70"><Check className="w-4 h-4 text-green-500 mt-0.5 shrink-0" /> Comunicazione diretta Michael</li>
+                            <li className="flex items-start gap-3 text-xs md:text-sm text-white/70"><Check className="w-4 h-4 text-green-500 mt-0.5 shrink-0" /> Presidio Logistico Attivo</li>
+                            <li className="flex items-start gap-3 text-xs md:text-sm text-white/70"><Check className="w-4 h-4 text-green-500 mt-0.5 shrink-0" /> Assistenza Diretta Michael</li>
+                            <li className="flex items-start gap-3 text-xs md:text-sm text-white/70"><Check className="w-4 h-4 text-green-500 mt-0.5 shrink-0" /> Puntualità Millimetrica</li>
                             <li className="flex items-start gap-3 text-xs md:text-sm text-white/30 italic"><X className="w-4 h-4 text-red-500/50 mt-0.5 shrink-0" /> No Night Estremo</li>
                         </ul>
                     </div>
@@ -90,7 +91,7 @@ const Investment: React.FC<InvestmentProps> = ({ onBookClick }) => {
                             onClick={handleBookNow}
                             className="w-full py-5 bg-[var(--milano-bronzo)]/10 border border-[var(--milano-bronzo)]/30 text-[10px] font-mono uppercase tracking-[0.2em] text-[var(--milano-bronzo)] hover:bg-[var(--milano-bronzo)] hover:text-black transition-all duration-500 active:scale-[0.98] touch-manipulation font-bold cursor-pointer relative z-30"
                         >
-                            Prenota Essential
+                            Attiva Incarico
                         </button>
                     </div>
                 </div>
@@ -104,19 +105,20 @@ const Investment: React.FC<InvestmentProps> = ({ onBookClick }) => {
                     <div className="flex-grow">
                         <div className="mb-8">
                             <h3 className="text-2xl md:text-3xl font-accent uppercase tracking-wide mb-2 text-[var(--milano-bronzo)]">Signature</h3>
-                            <p className="text-[10px] md:text-[11px] font-mono text-white/40 uppercase tracking-widest leading-relaxed">Per Chi Ha Capito Che l'Imprevisto Costa Più del Previsto.</p>
+                            <p className="text-[10px] md:text-[11px] font-mono text-white/40 uppercase tracking-widest leading-relaxed">La massima espressione della serenità logistica: l'imprevisto smette di esistere.</p>
                         </div>
 
-                        <div className="mb-8 p-6 bg-black/60 border border-[var(--milano-bronzo)]/20 text-center">
+                        <div className="mb-6 p-6 bg-black/60 border border-[var(--milano-bronzo)]/20 text-center">
                             <span className="block text-2xl md:text-3xl font-bold text-[var(--milano-bronzo)] mb-1">€280/ora</span>
                             <span className="text-[9px] md:text-[10px] uppercase tracking-widest text-white/40">Minimo 4h consecutive</span>
                         </div>
+                        <p className="text-[7px] text-white/15 text-center font-sans leading-tight mb-8 px-2">Tempo di Incarico comprensivo di coordinamento, presidio e gestione delle variabili in tempo reale.</p>
 
                         <ul className="space-y-4 mb-12">
                             <li className="flex items-start gap-3 text-xs md:text-sm text-white"><Check className="w-4 h-4 text-[var(--milano-bronzo)] mt-0.5 shrink-0" /> <strong>Tutto di Essentials, più:</strong></li>
-                            <li className="flex items-start gap-3 text-xs md:text-sm text-white/80"><Check className="w-4 h-4 text-[var(--milano-bronzo)] mt-0.5 shrink-0" /> Last-minute fino 4h prima</li>
-                            <li className="flex items-start gap-3 text-xs md:text-sm text-white/80"><Check className="w-4 h-4 text-[var(--milano-bronzo)] mt-0.5 shrink-0" /> Backup plan automatico</li>
-                            <li className="flex items-start gap-3 text-xs md:text-sm text-white/80"><Check className="w-4 h-4 text-[var(--milano-bronzo)] mt-0.5 shrink-0" /> Notturna estesa</li>
+                            <li className="flex items-start gap-3 text-xs md:text-sm text-white/80"><Check className="w-4 h-4 text-[var(--milano-bronzo)] mt-0.5 shrink-0" /> Protocollo Backup Automatico</li>
+                            <li className="flex items-start gap-3 text-xs md:text-sm text-white/80"><Check className="w-4 h-4 text-[var(--milano-bronzo)] mt-0.5 shrink-0" /> Reattività Last-Minute (4h)</li>
+                            <li className="flex items-start gap-3 text-xs md:text-sm text-white/80"><Check className="w-4 h-4 text-[var(--milano-bronzo)] mt-0.5 shrink-0" /> Guardian Notturno</li>
                         </ul>
                     </div>
 
@@ -125,7 +127,7 @@ const Investment: React.FC<InvestmentProps> = ({ onBookClick }) => {
                             onClick={handleBookNow}
                             className="w-full py-5 bg-[var(--milano-bronzo)] text-black text-[10px] font-mono uppercase tracking-[0.2em] hover:bg-white transition-all duration-500 font-bold active:scale-[0.98] touch-manipulation cursor-pointer relative z-30 shadow-[0_0_30px_rgba(212,175,55,0.2)]"
                         >
-                            Prenota Signature
+                            Attiva Incarico
                         </button>
                         <p className="text-[8px] md:text-[9px] text-center text-white/30 font-mono uppercase tracking-wider">
                             *First Time: -30% <button onClick={handleBookNow} className="underline hover:text-white ml-1">Usa Codice</button>
