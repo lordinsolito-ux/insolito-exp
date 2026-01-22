@@ -68,11 +68,11 @@ const Footer: React.FC<FooterProps> = ({
                 </div>
             </div>
             <div className="mt-24 pt-12 border-t border-[var(--milano-bronzo)]/5 flex flex-col md:flex-row justify-between items-center gap-8 relative z-10">
-                <span className="text-[9px] font-accent text-white/20 tracking-[1em] uppercase">© 2024 Insolito Privé. All Rights Reserved.</span>
+                <span className="text-[9px] font-accent text-white/20 tracking-[1em] uppercase">© 2026 Insolito Privé. All Rights Reserved.</span>
                 <div className="flex gap-12">
                     <span className="text-[9px] font-accent text-white/20 tracking-[0.5em] uppercase">Milano</span>
-                    <span className="text-[9px] font-accent text-white/20 tracking-[0.5em] uppercase">Paris</span>
-                    <span className="text-[9px] font-accent text-white/20 tracking-[0.5em] uppercase">London</span>
+                    <span className="text-[9px] font-accent text-white/20 tracking-[0.5em] uppercase">Bergamo</span>
+                    <span className="text-[9px] font-accent text-white/20 tracking-[0.5em] uppercase">Lecco</span>
                 </div>
             </div>
         </footer>

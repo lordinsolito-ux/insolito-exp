@@ -91,7 +91,7 @@ const Investment: React.FC<InvestmentProps> = ({ onBookClick }) => {
                             onClick={handleBookNow}
                             className="w-full py-5 bg-[var(--milano-bronzo)]/10 border border-[var(--milano-bronzo)]/30 text-[10px] font-mono uppercase tracking-[0.2em] text-[var(--milano-bronzo)] hover:bg-[var(--milano-bronzo)] hover:text-black transition-all duration-500 active:scale-[0.98] touch-manipulation font-bold cursor-pointer relative z-30"
                         >
-                            Attiva Incarico
+                            Richiedi Disponibilità
                         </button>
                     </div>
                 </div>
@@ -127,7 +127,7 @@ const Investment: React.FC<InvestmentProps> = ({ onBookClick }) => {
                             onClick={handleBookNow}
                             className="w-full py-5 bg-[var(--milano-bronzo)] text-black text-[10px] font-mono uppercase tracking-[0.2em] hover:bg-white transition-all duration-500 font-bold active:scale-[0.98] touch-manipulation cursor-pointer relative z-30 shadow-[0_0_30px_rgba(212,175,55,0.2)]"
                         >
-                            Attiva Incarico
+                            Richiedi Disponibilità
                         </button>
                         <p className="text-[8px] md:text-[9px] text-center text-white/30 font-mono uppercase tracking-wider">
                             *First Time: -30% <button onClick={handleBookNow} className="underline hover:text-white ml-1">Usa Codice</button>
@@ -249,11 +249,11 @@ const Investment: React.FC<InvestmentProps> = ({ onBookClick }) => {
                 <h3 className="text-2xl font-accent uppercase tracking-widest text-center mb-16">Domande che <span className="text-white/40">avresti fatto.</span></h3>
                 <div className="space-y-4">
                     {[
+                        { q: "Perché i costi sono superiori a un normale servizio di trasporto?", a: "Non vendiamo tragitti, ma architettura del tempo e serenità logistica. Mentre un servizio standard si limita a guidare, noi coordiniamo la tua agenda, gestiamo attivamente ogni imprevisto e garantiamo una protezione totale della tua privacy." },
+                        { q: "Posso richiedere un semplice trasferimento da A a B?", a: "Il nostro modello si basa sull'assistenza continuativa alla persona (Minimo 3h). Non effettuiamo corse singole 'point-to-point' poiché il nostro valore risiede nella disponibilità costante del Guardian durante l'intero periodo dell'incarico." },
                         { q: "Cosa succede in caso di imprevisti?", a: "Non possiamo controllare il mondo esterno, ma possiamo controllare la reazione ad esso. Monitoriamo costantemente ogni variabile in tempo reale. Se sorge un ostacolo, attiviamo immediatamente protocolli di backup per minimizzare l'impatto sul tuo programma. La nostra missione è che tu non debba mai preoccuparti di trovare una soluzione: l'abbiamo già trovata noi." },
-                        { q: "Posso pagare in contanti?", a: "No. Solo fattura elettronica. Questo è un business regolare, non un servizio in nero." },
-                        { q: "Che auto guidate?", a: "Non guidiamo limousine bianche. Guidiamo veicoli professionali, discreti, puliti. Se cerchi ostentazione, hai sbagliato indirizzo." },
-                        { q: "E se devo cancellare?", a: "Essentials/Signature: Rimborso 100% 24h prima. Elite: Illimitate." },
-                        { q: "Perché voi e non Uber Black?", a: "Uber è un'app, io sono un custode. Io proteggo il tuo tempo e la tua privacy. Se per te è lo stesso, prendi Uber." },
+                        { q: "Che tipo di veicoli utilizzate?", a: "Utilizziamo esclusivamente mezzi che garantiscano uno standard di 'Salotto in movimento', equipaggiati per il lavoro o il relax assoluto. Il veicolo è uno strumento accessorio fornito per garantire la massima riservatezza e sicurezza durante la prestazione del servizio di assistenza." },
+                        { q: "Come vengono gestiti i miei dati e la mia privacy?", a: "Ogni incarico è protetto da un impegno formale di non divulgazione (NDA). La tua identità e i tuoi spostamenti sono trattati con protocolli di sicurezza superiori agli standard legali, perché la discrezione è il nostro prodotto principale." },
                     ].map((item, i) => (
                         <div key={i} className="border-b border-white/10">
                             <button onClick={() => toggleFaq(i)} className="w-full py-6 flex justify-between items-center text-left hover:text-[var(--milano-bronzo)] transition-colors group">
