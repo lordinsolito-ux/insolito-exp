@@ -1,5 +1,5 @@
 import React from 'react';
-import { TierType } from '../../types';
+import { TierType } from '../types';
 import { Check } from 'lucide-react';
 
 interface TierSelectorProps {
@@ -84,8 +84,8 @@ export const TierSelector: React.FC<TierSelectorProps> = ({ selectedTier, onSele
                             key={tier.type}
                             onClick={() => onSelectTier(tier.type)}
                             className={`relative group text-left p-6 rounded-xl border-2 transition-all duration-300 ${isSelected
-                                    ? 'border-[var(--milano-bronzo)] bg-gradient-to-br ' + tier.gradient + ' shadow-[0_0_30px_rgba(212,175,55,0.3)]'
-                                    : 'border-white/10 bg-white/5 hover:border-white/30 hover:bg-white/10'
+                                ? 'border-[var(--milano-bronzo)] bg-gradient-to-br ' + tier.gradient + ' shadow-[0_0_30px_rgba(212,175,55,0.3)]'
+                                : 'border-white/10 bg-white/5 hover:border-white/30 hover:bg-white/10'
                                 }`}
                         >
                             {/* Badge */}
