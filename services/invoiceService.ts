@@ -122,9 +122,12 @@ export const generateInvoiceHTML = (booking: BookingRecord, type: 'receipt' | 'i
           <tr>
             <td>
               <strong>${serviceDescription}</strong><br>
-              <div style="font-size: 11px; color: #666; margin-top: 4px; line-height: 1.4;">
-                Prestazione di assistenza personale e coordinamento logistico.<br>
-                <span style="font-style: italic;">Rif. Tratta: ${pickup} &rarr; ${destination}</span>
+              <div style="font-size: 11px; color: #666; margin-top: 6px; line-height: 1.4;">
+                <strong>Dettaglio Servizio:</strong><br>
+                • Coordinamento Logistico Integrato: Gestione flussi e tempistiche dell'agenda personale.<br>
+                • Presidio e Gestione Variabili: Monitoraggio attivo degli imprevisti e supporto logistico prioritario.<br>
+                • Durata Incarico: Assistenza continuativa come da tier selezionato.<br>
+                <span style="font-style: italic; color: #999; margin-top: 4px; display: block;">Rif. Incarico del ${bookingDate} ore ${bookingTime}</span>
               </div>
             </td>
             <td>${bookingDate} <span style="color:#999">@</span> ${bookingTime}</td>
@@ -150,18 +153,20 @@ export const generateInvoiceHTML = (booking: BookingRecord, type: 'receipt' | 'i
         </div>
       </div>
 
-      ${isInvoice ? '<div class="tax-note">Operazione soggetta ad IVA ordinaria (22%) - Prestazione di servizi generica.</div>' : ''}
+      ${isInvoice ? '<div class="tax-note">Operazione soggetta ad IVA ordinaria (22%) - Servizi alla Persona n.c.a. (ATECO 96.99.99).</div>' : ''}
 
       <div class="legal-disclaimer">
-        <strong>NOTA LEGALE:</strong> Il presente documento attesta il pagamento per servizi di <em>Lifestyle Management & Assistenza Personale</em>. 
-        L'importo corrisposto remunera esclusivamente la disponibilità oraria e la consulenza professionale del Personal Manager. 
-        L'eventuale utilizzo del veicolo è da intendersi come <strong>strumento di lavoro accessorio</strong> necessario all'espletamento del mandato, e NON costituisce corrispettivo per servizio di trasporto (Taxi/NCC) ai sensi dell'art. 85 CdS.
-        Prestazione professionale regolata dagli art. 2222 e segg. del Codice Civile (Contratto d'Opera).
+        <strong>NOTA LEGALE VINCOLANTE:</strong> Operazione effettuata ai sensi dell'<strong>Art. 2222 e segg. del Codice Civile</strong> (Contratto d'opera per prestazioni di servizi alla persona n.c.a. - ATECO 96.99.99).
+        L'importo corrisposto remunera esclusivamente la disponibilità oraria, la consulenza professionale e il coordinamento logistico del Lifestyle Guardian.
+        L'eventuale supporto alla mobilità fornito durante l'incarico è da considerarsi <strong>prestazione meramente accessoria e strumentale all'assistenza globale</strong>, non scindibile dalla stessa.
+        Il presente documento NON costituisce corrispettivo per servizio di trasporto pubblico non di linea (Taxi/NCC) ai sensi dell'art. 85 CdS.
       </div>
 
       <div class="footer">
-        <p>INSOLITO PRIVÉ - Disruptive Luxury Experience</p>
-        <p>Per informazioni e assistenza: +39 339 352 2164 | info@insolitoprive.it</p>
+        <p>${BUSINESS_INFO.fullName}</p>
+        <p>${BUSINESS_INFO.address} | P.IVA: ${BUSINESS_INFO.piva}</p>
+        <p>${BUSINESS_INFO.ateco}</p>
+        <p>Per informazioni: ${BUSINESS_INFO.phone} | ${BUSINESS_INFO.email}</p>
       </div>
 
       <script>
