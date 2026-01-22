@@ -247,65 +247,56 @@ export const checkBookingConflict = (newBooking: BookingFormData, existingBookin
 };
 
 /**
- * Sends notifications - Prepared for Resend integration
- * Currently logs to console. Will send emails via Resend API when configured.
+ * Sends notifications via Resend email service
  */
 export const sendBookingUpdateNotification = async (
   booking: BookingRecord,
-  status: 'confirmed' | 'declined' | 'rescheduled',
+  status: 'confirmed' | 'declined' | 'rescheduled' | 'pending',
   reason?: string
 ): Promise<boolean> => {
-  const { generateConfirmationEmail, generateDeclinedEmail, generateRescheduledEmail, getRandomTestimonial } = await import('./emailTemplates');
+  try {
+    // Import resend service
+    const { sendAdminNotification, sendClientConfirmation, sendClientDecline } = await import('./resendService');
 
-  const bookingCode = booking.id.slice(-6).toUpperCase();
-  const formattedDate = new Date(booking.date).toLocaleDateString('it-IT', {
-    weekday: 'long',
-    day: 'numeric',
-    month: 'long',
-    year: 'numeric'
-  });
-
-  const testimonial = getRandomTestimonial();
-  let htmlMessage = "";
-  let subject = "";
-
-  if (status === 'confirmed') {
-    htmlMessage = generateConfirmationEmail(booking, bookingCode, formattedDate, testimonial);
-    subject = "Conferma Servizio INSOLITO Experiences";
-  } else if (status === 'declined') {
-    htmlMessage = generateDeclinedEmail(booking, bookingCode, formattedDate, testimonial);
-    subject = "⚠️ Aggiornamento Servizio - INSOLITO Experiences";
-  } else if (status === 'rescheduled') {
-    htmlMessage = generateRescheduledEmail(booking, bookingCode, formattedDate, testimonial, reason);
-    subject = "📅 Proposta Modifica - INSOLITO Experiences";
-  }
-
-  // TODO: Integrate with Resend API
-  // For now, log the notification details
-  console.log('📧 Notification Ready (Resend integration pending):', {
-    to: booking.email,
-    subject: subject,
-    status: status,
-    bookingId: booking.id
-  });
-
-  // Store notification in Supabase for tracking
-  if (isSupabaseConfigured()) {
-    try {
-      await supabase
-        .from('notifications')
-        .insert({
-          booking_id: booking.id,
-          email: booking.email,
-          subject: subject,
-          status: status,
-          sent_at: new Date().toISOString()
-        });
-    } catch (e) {
-      // Table might not exist yet, that's ok
-      console.log('Notification tracking skipped (table not configured)');
+    // For new bookings (pending), notify admin only
+    if (status === 'pending') {
+      console.log('📧 Sending admin notification for new booking...');
+      return await sendAdminNotification(booking);
     }
-  }
 
-  return true;
+    // For confirmed bookings, notify client
+    if (status === 'confirmed') {
+      console.log('✅ Sending confirmation email to client...');
+      return await sendClientConfirmation(booking);
+    }
+
+    // For declined bookings, notify client
+    if (status === 'declined') {
+      console.log('⚠️ Sending decline notification to client...');
+      return await sendClientDecline(booking);
+    }
+
+    // For rescheduled bookings, use legacy email template for now
+    if (status === 'rescheduled') {
+      const { generateRescheduledEmail, getRandomTestimonial } = await import('./emailTemplates');
+      const bookingCode = booking.id.slice(-6).toUpperCase();
+      const formattedDate = new Date(booking.date).toLocaleDateString('it-IT', {
+        weekday: 'long',
+        day: 'numeric',
+        month: 'long',
+        year: 'numeric'
+      });
+      const testimonial = getRandomTestimonial();
+      const htmlMessage = generateRescheduledEmail(booking, bookingCode, formattedDate, testimonial, reason);
+
+      console.log('📅 Reschedule notification ready (Resend integration pending for reschedule)');
+      // TODO: Implement reschedule template in resendService
+      return true;
+    }
+
+    return true;
+  } catch (error) {
+    console.error('❌ Failed to send notification:', error);
+    return false;
+  }
 };
