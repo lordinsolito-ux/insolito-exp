@@ -1,12 +1,16 @@
 import { BookingRecord } from '../types';
 import { BUSINESS_INFO } from '../legalContent';
+import { getTierServiceLabel, getTierFeatures } from './tierHelpers';
 
-export const generateInvoiceHTML = (booking: BookingRecord, type: 'receipt' | 'invoice' = 'receipt', billingDetails?: { businessName?: string, vatId?: string, address?: string }): string => {
+export const generateInvoiceHTML = (
+  booking: BookingRecord,
+  type: 'receipt' | 'invoice' = 'receipt',
+  billingDetails?: { businessName?: string; vatId?: string; address?: string }
+): string => {
   const invoiceNumber = `INV-${(booking.id || '000000').slice(-6).toUpperCase()}`;
   const date = new Date().toLocaleDateString('it-IT');
 
   const price = Number(booking.estimatedPrice) || 0;
-  // UPDATE: Services (Consulenza/Assistenza) are standard VAT 22%, not 10% (Transport)
   const taxRate = 0.22;
   const taxAmount = (price * taxRate) / (1 + taxRate);
   const netAmount = price - taxAmount;
@@ -15,32 +19,26 @@ export const generateInvoiceHTML = (booking: BookingRecord, type: 'receipt' | 'i
   const documentTitle = isInvoice ? 'FATTURA / INVOICE' : 'RICEVUTA - LIFESTYLE MANAGEMENT';
   const documentLabel = isInvoice ? 'Fattura' : 'Ricevuta';
 
-  // Safe access helpers
   const paymentMethod = booking.paymentMethod ? booking.paymentMethod.toUpperCase() : 'CASH';
 
-  // TRANSFORM SERVICE TYPE TO "LIFESTYLE" LANGUAGE
-  const getServiceLabel = (type: string) => {
-    const t = type.toLowerCase();
-    if (t.includes('airport')) return 'Assistenza Lifestyle - Airport Connection';
-    if (t.includes('hourly')) return 'Assistenza Personale Oraria (Hourly Disposal)';
-    if (t.includes('city')) return 'Assistenza Lifestyle - City Transfer';
-    return 'Servizi di Lifestyle Management';
-  };
+  // Use helper functions
+  const serviceDescription = getTierServiceLabel(booking.tier, booking.serviceType);
+  const tierFeatures = getTierFeatures(booking.tier);
 
-  const serviceDescription = booking.serviceType ? getServiceLabel(booking.serviceType) : 'Assistenza Personale';
-
-  // Client Details - Override with Billing Details if provided for Invoice
+  // Client Details
   const clientName = (isInvoice && billingDetails?.businessName) ? billingDetails.businessName : (booking.name || 'Cliente');
   const clientVat = (isInvoice && billingDetails?.vatId) ? billingDetails.vatId : '';
   const clientAddress = (isInvoice && billingDetails?.address) ? billingDetails.address : '';
-
   const clientEmail = booking.email || '';
   const clientPhone = booking.phone || '';
 
-  const pickup = booking.pickupLocation || 'N/A';
-  const destination = booking.destination || 'N/A';
   const bookingDate = booking.date || '';
   const bookingTime = booking.time || '';
+
+  // Tier-based pricing
+  const hours = booking.hours || 0;
+  const hourlyRate = booking.hourlyRate || 0;
+  const showHourlyBreakdown = booking.tier && hours > 0 && hourlyRate > 0;
 
   return `
     <!DOCTYPE html>
@@ -61,13 +59,15 @@ export const generateInvoiceHTML = (booking: BookingRecord, type: 'receipt' | 'i
         .table { width: 100%; border-collapse: collapse; margin-bottom: 40px; }
         .table th { text-align: left; padding: 15px; border-bottom: 2px solid #D4AF37; font-size: 11px; text-transform: uppercase; color: #666; letter-spacing: 1px; }
         .table td { padding: 15px; border-bottom: 1px solid #eee; font-size: 14px; }
+        .service-details { font-size: 11px; color: #666; margin-top: 8px; line-height: 1.8; }
+        .hourly-calc { font-size: 12px; color: #888; margin-top: 8px; font-style: italic; background: #f9f9f9; padding: 8px; border-radius: 4px; }
         .total-section { text-align: right; margin-top: 20px; }
         .total-row { display: flex; justify-content: flex-end; gap: 40px; padding: 5px 0; font-size: 14px; }
         .total-label { color: #666; }
         .total-value { font-weight: bold; width: 120px; }
         .grand-total { font-size: 20px; color: #D4AF37; border-top: 2px solid #D4AF37; padding-top: 15px; margin-top: 10px; }
         .footer { margin-top: 60px; text-align: center; font-size: 9px; color: #999; border-top: 1px solid #eee; padding-top: 20px; line-height: 1.5; }
-        .legal-disclaimer { margin-top: 20px; font-size: 9px; color: #888; text-align: justify; padding: 10px; background: #f9f9f9; border-left: 3px solid #ccc; }
+        .legal-disclaimer { margin-top: 20px; font-size: 9px; color: #888; text-align: justify; padding: 10px; background: #f9f9f9; border-left: 3px solid #ccc; line-height: 1.6; }
         ${isInvoice ? '.tax-note { margin-top: 20px; font-size: 11px; color: #666; text-align: center; padding: 10px; background: #fffbeb; border-radius: 5px; }' : ''}
         
         @media print {
@@ -96,7 +96,7 @@ export const generateInvoiceHTML = (booking: BookingRecord, type: 'receipt' | 'i
         <div class="box">
           <h3>Cliente / Intestatario</h3>
           <p><strong>${clientName}</strong></p>
-          ${clientVat ? `<p class="mono" style="font-size:12px; margin-top:4px;">P.IVA/CF: ${clientVat}</p>` : ''}
+          ${clientVat ? `<p style="font-size:12px; margin-top:4px;">P.IVA/CF: ${clientVat}</p>` : ''}
           ${clientAddress ? `<p style="font-size:12px; color:#555;">${clientAddress}</p>` : ''}
           <div style="margin-top: 10px; font-size: 12px; color: #666;">
             ${clientEmail}<br>${clientPhone}
@@ -122,13 +122,17 @@ export const generateInvoiceHTML = (booking: BookingRecord, type: 'receipt' | 'i
           <tr>
             <td>
               <strong>${serviceDescription}</strong><br>
-              <div style="font-size: 11px; color: #666; margin-top: 6px; line-height: 1.4;">
+              <div class="service-details">
+                <strong>Incarico del ${bookingDate} ore ${bookingTime}</strong><br><br>
                 <strong>Dettaglio Servizio:</strong><br>
-                • Coordinamento Logistico Integrato: Gestione flussi e tempistiche dell'agenda personale.<br>
-                • Presidio e Gestione Variabili: Monitoraggio attivo degli imprevisti e supporto logistico prioritario.<br>
-                • Durata Incarico: Assistenza continuativa come da tier selezionato.<br>
-                <span style="font-style: italic; color: #999; margin-top: 4px; display: block;">Rif. Incarico del ${bookingDate} ore ${bookingTime}</span>
+                ${tierFeatures.join('<br>')}
+                ${booking.tier && hours > 0 ? `<br><br><strong>Durata Incarico:</strong> ${hours} ore di assistenza continuativa (come da tier selezionato).` : ''}
               </div>
+              ${showHourlyBreakdown ? `
+              <div class="hourly-calc">
+                <strong>ONORARIO:</strong> ${hours} ore × €${hourlyRate}/h = €${(hours * hourlyRate).toFixed(2)}
+              </div>
+              ` : ''}
             </td>
             <td>${bookingDate} <span style="color:#999">@</span> ${bookingTime}</td>
             <td style="text-align: right;">€${isInvoice ? netAmount.toFixed(2) : price.toFixed(2)}</td>

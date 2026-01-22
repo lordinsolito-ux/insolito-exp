@@ -1,6 +1,22 @@
 
 import { LucideIcon } from 'lucide-react';
 
+// TIER-BASED SYSTEM (Essentials/Signature/Elite)
+export enum TierType {
+  ESSENTIALS = 'essentials',
+  SIGNATURE = 'signature',
+  ELITE = 'elite'
+}
+
+export interface TierInfo {
+  type: TierType;
+  hours: number;
+  hourlyRate: number;
+  totalPrice: number;
+  minHours: number;
+}
+
+// LEGACY: Maintained for backward compatibility during migration
 export enum ServiceTypeId {
   AIRPORT_TRANSFER = 'airport_transfer',
   HOURLY = 'hourly',
@@ -68,6 +84,12 @@ export interface BookingFormData {
   countryCode: string; // New field for international prefix
   phone: string;
 
+  // TIER-BASED SYSTEM (PRIMARY) - Optional for backward compatibility
+  tier?: TierType | null;
+  hours?: number; // Duration of assignment in hours
+  hourlyRate?: number; // €180 (Essentials), €280 (Signature), or €6000/month (Elite)
+
+  // LEGACY: Maintained for backward compatibility
   serviceType: ServiceTypeId | null;
   pickupLocation: string;
   stops: string[]; // New field for extra stops
@@ -96,6 +118,8 @@ export interface BookingRecord extends BookingFormData {
 }
 
 export interface ValidationErrors {
+  tier?: string;
+  hours?: string;
   serviceType?: string;
   pickupLocation?: string;
   destination?: string;
