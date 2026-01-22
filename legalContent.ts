@@ -34,6 +34,10 @@ export const BRAND_STORY = {
     title: "Dichiarazione di Responsabilità e Conformità",
     content: "In conformità con la normativa vigente, si dichiara che INSOLITO PRIVÉ opera esclusivamente nell'ambito dei Servizi alla Persona n.c.a. (Codice ATECO 96.99.99). L'attività prestata da Michael Sergio Jara Lloctun consiste in consulenza lifestyle, assistenza logistica e coordinamento delle necessità personali del cliente. Qualora il servizio includa il supporto alla mobilità, esso è da intendersi come prestazione meramente accessoria, strumentale e non scindibile dall'incarico di assistenza globale. Si precisa che INSOLITO PRIVÉ non svolge attività di trasporto pubblico non di linea (NCC o Taxi). Il rapporto professionale è regolato dalle norme sul contratto d'opera intellettuale e di servizi ai sensi dell'Art. 2222 e seguenti del Codice Civile."
   },
+  privacyNda: {
+    title: "Privacy & Non-Disclosure Agreement",
+    content: "La riservatezza è il cardine di ogni incarico affidato a INSOLITO PRIVÉ. Si garantisce che ogni informazione, conversazione o dettaglio relativo alla sfera personale, professionale e privata del cliente, acquisito durante la prestazione del servizio, sarà trattato con il massimo grado di confidenzialità. Michael Sergio Jara Lloctun si impegna formalmente alla non divulgazione di dati sensibili a terze parti, operando in piena conformità con il Regolamento UE 2016/679 (GDPR). La vostra privacy non è solo un obbligo legale, ma un impegno d'onore che definisce l'esclusività del nostro legame professionale."
+  },
   founderInfo: {
     fullName: "Michael Sergio Jara Lloctun",
     piva: "P.IVA: 14379200968",
