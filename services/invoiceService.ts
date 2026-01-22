@@ -1,4 +1,5 @@
 import { BookingRecord } from '../types';
+import { BUSINESS_INFO } from '../legalContent';
 
 export const generateInvoiceHTML = (booking: BookingRecord, type: 'receipt' | 'invoice' = 'receipt', billingDetails?: { businessName?: string, vatId?: string, address?: string }): string => {
   const invoiceNumber = `INV-${(booking.id || '000000').slice(-6).toUpperCase()}`;
@@ -78,13 +79,14 @@ export const generateInvoiceHTML = (booking: BookingRecord, type: 'receipt' | 'i
     </head>
     <body>
       <div class="header">
-        <div class="logo">INSOLITO PRIVÉ</div>
+        <div class="logo">${BUSINESS_INFO.name}</div>
         <div class="company-info">
-          <strong>INSOLITO SERVICES</strong><br>
-          Via Uboldo 8, 20063 Cernusco sul Naviglio (MI)<br>
-          P.IVA: IT14379200968<br>
-          Tel: +39 339 352 2164<br>
-          Email: info@insolitoprive.it
+          <strong>${BUSINESS_INFO.fullName}</strong><br>
+          ${BUSINESS_INFO.address}<br>
+          P.IVA: ${BUSINESS_INFO.piva}<br>
+          ${BUSINESS_INFO.ateco}<br>
+          Tel: ${BUSINESS_INFO.phone}<br>
+          Email: ${BUSINESS_INFO.email}
         </div>
       </div>
 
