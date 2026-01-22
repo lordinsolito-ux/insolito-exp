@@ -8,6 +8,7 @@ import {
 import { BookingRecord } from '../types';
 import { sendBookingUpdateNotification, fetchAllBookings, saveBooking, isCloudConfigured } from '../services/bookingService';
 import { generateInvoiceHTML } from '../services/invoiceService';
+import { BUSINESS_INFO } from '../legalContent';
 
 // --- TYPES ---
 interface AdminDashboardProps {
@@ -372,6 +373,28 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({ isOpen, onClose 
         setDocumentModalBooking(null);
     };
 
+    const sendViaWhatsApp = (booking: BookingRecord, type: 'receipt' | 'invoice') => {
+        const tierLabel = booking.tier ?
+            `Tier ${booking.tier.charAt(0).toUpperCase() + booking.tier.slice(1)}` :
+            'il servizio';
+
+        const message = `Gentile ${booking.name},\n\nLe invio ${type === 'invoice' ? 'la fattura' : 'la ricevuta'} per ${tierLabel} del ${booking.date}.\n\nGrazie per aver scelto INSOLITO PRIVÉ.\n\nMichael Jara\nLifestyle Guardian\n${BUSINESS_INFO.phone}`;
+
+        const phone = booking.phone.replace(/[^0-9]/g, '');
+        const whatsappUrl = `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
+        window.open(whatsappUrl, '_blank');
+        setDocumentModalBooking(null);
+    };
+
+    const sendViaEmail = (booking: BookingRecord, type: 'receipt' | 'invoice') => {
+        const subject = `${type === 'invoice' ? 'Fattura' : 'Ricevuta'} INSOLITO PRIVÉ - ${booking.date}`;
+        const tierInfo = booking.tier ? `Tier ${booking.tier.charAt(0).toUpperCase() + booking.tier.slice(1)}` : 'servizio';
+        const body = `Gentile ${booking.name},\n\nIn allegato ${type === 'invoice' ? 'la fattura' : 'la ricevuta'} per ${tierInfo} del ${booking.date}.\n\nPer scaricare il documento, la preghiamo di generarlo dalla dashboard o contattarci direttamente.\n\nGrazie,\nMichael Jara\nINSOLITO PRIVÉ\n${BUSINESS_INFO.phone} | ${BUSINESS_INFO.email}`;
+
+        window.location.href = `mailto:${booking.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+        setDocumentModalBooking(null);
+    };
+
     const handleBlockTime = async () => {
         if (!blockDate || !blockStartTime) {
             alert('Please select a date and start time');
@@ -632,6 +655,7 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({ isOpen, onClose 
                             <tr>
                                 <th className="p-4 text-[10px] uppercase tracking-widest text-gray-500 font-medium">Status</th>
                                 <th className="p-4 text-[10px] uppercase tracking-widest text-gray-500 font-medium">Client</th>
+                                <th className="p-4 text-[10px] uppercase tracking-widest text-gray-500 font-medium">Tier/Service</th>
                                 <th className="p-4 text-[10px] uppercase tracking-widest text-gray-500 font-medium">Date & Time</th>
                                 <th className="p-4 text-[10px] uppercase tracking-widest text-gray-500 font-medium">Route</th>
                                 <th className="p-4 text-[10px] uppercase tracking-widest text-gray-500 font-medium">Price</th>
@@ -655,12 +679,36 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({ isOpen, onClose 
                                         <div className="text-[10px] text-gray-500 font-mono">{booking.phone}</div>
                                     </td>
                                     <td className="p-4">
+                                        {booking.tier ? (
+                                            <div>
+                                                <div className="text-xs font-bold">
+                                                    {booking.tier === 'essentials' && '⚡ Essentials'}
+                                                    {booking.tier === 'signature' && '💎 Signature'}
+                                                    {booking.tier === 'elite' && '👑 Elite'}
+                                                </div>
+                                                <div className="text-[9px] text-gray-500">
+                                                    {booking.hours}h @ €{booking.hourlyRate}/h
+                                                </div>
+                                            </div>
+                                        ) : (
+                                            <div className="text-[10px] text-gray-500 uppercase">
+                                                {booking.serviceType?.replace('_', ' ')}
+                                            </div>
+                                        )}
+                                    </td>
+                                    <td className="p-4">
                                         <div className="text-xs text-gray-300">{booking.date}</div>
                                         <div className="text-[10px] text-gold-500 font-mono">{booking.time}</div>
                                     </td>
                                     <td className="p-4 max-w-xs">
-                                        <div className="text-[10px] text-gray-400 truncate max-w-[100px]" title={booking.pickupLocation}>From: {booking.pickupLocation}</div>
-                                        <div className="text-[10px] text-gray-400 truncate max-w-[100px]" title={booking.destination}>To: {booking.destination}</div>
+                                        {booking.tier ? (
+                                            <div className="text-[10px] text-gray-400 italic">Details in invoice</div>
+                                        ) : (
+                                            <>
+                                                <div className="text-[10px] text-gray-400 truncate max-w-[100px]" title={booking.pickupLocation}>From: {booking.pickupLocation}</div>
+                                                <div className="text-[10px] text-gray-400 truncate max-w-[100px]" title={booking.destination}>To: {booking.destination}</div>
+                                            </>
+                                        )}
                                     </td>
                                     <td className="p-4">
                                         <div className="font-mono text-gold-400 text-sm">€{booking.estimatedPrice}</div>
@@ -1088,6 +1136,27 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({ isOpen, onClose 
                                 >
                                     <FileText className="w-4 h-4" /> Invoice (Fattura)
                                 </button>
+
+                                {/* WhatsApp/Email Delivery Buttons */}
+                                <div className="mt-6 pt-4 border-t border-white/10">
+                                    <p className="text-xs text-gray-400 mb-3">Oppure invia direttamente:</p>
+                                    <div className="flex gap-2">
+                                        <button
+                                            onClick={() => sendViaWhatsApp(documentModalBooking, 'receipt')}
+                                            className="flex-1 flex items-center justify-center gap-2 py-2.5 px-3 bg-green-600/20 hover:bg-green-600 text-green-400 hover:text-white rounded-lg transition-all border border-green-600/30 hover:border-green-600"
+                                        >
+                                            <span className="text-lg">📱</span>
+                                            <span className="text-xs font-medium">WhatsApp</span>
+                                        </button>
+                                        <button
+                                            onClick={() => sendViaEmail(documentModalBooking, 'receipt')}
+                                            className="flex-1 flex items-center justify-center gap-2 py-2.5 px-3 bg-blue-600/20 hover:bg-blue-600 text-blue-400 hover:text-white rounded-lg transition-all border border-blue-600/30 hover:border-blue-600"
+                                        >
+                                            <span className="text-lg">✉️</span>
+                                            <span className="text-xs font-medium">Email</span>
+                                        </button>
+                                    </div>
+                                </div>
                             </div>
                         ) : (
                             <div className="space-y-4">
