@@ -36,24 +36,24 @@ const TheGuardian: React.FC<TheGuardianProps> = ({ onStoryClick }) => {
                 >
                     {/* Brand Origin Title */}
                     <div className="space-y-3 md:space-y-4">
-                        <span className="text-[#D4AF37] font-mono text-[9px] md:text-[10px] uppercase tracking-[0.4em] md:tracking-[0.5em] block">The Guardian Section & About Me</span>
+                        <span className="text-[#D4AF37] font-mono text-[9px] md:text-[10px] uppercase tracking-[0.4em] md:tracking-[0.5em] block">The Guardian</span>
                         <h2 className="text-2xl md:text-5xl font-accent text-black uppercase tracking-tighter leading-[0.9]">
-                            Perché Esiste<br />Insolito Privé.
+                            L'Arte di<br />Scomparire.
                         </h2>
                         <div className="h-px w-12 md:w-16 bg-[#D4AF37] mx-auto mt-4 md:mt-6"></div>
                     </div>
 
-                    {/* Manifesto / Why */}
+                    {/* Manifesto / Why - CLIENT FOCUSED */}
                     <div className="space-y-8 md:space-y-10 max-w-2xl mx-auto">
                         <div className="space-y-4 md:space-y-6 text-[#1a1a1a]/80 font-serif text-sm md:text-lg leading-relaxed">
                             <p className="font-display italic text-black text-lg md:text-2xl leading-tight">
-                                "Il vero lusso non è farsi notare, ma essere ovunque senza lasciare traccia."
+                                "Il vero lusso non è farsi notare, ma avere la certezza che tutto sia già stato risolto."
                             </p>
                             <p className="px-2 md:px-0">
-                                Insolito Privé non è nato per essere un'altra opzione di trasporto d'élite. È nato da una necessità radicale: restituire ai nostri membri la risorsa più preziosa e scarsa al mondo — <span className="text-black font-bold">la totale tranquillità.</span>
+                                INSOLITO PRIVÉ nasce per restituire ai nostri membri la risorsa più scarsa al mondo: <span className="text-black font-bold">la totale tranquillità.</span>
                             </p>
                             <p className="px-2 md:px-0">
-                                Abbiamo costruito un sistema di assistenza che opera nell'ombra, anticipando ogni variabile logistica prima ancora che si manifesti. Dalla gestione millimetrica degli arrivi alla sicurezza privata nel cuore della notte, la nostra missione è proteggere il tuo tempo e la tua riservatezza con precisione chirurgica.
+                                Operiamo nell'ombra, anticipando ogni variabile logistica prima ancora che si manifesti.
                             </p>
                         </div>
 

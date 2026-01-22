@@ -43,58 +43,79 @@ const BrandStoryModal: React.FC<BrandStoryModalProps> = ({ isOpen, onClose }) =>
                 </div>
             </button>
 
-            {/* MODAL CONTAINER - RESTORED TO 5XL ELEGANCE */}
-            <div className="relative w-full h-[100dvh] md:h-auto md:max-w-5xl md:luxury-monolith overflow-y-auto md:overflow-visible bg-black md:bg-black/60 shadow-2xl animate-reveal custom-scrollbar">
+            {/* MODAL CONTAINER - EDITORIAL INTERVIEW STYLE */}
+            <div className="relative w-full h-[100dvh] md:h-auto md:max-w-5xl md:luxury-monolith overflow-y-auto md:overflow-visible bg-black md:bg-black/80 shadow-2xl animate-reveal custom-scrollbar">
 
-                <div className="p-8 md:p-20 grid grid-cols-1 lg:grid-cols-2 gap-12 md:gap-16 items-start md:items-center">
+                {/* EDITORIAL LAYOUT: PHOTO LEFT, TEXT RIGHT */}
+                <div className="grid grid-cols-1 lg:grid-cols-2 min-h-[100dvh] md:min-h-0">
 
-                    {/* VISION TEXT */}
-                    <div className="space-y-12 md:space-y-20 pt-20 md:pt-0">
-                        <div className="space-y-6 md:space-y-8">
-                            <div className="flex items-center gap-4">
-                                <div className="w-8 h-px bg-[var(--milano-bronzo)]/40"></div>
-                                <span className="text-[var(--milano-bronzo)] font-mono text-[9px] md:text-[10px] uppercase tracking-[1em]">Fondatore & Visionario</span>
-                            </div>
-                            <h2 className="text-5xl md:text-8xl font-accent text-white uppercase tracking-tighter leading-tight drop-shadow-2xl">
-                                Michael <br /><span className="text-[var(--milano-bronzo)]">Jara</span>
+                    {/* PORTRAIT - FULL HEIGHT LEFT */}
+                    <div className="relative overflow-hidden aspect-[3/4] lg:aspect-auto lg:h-full order-2 lg:order-1">
+                        <img
+                            src="/assets/founder_michael_jara.jpg"
+                            alt="Michael Jara"
+                            className="w-full h-full object-cover grayscale brightness-90 md:brightness-100 transition-all duration-[3000ms]"
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-80 lg:opacity-60"></div>
+
+                        {/* QUOTE OVERLAY ON IMAGE */}
+                        <div className="absolute inset-x-0 bottom-0 p-8 md:p-12 lg:hidden">
+                            <blockquote className="text-white font-display text-lg italic leading-tight tracking-wide text-center">
+                                "{BRAND_STORY.quote}"
+                            </blockquote>
+                        </div>
+                    </div>
+
+                    {/* TEXT CONTENT - RIGHT SIDE */}
+                    <div className="p-8 md:p-12 lg:p-16 flex flex-col justify-center order-1 lg:order-2 pt-24 lg:pt-16">
+
+                        {/* HEADER */}
+                        <div className="space-y-4 mb-12">
+                            <h2 className="text-4xl md:text-6xl font-accent text-white uppercase tracking-tighter leading-[0.9]">
+                                Michael<br /><span className="text-[var(--milano-bronzo)]">Jara.</span>
                             </h2>
-                            <p className="text-white/20 font-mono text-[10px] leading-relaxed tracking-[1em] uppercase">Insolito Privé</p>
+                            <p className="text-[var(--milano-bronzo)] font-mono text-[10px] uppercase tracking-[0.5em]">
+                                {BRAND_STORY.subtitle}
+                            </p>
                         </div>
 
-                        <div className="space-y-8 md:space-y-10 border-l border-[var(--milano-bronzo)]/20 pl-8 md:pl-12">
+                        {/* BODY TEXT */}
+                        <div className="space-y-6 mb-12 border-l border-[var(--milano-bronzo)]/20 pl-6 md:pl-8">
                             {BRAND_STORY.content.map((p, i) => (
                                 <p
                                     key={i}
-                                    className="text-white/80 text-lg md:text-2xl font-display italic leading-relaxed tracking-wide"
+                                    className="text-white/80 text-base md:text-lg font-display italic leading-relaxed tracking-wide"
                                 >
                                     {p}
                                 </p>
                             ))}
                         </div>
 
-                        <div className="pt-8">
-                            <div className="flex items-center gap-8 md:gap-12 opacity-40">
-                                <div className="h-[0.5px] w-24 bg-[var(--milano-bronzo)]"></div>
-                                <span className="text-[9px] font-mono uppercase tracking-[1em]">Secret Archive</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    {/* PORTRAIT */}
-                    <div className="relative group overflow-hidden rounded-sm border border-white/5 aspect-[4/5] md:aspect-[3/4] shadow-2xl self-start lg:self-center">
-                        <img
-                            src="/assets/founder_michael_jara.jpg"
-                            alt="Michael Jara"
-                            className="w-full h-full object-cover grayscale brightness-75 md:brightness-100 md:group-hover:grayscale-0 transition-all duration-[3000ms]"
-                        />
-                        <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-60"></div>
-                        <div className="absolute inset-x-0 bottom-0 p-8 md:p-12 text-center bg-black/60 backdrop-blur-sm md:bg-transparent md:backdrop-blur-none transition-all duration-700">
-                            <blockquote className="text-white font-display text-lg md:text-2xl italic leading-tight tracking-wide">
+                        {/* QUOTE - DESKTOP ONLY */}
+                        <div className="hidden lg:block mb-12 border-t border-white/5 pt-8">
+                            <blockquote className="text-white/60 font-display text-xl italic leading-relaxed tracking-wide">
                                 "{BRAND_STORY.quote}"
                             </blockquote>
                         </div>
-                    </div>
 
+                        {/* LEGAL DISCLAIMER */}
+                        <div className="mt-auto pt-8 border-t border-white/5 space-y-6">
+                            <p className="text-[10px] font-mono text-[var(--milano-bronzo)]/60 uppercase tracking-[0.3em]">
+                                {BRAND_STORY.legalDisclaimer?.title}
+                            </p>
+                            <p className="text-[9px] text-white/30 font-sans leading-relaxed">
+                                {BRAND_STORY.legalDisclaimer?.content}
+                            </p>
+
+                            {/* FOUNDER FISCAL DATA */}
+                            <div className="pt-4 border-t border-white/5 text-[9px] font-mono text-white/20 uppercase tracking-widest space-y-1">
+                                <p>{BRAND_STORY.founderInfo?.fullName}</p>
+                                <p>{BRAND_STORY.founderInfo?.piva}</p>
+                                <p>{BRAND_STORY.founderInfo?.address}</p>
+                            </div>
+                        </div>
+
+                    </div>
                 </div>
             </div>
         </div>

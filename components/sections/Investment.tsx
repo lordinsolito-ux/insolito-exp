@@ -166,33 +166,57 @@ const Investment: React.FC<InvestmentProps> = ({ onBookClick }) => {
                 </div>
             </div>
 
-            {/* VALUE COMPARISON - ROI ANALYSIS */}
-            <div className="max-w-4xl mx-auto mb-24 md:mb-40 relative z-10 border-y border-white/5 bg-white/[0.01] p-8 md:p-16 rounded-sm">
-                <div className="flex flex-col md:flex-row items-center justify-between gap-12 text-center md:text-left">
-                    <div className="space-y-6 flex-1">
-                        <h4 className="text-[var(--milano-bronzo)] font-mono text-[10px] tracking-[0.4em] uppercase">Market Reality Check</h4>
-                        <h3 className="text-3xl font-accent uppercase tracking-wide text-white">Perché Insolito<br />costa il doppio?</h3>
-                        <p className="text-white/60 text-sm md:text-base font-display italic leading-relaxed">
-                            Un NCC standard ti porta da A a B. Noi ti restituiamo il tempo che perdi nel mezzo. Se il tuo tempo vale €200/ora, con noi sei già in profitto.
-                        </p>
+            {/* IL VALORE DEL TUO TEMPO - STRATEGIC COMPARISON */}
+            <div className="max-w-5xl mx-auto mb-24 md:mb-40 relative z-10 border-y border-white/5 bg-white/[0.01] p-8 md:p-16 rounded-sm">
+                <div className="text-center mb-12 md:mb-16">
+                    <h4 className="text-[var(--milano-bronzo)] font-mono text-[10px] tracking-[0.4em] uppercase mb-4">Il Valore del Tuo Tempo</h4>
+                    <h3 className="text-2xl md:text-4xl font-accent uppercase tracking-wide text-white mb-4">Perché la gestione è diversa<br />dal semplice trasporto.</h3>
+                </div>
+
+                {/* COMPARISON TABLE */}
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 mb-12">
+                    {/* TRASPORTO STANDARD */}
+                    <div className="bg-black/40 border border-white/5 p-8 md:p-10 rounded-sm space-y-6">
+                        <div className="text-center border-b border-white/10 pb-6">
+                            <h5 className="text-[11px] font-mono uppercase tracking-[0.3em] text-white/40 mb-2">Trasporto Standard</h5>
+                            <p className="text-white/20 text-[9px] font-mono uppercase tracking-widest">(A → B)</p>
+                        </div>
+                        <ul className="space-y-4 text-[11px] md:text-[12px] font-mono text-white/50 uppercase tracking-wider">
+                            <li className="flex items-start gap-3"><span className="text-white/20 shrink-0">•</span> Pura mobilità urbana</li>
+                            <li className="flex items-start gap-3"><span className="text-white/20 shrink-0">•</span> Solo trasferimento da un punto all'altro</li>
+                            <li className="flex items-start gap-3"><span className="text-white/20 shrink-0">•</span> Servizio basato su chilometraggio</li>
+                            <li className="flex items-start gap-3"><span className="text-white/20 shrink-0">•</span> Focus: Il Mezzo</li>
+                        </ul>
+                        <div className="text-center pt-6 border-t border-white/5">
+                            <span className="text-white/30 text-[10px] font-mono uppercase tracking-widest">~ €80 / ora</span>
+                            <p className="text-white/20 text-[8px] font-mono uppercase mt-1">Tariffa media mercato</p>
+                        </div>
                     </div>
 
-                    <div className="w-full md:w-auto flex-1 bg-black/40 border border-white/5 p-8 space-y-6 rounded-sm">
-                        <div className="flex justify-between items-center text-[10px] font-mono uppercase tracking-widest border-b border-white/10 pb-4">
-                            <span className="text-white/40">NCC Standard</span>
-                            <span className="text-white/40">~€80/ora</span>
+                    {/* INSOLITO PRIVÉ */}
+                    <div className="bg-[var(--milano-bronzo)]/[0.05] border border-[var(--milano-bronzo)]/30 p-8 md:p-10 rounded-sm space-y-6 relative">
+                        <div className="text-center border-b border-[var(--milano-bronzo)]/20 pb-6">
+                            <h5 className="text-[11px] font-mono uppercase tracking-[0.3em] text-[var(--milano-bronzo)] mb-2">Insolito Privé</h5>
+                            <p className="text-[var(--milano-bronzo)]/60 text-[9px] font-mono uppercase tracking-widest">(Lifestyle Management)</p>
                         </div>
-                        <div className="flex justify-between items-center text-[11px] font-mono uppercase tracking-widest pb-2 text-[var(--milano-bronzo)] font-bold">
-                            <span>INSOLITO Essentials</span>
-                            <span>€180/ora</span>
-                        </div>
-                        <ul className="space-y-3 text-[10px] text-white/60 font-mono uppercase tracking-wider pl-4 border-l border-[var(--milano-bronzo)]/30">
-                            <li>+ Assistenza Logistica</li>
-                            <li>+ Coordinamento Pre-Arrivo</li>
-                            <li>+ Gestione Comunicazioni</li>
-                            <li>+ Puntualità Garantita</li>
+                        <ul className="space-y-4 text-[11px] md:text-[12px] font-mono text-white/80 uppercase tracking-wider">
+                            <li className="flex items-start gap-3"><span className="text-[var(--milano-bronzo)] shrink-0">✓</span> Coordinamento Logistico Integrato</li>
+                            <li className="flex items-start gap-3"><span className="text-[var(--milano-bronzo)] shrink-0">✓</span> Gestione attiva di agenda e imprevisti</li>
+                            <li className="flex items-start gap-3"><span className="text-[var(--milano-bronzo)] shrink-0">✓</span> Onorario basato su disponibilità e assistenza</li>
+                            <li className="flex items-start gap-3"><span className="text-[var(--milano-bronzo)] shrink-0">✓</span> Focus: La Persona</li>
                         </ul>
+                        <div className="text-center pt-6 border-t border-[var(--milano-bronzo)]/20">
+                            <span className="text-[var(--milano-bronzo)] text-lg font-bold font-mono uppercase tracking-widest">€180 / ora</span>
+                            <p className="text-[var(--milano-bronzo)]/60 text-[8px] font-mono uppercase mt-1">Investimento in assistenza d'élite</p>
+                        </div>
                     </div>
+                </div>
+
+                {/* LEGAL DISCLAIMER */}
+                <div className="text-center max-w-3xl mx-auto">
+                    <p className="text-white/20 text-[9px] font-mono leading-relaxed tracking-wide">
+                        Insolito Privé opera esclusivamente nell'ambito dei Servizi alla Persona (Ateco 96.99.99), fornendo assistenza logistica e consulenza lifestyle. Il supporto alla mobilità è una componente accessoria e strumentale al servizio di assistenza.
+                    </p>
                 </div>
             </div>
 

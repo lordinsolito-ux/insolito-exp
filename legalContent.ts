@@ -22,11 +22,21 @@ export const BUSINESS_INFO = {
 };
 
 export const BRAND_STORY = {
-  title: "L'Arte della Riservatezza",
-  quote: "Non è solo un viaggio, è l'accesso a un mondo dove il dettaglio è architettura e il tempo è il lusso supremo.",
+  title: "Michael Jara",
+  subtitle: "Founder & Lifestyle Guardian",
+  quote: "Non vendo viaggi, vendo l'accesso a un mondo dove il dettaglio è architettura e il tempo è il lusso supremo.",
   content: [
-    "INSOLITO PRIVÉ nasce dalla visione di Michael Jara per offrire un'ombra professionale e discreta a chi esige l'eccellenza.",
-    "Il nostro DNA è forgiato sulla puntualità millimetrica e sulla cura riservata di ogni necessità personale.",
-    "Operiamo esclusivamente su referenza e appuntamento, garantendo un servizio che trascende il semplice trasporto per diventare pura assistenza d'élite."
-  ]
+    "Ho fondato Insolito Privé per offrire un'ombra professionale a chi esige l'eccellenza.",
+    "Il mio DNA è forgiato sulla puntualità millimetrica.",
+    "Non vendo viaggi, vendo l'accesso a un mondo dove il dettaglio è architettura e il tempo è il lusso supremo."
+  ],
+  legalDisclaimer: {
+    title: "Dichiarazione di Responsabilità e Conformità",
+    content: "In conformità con la normativa vigente, si dichiara che INSOLITO PRIVÉ opera esclusivamente nell'ambito dei Servizi alla Persona n.c.a. (Codice ATECO 96.99.99). L'attività prestata da Michael Sergio Jara Lloctun consiste in consulenza lifestyle, assistenza logistica e coordinamento delle necessità personali del cliente. Qualora il servizio includa il supporto alla mobilità, esso è da intendersi come prestazione meramente accessoria, strumentale e non scindibile dall'incarico di assistenza globale. Si precisa che INSOLITO PRIVÉ non svolge attività di trasporto pubblico non di linea (NCC o Taxi). Il rapporto professionale è regolato dalle norme sul contratto d'opera intellettuale e di servizi ai sensi dell'Art. 2222 e seguenti del Codice Civile."
+  },
+  founderInfo: {
+    fullName: "Michael Sergio Jara Lloctun",
+    piva: "P.IVA: 14379200968",
+    address: "Sede Legale: Via Uboldo n. 8, Cernusco sul Naviglio (MI)"
+  }
 };
