@@ -49,29 +49,31 @@ const BrandStoryModal: React.FC<BrandStoryModalProps> = ({ isOpen, onClose }) =>
                 {/* EDITORIAL LAYOUT */}
                 <div className="grid grid-cols-1 lg:grid-cols-2 min-h-[100dvh] md:min-h-0">
 
-                    {/* PORTRAIT - LEFT */}
-                    <div className="relative overflow-hidden aspect-[3/4] lg:aspect-auto lg:h-full order-2 lg:order-1">
-                        <img
-                            src="/assets/founder_michael_jara.jpg"
-                            alt="Michael Jara"
-                            className="w-full h-full object-cover grayscale brightness-90 transition-all duration-[3000ms]"
-                        />
-                        <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-80 lg:opacity-60"></div>
+                    {/* PORTRAIT - LEFT - FRAMED LIKE A PAINTING */}
+                    <div className="relative bg-black flex items-start justify-center order-2 lg:order-1 p-6 md:p-10 lg:p-12">
+                        <div className="relative w-full max-w-sm lg:max-w-none aspect-[3/4] overflow-hidden rounded-sm border border-white/10 shadow-2xl">
+                            <img
+                                src="/assets/founder_michael_jara.jpg"
+                                alt="Michael Jara"
+                                className="w-full h-full object-cover object-top grayscale brightness-90 transition-all duration-[3000ms]"
+                            />
+                            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"></div>
 
-                        {/* QUOTE - MOBILE ONLY */}
-                        <div className="absolute inset-x-0 bottom-0 p-8 lg:hidden">
-                            <blockquote className="text-white font-display text-lg italic leading-tight text-center">
-                                "{BRAND_STORY.quote}"
-                            </blockquote>
+                            {/* QUOTE - MOBILE ONLY */}
+                            <div className="absolute inset-x-0 bottom-0 p-6 lg:hidden">
+                                <blockquote className="text-white font-display text-base italic leading-tight text-center">
+                                    "{BRAND_STORY.quote}"
+                                </blockquote>
+                            </div>
                         </div>
                     </div>
 
                     {/* TEXT - RIGHT */}
-                    <div className="p-8 md:p-12 lg:p-14 flex flex-col order-1 lg:order-2 pt-24 lg:pt-14">
+                    <div className="p-8 md:p-10 lg:p-12 flex flex-col order-1 lg:order-2 pt-24 lg:pt-12">
 
                         {/* HEADER */}
-                        <div className="space-y-3 mb-10">
-                            <h2 className="text-4xl md:text-5xl font-accent text-white uppercase tracking-tighter leading-[0.9]">
+                        <div className="space-y-3 mb-8">
+                            <h2 className="text-3xl md:text-5xl font-accent text-white uppercase tracking-tighter leading-[0.9]">
                                 Michael<br /><span className="text-[var(--milano-bronzo)]">Jara.</span>
                             </h2>
                             <p className="text-[var(--milano-bronzo)] font-mono text-[9px] uppercase tracking-[0.5em]">
@@ -80,7 +82,7 @@ const BrandStoryModal: React.FC<BrandStoryModalProps> = ({ isOpen, onClose }) =>
                         </div>
 
                         {/* BODY */}
-                        <div className="space-y-5 mb-10 border-l border-[var(--milano-bronzo)]/20 pl-6">
+                        <div className="space-y-4 mb-8 border-l border-[var(--milano-bronzo)]/20 pl-5">
                             {BRAND_STORY.content.map((p, i) => (
                                 <p key={i} className="text-white/80 text-sm md:text-base font-display italic leading-relaxed">
                                     {p}
@@ -89,38 +91,38 @@ const BrandStoryModal: React.FC<BrandStoryModalProps> = ({ isOpen, onClose }) =>
                         </div>
 
                         {/* QUOTE - DESKTOP */}
-                        <div className="hidden lg:block mb-10 border-t border-white/5 pt-6">
-                            <blockquote className="text-white/50 font-display text-lg italic">
+                        <div className="hidden lg:block mb-8 border-t border-white/5 pt-5">
+                            <blockquote className="text-white/50 font-display text-base italic">
                                 "{BRAND_STORY.quote}"
                             </blockquote>
                         </div>
 
                         {/* LEGAL SHIELD - TWO COLUMNS */}
-                        <div className="mt-auto pt-8 border-t border-white/5">
-                            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-6">
+                        <div className="mt-auto pt-6 border-t border-white/5">
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-5">
                                 {/* LEFT: RESPONSABILITÀ */}
-                                <div className="space-y-2">
-                                    <p className="text-[8px] font-mono text-[var(--milano-bronzo)]/50 uppercase tracking-[0.2em]">
+                                <div className="space-y-1.5">
+                                    <p className="text-[7px] font-mono text-[var(--milano-bronzo)]/50 uppercase tracking-[0.2em]">
                                         {BRAND_STORY.legalDisclaimer?.title}
                                     </p>
-                                    <p className="text-[8px] text-white/20 font-sans leading-relaxed">
+                                    <p className="text-[7px] text-white/20 font-sans leading-relaxed">
                                         {BRAND_STORY.legalDisclaimer?.content}
                                     </p>
                                 </div>
 
                                 {/* RIGHT: PRIVACY & NDA */}
-                                <div className="space-y-2">
-                                    <p className="text-[8px] font-mono text-[var(--milano-bronzo)]/50 uppercase tracking-[0.2em]">
+                                <div className="space-y-1.5">
+                                    <p className="text-[7px] font-mono text-[var(--milano-bronzo)]/50 uppercase tracking-[0.2em]">
                                         {BRAND_STORY.privacyNda?.title}
                                     </p>
-                                    <p className="text-[8px] text-white/20 font-sans leading-relaxed">
+                                    <p className="text-[7px] text-white/20 font-sans leading-relaxed">
                                         {BRAND_STORY.privacyNda?.content}
                                     </p>
                                 </div>
                             </div>
 
                             {/* FOUNDER SEAL */}
-                            <div className="pt-4 border-t border-white/5 text-[8px] font-mono text-white/15 uppercase tracking-widest text-center space-y-0.5">
+                            <div className="pt-3 border-t border-white/5 text-[7px] font-mono text-white/15 uppercase tracking-widest text-center space-y-0.5">
                                 <p>{BRAND_STORY.founderInfo?.fullName}</p>
                                 <p>{BRAND_STORY.founderInfo?.piva} • {BRAND_STORY.founderInfo?.address}</p>
                             </div>

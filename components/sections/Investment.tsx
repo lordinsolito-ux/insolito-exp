@@ -247,6 +247,7 @@ const Investment: React.FC<InvestmentProps> = ({ onBookClick }) => {
                 <h3 className="text-2xl font-accent uppercase tracking-widest text-center mb-16">Domande che <span className="text-white/40">avresti fatto.</span></h3>
                 <div className="space-y-4">
                     {[
+                        { q: "Cosa succede in caso di imprevisti?", a: "Non possiamo controllare il mondo esterno, ma possiamo controllare la reazione ad esso. Monitoriamo costantemente ogni variabile in tempo reale. Se sorge un ostacolo, attiviamo immediatamente protocolli di backup per minimizzare l'impatto sul tuo programma. La nostra missione è che tu non debba mai preoccuparti di trovare una soluzione: l'abbiamo già trovata noi." },
                         { q: "Posso pagare in contanti?", a: "No. Solo fattura elettronica. Questo è un business regolare, non un servizio in nero." },
                         { q: "Che auto guidate?", a: "Non guidiamo limousine bianche. Guidiamo veicoli professionali, discreti, puliti. Se cerchi ostentazione, hai sbagliato indirizzo." },
                         { q: "E se devo cancellare?", a: "Essentials/Signature: Rimborso 100% 24h prima. Elite: Illimitate." },

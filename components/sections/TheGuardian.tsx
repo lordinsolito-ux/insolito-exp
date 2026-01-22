@@ -43,17 +43,17 @@ const TheGuardian: React.FC<TheGuardianProps> = ({ onStoryClick }) => {
                         <div className="h-px w-12 md:w-16 bg-[#D4AF37] mx-auto mt-4 md:mt-6"></div>
                     </div>
 
-                    {/* Manifesto / Why - CLIENT FOCUSED */}
+                    {/* Manifesto / Why - REALISMO D'ÉLITE */}
                     <div className="space-y-8 md:space-y-10 max-w-2xl mx-auto">
                         <div className="space-y-4 md:space-y-6 text-[#1a1a1a]/80 font-serif text-sm md:text-lg leading-relaxed">
                             <p className="font-display italic text-black text-lg md:text-2xl leading-tight">
-                                "Il vero lusso non è farsi notare, ma avere la certezza che tutto sia già stato risolto."
+                                "Il vero lusso non è farsi notare, ma avere la certezza che ogni variabile sia già stata prevista e gestita."
                             </p>
                             <p className="px-2 md:px-0">
-                                INSOLITO PRIVÉ nasce per restituire ai nostri membri la risorsa più scarsa al mondo: <span className="text-black font-bold">la totale tranquillità.</span>
+                                INSOLITO PRIVÉ nasce per restituire ai propri membri la risorsa più preziosa: <span className="text-black font-bold">la totale serenità.</span>
                             </p>
                             <p className="px-2 md:px-0">
-                                Operiamo nell'ombra, anticipando ogni variabile logistica prima ancora che si manifesti.
+                                Operiamo nell'ombra per neutralizzare ogni complessità logistica, permettendoti di restare concentrato solo su ciò che conta.
                             </p>
                         </div>
 
