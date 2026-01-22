@@ -15,10 +15,10 @@ i18n
       it: { translation: it },
       es: { translation: es }
     },
-    lng: 'en', // Force English as default
+    lng: 'it', // Italiano come lingua principale
     fallbackLng: 'en',
     detection: {
-      order: ['querystring', 'localStorage', 'navigator'],
+      order: ['localStorage', 'navigator', 'querystring'],
       caches: ['localStorage']
     },
     interpolation: {
