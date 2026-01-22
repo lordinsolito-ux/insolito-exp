@@ -60,9 +60,9 @@ const IntroSplash: React.FC<IntroSplashProps> = ({ onFinish }) => {
                     <div className="w-24 h-24 md:w-20 md:h-20 rounded-full border border-white/5 flex items-center justify-center group-hover:border-[var(--milano-bronzo)]/30 transition-all duration-1000">
                         <div className="w-2 h-2 md:w-1 md:h-1 bg-white group-hover:bg-[var(--milano-bronzo)] rounded-full transition-all duration-700"></div>
                     </div>
-                    <span className="text-[11px] md:text-[10px] font-mono text-[var(--milano-bronzo)]/40 tracking-[0.8rem] md:tracking-[1.2rem] uppercase group-hover:text-[var(--milano-bronzo)] transition-all duration-700">Scomparire.</span>
+                    <span className="text-[11px] md:text-[10px] font-mono text-[var(--milano-bronzo)]/40 tracking-[0.8rem] md:tracking-[1.2rem] uppercase group-hover:text-[var(--milano-bronzo)] transition-all duration-700">L'arte di Scomparire.</span>
                     <span className="absolute -bottom-16 md:-bottom-16 text-[10px] md:text-[10px] font-display italic text-[var(--milano-bronzo)] tracking-[0.2em] px-8 py-3 bg-black flex flex-col items-center">
-                        <span className="relative z-10">[ Clicca per entrare ]</span>
+                        <span className="relative z-10">[ ENTER ]</span>
                         {/* Shimmer/Glossy Glow Effect */}
                         <span className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent skew-x-12 -translate-x-full animate-shimmer pointer-events-none"></span>
                         <span className="absolute inset-0 bg-[var(--milano-bronzo)]/10 blur-xl animate-pulse-slow"></span>
@@ -84,7 +84,7 @@ const IntroSplash: React.FC<IntroSplashProps> = ({ onFinish }) => {
             {step === 3 && (
                 <div className="flex flex-col items-center gap-10 md:gap-12 animate-reveal px-6 text-center">
                     <div className="flex flex-col items-center gap-4">
-                        <h1 className="text-5xl md:text-8xl font-accent text-white tracking-[0.3em] md:tracking-[0.4em] mb-4">INSOLITO</h1>
+                        <h1 className="text-5xl md:text-8xl font-accent text-white tracking-[0.3em] md:tracking-[0.4em] mb-4">INSOLITO Privè</h1>
                         <div className="h-px w-20 md:w-24 bg-gradient-to-r from-transparent via-[var(--milano-bronzo)]/30 to-transparent"></div>
                         <p className="text-[9px] md:text-[10px] font-mono text-[var(--milano-bronzo)] tracking-[1.2em] md:tracking-[1.5em] uppercase drop-shadow-[0_0_8px_rgba(212,175,55,0.3)]">L'Arte di Scomparire</p>
                     </div>
