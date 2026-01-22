@@ -162,6 +162,11 @@ export const generateInvoiceHTML = (booking: BookingRecord, type: 'receipt' | 'i
         Il presente documento NON costituisce corrispettivo per servizio di trasporto pubblico non di linea (Taxi/NCC) ai sensi dell'art. 85 CdS.
       </div>
 
+      <div class="legal-disclaimer" style="margin-top: 15px; background: #f5f5f5; border-left: 3px solid #D4AF37;">
+        <strong>PRIVACY & RISERVATEZZA:</strong> Per ragioni di riservatezza e conformità all'accordo NDA sottoscritto, i dettagli specifici dei luoghi e degli interlocutori del cliente non vengono riportati in questo documento fiscale.
+        La protezione della privacy del cliente è parte integrante del servizio di Lifestyle Management fornito.
+      </div>
+
       <div class="footer">
         <p>${BUSINESS_INFO.fullName}</p>
         <p>${BUSINESS_INFO.address} | P.IVA: ${BUSINESS_INFO.piva}</p>
