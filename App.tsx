@@ -11,7 +11,8 @@ import {
   LocationSuggestion,
   RouteInfo,
   ServiceTypeId,
-  BookingRecord
+  BookingRecord,
+  TierType
 } from './types';
 
 // Existing Components
@@ -38,11 +39,13 @@ import Footer from './components/sections/Footer';
 import GhostModeOverlay from './components/sections/GhostModeOverlay';
 import TheGuardian from './components/sections/TheGuardian';
 import Investment from './components/sections/Investment';
+import { TierSelector } from './components/TierSelector';
 
 // Services
 import { searchLocations, calculateRoute, calculatePrice } from './services/googleMapsService';
 import { getCachedRoute, cacheRoute } from './services/routeCache';
 import { generateTimeSlots, checkAvailability, checkBookingConflict, saveBooking, fetchAllBookings } from './services/bookingService';
+import { getTierRates } from './services/tierHelpers';
 import { LEGAL_CONTENT } from './legalContent';
 
 const INITIAL_FORM_STATE: BookingFormData = {
@@ -97,6 +100,7 @@ const App: React.FC = () => {
   const [routeInfo, setRouteInfo] = useState<RouteInfo | null>(null);
   const [hasShownRouteModal, setHasShownRouteModal] = useState(false);
   const [bookingConflictError, setBookingConflictError] = useState<string | null>(null);
+  const [preselectedTier, setPreselectedTier] = useState<TierType | null>(null);
 
   // Refs
   const idleTimer = useRef<NodeJS.Timeout | null>(null);
@@ -265,6 +269,27 @@ const App: React.FC = () => {
   const handleNextStep = () => { if (validateStep(activeStep)) setActiveStep(prev => Math.min(prev + 1, 4)); };
   const handlePrevStep = () => setActiveStep(prev => Math.max(prev - 1, 1));
   const handleServiceSelect = (id: ServiceTypeId) => { setFormData(prev => ({ ...prev, serviceType: id })); setActiveStep(2); };
+
+  const handleTierSelect = (tier: TierType) => {
+    const { hourlyRate, minHours } = getTierRates(tier);
+    setFormData(prev => ({
+      ...prev,
+      tier: tier,
+      hours: minHours,
+      hourlyRate: hourlyRate,
+      estimatedPrice: minHours * hourlyRate,
+      duration: minHours * 60,
+      priceBreakdown: {
+        ...prev.priceBreakdown,
+        total: minHours * hourlyRate,
+        baseFare: minHours * hourlyRate,
+        serviceMultiplier: 1
+      }
+    }));
+    setActiveStep(2);
+    setPreselectedTier(null);
+  };
+
   const handleResetApp = () => { setIsBookingConfirmed(false); setActiveStep(1); setFormData(INITIAL_FORM_STATE); setRouteInfo(null); setTermsAccepted(false); };
 
   const handleSubmit = async () => {

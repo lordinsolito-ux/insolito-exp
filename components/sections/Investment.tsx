@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
 import { Check, X, ChevronDown } from 'lucide-react';
+import { TierType } from '../../types';
 
 interface InvestmentProps {
     onBookClick: () => void;
+    onTierSelect?: (tier: TierType) => void;
 }
 
-const Investment: React.FC<InvestmentProps> = ({ onBookClick }) => {
+const Investment: React.FC<InvestmentProps> = ({ onBookClick, onTierSelect }) => {
     const [openFaq, setOpenFaq] = useState<number | null>(null);
     const whatsappLink = "https://wa.me/393393522164";
 
@@ -28,6 +30,18 @@ const Investment: React.FC<InvestmentProps> = ({ onBookClick }) => {
             if (el) {
                 el.scrollIntoView({ behavior: 'smooth' });
             }
+        }
+    };
+
+    const handleTierBooking = (tier: TierType) => {
+        // Trigger tier selection if handler provided
+        if (onTierSelect) {
+            onTierSelect(tier);
+        }
+        // Scroll to booking section
+        const el = document.getElementById('booking-section');
+        if (el) {
+            el.scrollIntoView({ behavior: 'smooth' });
         }
     };
 
@@ -88,10 +102,10 @@ const Investment: React.FC<InvestmentProps> = ({ onBookClick }) => {
 
                     <div className="mt-auto pt-8">
                         <button
-                            onClick={handleBookNow}
+                            onClick={() => handleTierBooking(TierType.ESSENTIALS)}
                             className="w-full py-5 bg-[var(--milano-bronzo)]/10 border border-[var(--milano-bronzo)]/30 text-[10px] font-mono uppercase tracking-[0.2em] text-[var(--milano-bronzo)] hover:bg-[var(--milano-bronzo)] hover:text-black transition-all duration-500 active:scale-[0.98] touch-manipulation font-bold cursor-pointer relative z-30"
                         >
-                            Richiedi Disponibilità
+                            Richiedi Essentials →
                         </button>
                     </div>
                 </div>
@@ -124,10 +138,10 @@ const Investment: React.FC<InvestmentProps> = ({ onBookClick }) => {
 
                     <div className="mt-auto pt-8 space-y-4">
                         <button
-                            onClick={handleBookNow}
+                            onClick={() => handleTierBooking(TierType.SIGNATURE)}
                             className="w-full py-5 bg-[var(--milano-bronzo)] text-black text-[10px] font-mono uppercase tracking-[0.2em] hover:bg-white transition-all duration-500 font-bold active:scale-[0.98] touch-manipulation cursor-pointer relative z-30 shadow-[0_0_30px_rgba(212,175,55,0.2)]"
                         >
-                            Richiedi Disponibilità
+                            Richiedi Signature →
                         </button>
                         <p className="text-[8px] md:text-[9px] text-center text-white/30 font-mono uppercase tracking-wider">
                             *First Time: -30% <button onClick={handleBookNow} className="underline hover:text-white ml-1">Usa Codice</button>
