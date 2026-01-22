@@ -78,7 +78,7 @@ const Investment: React.FC<InvestmentProps> = ({ onBookClick }) => {
                         </div>
                         <p className="text-[7px] text-white/15 text-center font-sans leading-tight mb-8 px-2">Le tariffe si intendono per servizi di assistenza alla persona e coordinamento logistico. L'eventuale supporto alla mobilità è incluso a titolo accessorio.</p>
 
-                        <ul className="space-y-4 mb-12">
+                        <ul className="space-y-4">
                             <li className="flex items-start gap-3 text-xs md:text-sm text-white/70"><Check className="w-4 h-4 text-green-500 mt-0.5 shrink-0" /> Presidio Logistico Attivo</li>
                             <li className="flex items-start gap-3 text-xs md:text-sm text-white/70"><Check className="w-4 h-4 text-green-500 mt-0.5 shrink-0" /> Assistenza Diretta Michael</li>
                             <li className="flex items-start gap-3 text-xs md:text-sm text-white/70"><Check className="w-4 h-4 text-green-500 mt-0.5 shrink-0" /> Puntualità Millimetrica</li>
@@ -114,7 +114,7 @@ const Investment: React.FC<InvestmentProps> = ({ onBookClick }) => {
                         </div>
                         <p className="text-[7px] text-white/15 text-center font-sans leading-tight mb-8 px-2">Tempo di Incarico comprensivo di coordinamento, presidio e gestione delle variabili in tempo reale.</p>
 
-                        <ul className="space-y-4 mb-12">
+                        <ul className="space-y-4">
                             <li className="flex items-start gap-3 text-xs md:text-sm text-white"><Check className="w-4 h-4 text-[var(--milano-bronzo)] mt-0.5 shrink-0" /> <strong>Tutto di Essentials, più:</strong></li>
                             <li className="flex items-start gap-3 text-xs md:text-sm text-white/80"><Check className="w-4 h-4 text-[var(--milano-bronzo)] mt-0.5 shrink-0" /> Protocollo Backup Automatico</li>
                             <li className="flex items-start gap-3 text-xs md:text-sm text-white/80"><Check className="w-4 h-4 text-[var(--milano-bronzo)] mt-0.5 shrink-0" /> Reattività Last-Minute (4h)</li>
@@ -149,7 +149,7 @@ const Investment: React.FC<InvestmentProps> = ({ onBookClick }) => {
                             <span className="text-[9px] md:text-[10px] uppercase tracking-widest text-white/40">24/7/365 Illimitato</span>
                         </div>
 
-                        <ul className="space-y-4 mb-12">
+                        <ul className="space-y-4">
                             <li className="flex items-start gap-3 text-xs md:text-sm text-white/90"><Check className="w-4 h-4 text-white mt-0.5 shrink-0" /> Linea diretta prioritaria H24</li>
                             <li className="flex items-start gap-3 text-xs md:text-sm text-white/90"><Check className="w-4 h-4 text-white mt-0.5 shrink-0" /> Nessun limite di ore</li>
                             <li className="flex items-start gap-3 text-xs md:text-sm text-white/90"><Check className="w-4 h-4 text-white mt-0.5 shrink-0" /> Coordinamento team dedicato</li>
