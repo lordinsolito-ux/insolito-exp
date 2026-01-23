@@ -176,7 +176,7 @@ const Investment: React.FC<InvestmentProps> = ({ selectedTier, onBookClick, onTi
             {/* FINAL CTA */}
             <div className="max-w-4xl mx-auto text-center relative z-10 py-16 md:py-32 border-y border-white/5 bg-black px-6">
                 <h2
-                    style={{ fontSize: 'var(--text-title-lg)' }}
+                    style={{ fontSize: 'var(--text-title-lg)', lineHeight: '1.2' }}
                     className="font-accent uppercase font-bold tracking-tighter mb-8 text-white"
                 >
                     Il tuo tempo <br /> non torna indietro.
