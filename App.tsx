@@ -33,7 +33,7 @@ import FloatingHeader from './components/sections/FloatingHeader';
 import Hero from './components/sections/Hero';
 import NarrativeSpread from './components/sections/NarrativeSpread';
 import AntiLuxury from './components/sections/AntiLuxury';
-import ServiceSelection from './components/sections/ServiceSelection';
+// import ServiceSelection from './components/sections/ServiceSelection'; // Removed Legacy Cards
 import BookingForm from './components/sections/BookingForm';
 import Footer from './components/sections/Footer';
 import GhostModeOverlay from './components/sections/GhostModeOverlay';
@@ -105,7 +105,7 @@ const App: React.FC = () => {
 
   // Refs
   const idleTimer = useRef<NodeJS.Timeout | null>(null);
-  const servicesRef = useRef<HTMLDivElement>(null);
+  const investmentRef = useRef<HTMLDivElement>(null);
   const formCardRef = useRef<HTMLDivElement>(null);
 
   // Activity Monitor (Ghost Mode)
@@ -354,7 +354,7 @@ const App: React.FC = () => {
         isScrolled={isScrolled}
         onPhilosophy={() => document.getElementById('essence')?.scrollIntoView({ behavior: 'smooth' })}
         onVision={() => setIsVisionOpen(true)}
-        onServices={() => servicesRef.current?.scrollIntoView({ behavior: 'smooth' })}
+        onServices={() => investmentRef.current?.scrollIntoView({ behavior: 'smooth' })}
         onInquire={() => formCardRef.current?.scrollIntoView({ behavior: 'smooth' })}
       />
 
@@ -372,29 +372,31 @@ const App: React.FC = () => {
             isScrolled={isScrolled}
             onAdminLogin={() => setShowAdminLogin(true)}
             onArchiveClick={() => setShowHistory(true)}
-            onEnterClick={() => servicesRef.current?.scrollIntoView({ behavior: 'smooth' })}
+            onEnterClick={() => investmentRef.current?.scrollIntoView({ behavior: 'smooth' })}
           />
 
           <main className="bg-transparent relative z-10">
+            {/* <ServiceSelection ref={servicesRef} onServiceSelect={handleServiceSelect} /> - REMOVED LEGACY */}
             <NarrativeSpread />
             <TheGuardian onStoryClick={() => setShowBrandStory(true)} />
-            <ServiceSelection ref={servicesRef} onServiceSelect={handleServiceSelect} />
             <AntiLuxury />
-            <Investment
-              onBookClick={() => {
-                setActiveStep(1);
-                setTimeout(() => {
-                  formCardRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                }, 100);
-              }}
-              onTierSelect={(tier) => {
-                // ✅ FIX: Chiama direttamente handleTierSelect invece di mostrare TierSelector
-                handleTierSelect(tier);
-                setTimeout(() => {
-                  formCardRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                }, 100);
-              }}
-            />
+            <div ref={investmentRef}>
+              <Investment
+                onBookClick={() => {
+                  setActiveStep(1);
+                  setTimeout(() => {
+                    formCardRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                  }, 100);
+                }}
+                onTierSelect={(tier) => {
+                  // ✅ FIX: Chiama direttamente handleTierSelect invece di mostrare TierSelector
+                  handleTierSelect(tier);
+                  setTimeout(() => {
+                    formCardRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                  }, 100);
+                }}
+              />
+            </div>
 
             <div ref={formCardRef}>
               <BookingForm
