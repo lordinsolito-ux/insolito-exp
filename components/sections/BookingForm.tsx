@@ -40,6 +40,8 @@ interface BookingFormProps {
     onPrevStep: () => void;
     onNextStep: () => void;
     onSelectTier: (tier: TierType) => void;
+    onAddAttachments: (files: File[]) => void;
+    onRemoveAttachment: (index: number) => void;
     onSubmit: (e: React.FormEvent) => void;
     isNightService: (time: string) => boolean;
 }
@@ -61,6 +63,8 @@ const BookingForm: React.FC<BookingFormProps> = ({
     onPrevStep,
     onNextStep,
     onSelectTier,
+    onAddAttachments,
+    onRemoveAttachment,
     onSubmit,
     isNightService
 }) => {
@@ -77,10 +81,9 @@ const BookingForm: React.FC<BookingFormProps> = ({
     const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         if (e.target.files) {
             const files = Array.from(e.target.files);
-            // In a real app, we'd use a prop to update state. 
-            // For now, let's assume formData.attachments is updated via a custom handler or hidden input logic
-            // Since I cannot modify all parent handlers easily without risk, I'll mock the UI feedback
-            console.log('Files attached:', files);
+            onAddAttachments(files);
+            // Clear input so same file can be selected again
+            if (fileInputRef.current) fileInputRef.current.value = '';
         }
     };
 
@@ -191,13 +194,21 @@ const BookingForm: React.FC<BookingFormProps> = ({
                                                         className="hidden"
                                                     />
                                                 </div>
-                                                {/* Mock Attachment List */}
+                                                {/* Real Attachment List */}
                                                 <div className="flex flex-wrap gap-4">
-                                                    <div className="attachment-chip">
-                                                        <FileText className="w-3 h-3" />
-                                                        <span>Breve_Logistico.pdf</span>
-                                                        <X className="w-3 h-3 ml-2 cursor-pointer hover:text-red-500" />
-                                                    </div>
+                                                    {formData.attachments?.map((file, idx) => (
+                                                        <div key={idx} className="attachment-chip group/chip">
+                                                            {getFileIcon(file.type)}
+                                                            <span className="max-w-[150px] truncate">{file.name}</span>
+                                                            <X
+                                                                className="w-3 h-3 ml-2 cursor-pointer hover:text-red-500 transition-colors"
+                                                                onClick={(e) => {
+                                                                    e.stopPropagation();
+                                                                    onRemoveAttachment(idx);
+                                                                }}
+                                                            />
+                                                        </div>
+                                                    ))}
                                                 </div>
                                             </div>
                                         </div>

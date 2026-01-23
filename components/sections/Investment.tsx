@@ -1,13 +1,17 @@
 import React, { useState } from 'react';
-import { Check, X, ChevronDown } from 'lucide-react';
+import { Check, ChevronDown } from 'lucide-react';
 import { TierType } from '../../types';
+import { TierSelector } from '../TierSelector';
+import { useTranslation } from 'react-i18next';
 
 interface InvestmentProps {
+    selectedTier: TierType | null;
     onBookClick: () => void;
-    onTierSelect?: (tier: TierType) => void;
+    onTierSelect: (tier: TierType) => void;
 }
 
-const Investment: React.FC<InvestmentProps> = ({ onBookClick, onTierSelect }) => {
+const Investment: React.FC<InvestmentProps> = ({ selectedTier, onBookClick, onTierSelect }) => {
+    const { t } = useTranslation();
     const [openFaq, setOpenFaq] = useState<number | null>(null);
     const whatsappLink = "https://wa.me/393393522164";
 
@@ -22,23 +26,10 @@ const Investment: React.FC<InvestmentProps> = ({ onBookClick, onTierSelect }) =>
         window.open(url, '_blank', 'noopener,noreferrer');
     };
 
-    const handleBookNow = () => {
-        if (onBookClick) {
-            onBookClick();
-        } else {
-            const el = document.getElementById('booking-section');
-            if (el) {
-                el.scrollIntoView({ behavior: 'smooth' });
-            }
-        }
-    };
-
     const handleTierBooking = (tier: TierType) => {
-        // Trigger tier selection if handler provided
         if (onTierSelect) {
             onTierSelect(tier);
         }
-        // Scroll to booking section
         const el = document.getElementById('booking-section');
         if (el) {
             el.scrollIntoView({ behavior: 'smooth' });
@@ -70,116 +61,13 @@ const Investment: React.FC<InvestmentProps> = ({ onBookClick, onTierSelect }) =>
                 </p>
             </div>
 
-            {/* TIERS GRID */}
-            <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-24 md:mb-40 relative z-10 items-stretch">
-
-                {/* TIER 1 - ESSENTIALS */}
-                <div className="bg-white/[0.02] border border-white/10 p-8 md:p-10 hover:border-[var(--milano-bronzo)]/30 transition-all duration-500 group relative overflow-hidden rounded-sm flex flex-col h-full">
-                    <div className="absolute top-0 right-0 bg-[var(--milano-bronzo)] text-black text-[9px] font-bold px-3 py-1 uppercase tracking-widest z-10">
-                        ⚡ First Time -30%
-                    </div>
-
-                    <div className="flex-grow">
-                        <div className="mb-8">
-                            <span className="inline-block py-1 px-3 bg-white/5 text-[9px] font-mono tracking-widest text-white/60 uppercase rounded-sm mb-4">Start Here</span>
-                            <h3 className="text-2xl md:text-3xl font-accent uppercase tracking-wide mb-2">Essentials</h3>
-                            <p className="text-[10px] md:text-[11px] font-mono text-white/40 uppercase tracking-widest leading-relaxed">Per chi esige un coordinamento impeccabile delle proprie necessità quotidiane.</p>
-                        </div>
-
-                        <div className="mb-6 p-6 bg-black/40 border border-white/5 text-center">
-                            <span className="block text-2xl md:text-3xl font-bold text-white mb-1">€180/ora</span>
-                            <span className="text-[9px] md:text-[10px] uppercase tracking-widest text-white/40">Minimo 3h consecutive</span>
-                        </div>
-                        <p className="text-[7px] text-white/15 text-center font-sans leading-tight mb-8 px-2">Le tariffe si intendono per servizi di assistenza alla persona e coordinamento logistico. L'eventuale supporto alla mobilità è incluso a titolo accessorio.</p>
-
-                        <ul className="space-y-4">
-                            <li className="flex items-start gap-3 text-xs md:text-sm text-white/70"><Check className="w-4 h-4 text-green-500 mt-0.5 shrink-0" /> Presidio Logistico Attivo</li>
-                            <li className="flex items-start gap-3 text-xs md:text-sm text-white/70"><Check className="w-4 h-4 text-green-500 mt-0.5 shrink-0" /> Assistenza Diretta Michael</li>
-                            <li className="flex items-start gap-3 text-xs md:text-sm text-white/70"><Check className="w-4 h-4 text-green-500 mt-0.5 shrink-0" /> Puntualità Millimetrica</li>
-                            <li className="flex items-start gap-3 text-xs md:text-sm text-white/30 italic"><X className="w-4 h-4 text-red-500/50 mt-0.5 shrink-0" /> No Night Estremo</li>
-                        </ul>
-                    </div>
-
-                    <div className="mt-auto pt-8">
-                        <button
-                            onClick={() => handleTierBooking(TierType.ESSENTIALS)}
-                            className="w-full py-5 bg-[var(--milano-bronzo)]/10 border border-[var(--milano-bronzo)]/30 text-[10px] font-mono uppercase tracking-[0.2em] text-[var(--milano-bronzo)] hover:bg-[var(--milano-bronzo)] hover:text-black transition-all duration-500 active:scale-[0.98] touch-manipulation font-bold cursor-pointer relative z-30"
-                        >
-                            Richiedi Essentials →
-                        </button>
-                    </div>
-                </div>
-
-                {/* TIER 2 - SIGNATURE */}
-                <div className="bg-[var(--milano-bronzo)]/[0.05] border border-[var(--milano-bronzo)]/40 p-8 md:p-10 relative shadow-[0_0_50px_-20px_rgba(139,115,85,0.2)] rounded-sm flex flex-col h-full transform transition-all duration-500 hover:border-[var(--milano-bronzo)]">
-                    <div className="absolute top-0 right-0 p-2">
-                        <span className="text-[8px] font-mono bg-[var(--milano-bronzo)] text-black px-2 py-1 uppercase tracking-widest font-bold">💎 73% Clienti</span>
-                    </div>
-
-                    <div className="flex-grow">
-                        <div className="mb-8">
-                            <h3 className="text-2xl md:text-3xl font-accent uppercase tracking-wide mb-2 text-[var(--milano-bronzo)]">Signature</h3>
-                            <p className="text-[10px] md:text-[11px] font-mono text-white/40 uppercase tracking-widest leading-relaxed">La massima espressione della serenità logistica: l'imprevisto smette di esistere.</p>
-                        </div>
-
-                        <div className="mb-6 p-6 bg-black/60 border border-[var(--milano-bronzo)]/20 text-center">
-                            <span className="block text-2xl md:text-3xl font-bold text-[var(--milano-bronzo)] mb-1">€280/ora</span>
-                            <span className="text-[9px] md:text-[10px] uppercase tracking-widest text-white/40">Minimo 4h consecutive</span>
-                        </div>
-                        <p className="text-[7px] text-white/15 text-center font-sans leading-tight mb-8 px-2">Tempo di Incarico comprensivo di coordinamento, presidio e gestione delle variabili in tempo reale.</p>
-
-                        <ul className="space-y-4">
-                            <li className="flex items-start gap-3 text-xs md:text-sm text-white"><Check className="w-4 h-4 text-[var(--milano-bronzo)] mt-0.5 shrink-0" /> <strong>Tutto di Essentials, più:</strong></li>
-                            <li className="flex items-start gap-3 text-xs md:text-sm text-white/80"><Check className="w-4 h-4 text-[var(--milano-bronzo)] mt-0.5 shrink-0" /> Protocollo Backup Automatico</li>
-                            <li className="flex items-start gap-3 text-xs md:text-sm text-white/80"><Check className="w-4 h-4 text-[var(--milano-bronzo)] mt-0.5 shrink-0" /> Reattività Last-Minute (4h)</li>
-                            <li className="flex items-start gap-3 text-xs md:text-sm text-white/80"><Check className="w-4 h-4 text-[var(--milano-bronzo)] mt-0.5 shrink-0" /> Guardian Notturno</li>
-                        </ul>
-                    </div>
-
-                    <div className="mt-auto pt-8 space-y-4">
-                        <button
-                            onClick={() => handleTierBooking(TierType.SIGNATURE)}
-                            className="w-full py-5 bg-[var(--milano-bronzo)] text-black text-[10px] font-mono uppercase tracking-[0.2em] hover:bg-white transition-all duration-500 font-bold active:scale-[0.98] touch-manipulation cursor-pointer relative z-30 shadow-[0_0_30px_rgba(212,175,55,0.2)]"
-                        >
-                            Richiedi Signature →
-                        </button>
-                        <p className="text-[8px] md:text-[9px] text-center text-white/30 font-mono uppercase tracking-wider">
-                            *First Time: -30% <button onClick={handleBookNow} className="underline hover:text-white ml-1">Usa Codice</button>
-                        </p>
-                    </div>
-                </div>
-
-                {/* TIER 3 - ELITE RETAINER */}
-                <div className="bg-white/[0.02] border border-white/10 p-8 md:p-10 hover:border-[var(--milano-bronzo)]/30 transition-all duration-500 rounded-sm flex flex-col h-full">
-                    <div className="flex-grow">
-                        <div className="mb-8">
-                            <span className="inline-block py-1 px-3 bg-white/5 text-[9px] font-mono tracking-widest text-[var(--milano-bronzo)] uppercase rounded-sm mb-4">👑 Invitation Only</span>
-                            <h3 className="text-2xl md:text-3xl font-accent uppercase tracking-wide mb-2">Elite Retainer</h3>
-                            <p className="text-[10px] md:text-[11px] font-mono text-white/40 uppercase tracking-widest leading-relaxed">Per Chi Non Vuole Più Pensare a "Posso Chiamarlo?".</p>
-                        </div>
-
-                        <div className="mb-8 p-6 bg-black/40 border border-white/5 text-center overflow-hidden">
-                            <span className="block text-xl md:text-2xl lg:text-3xl font-bold text-white mb-1 truncate whitespace-nowrap">€6.000/mese</span>
-                            <span className="text-[9px] md:text-[10px] uppercase tracking-widest text-white/40">24/7/365 Illimitato</span>
-                        </div>
-
-                        <ul className="space-y-4">
-                            <li className="flex items-start gap-3 text-xs md:text-sm text-white/90"><Check className="w-4 h-4 text-white mt-0.5 shrink-0" /> Linea diretta prioritaria H24</li>
-                            <li className="flex items-start gap-3 text-xs md:text-sm text-white/90"><Check className="w-4 h-4 text-white mt-0.5 shrink-0" /> Nessun limite di ore</li>
-                            <li className="flex items-start gap-3 text-xs md:text-sm text-white/90"><Check className="w-4 h-4 text-white mt-0.5 shrink-0" /> Coordinamento team dedicato</li>
-                        </ul>
-                    </div>
-
-                    <div className="mt-auto pt-8 space-y-4">
-                        <button
-                            onClick={() => handleWhatsApp("Sono interessato al Tier ELITE RETAINER.")}
-                            className="w-full py-5 border border-white/20 text-[10px] font-mono uppercase tracking-[0.2em] hover:bg-white hover:text-black transition-all duration-500 active:scale-[0.98] touch-manipulation font-bold cursor-pointer relative z-30"
-                        >
-                            Richiedi Elite
-                        </button>
-                        <p className="text-[8px] md:text-[9px] text-center text-white/30 font-mono uppercase tracking-wider">Disponibili: 7 Slot</p>
-                    </div>
-                </div>
+            {/* UNIFIED TIER SELECTOR */}
+            <div className="max-w-7xl mx-auto mb-24 md:mb-40 relative z-10">
+                <TierSelector
+                    selectedTier={selectedTier}
+                    onSelectTier={handleTierBooking}
+                    t={t}
+                />
             </div>
 
             {/* IL VALORE DEL TUO TEMPO - STRATEGIC COMPARISON */}
@@ -293,7 +181,7 @@ const Investment: React.FC<InvestmentProps> = ({ onBookClick, onTierSelect }) =>
                 <div className="flex flex-col items-center gap-8">
                     <button
                         onClick={() => handleWhatsApp()}
-                        className="w-full md:w-auto px-16 py-6 bg-white text-black text-[12px] font-mono uppercase tracking-[0.3em] hover:bg-[var(--milano-bronzo)] hover:text-white transition-all duration-500 font-bold active:scale-[0.98] touch-manipulation cursor-pointer relative z-30"
+                        className="w-full md:w-auto px-16 py-6 bg-white text-black text-[12px] font-mono uppercase tracking-[0.3em] hover:bg-[var(--milano-bronzo)] hover:text-white transition-all duration-500 font-bold active:scale-[0.98] touch-manipulation cursor-pointer relative z-30 shadow-[0_0_30px_rgba(212,175,55,0.2)]"
                     >
                         Parla con Michael
                     </button>

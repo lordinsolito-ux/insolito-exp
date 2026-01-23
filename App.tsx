@@ -307,6 +307,20 @@ const App: React.FC = () => {
     setPreselectedTier(null);
   };
 
+  const handleAddAttachments = (files: File[]) => {
+    setFormData(prev => ({
+      ...prev,
+      attachments: [...(prev.attachments || []), ...files]
+    }));
+  };
+
+  const handleRemoveAttachment = (index: number) => {
+    setFormData(prev => ({
+      ...prev,
+      attachments: prev.attachments?.filter((_, i) => i !== index)
+    }));
+  };
+
   const handleResetApp = () => { setIsBookingConfirmed(false); setActiveStep(1); setFormData(INITIAL_FORM_STATE); setRouteInfo(null); setTermsAccepted(false); };
 
   const handleSubmit = async () => {
@@ -382,6 +396,7 @@ const App: React.FC = () => {
             <AntiLuxury />
             <div ref={investmentRef}>
               <Investment
+                selectedTier={formData.tier || null}
                 onBookClick={() => {
                   setActiveStep(1);
                   setTimeout(() => {
@@ -416,6 +431,8 @@ const App: React.FC = () => {
                 onPrevStep={handlePrevStep}
                 onNextStep={handleNextStep}
                 onSelectTier={handleTierSelect}
+                onAddAttachments={handleAddAttachments}
+                onRemoveAttachment={handleRemoveAttachment}
                 onSubmit={handleSubmit}
                 isNightService={isNightService}
               />
