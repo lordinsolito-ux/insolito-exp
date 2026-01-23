@@ -116,12 +116,12 @@ const BookingForm: React.FC<BookingFormProps> = ({
                         animate={{ opacity: 1, scale: 1, y: 0 }}
                         exit={{ opacity: 0, scale: 0.98, y: 10 }}
                         transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-                        className={`relative w-full max-w-3xl mt-20 rounded-none md:rounded-lg overflow-hidden transition-all duration-1000 shadow-2xl mb-8 ${activeStep >= 2 ? 'pearl-monolith border-none border-2 border-black/5' : 'luxury-monolith border border-white/10'}`}
+                        className={`relative w-[92vw] md:w-full max-w-3xl mt-16 md:mt-20 rounded-lg overflow-hidden transition-all duration-1000 shadow-2xl mb-8 ${activeStep >= 2 ? 'pearl-monolith border-none border-2 border-black/5' : 'luxury-monolith border border-white/10'}`}
                     >
                         {/* CLOSE BUTTON - ARCHITECTURAL PRECISION */}
                         <button
                             onClick={onClose}
-                            className={`absolute top-4 right-4 z-[210] p-2 group transition-all duration-700 ${activeStep >= 2 ? 'text-black/40 hover:text-black' : 'text-white/40 hover:text-white'}`}
+                            className={`absolute top-3 right-3 md:top-4 md:right-4 z-[210] p-2 group transition-all duration-700 ${activeStep >= 2 ? 'text-black/40 hover:text-black' : 'text-white/40 hover:text-white'}`}
                         >
                             <X className="w-5 h-5 transition-transform group-hover:rotate-90 duration-700" strokeWidth={1} />
                         </button>
@@ -131,7 +131,7 @@ const BookingForm: React.FC<BookingFormProps> = ({
                         <div className="relative z-10 w-full">
                             <StepIndicator currentStep={activeStep} />
 
-                            <div className="p-5 md:p-8 lg:p-10">
+                            <div className="p-4 md:p-8 lg:p-10">
                                 <AnimatePresence mode="wait">
                                     {/* STEP 1: PROTOCOLLO (TIER) */}
                                     {activeStep === 1 && (
