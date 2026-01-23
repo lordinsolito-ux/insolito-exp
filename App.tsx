@@ -251,10 +251,26 @@ const App: React.FC = () => {
   const validateStep = (step: number): boolean => {
     const errors: ValidationErrors = {};
     let isValid = true;
-    if (step === 1 && !formData.serviceType) { errors.serviceType = t('validation.required'); isValid = false; }
+
+    if (step === 1 && !formData.tier && !formData.serviceType) {
+      errors.tier = 'Seleziona un tier di servizio';
+      isValid = false;
+    }
     else if (step === 2) {
-      if (!formData.pickupLocation) { errors.pickupLocation = t('validation.required'); isValid = false; }
-      if (!formData.destination) { errors.destination = t('validation.required'); isValid = false; }
+      if (formData.tier) {
+        // Tier-based validation
+        if (!formData.assistanceDescription?.trim()) {
+          errors.assistanceDescription = 'Descrivi la natura dell\'incarico';
+          isValid = false;
+        } else if (formData.assistanceDescription.length < 30) {
+          errors.assistanceDescription = 'La descrizione deve essere di almeno 30 caratteri per garantire un servizio d\'eccellenza';
+          isValid = false;
+        }
+      } else {
+        // Legacy validation
+        if (!formData.pickupLocation) { errors.pickupLocation = t('validation.required'); isValid = false; }
+        if (!formData.destination) { errors.destination = t('validation.required'); isValid = false; }
+      }
       if (!formData.date) { errors.date = t('validation.required'); isValid = false; }
       if (!formData.time) { errors.time = t('validation.required'); isValid = false; }
     } else if (step === 3) {
@@ -361,32 +377,51 @@ const App: React.FC = () => {
             <TheGuardian onStoryClick={() => setShowBrandStory(true)} />
             <ServiceSelection ref={servicesRef} onServiceSelect={handleServiceSelect} />
             <AntiLuxury />
-            <Investment onBookClick={() => {
-              setActiveStep(2);
-              setTimeout(() => {
-                formCardRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-              }, 100);
-            }} />
-            <BookingForm
-              ref={formCardRef}
-              activeStep={activeStep}
-              formData={formData}
-              validationErrors={validationErrors}
-              availableSlots={availableSlots}
-              termsAccepted={termsAccepted}
-              isLoading={isLoading}
-              t={t}
-              onInputChange={handleInputChange}
-              onLocationSearch={handleLocationSearch}
-              onInputBlur={triggerRouteCalc}
-              onPaymentMethodChange={(m) => setFormData(p => ({ ...p, paymentMethod: m }))}
-              onToggleTerms={setTermsAccepted}
-              onShowTerms={() => setShowTerms(true)}
-              onPrevStep={handlePrevStep}
-              onNextStep={handleNextStep}
-              onSubmit={handleSubmit}
-              isNightService={isNightService}
+            <Investment
+              onBookClick={() => {
+                setActiveStep(1);
+                setTimeout(() => {
+                  formCardRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }, 100);
+              }}
+              onTierSelect={(tier) => {
+                setPreselectedTier(tier);
+                setActiveStep(1);
+                setTimeout(() => {
+                  formCardRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }, 100);
+              }}
             />
+
+            <div ref={formCardRef}>
+              {activeStep === 1 && (
+                <TierSelector
+                  selectedTier={formData.tier || preselectedTier}
+                  onSelectTier={handleTierSelect}
+                  t={t}
+                />
+              )}
+
+              <BookingForm
+                activeStep={activeStep}
+                formData={formData}
+                validationErrors={validationErrors}
+                availableSlots={availableSlots}
+                termsAccepted={termsAccepted}
+                isLoading={isLoading}
+                t={t}
+                onInputChange={handleInputChange}
+                onLocationSearch={handleLocationSearch}
+                onInputBlur={triggerRouteCalc}
+                onPaymentMethodChange={(m) => setFormData(p => ({ ...p, paymentMethod: m }))}
+                onToggleTerms={setTermsAccepted}
+                onShowTerms={() => setShowTerms(true)}
+                onPrevStep={handlePrevStep}
+                onNextStep={handleNextStep}
+                onSubmit={handleSubmit}
+                isNightService={isNightService}
+              />
+            </div>
           </main>
 
           <Footer

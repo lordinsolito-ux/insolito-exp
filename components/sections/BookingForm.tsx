@@ -77,31 +77,58 @@ const BookingForm = forwardRef<HTMLDivElement, BookingFormProps>(({
                                         <div className="space-y-10">
                                             <div className="flex items-center gap-4 mb-2">
                                                 <MapPin className="w-4 h-4 text-[var(--milano-bronzo)]" />
-                                                <h4 className="text-[10px] font-mono text-white/40 uppercase tracking-[0.5em]">Dove ti troviamo?</h4>
+                                                <h4 className="text-[10px] font-mono text-white/40 uppercase tracking-[0.5em]">{formData.tier ? 'Natura dell\'Incarico' : 'Dove ti troviamo?'}</h4>
                                             </div>
                                             <div className="space-y-6">
-                                                <div className="group relative">
-                                                    <input
-                                                        type="text"
-                                                        value={formData.pickupLocation}
-                                                        onChange={(e) => onLocationSearch('pickup', e.target.value)}
-                                                        onBlur={onInputBlur}
-                                                        placeholder="PUNTO DI PARTENZA (VIA, HOTEL, AEROPORTO)"
-                                                        className="elite-input"
-                                                    />
-                                                    {validationErrors.pickupLocation && <p className="text-red-500/80 text-[9px] mt-2 font-mono uppercase tracking-widest">{validationErrors.pickupLocation}</p>}
-                                                </div>
-                                                <div className="group relative">
-                                                    <input
-                                                        type="text"
-                                                        value={formData.destination}
-                                                        onChange={(e) => onLocationSearch('destination', e.target.value)}
-                                                        onBlur={onInputBlur}
-                                                        placeholder="DESTINAZIONE FINALE"
-                                                        className="elite-input"
-                                                    />
-                                                    {validationErrors.destination && <p className="text-red-500/80 text-[9px] mt-2 font-mono uppercase tracking-widest">{validationErrors.destination}</p>}
-                                                </div>
+                                                {formData.tier ? (
+                                                    <div className="group relative">
+                                                        <label className="text-xs text-white/60 uppercase tracking-widest mb-2 block">
+                                                            Descriva l'Incarico di Assistenza *
+                                                        </label>
+                                                        <textarea
+                                                            value={formData.assistanceDescription || ''}
+                                                            onChange={(e) => onInputChange(e)}
+                                                            name="assistanceDescription"
+                                                            onBlur={onInputBlur}
+                                                            placeholder="Descriva la natura dell'incarico: gestione logistica, coordinamento spostamenti d'élite, assistenza fiduciaria o presidio operativo per eventi. (Es: Richiedo assistenza per arrivo aeroportuale ore 14:30, coordinamento bagagli e presidio durante meeting pomeridiano in centro)."
+                                                            className="elite-input min-h-[140px] resize-none"
+                                                            rows={6}
+                                                        />
+                                                        {validationErrors.assistanceDescription && (
+                                                            <p className="text-red-500/80 text-[9px] mt-2 font-mono uppercase tracking-widest">
+                                                                {validationErrors.assistanceDescription}
+                                                            </p>
+                                                        )}
+                                                        <p className="text-[9px] text-gray-500 mt-2 leading-relaxed italic">
+                                                            Focus: descriva cosa deve essere gestito/coordinato, non semplicemente "dove andare". Ogni incarico è unico.
+                                                        </p>
+                                                    </div>
+                                                ) : (
+                                                    <>
+                                                        <div className="group relative">
+                                                            <input
+                                                                type="text"
+                                                                value={formData.pickupLocation}
+                                                                onChange={(e) => onLocationSearch('pickup', e.target.value)}
+                                                                onBlur={onInputBlur}
+                                                                placeholder="PUNTO DI PARTENZA (VIA, HOTEL, AEROPORTO)"
+                                                                className="elite-input"
+                                                            />
+                                                            {validationErrors.pickupLocation && <p className="text-red-500/80 text-[9px] mt-2 font-mono uppercase tracking-widest">{validationErrors.pickupLocation}</p>}
+                                                        </div>
+                                                        <div className="group relative">
+                                                            <input
+                                                                type="text"
+                                                                value={formData.destination}
+                                                                onChange={(e) => onLocationSearch('destination', e.target.value)}
+                                                                onBlur={onInputBlur}
+                                                                placeholder="DESTINAZIONE FINALE"
+                                                                className="elite-input"
+                                                            />
+                                                            {validationErrors.destination && <p className="text-red-500/80 text-[9px] mt-2 font-mono uppercase tracking-widest">{validationErrors.destination}</p>}
+                                                        </div>
+                                                    </>
+                                                )}
                                             </div>
                                         </div>
 
@@ -271,6 +298,23 @@ const BookingForm = forwardRef<HTMLDivElement, BookingFormProps>(({
                         </button>
 
                         <div className="w-full md:w-auto">
+                            {activeStep === 4 && (
+                                <div className="mb-8 p-5 bg-black/40 border border-[var(--milano-bronzo)]/20 rounded-lg backdrop-blur-sm text-left">
+                                    <div className="flex items-start gap-3">
+                                        <div className="text-[var(--milano-bronzo)] mt-0.5 font-bold">⚖️</div>
+                                        <div>
+                                            <h4 className="text-[11px] uppercase tracking-widest text-[var(--milano-bronzo)] font-bold mb-3 flex items-center gap-2">
+                                                Informativa Contrattuale
+                                                <span className="text-[8px] text-gray-500 font-normal ml-2">(Art. 2222 C.C.)</span>
+                                            </h4>
+                                            <p className="text-[9px] leading-relaxed text-gray-300">
+                                                La presente richiesta costituisce conferimento di incarico per la prestazione di servizi di <strong className="text-white">assistenza personale, coordinamento logistico e supporto fiduciario</strong>, regolati dalle norme sul <a href="https://www.normattiva.it/uri-res/N2Ls?urn:nir:stato:codice.civile:1942-03-16~art2222!" target="_blank" rel="noopener noreferrer" className="underline text-[var(--milano-bronzo)] hover:text-white transition-colors"><strong>Contratto d'Opera (Art. 2222 e seguenti C.C.)</strong></a>. Il prestatore opera come <strong className="text-white">consulente gestionale e assistente lifestyle</strong>. Eventuali supporti alla mobilità sono da intendersi come <strong className="text-white">accessori e strumentali</strong> all'esecuzione della missione richiesta. L'accettazione dell'incarico è soggetta a conferma.
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            )}
+
                             {activeStep < 4 ? (
                                 <button
                                     onClick={onNextStep}
