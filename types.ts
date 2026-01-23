@@ -109,7 +109,7 @@ export interface BookingFormData {
   paymentMethod: PaymentMethod;
   hasPets: boolean;
 
-  attachments: File[]; // New: support for mission-critical documents
+  attachments?: File[]; // Optional: support for mission-critical documents
   estimatedPrice: number;
   priceBreakdown: PriceBreakdown; // Store detailed pricing
 }
