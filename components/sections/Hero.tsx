@@ -55,8 +55,8 @@ const Hero: React.FC<HeroProps> = ({ isScrolled, onAdminLogin, onArchiveClick, o
                     className="flex items-center gap-4 md:gap-6 group cursor-pointer"
                     onClick={onAdminLogin}
                 >
-                    <div className="w-6 h-6 md:w-8 md:h-8 rounded-full border border-white/10 flex items-center justify-center transition-all duration-700">
-                        <div className="w-1 h-1 bg-[var(--milano-bronzo)] rounded-full"></div>
+                    <div className="w-8 h-8 md:w-10 md:h-10 flex items-center justify-center transition-all duration-700">
+                        <img src="/logo-insolito.png" alt="Logo" className="w-full h-full object-contain filter brightness-[1.1]" />
                     </div>
                     <span className="text-[9px] md:text-[10px] text-white/40 uppercase tracking-[0.5rem] md:tracking-[0.8rem] group-hover:text-white transition-all duration-700 font-mono hidden sm:block">Index.01</span>
                 </motion.div>

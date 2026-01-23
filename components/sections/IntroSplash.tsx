@@ -57,8 +57,12 @@ const IntroSplash: React.FC<IntroSplashProps> = ({ onFinish }) => {
                     onClick={handleStart}
                     className="group relative z-10 flex flex-col items-center gap-10 md:gap-12 px-10 py-20"
                 >
-                    <div className="w-24 h-24 md:w-20 md:h-20 rounded-full border border-white/5 flex items-center justify-center group-hover:border-[var(--milano-bronzo)]/30 transition-all duration-1000">
-                        <div className="w-2 h-2 md:w-1 md:h-1 bg-white group-hover:bg-[var(--milano-bronzo)] rounded-full transition-all duration-700"></div>
+                    <div className="w-24 h-24 md:w-32 md:h-32 flex items-center justify-center transition-all duration-1000">
+                        <img
+                            src="/logo-insolito.png"
+                            alt="Insolito Privé"
+                            className="w-full h-full object-contain filter brightness-[1.2] drop-shadow-[0_0_20px_rgba(139,115,85,0.2)] group-hover:drop-shadow-[0_0_30px_rgba(139,115,85,0.4)] transition-all duration-700"
+                        />
                     </div>
                     <span className="text-[11px] md:text-[10px] font-mono text-[var(--milano-bronzo)]/40 tracking-[0.8rem] md:tracking-[1.2rem] uppercase group-hover:text-[var(--milano-bronzo)] transition-all duration-700">L'arte di Scomparire.</span>
                     <span className="absolute -bottom-16 md:-bottom-16 text-[10px] md:text-[10px] font-display italic text-[var(--milano-bronzo)] tracking-[0.2em] px-8 py-3 bg-black flex flex-col items-center">
@@ -83,7 +87,14 @@ const IntroSplash: React.FC<IntroSplashProps> = ({ onFinish }) => {
 
             {step === 3 && (
                 <div className="flex flex-col items-center gap-10 md:gap-12 animate-reveal px-6 text-center">
-                    <div className="flex flex-col items-center gap-4">
+                    <div className="flex flex-col items-center gap-6">
+                        <div className="w-32 h-32 md:w-48 md:h-48 mb-4">
+                            <img
+                                src="/logo-insolito.png"
+                                alt="Insolito Privé"
+                                className="w-full h-full object-contain drop-shadow-[0_0_40px_rgba(139,115,85,0.3)]"
+                            />
+                        </div>
                         <h1 className="text-5xl md:text-8xl font-accent text-white tracking-[0.3em] md:tracking-[0.4em] mb-4">INSOLITO Privè</h1>
                         <div className="h-px w-20 md:w-24 bg-gradient-to-r from-transparent via-[var(--milano-bronzo)]/30 to-transparent"></div>
                         <p className="text-[9px] md:text-[10px] font-mono text-[var(--milano-bronzo)] tracking-[1.2em] md:tracking-[1.5em] uppercase drop-shadow-[0_0_8px_rgba(212,175,55,0.3)]">L'Arte di Scomparire</p>
