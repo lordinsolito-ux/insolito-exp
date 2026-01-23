@@ -8,6 +8,7 @@ import {
 import { BookingRecord } from '../types';
 import { sendBookingUpdateNotification, fetchAllBookings, saveBooking, isCloudConfigured } from '../services/bookingService';
 import { generateInvoiceHTML } from '../services/invoiceService';
+import { stripeService } from '../services/stripeService';
 import { BUSINESS_INFO } from '../legalContent';
 
 // --- TYPES ---
@@ -163,7 +164,11 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({ isOpen, onClose 
     const [isProcessing, setIsProcessing] = useState<string | null>(null);
 
     // Filters for Bookings View
-    const [bookingFilter, setBookingFilter] = useState<'all' | 'pending' | 'confirmed' | 'declined' | 'rescheduled'>('all');
+    const [bookingFilter, setBookingFilter] = useState<'all' | 'requested' | 'proposed' | 'confirmed' | 'declined' | 'rescheduled' | 'executed' | 'pending'>('all');
+
+    // Phase 26: Approval Workflow State
+    const [approvingBooking, setApprovingBooking] = useState<BookingRecord | null>(null);
+    const [stripeLink, setStripeLink] = useState('');
 
     // Reschedule State
     const [editingBooking, setEditingBooking] = useState<BookingRecord | null>(null);
@@ -207,12 +212,12 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({ isOpen, onClose 
             // 2. Within Pending: Sort by SUBMISSION TIME (Newest first)
             // 3. Other bookings: Sort by TRIP DATE (Newest/Furthest first)
             const sorted = Array.isArray(activeData) ? activeData.sort((a, b) => {
-                // 1. Pending Priority
-                if (a.status === 'pending' && b.status !== 'pending') return -1;
-                if (a.status !== 'pending' && b.status === 'pending') return 1;
+                // 1. Priority: Requested bookings FIRST, then Proposed
+                if ((a.status === 'requested' || a.status === 'pending') && b.status !== 'requested' && b.status !== 'pending') return -1;
+                if (a.status !== 'requested' && a.status !== 'pending' && (b.status === 'requested' || b.status === 'pending')) return 1;
 
-                // 2. Pending Sorting (By Submission Timestamp - Newest First)
-                if (a.status === 'pending' && b.status === 'pending') {
+                // 2. Sorting (By Submission Timestamp - Newest First)
+                if ((a.status === 'requested' || a.status === 'pending') && (b.status === 'requested' || b.status === 'pending')) {
                     const tA = a.timestamp ? new Date(a.timestamp).getTime() : Number(a.id);
                     const tB = b.timestamp ? new Date(b.timestamp).getTime() : Number(b.id);
                     return tB - tA; // Descending
@@ -299,19 +304,44 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({ isOpen, onClose 
     }, [bookings]);
 
     // Actions
-    const handleStatusUpdate = async (id: string, status: 'confirmed' | 'declined') => {
+    const handleStatusUpdate = async (id: string, status: any, stripeLinkValue?: string) => {
         const booking = bookings.find(b => b.id === id);
         if (!booking) return;
         setIsProcessing(id);
 
         // Optimistic Update
-        const updated = bookings.map(b => b.id === id ? { ...b, status } : b);
+        const updated = bookings.map(b => b.id === id ? { ...b, status, stripeLink: stripeLinkValue || b.stripeLink } : b);
         setBookings(updated);
 
-        const newRecord = { ...booking, status };
+        const newRecord = { ...booking, status, stripeLink: stripeLinkValue || booking.stripeLink };
         await saveBooking(newRecord); // Admin update (no flag needed)
         await sendBookingUpdateNotification(newRecord, status);
         setIsProcessing(null);
+        setApprovingBooking(null);
+        setStripeLink('');
+    };
+
+    const handleApproveProposal = async () => {
+        if (!approvingBooking) return;
+
+        setIsProcessing(approvingBooking.id);
+
+        // 1. Generate Stripe Link automatically
+        const { url, error } = await stripeService.createProposalPayment(approvingBooking);
+
+        if (error || !url) {
+            alert(`Stripe Error: ${error || 'Failed to generate link'}. Please check your Edge Function and STRIPE_SECRET_KEY.`);
+            setIsProcessing(null);
+            return;
+        }
+
+        // 2. Update status and send email
+        await handleStatusUpdate(approvingBooking.id, 'proposed', url);
+        setIsProcessing(null);
+    };
+
+    const handleMarkExecuted = async (id: string) => {
+        await handleStatusUpdate(id, 'executed');
     };
 
     const openReschedule = (booking: BookingRecord) => {
@@ -478,7 +508,7 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({ isOpen, onClose 
                     icon={AlertOctagon}
                     trend={stats.pending > 0 ? 'down' : 'neutral'}
                     onClick={() => {
-                        setBookingFilter('pending');
+                        setBookingFilter('requested');
                         setView('bookings');
                     }}
                 />
@@ -549,7 +579,7 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({ isOpen, onClose 
                 <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
                     <h1 className="text-2xl md:text-3xl font-serif text-white">Bookings</h1>
                     <div className="flex bg-gray-900/50 rounded-lg p-1 border border-white/5 w-full md:w-auto overflow-x-auto">
-                        {(['all', 'pending', 'confirmed', 'rescheduled', 'declined'] as const).map(f => (
+                        {(['all', 'requested', 'proposed', 'confirmed', 'executed', 'rescheduled', 'declined'] as const).map(f => (
                             <button
                                 key={f}
                                 onClick={() => setBookingFilter(f)}
@@ -611,23 +641,41 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({ isOpen, onClose 
 
                                 {/* Actions */}
                                 <div className="flex justify-end gap-2 pt-2 border-t border-white/5">
-                                    {(booking.status === 'pending' || booking.status === 'rescheduled') && (
+                                    {(booking.status === 'requested' || booking.status === 'pending' || booking.status === 'rescheduled') && (
                                         <>
                                             <button
-                                                onClick={() => handleStatusUpdate(booking.id, 'confirmed')}
+                                                onClick={() => setApprovingBooking(booking)}
                                                 disabled={isProcessing === booking.id}
-                                                className="flex-1 py-2 bg-green-600/20 hover:bg-green-600 text-green-400 hover:text-white rounded text-xs font-bold uppercase tracking-wider transition-colors flex items-center justify-center gap-2"
+                                                className="flex-1 py-2 bg-gold-600/20 hover:bg-gold-600 text-gold-400 hover:text-white rounded text-[10px] font-bold uppercase tracking-wider transition-colors flex items-center justify-center gap-2"
                                             >
-                                                <Check className="w-3 h-3" /> Confirm
+                                                <Check className="w-3 h-3" /> Approve
                                             </button>
                                             <button
                                                 onClick={() => handleStatusUpdate(booking.id, 'declined')}
                                                 disabled={isProcessing === booking.id}
-                                                className="flex-1 py-2 bg-red-600/20 hover:bg-red-600 text-red-400 hover:text-white rounded text-xs font-bold uppercase tracking-wider transition-colors flex items-center justify-center gap-2"
+                                                className="flex-1 py-2 bg-red-600/20 hover:bg-red-600 text-red-400 hover:text-white rounded text-[10px] font-bold uppercase tracking-wider transition-colors flex items-center justify-center gap-2"
                                             >
                                                 <X className="w-3 h-3" /> Decline
                                             </button>
                                         </>
+                                    )}
+                                    {booking.status === 'proposed' && (
+                                        <button
+                                            onClick={() => handleStatusUpdate(booking.id, 'confirmed')}
+                                            disabled={isProcessing === booking.id}
+                                            className="flex-1 py-2 bg-green-600/20 hover:bg-green-600 text-green-400 hover:text-white rounded text-[10px] font-bold uppercase tracking-wider transition-colors flex items-center justify-center gap-2"
+                                        >
+                                            <Check className="w-3 h-3" /> Mark Paid
+                                        </button>
+                                    )}
+                                    {booking.status === 'confirmed' && (
+                                        <button
+                                            onClick={() => handleMarkExecuted(booking.id)}
+                                            disabled={isProcessing === booking.id}
+                                            className="flex-1 py-2 bg-blue-600/20 hover:bg-blue-600 text-blue-400 hover:text-white rounded text-[10px] font-bold uppercase tracking-wider transition-colors flex items-center justify-center gap-2"
+                                        >
+                                            <Check className="w-3 h-3" /> Executed
+                                        </button>
                                     )}
                                     {booking.status === 'confirmed' && (
                                         <button
@@ -716,13 +764,13 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({ isOpen, onClose 
                                     </td>
                                     <td className="p-4 text-right">
                                         <div className="flex justify-end gap-1">
-                                            {(booking.status === 'pending' || booking.status === 'rescheduled') && (
+                                            {(booking.status === 'requested' || booking.status === 'pending' || booking.status === 'rescheduled') && (
                                                 <>
                                                     <button
-                                                        onClick={() => handleStatusUpdate(booking.id, 'confirmed')}
+                                                        onClick={() => setApprovingBooking(booking)}
                                                         disabled={isProcessing === booking.id}
-                                                        className="p-1.5 bg-green-600/20 hover:bg-green-600 text-green-400 hover:text-white rounded transition-colors"
-                                                        title="Confirm Booking"
+                                                        className="p-1.5 bg-gold-600/20 hover:bg-gold-600 text-gold-400 hover:text-white rounded transition-colors"
+                                                        title="Approve & Send Proposal"
                                                     >
                                                         <Check className="w-3 h-3" />
                                                     </button>
@@ -735,6 +783,26 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({ isOpen, onClose 
                                                         <X className="w-3 h-3" />
                                                     </button>
                                                 </>
+                                            )}
+                                            {booking.status === 'proposed' && (
+                                                <button
+                                                    onClick={() => handleStatusUpdate(booking.id, 'confirmed')}
+                                                    disabled={isProcessing === booking.id}
+                                                    className="p-1.5 bg-green-600/20 hover:bg-green-600 text-green-400 hover:text-white rounded transition-colors"
+                                                    title="Mark as Paid/Confirmed"
+                                                >
+                                                    <Check className="w-3 h-3" />
+                                                </button>
+                                            )}
+                                            {booking.status === 'confirmed' && (
+                                                <button
+                                                    onClick={() => handleMarkExecuted(booking.id)}
+                                                    disabled={isProcessing === booking.id}
+                                                    className="p-1.5 bg-blue-600/20 hover:bg-blue-600 text-blue-400 hover:text-white rounded transition-colors"
+                                                    title="Mark as Executed (Send Closing Email)"
+                                                >
+                                                    <Check className="w-3 h-3" />
+                                                </button>
                                             )}
                                             {booking.status === 'confirmed' && (
                                                 <button
@@ -1103,6 +1171,57 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({ isOpen, onClose 
                                 className="flex-1 py-2 bg-gold-600 text-black hover:bg-gold-500 rounded text-xs font-bold uppercase tracking-widest transition-colors"
                             >
                                 Close
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            )}
+            {/* Phase 26: Fiduciary Proposal Modal */}
+            {approvingBooking && (
+                <div className="absolute inset-0 z-[230] bg-black/80 backdrop-blur-md flex items-center justify-center p-4">
+                    <div className="bg-gray-900 border border-gold-500/30 rounded-xl p-6 w-full max-w-sm shadow-2xl animate-zoom-out">
+                        <div className="w-12 h-12 bg-gold-600/20 rounded-full flex items-center justify-center mb-4 mx-auto">
+                            <Briefcase className="w-6 h-6 text-gold-500" />
+                        </div>
+                        <h3 className="text-xl text-gold-400 font-serif mb-2 text-center">Fiduciary Proposal</h3>
+                        <p className="text-gray-400 text-[11px] mb-6 text-center leading-relaxed">
+                            Stai approvando la richiesta di <span className="text-white font-bold">{approvingBooking.name}</span>.<br />
+                            Inserisci il link di pagamento Stripe per finalizzare la proposta.
+                        </p>
+
+                        <div className="space-y-4">
+                            <div className="bg-gold-900/10 border border-gold-900/20 rounded-lg p-4 text-[11px] text-gold-400 italic space-y-2">
+                                <p>Cliccando su Genera, il sistema:</p>
+                                <ul className="list-disc pl-4 space-y-1">
+                                    <li>Creerà una sessione di pagamento Stripe da <strong>€{approvingBooking.estimatedPrice}</strong>.</li>
+                                    <li>Aggiornerà lo stato della pratica a "Proposed".</li>
+                                    <li>Invierà la proposta fiduciaria con termini legali al cliente.</li>
+                                </ul>
+                            </div>
+
+                            <button
+                                onClick={handleApproveProposal}
+                                disabled={isProcessing === approvingBooking.id}
+                                className="w-full py-3 bg-gold-600 text-black hover:bg-gold-500 disabled:opacity-50 disabled:cursor-not-allowed rounded-lg transition-all uppercase text-xs font-bold tracking-widest shadow-lg shadow-gold-900/20 flex items-center justify-center gap-2"
+                            >
+                                {isProcessing === approvingBooking.id ? (
+                                    <>
+                                        <RefreshCw className="w-4 h-4 animate-spin text-black" />
+                                        Generating & Sending...
+                                    </>
+                                ) : (
+                                    <>
+                                        <Check className="w-4 h-4 text-black" />
+                                        Generate & Send Proposal
+                                    </>
+                                )}
+                            </button>
+
+                            <button
+                                onClick={() => setApprovingBooking(null)}
+                                className="w-full py-2 text-gray-500 hover:text-white text-xs uppercase tracking-widest transition-colors"
+                            >
+                                Cancel
                             </button>
                         </div>
                     </div>

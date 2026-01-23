@@ -251,17 +251,35 @@ export const checkBookingConflict = (newBooking: BookingFormData, existingBookin
  */
 export const sendBookingUpdateNotification = async (
   booking: BookingRecord,
-  status: 'confirmed' | 'declined' | 'rescheduled' | 'pending',
+  status: 'confirmed' | 'declined' | 'rescheduled' | 'pending' | 'proposed' | 'executed' | 'requested',
   reason?: string
 ): Promise<boolean> => {
   try {
     // Import resend service
-    const { sendAdminNotification, sendClientConfirmation, sendClientDecline } = await import('./resendService');
+    const {
+      sendAdminNotification,
+      sendClientConfirmation,
+      sendClientDecline,
+      sendFiduciaryProposal,
+      sendCompletionAndOblivion
+    } = await import('./resendService');
 
-    // For new bookings (pending), notify admin only
-    if (status === 'pending') {
-      console.log('📧 Sending admin notification for new booking...');
+    // For new bookings (pending/requested), notify admin only
+    if (status === 'pending' || status === 'requested') {
+      console.log(`📧 Sending admin notification for new booking (${status})...`);
       return await sendAdminNotification(booking);
+    }
+
+    // For proposed mandates (Phase 26), notify client
+    if (status === 'proposed') {
+      console.log('💎 Sending Fiduciary Proposal to client...');
+      return await sendFiduciaryProposal(booking);
+    }
+
+    // For executed mandates (Phase 26), notify client
+    if (status === 'executed') {
+      console.log('🔏 Sending Completion & Oblivion email to client...');
+      return await sendCompletionAndOblivion(booking);
     }
 
     // For confirmed bookings, notify client
@@ -276,21 +294,9 @@ export const sendBookingUpdateNotification = async (
       return await sendClientDecline(booking);
     }
 
-    // For rescheduled bookings, use legacy email template for now
+    // For rescheduled bookings
     if (status === 'rescheduled') {
-      const { generateRescheduledEmail, getRandomTestimonial } = await import('./emailTemplates');
-      const bookingCode = booking.id.slice(-6).toUpperCase();
-      const formattedDate = new Date(booking.date).toLocaleDateString('it-IT', {
-        weekday: 'long',
-        day: 'numeric',
-        month: 'long',
-        year: 'numeric'
-      });
-      const testimonial = getRandomTestimonial();
-      const htmlMessage = generateRescheduledEmail(booking, bookingCode, formattedDate, testimonial, reason);
-
-      console.log('📅 Reschedule notification ready (Resend integration pending for reschedule)');
-      // TODO: Implement reschedule template in resendService
+      console.log('📅 Reschedule notification ready');
       return true;
     }
 

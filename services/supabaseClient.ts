@@ -44,6 +44,7 @@ export interface BookingRow {
     vehicle_preference: string | null;
     contact_method: string;
     is_vip: boolean;
+    stripe_link: string | null;
 }
 
 // Helper to convert DB row to BookingRecord
@@ -70,6 +71,7 @@ export const rowToBookingRecord = (row: BookingRow): any => ({
     vehiclePreference: row.vehicle_preference,
     contactMethod: row.contact_method,
     isVIP: row.is_vip,
+    stripeLink: row.stripe_link || undefined,
 });
 
 // Helper to convert BookingRecord to DB row format
@@ -95,4 +97,5 @@ export const bookingToRow = (booking: any): Partial<BookingRow> => ({
     vehicle_preference: booking.vehiclePreference || null,
     contact_method: booking.contactMethod || 'whatsapp',
     is_vip: booking.isVIP || false,
+    stripe_link: booking.stripeLink || null,
 });

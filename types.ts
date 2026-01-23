@@ -114,8 +114,9 @@ export interface BookingFormData {
 export interface BookingRecord extends BookingFormData {
   id: string;
   timestamp: string;
-  status: 'confirmed' | 'pending' | 'completed' | 'cancelled' | 'declined' | 'rescheduled';
+  status: 'requested' | 'proposed' | 'confirmed' | 'pending' | 'completed' | 'cancelled' | 'declined' | 'rescheduled' | 'executed';
   needsInvoice?: boolean; // Optional: true if user needs formal invoice (fattura)
+  stripeLink?: string; // New: payment link for proposals
 }
 
 export interface ValidationErrors {
@@ -129,4 +130,5 @@ export interface ValidationErrors {
   name?: string;
   email?: string;
   phone?: string;
+  assistanceDescription?: string;
 }
