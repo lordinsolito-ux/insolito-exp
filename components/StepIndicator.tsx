@@ -5,10 +5,10 @@ interface StepIndicatorProps {
 }
 
 const steps = [
-  { num: 1, label: "Service" },
-  { num: 2, label: "Details" },
-  { num: 3, label: "Vehicle" },
-  { num: 4, label: "Review" }
+  { num: 1, label: "Protocollo" },
+  { num: 2, label: "Missione" },
+  { num: 3, label: "Profilo" },
+  { num: 4, label: "Revisione" }
 ];
 
 export const StepIndicator: React.FC<StepIndicatorProps> = ({ currentStep }) => {

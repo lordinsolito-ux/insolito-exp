@@ -396,14 +396,6 @@ const App: React.FC = () => {
             />
 
             <div ref={formCardRef}>
-              {activeStep === 1 && (
-                <TierSelector
-                  selectedTier={formData.tier || preselectedTier}
-                  onSelectTier={handleTierSelect}
-                  t={t}
-                />
-              )}
-
               <BookingForm
                 activeStep={activeStep}
                 formData={formData}
@@ -420,6 +412,7 @@ const App: React.FC = () => {
                 onShowTerms={() => setShowTerms(true)}
                 onPrevStep={handlePrevStep}
                 onNextStep={handleNextStep}
+                onSelectTier={handleTierSelect}
                 onSubmit={handleSubmit}
                 isNightService={isNightService}
               />
