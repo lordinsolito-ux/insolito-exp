@@ -75,6 +75,8 @@ export interface PriceBreakdown {
   serviceMultiplier: number;
 }
 
+export type PaymentMethod = 'link' | 'pos' | 'cash' | 'credit_card' | 'stripe';
+
 export interface BookingFormData {
   clientCode?: string;
   isVIP: boolean;
@@ -104,7 +106,7 @@ export interface BookingFormData {
 
   // New Fields
   contactMethod: 'whatsapp' | 'sms' | 'call';
-  paymentMethod: 'link' | 'pos' | 'cash';
+  paymentMethod: PaymentMethod;
   hasPets: boolean;
 
   estimatedPrice: number;

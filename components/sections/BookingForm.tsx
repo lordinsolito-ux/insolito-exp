@@ -12,21 +12,21 @@ import {
     MapPin,
     AlertCircle
 } from 'lucide-react';
-import { FormData, ValidationErrors, ServiceTypeId, TierType, PaymentMethod } from '../../types';
+import { BookingFormData, ValidationErrors, ServiceTypeId, TierType, PaymentMethod } from '../../types';
 import { StepIndicator } from '../StepIndicator';
 import { getTierRates } from '../../services/tierHelpers';
 import { TierSelector } from '../TierSelector';
 
 interface BookingFormProps {
     activeStep: number;
-    formData: FormData;
+    formData: BookingFormData;
     validationErrors: ValidationErrors;
     availableSlots: string[];
     termsAccepted: boolean;
     isLoading: boolean;
     t: (key: string) => string;
     onInputChange: (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => void;
-    onLocationSearch: (field: 'pickupLocation' | 'dropoffLocation', query: string) => void;
+    onLocationSearch: (type: 'pickup' | 'destination' | 'stop', value: string, index?: number) => void;
     onInputBlur: () => void;
     onPaymentMethodChange: (method: PaymentMethod) => void;
     onToggleTerms: (accepted: boolean) => void;
@@ -80,7 +80,7 @@ const BookingForm: React.FC<BookingFormProps> = ({
                                     className="space-y-12"
                                 >
                                     <TierSelector
-                                        selectedTier={formData.tier}
+                                        selectedTier={formData.tier || undefined}
                                         onSelectTier={onSelectTier}
                                         t={t}
                                     />
@@ -294,7 +294,7 @@ const BookingForm: React.FC<BookingFormProps> = ({
                                             <div className="group relative">
                                                 <label className="text-[9px] font-mono pearl-content opacity-60 uppercase tracking-[0.3em] mb-2 block">Metodo di Versamento</label>
                                                 <div className="grid grid-cols-2 gap-4">
-                                                    {(['credit_card', 'stripe'] as PaymentMethod[]).map(method => (
+                                                    {(['credit_card', 'stripe', 'link', 'pos', 'cash'] as PaymentMethod[]).map(method => (
                                                         <button
                                                             key={method}
                                                             type="button"
