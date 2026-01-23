@@ -334,9 +334,15 @@ const BookingForm: React.FC<BookingFormProps> = ({
                                                         <p className="text-[8px] font-mono text-[var(--milano-bronzo)] uppercase tracking-widest font-bold">Piano</p>
                                                         <p className="text-[12px] font-accent text-black uppercase font-bold">{formData.tier}</p>
                                                     </div>
-                                                    <div className="space-y-1 md:col-span-2">
+                                                    <div className="space-y-1 md:col-span-1">
                                                         <p className="text-[8px] font-mono text-[var(--milano-bronzo)] uppercase tracking-widest font-bold">Attivazione</p>
-                                                        <p className="text-[12px] font-accent text-black uppercase font-bold">{formData.date} — {formData.time}</p>
+                                                        <p className="text-[12px] font-accent text-black uppercase font-bold whitespace-nowrap">{formData.date} — {formData.time}</p>
+                                                    </div>
+                                                    <div className="space-y-1">
+                                                        <p className="text-[8px] font-mono text-[var(--milano-bronzo)] uppercase tracking-widest font-bold">Allegati</p>
+                                                        <p className="text-[12px] font-accent text-black uppercase font-bold">
+                                                            {formData.attachments?.length || 0} File
+                                                        </p>
                                                     </div>
                                                 </div>
                                             </div>
