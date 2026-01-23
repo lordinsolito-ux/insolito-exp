@@ -184,30 +184,30 @@ const BookingForm: React.FC<BookingFormProps> = ({
                                                         onChange={(e) => onInputChange(e)}
                                                         name="assistanceDescription"
                                                         onBlur={onInputBlur}
-                                                        placeholder="Specifichi gli obiettivi..."
+                                                        placeholder="Descriva brevemente la missione..."
                                                         className={`pearl-input w-full min-h-[100px] text-[13px] leading-relaxed bg-black/[0.02] border focus:bg-white focus:border-[var(--milano-bronzo)] transition-all shadow-inner text-black p-4 ${validationErrors.assistanceDescription ? 'border-red-500 bg-red-50/10' : 'border-black/10'}`}
                                                     />
                                                     {validationErrors.assistanceDescription && (
                                                         <p className="text-[9px] font-mono text-red-500 uppercase tracking-widest mt-1 flex items-center gap-1">
-                                                            <AlertCircle className="w-3 h-3" /> {validationErrors.assistanceDescription}
+                                                            <AlertCircle className="w-3" /> {validationErrors.assistanceDescription}
                                                         </p>
                                                     )}
                                                 </div>
 
-                                                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8">
+                                                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-10">
                                                     {/* FINESTRA TEMPORALE */}
-                                                    <div className="space-y-4 p-5 bg-black/[0.03] border border-black/5 rounded-sm">
+                                                    <div className="space-y-4 p-5 bg-white border border-black/5 rounded-sm shadow-sm">
                                                         <div className="flex items-center gap-2">
                                                             <Calendar className="w-3.5 h-3.5 text-[var(--milano-bronzo)]" />
-                                                            <h4 className="text-[9px] font-mono uppercase tracking-[0.4em] text-black font-bold">Finestra</h4>
+                                                            <h4 className="text-[9px] font-mono uppercase tracking-[0.4em] text-black font-bold">Pianificazione</h4>
                                                         </div>
                                                         <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                                                             <div className="space-y-1">
-                                                                <input type="date" name="date" value={formData.date} onChange={onInputChange} className={`pearl-input !p-2.5 !text-[11px] !bg-white text-black shadow-sm [&::-webkit-calendar-picker-indicator]:opacity-100 [&::-webkit-calendar-picker-indicator]:brightness-0 [&::-webkit-calendar-picker-indicator]:cursor-pointer w-full ${validationErrors.date ? 'border-red-500' : 'border-black/10'}`} style={{ colorScheme: 'light' }} />
+                                                                <input type="date" name="date" value={formData.date} onChange={onInputChange} className={`pearl-input !p-2.5 !text-[11px] !bg-black/[0.02] text-black shadow-sm [&::-webkit-calendar-picker-indicator]:opacity-100 [&::-webkit-calendar-picker-indicator]:brightness-0 [&::-webkit-calendar-picker-indicator]:cursor-pointer w-full ${validationErrors.date ? 'border-red-500' : 'border-black/5'}`} style={{ colorScheme: 'light' }} />
                                                                 {validationErrors.date && <p className="text-[8px] font-mono text-red-500 uppercase">Richiesto</p>}
                                                             </div>
                                                             <div className="space-y-1">
-                                                                <select name="time" value={formData.time} onChange={onInputChange} disabled={!formData.date} className={`pearl-input !p-2.5 !text-[11px] !bg-white text-black shadow-sm w-full ${validationErrors.time ? 'border-red-500' : 'border-black/10'}`}>
+                                                                <select name="time" value={formData.time} onChange={onInputChange} disabled={!formData.date} className={`pearl-input !p-2.5 !text-[11px] !bg-black/[0.02] text-black shadow-sm w-full ${validationErrors.time ? 'border-red-500' : 'border-black/5'}`}>
                                                                     <option value="">DEBUTTO</option>
                                                                     {availableSlots.map(s => <option key={s} value={s}>{s}</option>)}
                                                                 </select>
@@ -217,25 +217,25 @@ const BookingForm: React.FC<BookingFormProps> = ({
                                                     </div>
 
                                                     {/* CAVEAU ALLEGATI */}
-                                                    <div className="space-y-4">
+                                                    <div className="space-y-4 p-5 bg-black/[0.02] border border-black/5 rounded-sm">
                                                         <div className="flex items-center gap-2">
                                                             <ShieldCheck className="w-3.5 h-3.5 text-[var(--milano-bronzo)]" />
-                                                            <h4 className="text-[9px] font-mono uppercase tracking-[0.4em] text-black font-bold">Caveau</h4>
+                                                            <h4 className="text-[9px] font-mono uppercase tracking-[0.4em] text-black font-bold">Caveau Documenti</h4>
                                                         </div>
                                                         <div
                                                             onClick={() => fileInputRef.current?.click()}
-                                                            className="pearl-vault !py-5 !px-4 cursor-pointer border-dashed border-2 border-black/10 hover:border-[var(--milano-bronzo)] transition-all bg-black/[0.01] flex items-center gap-3 group"
+                                                            className="pearl-vault !py-4 !px-4 cursor-pointer border-dashed border-2 border-black/10 hover:border-[var(--milano-bronzo)] transition-all bg-white flex items-center gap-3 group"
                                                         >
                                                             <Paperclip className="w-4 h-4 text-black/40 group-hover:text-[var(--milano-bronzo)] transition-colors" />
                                                             <div className="text-left flex flex-col">
-                                                                <span className="text-[9px] font-mono uppercase tracking-widest text-black font-bold">Allega Media</span>
-                                                                <span className="text-[7px] font-mono text-black/30 uppercase">PDF, Video, Foto, Audio</span>
+                                                                <span className="text-[9px] font-mono uppercase tracking-widest text-black font-bold">Protocollo Media</span>
+                                                                <span className="text-[7px] font-mono text-black/30 uppercase">PDF, Video, Foto</span>
                                                             </div>
                                                             <input type="file" ref={fileInputRef} onChange={handleFileChange} multiple className="hidden" />
                                                         </div>
-                                                        <div className="flex flex-wrap gap-2">
+                                                        <div className="flex flex-wrap gap-2 min-h-[20px]">
                                                             {formData.attachments?.slice(0, 3).map((file, idx) => (
-                                                                <div key={idx} className="attachment-chip !px-2 !py-1 text-[8px] bg-black/5 border border-black/10 text-black flex items-center gap-1.5 shadow-sm">
+                                                                <div key={idx} className="attachment-chip !px-2 !py-1 text-[8px] bg-white border border-black/10 text-black flex items-center gap-1.5 shadow-sm rounded-full">
                                                                     <span className="truncate max-w-[80px] font-medium">{file.name}</span>
                                                                     <X className="w-2.5 h-2.5 cursor-pointer hover:text-red-500" onClick={(e) => { e.stopPropagation(); onRemoveAttachment(idx); }} />
                                                                 </div>
@@ -270,19 +270,31 @@ const BookingForm: React.FC<BookingFormProps> = ({
                                                 <span className="text-[8px] font-mono text-black/30 uppercase tracking-[0.4em]">Identità Digitale</span>
                                             </div>
 
-                                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
-                                                <div className="space-y-4">
-                                                    <input type="text" name="name" value={formData.name} onChange={onInputChange} placeholder="NOME COMPLETO" className="pearl-input !py-3 !text-[12px] bg-black/[0.02] border-black/10 focus:bg-white transition-all shadow-sm" />
-                                                    <input type="email" name="email" value={formData.email} onChange={onInputChange} placeholder="EMAIL@ESCLUSIVA.COM" className="pearl-input !py-3 !text-[12px] bg-black/[0.02] border-black/10 focus:bg-white transition-all shadow-sm" />
+                                            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 bg-black/[0.01] p-6 border border-black/5 rounded-sm shadow-sm">
+                                                <div className="space-y-5">
+                                                    <div className="space-y-1.5">
+                                                        <label className="text-[8px] font-mono uppercase text-black/40 tracking-widest ml-1">Identità Reale</label>
+                                                        <input type="text" name="name" value={formData.name} onChange={onInputChange} placeholder="NOME COMPLETO" className="pearl-input !py-4 !text-[12px] bg-white border-black/10 focus:bg-white transition-all shadow-sm w-full" />
+                                                    </div>
+                                                    <div className="space-y-1.5">
+                                                        <label className="text-[8px] font-mono uppercase text-black/40 tracking-widest ml-1">Canale Esclusivo</label>
+                                                        <input type="email" name="email" value={formData.email} onChange={onInputChange} placeholder="EMAIL@ESCLUSIVA.COM" className="pearl-input !py-4 !text-[12px] bg-white border-black/10 focus:bg-white transition-all shadow-sm w-full" />
+                                                    </div>
                                                 </div>
-                                                <div className="space-y-4">
-                                                    <input type="tel" name="phone" value={formData.phone} onChange={onInputChange} placeholder="RECAPITO TELEFONICO" className="pearl-input !py-3 !text-[12px] bg-black/[0.02] border-black/10 focus:bg-white transition-all shadow-sm" />
-                                                    <div className="grid grid-cols-2 gap-2">
-                                                        {(['credit_card', 'stripe'] as PaymentMethod[]).map(method => (
-                                                            <button key={method} type="button" onClick={() => onPaymentMethodChange(method)} className={`py-3 text-[8px] font-mono border transition-all ${formData.paymentMethod === method ? 'bg-black text-white border-black shadow-md' : 'border-black/10 text-black/30 hover:border-black/20'}`}>
-                                                                {method.toUpperCase()}
-                                                            </button>
-                                                        ))}
+                                                <div className="space-y-5">
+                                                    <div className="space-y-1.5">
+                                                        <label className="text-[8px] font-mono uppercase text-black/40 tracking-widest ml-1">Linea Diretta</label>
+                                                        <input type="tel" name="phone" value={formData.phone} onChange={onInputChange} placeholder="RECAPITO TELEFONICO" className="pearl-input !py-4 !text-[12px] bg-white border-black/10 focus:bg-white transition-all shadow-sm w-full" />
+                                                    </div>
+                                                    <div className="space-y-1.5">
+                                                        <label className="text-[8px] font-mono uppercase text-black/40 tracking-widest ml-1">Pre-Autorizzazione</label>
+                                                        <div className="grid grid-cols-2 gap-2">
+                                                            {(['credit_card', 'stripe'] as PaymentMethod[]).map(method => (
+                                                                <button key={method} type="button" onClick={() => onPaymentMethodChange(method)} className={`py-4 text-[8px] font-mono border transition-all ${formData.paymentMethod === method ? 'bg-black text-white border-black shadow-md' : 'bg-white border-black/10 text-black/30 hover:border-black/20'}`}>
+                                                                    {method.toUpperCase()}
+                                                                </button>
+                                                            ))}
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -330,13 +342,21 @@ const BookingForm: React.FC<BookingFormProps> = ({
                                             </div>
 
                                             <div className="flex flex-col items-center gap-6 pt-2">
-                                                <label className="flex items-center gap-3 cursor-pointer group">
-                                                    <input type="checkbox" checked={termsAccepted} onChange={(e) => onToggleTerms(e.target.checked)} className="hidden" />
-                                                    <div className={`w-5 h-5 border-2 flex items-center justify-center transition-all ${termsAccepted ? 'bg-black border-black/10 shadow-md' : 'border-black/20 group-hover:border-black/40'}`}>
-                                                        {termsAccepted && <Check className="w-3.5 h-3.5 text-white" />}
-                                                    </div>
-                                                    <span className="text-[9px] font-mono text-black/60 uppercase tracking-[0.2em] group-hover:text-black transition-colors font-bold">Accetto l'Impegno di Riservatezza</span>
-                                                </label>
+                                                <div className="flex flex-col items-center gap-4">
+                                                    <label className="flex items-center gap-3 cursor-pointer group">
+                                                        <input type="checkbox" checked={termsAccepted} onChange={(e) => onToggleTerms(e.target.checked)} className="hidden" />
+                                                        <div className={`w-5 h-5 border-2 flex items-center justify-center transition-all ${termsAccepted ? 'bg-black border-black/10 shadow-md' : 'border-black/20 group-hover:border-black/40'}`}>
+                                                            {termsAccepted && <Check className="w-3.5 h-3.5 text-white" />}
+                                                        </div>
+                                                        <span className="text-[9px] font-mono text-black/60 uppercase tracking-[0.2em] group-hover:text-black transition-colors font-bold">Accetto l'Impegno di Riservatezza</span>
+                                                    </label>
+                                                    <button
+                                                        onClick={onShowTerms}
+                                                        className="text-[8px] font-mono text-[var(--milano-bronzo)] hover:text-black transition-colors uppercase tracking-[0.3em] underline underline-offset-4"
+                                                    >
+                                                        Visualizza Accordo Digitale
+                                                    </button>
+                                                </div>
 
                                                 <button
                                                     onClick={onSubmit}

@@ -5,7 +5,7 @@ interface StepIndicatorProps {
 }
 
 const steps = [
-  { num: 1, label: "Protocollo" },
+  { num: 1, label: "Pronto" },
   { num: 2, label: "Missione" },
   { num: 3, label: "Profilo" },
   { num: 4, label: "Revisione" }

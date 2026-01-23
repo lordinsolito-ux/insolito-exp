@@ -182,7 +182,8 @@ const App: React.FC = () => {
         priceBreakdown: breakdown,
         duration: routeInfo.duration
       }));
-    } else if (!routeInfo) {
+    } else if (formData.serviceType && !routeInfo) {
+      // Only reset for legacy service types that REQUIRE a route
       setFormData(prev => ({ ...prev, estimatedPrice: 25, duration: 0 }));
     }
   }, [formData.serviceType, formData.vehiclePreference, routeInfo, formData.time, formData.hasPets, formData.stops.length, formData.date]);

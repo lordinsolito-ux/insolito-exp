@@ -10,7 +10,7 @@ interface BookingConfirmationProps {
 }
 
 export const BookingConfirmation: React.FC<BookingConfirmationProps> = ({ formData, onReset }) => {
-  const serviceName = formData.tier ? `TIER ${formData.tier.toUpperCase()}` : (SERVICE_TYPES.find(s => s.id === formData.serviceType)?.name || 'LIFESTYLE MANAGEMENT');
+  const serviceName = formData.tier ? `${formData.tier.toUpperCase()}` : (SERVICE_TYPES.find(s => s.id === formData.serviceType)?.name || 'LIFESTYLE MANAGEMENT');
 
   return (
     <div className="min-h-screen bg-black text-gray-200 font-sans flex items-center justify-center p-4 relative overflow-hidden">
@@ -46,7 +46,7 @@ export const BookingConfirmation: React.FC<BookingConfirmationProps> = ({ formDa
 
         <div className="space-y-5 text-left bg-white/[0.02] p-8 rounded-sm border border-white/5 mb-10">
           <div className="flex justify-between items-center border-b border-white/5 pb-3">
-            <span className="text-[9px] font-mono text-white/30 uppercase tracking-[0.3em]">Protocollo</span>
+            <span className="text-[9px] font-mono text-white/30 uppercase tracking-[0.3em]">Servizio</span>
             <span className="text-sm text-white/80 font-accent uppercase">{serviceName}</span>
           </div>
           <div className="flex justify-between items-center border-b border-white/5 pb-3">
