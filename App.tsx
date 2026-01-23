@@ -352,6 +352,7 @@ const App: React.FC = () => {
 
   return (
     <>
+      <div className="fixed inset-0 pointer-events-none z-[999] cinematic-grain"></div>
       {showIntro && <IntroSplash onFinish={() => setShowIntro(false)} />}
 
       {/* Modals */}
