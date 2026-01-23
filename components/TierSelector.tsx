@@ -98,19 +98,19 @@ export const TierSelector: React.FC<TierSelectorProps> = ({ selectedTier, onSele
                                 </div>
                             )}
 
-                            <div className="space-y-10 flex-1">
+                            <div className="space-y-8 flex-1">
                                 <div className="space-y-4">
-                                    <div className="flex justify-between items-start">
-                                        <h4 className="text-2xl md:text-3xl font-accent text-white tracking-tighter uppercase">{tier.name}</h4>
-                                        <Icon className={`w-6 h-6 ${isSelected ? 'text-[var(--milano-bronzo)]' : 'text-white/20'}`} />
+                                    <div className="flex justify-between items-start gap-4">
+                                        <h4 className="text-xl md:text-2xl font-accent text-white tracking-tighter uppercase leading-tight">{tier.name}</h4>
+                                        <Icon className={`w-5 h-5 shrink-0 ${isSelected ? 'text-[var(--milano-bronzo)]' : 'text-white/20'}`} />
                                     </div>
-                                    <p className="text-[9px] font-mono text-white/30 uppercase leading-relaxed tracking-wider h-12">
+                                    <p className="text-[9px] font-mono text-white/30 uppercase leading-relaxed tracking-wider min-h-[40px]">
                                         {tier.description}
                                     </p>
                                 </div>
 
-                                <div className="py-10 border-y border-white/5 group-hover:border-[var(--milano-bronzo)]/20 transition-colors duration-700">
-                                    <div className="text-3xl md:text-4xl lg:text-5xl font-accent text-white tracking-tighter mb-2 leading-none">{tier.price}</div>
+                                <div className="py-8 border-y border-white/5 group-hover:border-[var(--milano-bronzo)]/20 transition-colors duration-700">
+                                    <div className="text-2xl md:text-3xl lg:text-4xl font-accent text-white tracking-tighter mb-2 leading-tight">{tier.price}</div>
                                     <div className="text-[8px] font-mono text-white/30 tracking-[0.3em] uppercase">{tier.duration}</div>
                                 </div>
 

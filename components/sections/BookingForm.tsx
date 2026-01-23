@@ -147,8 +147,9 @@ const BookingForm: React.FC<BookingFormProps> = ({
                                                 onSelectTier={onSelectTier}
                                                 t={t}
                                             />
-                                            <div className="flex justify-end pt-4">
-                                                <button onClick={onNextStep} className="btn-monumental scale-90">Prosegui</button>
+                                            <div className="flex justify-between pt-4 border-t border-black/10">
+                                                <button onClick={onClose} className="text-[10px] font-mono uppercase tracking-widest text-black/60 hover:text-black transition-colors font-bold">Indietro</button>
+                                                <button onClick={onNextStep} className="btn-monumental scale-90 px-12">Prosegui</button>
                                             </div>
                                         </motion.div>
                                     )}
