@@ -72,33 +72,44 @@
     box-shadow: 0 40px 100px -20px rgba(0, 0, 0, 0.8);
   }
 
-  /* PEARL MONOLITH EXCLUSIVE */
+  /* PEARL MONOLITH EXCLUSIVE - FORCED */
   .pearl-monolith {
-    @apply bg-[var(--perla-seta)] border-none relative overflow-hidden text-[var(--antracite-elite)];
-    box-shadow: 0 50px 100px -20px rgba(0, 0, 0, 0.2);
+    background-color: var(--perla-seta) !important;
+    @apply border-none relative overflow-hidden;
+    box-shadow: 0 50px 150px -20px rgba(0, 0, 0, 0.15);
   }
 
-  /* PEARL INPUTS - HIGH CONTRAST */
-  .pearl-input {
-    @apply border-b border-[var(--antracite-elite)]/10 py-5 px-6 transition-all duration-700 outline-none w-full block;
-    background-color: transparent !important;
+  .pearl-content {
     color: var(--antracite-elite) !important;
+  }
+
+  .pearl-title {
+    color: var(--antracite-elite) !important;
+    @apply italic;
+  }
+
+  /* PEARL INPUTS - MASSIVE FOCUS */
+  .pearl-input {
+    @apply border-b-2 border-black/10 py-8 px-8 transition-all duration-700 outline-none w-full block;
+    background-color: rgba(0, 0, 0, 0.02) !important;
+    color: #000000 !important;
     font-family: 'IBM Plex Mono', monospace;
-    @apply text-[11px] uppercase tracking-[0.2em];
+    @apply text-[14px] uppercase tracking-[0.2em];
     border-radius: 0;
   }
 
   .pearl-input:focus {
+    background-color: rgba(0, 0, 0, 0.04) !important;
     border-b-color: var(--milano-bronzo) !important;
   }
 
   .pearl-input::placeholder {
-    color: rgba(0, 0, 0, 0.2) !important;
+    color: rgba(0, 0, 0, 0.3) !important;
   }
 
   /* Browser Autofill Fix - Pearl Mode */
   .pearl-input:-webkit-autofill {
-    -webkit-text-fill-color: var(--antracite-elite) !important;
+    -webkit-text-fill-color: #000000 !important;
     -webkit-box-shadow: 0 0 0px 1000px var(--perla-seta) inset !important;
   }
 
