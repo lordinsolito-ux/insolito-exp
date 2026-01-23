@@ -68,6 +68,7 @@ const INITIAL_FORM_STATE: BookingFormData = {
   phone: '',
   paymentMethod: 'cash',
   hasPets: false,
+  attachments: [],
   priceBreakdown: { total: 0, baseFare: 0, distanceFare: 0, nightSurcharge: 0, petFee: 0, stopFee: 0, serviceMultiplier: 1 }
 };
 
