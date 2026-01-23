@@ -197,7 +197,7 @@ const BookingForm: React.FC<BookingFormProps> = ({
                                                             <h4 className="text-[9px] font-mono uppercase tracking-[0.4em] text-black font-bold">Finestra</h4>
                                                         </div>
                                                         <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                                                            <input type="date" name="date" value={formData.date} onChange={onInputChange} className="pearl-input !p-2.5 !text-[11px] !bg-white border-black/10 text-black shadow-sm" style={{ colorScheme: 'light' }} />
+                                                            <input type="date" name="date" value={formData.date} onChange={onInputChange} className="pearl-input !p-2.5 !text-[11px] !bg-white border-black/10 text-black shadow-sm [&::-webkit-calendar-picker-indicator]:opacity-100 [&::-webkit-calendar-picker-indicator]:brightness-0 [&::-webkit-calendar-picker-indicator]:cursor-pointer" style={{ colorScheme: 'light' }} />
                                                             <select name="time" value={formData.time} onChange={onInputChange} disabled={!formData.date} className="pearl-input !p-2.5 !text-[11px] !bg-white border-black/10 text-black shadow-sm">
                                                                 <option value="">DEBUTTO</option>
                                                                 {availableSlots.map(s => <option key={s} value={s}>{s}</option>)}
