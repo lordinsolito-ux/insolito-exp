@@ -89,6 +89,7 @@ const App: React.FC = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isVisionOpen, setIsVisionOpen] = useState(false);
   const [isGhostMode, setIsGhostMode] = useState(false);
+  const [isBookingModalOpen, setIsBookingModalOpen] = useState(false);
 
   // Form States
   const [activeStep, setActiveStep] = useState(1);
@@ -311,6 +312,7 @@ const App: React.FC = () => {
     }));
     setActiveStep(2);
     setPreselectedTier(null);
+    setIsBookingModalOpen(true);
   };
 
   const handleAddAttachments = (files: File[]) => {
@@ -345,6 +347,7 @@ const App: React.FC = () => {
       // The admin will receive an email automatically via the saveBooking -> sendBookingUpdateNotification flow
 
       setIsBookingConfirmed(true);
+      setIsBookingModalOpen(false);
     } finally {
       setIsLoading(false);
     }
@@ -376,7 +379,7 @@ const App: React.FC = () => {
         onPhilosophy={() => document.getElementById('essence')?.scrollIntoView({ behavior: 'smooth' })}
         onVision={() => setIsVisionOpen(true)}
         onServices={() => investmentRef.current?.scrollIntoView({ behavior: 'smooth' })}
-        onInquire={() => formCardRef.current?.scrollIntoView({ behavior: 'smooth' })}
+        onInquire={() => { setActiveStep(1); setIsBookingModalOpen(true); }}
       />
 
       {isBookingConfirmed ? (
@@ -393,7 +396,7 @@ const App: React.FC = () => {
             isScrolled={isScrolled}
             onAdminLogin={() => setShowAdminLogin(true)}
             onArchiveClick={() => setShowHistory(true)}
-            onEnterClick={() => investmentRef.current?.scrollIntoView({ behavior: 'smooth' })}
+            onEnterClick={() => { setActiveStep(1); setIsBookingModalOpen(true); }}
           />
 
           <main className="bg-transparent relative z-10">
@@ -406,44 +409,38 @@ const App: React.FC = () => {
                 selectedTier={formData.tier || null}
                 onBookClick={() => {
                   setActiveStep(1);
-                  setTimeout(() => {
-                    formCardRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                  }, 100);
+                  setIsBookingModalOpen(true);
                 }}
                 onTierSelect={(tier) => {
-                  // ✅ FIX: Chiama direttamente handleTierSelect invece di mostrare TierSelector
                   handleTierSelect(tier);
-                  setTimeout(() => {
-                    formCardRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                  }, 100);
                 }}
               />
             </div>
 
-            <div ref={formCardRef}>
-              <BookingForm
-                activeStep={activeStep}
-                formData={formData}
-                validationErrors={validationErrors}
-                availableSlots={availableSlots}
-                termsAccepted={termsAccepted}
-                isLoading={isLoading}
-                t={t}
-                onInputChange={handleInputChange}
-                onLocationSearch={handleLocationSearch}
-                onInputBlur={triggerRouteCalc}
-                onPaymentMethodChange={(m) => setFormData(p => ({ ...p, paymentMethod: m }))}
-                onToggleTerms={setTermsAccepted}
-                onShowTerms={() => setShowTerms(true)}
-                onPrevStep={handlePrevStep}
-                onNextStep={handleNextStep}
-                onSelectTier={handleTierSelect}
-                onAddAttachments={handleAddAttachments}
-                onRemoveAttachment={handleRemoveAttachment}
-                onSubmit={handleSubmit}
-                isNightService={isNightService}
-              />
-            </div>
+            <BookingForm
+              isOpen={isBookingModalOpen}
+              onClose={() => setIsBookingModalOpen(false)}
+              activeStep={activeStep}
+              formData={formData}
+              validationErrors={validationErrors}
+              availableSlots={availableSlots}
+              termsAccepted={termsAccepted}
+              isLoading={isLoading}
+              t={t}
+              onInputChange={handleInputChange}
+              onLocationSearch={handleLocationSearch}
+              onInputBlur={triggerRouteCalc}
+              onPaymentMethodChange={(m) => setFormData(p => ({ ...p, paymentMethod: m }))}
+              onToggleTerms={setTermsAccepted}
+              onShowTerms={() => setShowTerms(true)}
+              onPrevStep={handlePrevStep}
+              onNextStep={handleNextStep}
+              onSelectTier={handleTierSelect}
+              onAddAttachments={handleAddAttachments}
+              onRemoveAttachment={handleRemoveAttachment}
+              onSubmit={handleSubmit}
+              isNightService={isNightService}
+            />
           </main>
 
           <Footer
