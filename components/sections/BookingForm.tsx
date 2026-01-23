@@ -169,7 +169,7 @@ const BookingForm: React.FC<BookingFormProps> = ({
                                                 >
                                                     Missione <span className="text-[var(--milano-bronzo)]">Fiduciaria</span>
                                                 </h3>
-                                                <span className="text-[8px] font-mono text-black/30 uppercase tracking-[0.4em]">Protocollo: {formData.tier}</span>
+                                                <span className="text-[8px] font-mono text-black/30 uppercase tracking-[0.4em]">Servizio Scelto: {formData.tier}</span>
                                             </div>
 
                                             <div className="space-y-6">
@@ -298,7 +298,7 @@ const BookingForm: React.FC<BookingFormProps> = ({
                                                 >
                                                     Revisione <span className="text-[var(--milano-bronzo)]">Incarico</span>
                                                 </h3>
-                                                <span className="text-[8px] font-mono text-black/30 uppercase tracking-[0.4em]">Protocollo Finale</span>
+                                                <span className="text-[8px] font-mono text-black/30 uppercase tracking-[0.4em]">Riassunto Finale</span>
                                             </div>
 
                                             <div className="p-6 border border-[var(--milano-bronzo)]/30 bg-black/[0.02] rounded-sm space-y-6 shadow-sm">
@@ -321,10 +321,10 @@ const BookingForm: React.FC<BookingFormProps> = ({
                                             <div className="flex flex-col items-center gap-6 pt-2">
                                                 <label className="flex items-center gap-3 cursor-pointer group">
                                                     <input type="checkbox" checked={termsAccepted} onChange={(e) => onToggleTerms(e.target.checked)} className="hidden" />
-                                                    <div className={`w-5 h-5 border-2 flex items-center justify-center transition-all ${termsAccepted ? 'bg-black border-black shadow-md' : 'border-black/20 group-hover:border-black/40'}`}>
+                                                    <div className={`w-5 h-5 border-2 flex items-center justify-center transition-all ${termsAccepted ? 'bg-black border-black/10 shadow-md' : 'border-black/20 group-hover:border-black/40'}`}>
                                                         {termsAccepted && <Check className="w-3.5 h-3.5 text-white" />}
                                                     </div>
-                                                    <span className="text-[9px] font-mono text-black/60 uppercase tracking-[0.2em] group-hover:text-black transition-colors font-bold">Accetto il Protocollo Legale</span>
+                                                    <span className="text-[9px] font-mono text-black/60 uppercase tracking-[0.2em] group-hover:text-black transition-colors font-bold">Accetto l'Impegno di Riservatezza</span>
                                                 </label>
 
                                                 <button
@@ -332,7 +332,7 @@ const BookingForm: React.FC<BookingFormProps> = ({
                                                     disabled={!termsAccepted || isLoading}
                                                     className="btn-monumental !bg-black !text-white hover:!bg-[var(--milano-bronzo)] w-full md:w-auto px-16 py-4 shadow-2xl active:scale-[0.98] transition-all"
                                                 >
-                                                    {isLoading ? 'INVIO...' : 'INVIA RICHIESTA FIDUCIARIA'}
+                                                    {isLoading ? 'INVIO...' : 'RICHIEDI DISPONIBILITÀ'}
                                                 </button>
 
                                                 <button onClick={onPrevStep} className="text-[10px] font-mono uppercase tracking-widest text-black/80 hover:text-black transition-colors font-bold">Modifica Dati</button>

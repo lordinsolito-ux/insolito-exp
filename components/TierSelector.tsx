@@ -44,7 +44,7 @@ const TIER_DATA: TierCardData[] = [
         description: 'La massima espressione della serenità logistica: l\'imprevisto smette di esistere.',
         features: [
             'TUTTO DI ESSENTIALS, PIÙ:',
-            'PROTOCOLLO BACKUP AUTOMATICO',
+            'SINCRONIZZAZIONE OPERATIVA TOTALE',
             'REATTIVITÀ LAST-MINUTE (4H)',
             'GUARDIAN NOTTURNO'
         ],
@@ -72,7 +72,7 @@ export const TierSelector: React.FC<TierSelectorProps> = ({ selectedTier, onSele
         <div className="space-y-12">
             <div className="text-center space-y-4">
                 <h3 className="text-2xl md:text-3xl font-display text-white tracking-widest italic uppercase">
-                    Protocollo <span className="text-[var(--milano-bronzo)]">Selezione</span>
+                    Selezione <span className="text-[var(--milano-bronzo)]">Esclusiva</span>
                 </h3>
                 <div className="h-px w-24 bg-[var(--milano-bronzo)]/30 mx-auto"></div>
             </div>
@@ -131,7 +131,7 @@ export const TierSelector: React.FC<TierSelectorProps> = ({ selectedTier, onSele
                                 ? 'bg-[var(--milano-bronzo)] border-[var(--milano-bronzo)] text-white'
                                 : 'border-white/10 text-white/40 group-hover:border-white/30 group-hover:text-white'
                                 }`}>
-                                {isSelected ? 'Protocollo Attivo' : 'Seleziona Protocollo'}
+                                {isSelected ? 'Piano Selezionato' : 'Richiedi Disponibilità'}
                             </div>
                         </button>
                     );
