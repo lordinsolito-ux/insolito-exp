@@ -40,7 +40,7 @@ const Hero: React.FC<HeroProps> = ({ isScrolled, onAdminLogin, onArchiveClick, o
                 style={{
                     background: useTransform(
                         [springX, springY],
-                        ([x, y]: any) => `radial-gradient(1000px circle at ${50 + x * 20}% ${50 + y * 20}%, rgba(212, 175, 53, 0.05), transparent 80%)`
+                        ([x, y]: any) => `radial-gradient(1000px circle at ${50 + x * 20}% ${50 + y * 20}%, rgba(212, 175, 53, 0.15), transparent 80%)`
                     )
                 }}
             />

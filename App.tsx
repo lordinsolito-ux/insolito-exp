@@ -101,6 +101,12 @@ const App: React.FC = () => {
   const [routeInfo, setRouteInfo] = useState<RouteInfo | null>(null);
   const [hasShownRouteModal, setHasShownRouteModal] = useState(false);
   const [bookingConflictError, setBookingConflictError] = useState<string | null>(null);
+  // Startup log for verification
+  useEffect(() => {
+    console.log("%cINSOLITO PRIVÉ - VIRAL READY 1.0", "color: #8B7355; font-size: 20px; font-weight: bold;");
+    console.log("Shadow Parallax & Cinematic Grain: ACTIVE");
+  }, []);
+
   const [preselectedTier, setPreselectedTier] = useState<TierType | null>(null);
 
   // Refs
