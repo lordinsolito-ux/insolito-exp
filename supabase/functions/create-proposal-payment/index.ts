@@ -7,6 +7,13 @@ const stripe = new Stripe(Deno.env.get('STRIPE_SECRET_KEY') ?? '', {
     httpClient: Stripe.createFetchHttpClient(),
 })
 
+// STRIPE PRICE IDS - Configurati tramite constants.ts
+const STRIPE_PRICE_IDS = {
+    essentials: 'price_1Sshp1RQyWAZgAKdf78GeEWY',  // €180/h
+    signature: 'price_1Sshp2RQyWAZgAKdzPMsFoZK',   // €280/h
+    elite: 'price_1Sshp2RQyWAZgAKdkUmtOvgb'        // €6000/mese
+}
+
 const corsHeaders = {
     'Access-Control-Allow-Origin': '*',
     'Access-Control-Allow-Headers': 'authorization, x-client-info, apikey, content-type',
@@ -18,34 +25,60 @@ serve(async (req) => {
     }
 
     try {
-        const { bookingId, amount, customerEmail, customerName, description } = await req.json()
+        const { bookingId, amount, customerEmail, customerName, description, tier, hours } = await req.json()
 
-        // 1. Create a Stripe Price dynamically (or use a product_id if you have one)
-        // For simplicity, we create a one-time product and price
-        const product = await stripe.products.create({
-            name: `${description}`,
-        })
+        // Determina quale Price ID usare in base al tier
+        let priceId: string;
+        let quantity: number = 1;
 
-        const price = await stripe.prices.create({
-            unit_amount: Math.round(amount * 100), // in cents
-            currency: 'eur',
-            product: product.id,
-        })
+        if (tier === 'elite') {
+            // Elite è subscription mensile (€6000/mese)
+            priceId = STRIPE_PRICE_IDS.elite;
+            quantity = 1; // 1 mese
+        } else if (tier === 'essentials') {
+            // Essentials: €180/ora
+            priceId = STRIPE_PRICE_IDS.essentials;
+            quantity = hours || 3; // Minimo 3 ore
+        } else if (tier === 'signature') {
+            // Signature: €280/ora
+            priceId = STRIPE_PRICE_IDS.signature;
+            quantity = hours || 4; // Minimo 4 ore
+        } else {
+            // Fallback: usa creazione dinamica per booking legacy senza tier
+            console.warn('⚠️ Booking senza tier specificato, usando creazione dinamica');
 
-        // 2. Create a Payment Link
+            const product = await stripe.products.create({
+                name: `${description}`,
+            })
+
+            const price = await stripe.prices.create({
+                unit_amount: Math.round(amount * 100), // in cents
+                currency: 'eur',
+                product: product.id,
+            })
+
+            priceId = price.id;
+            quantity = 1;
+        }
+
+        // 2. Crea Payment Link usando il Price ID pre-configurato
         const paymentLink = await stripe.paymentLinks.create({
-            line_items: [{ price: price.id, quantity: 1 }],
+            line_items: [{ price: priceId, quantity: quantity }],
             after_completion: {
                 type: 'redirect',
                 redirect: { url: 'https://insolitoprive.it/grazie' }
             },
-            metadata: { bookingId },
+            metadata: {
+                bookingId,
+                tier: tier || 'legacy',
+                hours: hours?.toString() || '0'
+            },
         })
 
-        // 3. Update the booking in Supabase
+        // 3. Update booking in Supabase
         const supabaseClient = createClient(
             Deno.env.get('SUPABASE_URL') ?? '',
-            Deno.env.get('SUPABASE_ANON_KEY') ?? '' // We use service role if you want to bypass RLS
+            Deno.env.get('SUPABASE_SERVICE_ROLE_KEY') ?? ''
         )
 
         const { error: updateError } = await supabaseClient
@@ -58,12 +91,15 @@ serve(async (req) => {
 
         if (updateError) throw updateError
 
+        console.log(`✅ Payment Link creato per Tier ${tier}: ${paymentLink.url}`)
+
         return new Response(
             JSON.stringify({ url: paymentLink.url }),
             { headers: { ...corsHeaders, 'Content-Type': 'application/json' }, status: 200 }
         )
 
     } catch (error) {
+        console.error('❌ Errore Edge Function:', error)
         return new Response(
             JSON.stringify({ error: error.message }),
             { headers: { ...corsHeaders, 'Content-Type': 'application/json' }, status: 400 }

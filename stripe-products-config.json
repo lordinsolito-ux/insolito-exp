@@ -1,0 +1,21 @@
+{
+  "products": {
+    "essentials": {
+      "product_id": "prod_TqOc64Td2OPh7F",
+      "price_id": "price_1Sshp1RQyWAZgAKdf78GeEWY",
+      "hourly_rate": 180,
+      "min_hours": 3
+    },
+    "signature": {
+      "product_id": "prod_TqOc1VJ31kxyUX",
+      "price_id": "price_1Sshp2RQyWAZgAKdzPMsFoZK",
+      "hourly_rate": 280,
+      "min_hours": 4
+    },
+    "elite": {
+      "product_id": "prod_TqOcYawLTrBza2",
+      "price_id": "price_1Sshp2RQyWAZgAKdkUmtOvgb",
+      "monthly_fee": 6000
+    }
+  }
+}

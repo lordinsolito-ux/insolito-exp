@@ -10,6 +10,31 @@ import {
 } from 'lucide-react';
 import { ServiceType, ServiceTypeId, VehicleType, VehicleTypeId, LocationSuggestion } from './types';
 
+// ==============================================
+// STRIPE CONFIGURATION
+// ==============================================
+/**
+ * Stripe Price IDs for Tier-Based Products
+ * Created via setup-stripe-products.js
+ * See stripe-products-config.json for full details
+ */
+export const STRIPE_PRICE_IDS = {
+  essentials: 'price_1Sshp1RQyWAZgAKdf78GeEWY',  // €180/h - Min 3h
+  signature: 'price_1Sshp2RQyWAZgAKdzPMsFoZK',   // €280/h - Min 4h
+  elite: 'price_1Sshp2RQyWAZgAKdkUmtOvgb'        // €6000/mese - Unlimited
+} as const;
+
+export const STRIPE_PRODUCT_IDS = {
+  essentials: 'prod_TqOc64Td2OPh7F',
+  signature: 'prod_TqOc1VJ31kxyUX',
+  elite: 'prod_TqOcYawLTrBza2'
+} as const;
+
+// ==============================================
+// SERVICE DEFINITIONS
+// ==============================================
+
+
 // Elite Service Definitions - INSOLITO EXPERIENCES
 // No public pricing (Bespoke Pricing model)
 export const SERVICE_TYPES: (ServiceType & { image: string })[] = [

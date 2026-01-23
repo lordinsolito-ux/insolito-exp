@@ -67,79 +67,53 @@ const BookingForm = forwardRef<HTMLDivElement, BookingFormProps>(({
                                 >
                                     <div className="space-y-6 text-center md:text-left">
                                         <h3 className="text-4xl md:text-6xl font-display text-white tracking-tight italic">
-                                            L'Itinerario <span className="text-[var(--milano-bronzo)]">Privato</span>
+                                            L'Incarico <span className="text-[var(--milano-bronzo)]">Fiduciario</span>
                                         </h3>
                                         <div className="h-px w-24 bg-gradient-to-r from-[var(--milano-bronzo)] to-transparent mx-auto md:mx-0"></div>
                                     </div>
 
                                     <div className="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-20">
-                                        {/* ITINERARY */}
+                                        {/* MISSION DESCRIPTION */}
                                         <div className="space-y-10">
                                             <div className="flex items-center gap-4 mb-2">
                                                 <MapPin className="w-4 h-4 text-[var(--milano-bronzo)]" />
-                                                <h4 className="text-[10px] font-mono text-white/40 uppercase tracking-[0.5em]">{formData.tier ? 'Natura dell\'Incarico' : 'Dove ti troviamo?'}</h4>
-                                            </div>
-                                            <div className="space-y-6">
-                                                {formData.tier ? (
-                                                    <div className="group relative">
-                                                        <label className="text-xs text-white/60 uppercase tracking-widest mb-2 block">
-                                                            Descriva l'Incarico di Assistenza *
-                                                        </label>
-                                                        <textarea
-                                                            value={formData.assistanceDescription || ''}
-                                                            onChange={(e) => onInputChange(e)}
-                                                            name="assistanceDescription"
-                                                            onBlur={onInputBlur}
-                                                            placeholder="Descriva la natura dell'incarico: gestione logistica, coordinamento spostamenti d'élite, assistenza fiduciaria o presidio operativo per eventi. (Es: Richiedo assistenza per arrivo aeroportuale ore 14:30, coordinamento bagagli e presidio durante meeting pomeridiano in centro)."
-                                                            className="elite-input min-h-[140px] resize-none"
-                                                            rows={6}
-                                                        />
-                                                        {validationErrors.assistanceDescription && (
-                                                            <p className="text-red-500/80 text-[9px] mt-2 font-mono uppercase tracking-widest">
-                                                                {validationErrors.assistanceDescription}
-                                                            </p>
-                                                        )}
-                                                        <p className="text-[9px] text-gray-500 mt-2 leading-relaxed italic">
-                                                            Focus: descriva cosa deve essere gestito/coordinato, non semplicemente "dove andare". Ogni incarico è unico.
-                                                        </p>
-                                                    </div>
-                                                ) : (
-                                                    <>
-                                                        <div className="group relative">
-                                                            <input
-                                                                type="text"
-                                                                value={formData.pickupLocation}
-                                                                onChange={(e) => onLocationSearch('pickup', e.target.value)}
-                                                                onBlur={onInputBlur}
-                                                                placeholder="PUNTO DI PARTENZA (VIA, HOTEL, AEROPORTO)"
-                                                                className="elite-input"
-                                                            />
-                                                            {validationErrors.pickupLocation && <p className="text-red-500/80 text-[9px] mt-2 font-mono uppercase tracking-widest">{validationErrors.pickupLocation}</p>}
-                                                        </div>
-                                                        <div className="group relative">
-                                                            <input
-                                                                type="text"
-                                                                value={formData.destination}
-                                                                onChange={(e) => onLocationSearch('destination', e.target.value)}
-                                                                onBlur={onInputBlur}
-                                                                placeholder="DESTINAZIONE FINALE"
-                                                                className="elite-input"
-                                                            />
-                                                            {validationErrors.destination && <p className="text-red-500/80 text-[9px] mt-2 font-mono uppercase tracking-widest">{validationErrors.destination}</p>}
-                                                        </div>
-                                                    </>
-                                                )}
-                                            </div>
-                                        </div>
-
-                                        {/* SCHEDULE */}
-                                        <div className="space-y-10">
-                                            <div className="flex items-center gap-4 mb-2">
-                                                <Calendar className="w-4 h-4 text-[var(--milano-bronzo)]" />
-                                                <h4 className="text-[10px] font-mono text-white/40 uppercase tracking-[0.5em]">Quando?</h4>
+                                                <h4 className="text-[10px] font-mono text-white/40 uppercase tracking-[0.5em]">Natura della Missione</h4>
                                             </div>
                                             <div className="space-y-6">
                                                 <div className="group relative">
+                                                    <label className="text-[9px] font-mono text-white/40 uppercase tracking-[0.3em] mb-4 block">
+                                                        Dettagli dell'Incarico *
+                                                    </label>
+                                                    <textarea
+                                                        value={formData.assistanceDescription || ''}
+                                                        onChange={(e) => onInputChange(e)}
+                                                        name="assistanceDescription"
+                                                        onBlur={onInputBlur}
+                                                        placeholder="Descriva l'incarico: gestione logistica, coordinamento eventi, assistenza fiduciaria o presidio operativo. (Es: Richiedo assistenza per gestione bagagli e coordinamento spostamenti durante meeting in centro dalle 14:00)."
+                                                        className="elite-input min-h-[160px] resize-none text-[11px]"
+                                                        rows={6}
+                                                    />
+                                                    {validationErrors.assistanceDescription && (
+                                                        <p className="text-red-500/80 text-[9px] mt-2 font-mono uppercase tracking-widest">
+                                                            {validationErrors.assistanceDescription}
+                                                        </p>
+                                                    )}
+                                                    <p className="text-[8px] text-white/20 mt-4 leading-relaxed font-mono uppercase tracking-tight">
+                                                        Professional Focus: Descriva cosa dobbiamo gestire. L'eccellenza sta nei dettagli.
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        {/* SCHEDULE & DURATION */}
+                                        <div className="space-y-10">
+                                            <div className="flex items-center gap-4 mb-2">
+                                                <Calendar className="w-4 h-4 text-[var(--milano-bronzo)]" />
+                                                <h4 className="text-[10px] font-mono text-white/40 uppercase tracking-[0.5em]">Cronoprogramma</h4>
+                                            </div>
+                                            <div className="space-y-6">
+                                                <div className="group relative">
+                                                    <label className="text-[9px] font-mono text-white/40 uppercase tracking-[0.3em] mb-2 block">Data dell'Incarico</label>
                                                     <input
                                                         type="date"
                                                         name="date"
@@ -152,6 +126,7 @@ const BookingForm = forwardRef<HTMLDivElement, BookingFormProps>(({
                                                     {validationErrors.date && <p className="text-red-500/80 text-[9px] mt-2 font-mono uppercase tracking-widest">{validationErrors.date}</p>}
                                                 </div>
                                                 <div className="group relative">
+                                                    <label className="text-[9px] font-mono text-white/40 uppercase tracking-[0.3em] mb-2 block">Orario di Inizio Operativo</label>
                                                     <select
                                                         name="time"
                                                         value={formData.time}
@@ -164,11 +139,18 @@ const BookingForm = forwardRef<HTMLDivElement, BookingFormProps>(({
                                                         </option>
                                                         {availableSlots.map(s => <option key={s} value={s} className="bg-[#0a0a0a]">{s} {isNightService(s) ? '(NIGHT)' : ''}</option>)}
                                                     </select>
-                                                    <div className="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none">
+                                                    <div className="absolute right-4 top-[70%] -translate-y-1/2 pointer-events-none">
                                                         <Clock className={`w-4 h-4 ${!formData.date ? 'text-white/5' : 'text-[var(--milano-bronzo)]/40'}`} />
                                                     </div>
                                                     {validationErrors.time && <p className="text-red-500/80 text-[9px] mt-2 font-mono uppercase tracking-widest">{validationErrors.time}</p>}
                                                 </div>
+
+                                                {formData.tier && (
+                                                    <div className="p-4 bg-[var(--milano-bronzo)]/5 border border-[var(--milano-bronzo)]/10">
+                                                        <p className="text-[9px] font-mono text-[var(--milano-bronzo)] uppercase tracking-widest mb-1">Piano Selezionato</p>
+                                                        <p className="text-sm font-accent text-white uppercase">{formData.tier} - {formData.hours} ORE INCLUSE</p>
+                                                    </div>
+                                                )}
                                             </div>
                                         </div>
                                     </div>
@@ -210,22 +192,21 @@ const BookingForm = forwardRef<HTMLDivElement, BookingFormProps>(({
                                         <div className="space-y-10">
                                             <div className="flex items-center gap-4 mb-2">
                                                 <CreditCard className="w-4 h-4 text-[var(--milano-bronzo)]" />
-                                                <h4 className="text-[10px] font-mono text-white/40 uppercase tracking-[0.5em]">Regolamento Interno</h4>
+                                                <h4 className="text-[10px] font-mono text-white/40 uppercase tracking-[0.5em]">Modalità di Versamento</h4>
                                             </div>
-                                            <div className="grid grid-cols-2 gap-4">
-                                                {['cash', 'pos'].map(m => (
-                                                    <button
-                                                        key={m}
-                                                        onClick={() => onPaymentMethodChange(m as any)}
-                                                        className={`py-5 border text-[10px] uppercase tracking-[0.4em] transition-all duration-500 ${formData.paymentMethod === m ? 'border-[var(--milano-bronzo)] text-[var(--milano-bronzo)] bg-[var(--milano-bronzo)]/10 font-bold' : 'border-white/5 text-white/20 hover:border-white/20 hover:text-white/40'}`}
-                                                    >
-                                                        {m === 'cash' ? 'CONTANTI' : 'CARTA/POS'}
-                                                    </button>
-                                                ))}
+                                            <div className="grid grid-cols-1 gap-4">
+                                                <div className="py-6 border border-[var(--milano-bronzo)]/30 bg-[var(--milano-bronzo)]/5 text-center px-4">
+                                                    <p className="text-[10px] font-mono text-white uppercase tracking-[0.2em] mb-2 font-bold">Stripe Secure Payment Link</p>
+                                                    <p className="text-[8px] text-white/40 font-mono uppercase tracking-widest leading-relaxed">
+                                                        Riceverà un link di pagamento dedicato via email <br /> a seguito dell'accettazione fiduciaria dell'incarico.
+                                                    </p>
+                                                </div>
                                             </div>
-                                            <p className="text-[9px] font-mono text-white/20 uppercase leading-relaxed text-center italic">
-                                                *La carta serve solo come garanzia. <br /> Il pagamento avviene a fine servizio.
-                                            </p>
+                                            <div className="p-4 border border-white/5 bg-white/[0.01]">
+                                                <p className="text-[7px] font-mono text-white/25 uppercase leading-relaxed text-center italic">
+                                                    *Non accettiamo pagamenti diretti in contanti per garantire la massima tracciabilità e sicurezza delle transazioni fiduciarie d'élite.
+                                                </p>
+                                            </div>
                                         </div>
                                     </div>
                                 </motion.div>
@@ -242,7 +223,7 @@ const BookingForm = forwardRef<HTMLDivElement, BookingFormProps>(({
                                     <div className="space-y-8">
                                         <Star className="w-12 h-12 text-[var(--milano-bronzo)]/20 mx-auto animate-pulse-slow" strokeWidth={0.5} />
                                         <h3 className="text-3xl md:text-5xl font-display text-white italic tracking-tight">
-                                            Riepilogo <span className="text-[var(--milano-bronzo)]">Esclusivo</span>
+                                            Riepilogo <span className="text-[var(--milano-bronzo)]">Incarico</span>
                                         </h3>
                                     </div>
 
@@ -252,13 +233,13 @@ const BookingForm = forwardRef<HTMLDivElement, BookingFormProps>(({
                                             <span className="text-white text-xl font-accent uppercase tracking-widest">{formData.name}</span>
                                         </div>
                                         <div className="flex justify-between items-center">
-                                            <span className="text-[10px] font-mono text-white/20 uppercase tracking-[0.4em]">Servizio</span>
+                                            <span className="text-[10px] font-mono text-white/20 uppercase tracking-[0.4em]">Profilo Selezione</span>
                                             <span className="text-[var(--milano-bronzo)] text-xl tracking-widest uppercase font-accent">
-                                                {SERVICE_TYPES.find(s => s.id === formData.serviceType)?.name}
+                                                {formData.tier ? `TIER ${formData.tier}` : 'LIFESTYLE MANAGEMENT'}
                                             </span>
                                         </div>
                                         <div className="flex flex-col items-center gap-2 pt-8">
-                                            <span className="text-[10px] font-mono text-white/20 uppercase tracking-[1em]">Valore Previsto</span>
+                                            <span className="text-[10px] font-mono text-white/20 uppercase tracking-[1em]">Onorario Professionale</span>
                                             <span className="text-7xl md:text-8xl font-accent text-white tracking-tighter">€{formData.estimatedPrice}</span>
                                         </div>
                                     </div>

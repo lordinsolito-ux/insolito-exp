@@ -10,72 +10,68 @@ interface BookingConfirmationProps {
 }
 
 export const BookingConfirmation: React.FC<BookingConfirmationProps> = ({ formData, onReset }) => {
-  const serviceName = SERVICE_TYPES.find(s => s.id === formData.serviceType)?.name;
+  const serviceName = formData.tier ? `TIER ${formData.tier.toUpperCase()}` : (SERVICE_TYPES.find(s => s.id === formData.serviceType)?.name || 'LIFESTYLE MANAGEMENT');
 
   return (
     <div className="min-h-screen bg-black text-gray-200 font-sans flex items-center justify-center p-4 relative overflow-hidden">
       {/* Background Elements */}
       <div className="absolute inset-0 z-0 pointer-events-none">
-        <div className="absolute inset-0 bg-gray-900"></div>
-        <img
-          src="https://s2.best-wallpaper.net/wallpaper/iphone/1801/Milan-Italy-night-river-lights-city_iphone_320x480.jpg"
-          alt="Background"
-          className="absolute inset-0 w-full h-full object-cover opacity-20"
-        />
-        <div className="absolute inset-0 bg-gradient-to-t from-black via-black/80 to-black/40"></div>
+        <div className="absolute inset-0 bg-black"></div>
+        <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(circle_at_50%_50%,_rgba(58,58,58,0.3),_transparent_70%)]"></div>
+        <div className="absolute inset-0 bg-noise opacity-[0.05]"></div>
       </div>
 
-      <div className="relative z-10 bg-black/60 backdrop-blur-xl border border-gold-900/50 rounded-xl shadow-2xl max-w-lg w-full p-8 md:p-12 text-center animate-fade-in">
-        <div className="flex justify-center mb-6">
-          <div className="w-20 h-20 rounded-full bg-gold-900/10 border-2 border-gold-500/50 flex items-center justify-center shadow-[0_0_30px_rgba(212,175,55,0.1)] relative">
-            <Clock className="w-10 h-10 text-gold-400 animate-pulse" />
+      <div className="relative z-10 bg-black/80 backdrop-blur-3xl border border-white/10 rounded-sm shadow-2xl max-w-lg w-full p-8 md:p-12 text-center animate-fade-in">
+        <div className="flex justify-center mb-10">
+          <div className="w-24 h-24 rounded-full bg-[var(--milano-bronzo)]/5 border border-[var(--milano-bronzo)]/20 flex items-center justify-center shadow-[0_0_50px_rgba(139,115,85,0.1)] relative">
+            <Clock className="w-10 h-10 text-[var(--milano-bronzo)] animate-pulse" />
             <div className="absolute top-0 right-0">
               <span className="flex h-3 w-3">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-gold-400 opacity-75"></span>
-                <span className="relative inline-flex rounded-full h-3 w-3 bg-gold-500"></span>
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[var(--milano-bronzo)] opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-3 w-3 bg-[var(--milano-bronzo)]"></span>
               </span>
             </div>
           </div>
         </div>
 
-        <h2 className="text-3xl font-display text-gold-200 mb-2 tracking-wide">Request Under Review</h2>
-        <div className="inline-block bg-gold-900/30 text-gold-500 border border-gold-800/50 px-3 py-1 rounded text-[10px] uppercase font-bold tracking-widest mb-6">
-          Status: Analyzing Availability
+        <h2 className="text-4xl font-display text-white italic mb-2 tracking-tight">Richiesta in Analisi</h2>
+        <div className="inline-block bg-[var(--milano-bronzo)]/10 text-[var(--milano-bronzo)] border border-[var(--milano-bronzo)]/20 px-4 py-1.5 rounded-sm text-[10px] uppercase font-bold tracking-[0.3em] mb-10">
+          Status: Verifica Disponibilità Fiduciaria
         </div>
 
-        <p className="text-gray-400 text-sm mb-8 font-light leading-relaxed">
-          Thank you, <span className="text-white">{formData.name}</span>. Your booking request has been securely received.
-          We are verifying availability for the selected time slot.
+        <p className="text-gray-400 text-sm mb-12 font-light leading-relaxed font-sans uppercase tracking-widest text-[10px]">
+          Grazie, <span className="text-white font-bold">{formData.name}</span>. La sua richiesta di accesso è stata registrata con successo.
+          Il nostro team sta verificando la fattibilità logistica dell'incarico.
         </p>
 
-        <div className="space-y-4 text-left bg-black/40 p-6 rounded border border-white/5 mb-8">
-          <div className="flex justify-between border-b border-white/10 pb-2">
-            <span className="text-xs text-gray-500 uppercase tracking-widest">Service</span>
-            <span className="text-gray-300">{serviceName}</span>
+        <div className="space-y-5 text-left bg-white/[0.02] p-8 rounded-sm border border-white/5 mb-10">
+          <div className="flex justify-between items-center border-b border-white/5 pb-3">
+            <span className="text-[9px] font-mono text-white/30 uppercase tracking-[0.3em]">Protocollo</span>
+            <span className="text-sm text-white/80 font-accent uppercase">{serviceName}</span>
           </div>
-          <div className="flex justify-between border-b border-white/10 pb-2">
-            <span className="text-xs text-gray-500 uppercase tracking-widest">Date & Time</span>
-            <span className="text-gray-300">{new Date(formData.date).toLocaleDateString()} at {formData.time}</span>
+          <div className="flex justify-between items-center border-b border-white/5 pb-3">
+            <span className="text-[9px] font-mono text-white/30 uppercase tracking-[0.3em]">Data & Inizio</span>
+            <span className="text-sm text-white/80 font-accent uppercase">{new Date(formData.date).toLocaleDateString()} @ {formData.time}</span>
           </div>
-          <div className="flex justify-between">
-            <span className="text-xs text-gray-500 uppercase tracking-widest">Estimated Value</span>
-            <span className="text-gold-400 font-display text-lg">€{formData.estimatedPrice}</span>
+          <div className="flex justify-between items-center">
+            <span className="text-[9px] font-mono text-white/30 uppercase tracking-[0.3em]">Onorario</span>
+            <span className="text-[var(--milano-bronzo)] font-accent text-2xl tracking-tighter">€{formData.estimatedPrice}</span>
           </div>
         </div>
 
-        <div className="flex gap-4 mb-8 bg-gray-900/50 p-4 rounded text-left border-l-2 border-gold-500">
-          <AlertCircle className="w-5 h-5 text-gold-500 shrink-0 mt-0.5" />
-          <div className="text-xs text-gray-400">
-            <strong className="text-gray-200 block mb-1">What happens next?</strong>
-            You will receive a confirmation message via WhatsApp shortly. If the time is unavailable, we will propose an alternative.
+        <div className="flex gap-4 mb-10 bg-white/[0.01] p-6 rounded-sm text-left border-l-2 border-[var(--milano-bronzo)]">
+          <AlertCircle className="w-5 h-5 text-[var(--milano-bronzo)] shrink-0 mt-0.5" />
+          <div className="text-[10px] font-mono text-white/40 uppercase tracking-widest leading-relaxed">
+            <strong className="text-white block mb-2">Cosa succede ora?</strong>
+            Analizzeremo i dettagli della sua missione. In caso di esito positivo, riceverà via email una proposta formale contenente il link di pagamento Stripe per confermare definitivamente l'intervento.
           </div>
         </div>
 
         <button
           onClick={onReset}
-          className="w-full py-4 bg-gray-800 text-white font-bold uppercase tracking-[0.2em] text-sm hover:bg-gold-600 hover:text-black transition-all flex items-center justify-center gap-3 shadow-lg border border-white/10"
+          className="w-full py-6 bg-white text-black font-accent text-[11px] uppercase tracking-[0.4em] hover:bg-[var(--milano-bronzo)] hover:text-white transition-all duration-700 shadow-xl"
         >
-          <Home className="w-4 h-4" /> Return Home
+          <Home className="w-4 h-4 inline-block mr-3 -mt-1" /> Tornare alla Home
         </button>
       </div>
     </div>

@@ -319,8 +319,10 @@ const App: React.FC = () => {
       }
       const newBooking: BookingRecord = { ...formData, id: Date.now().toString(), timestamp: new Date().toISOString(), status: 'requested' };
       await saveBooking(newBooking, true);
-      const message = `*NEW ASSISTANCE REQUEST* 👑\n*Client:* ${formData.name}\n*Concierge Services:* ${SERVICE_TYPES.find(s => s.id === formData.serviceType)?.name}\n*Pick-up:* ${formData.pickupLocation}\n*Destination:* ${formData.destination}\n*Date:* ${new Date(formData.date).toLocaleDateString()}\n*Time:* ${formData.time}\n*Total:* €${formData.estimatedPrice}`;
-      window.location.href = `https://wa.me/393393522164?text=${encodeURIComponent(message)}`;
+
+      // WhatsApp redirect removed to keep user in-app as requested
+      // The admin will receive an email automatically via the saveBooking -> sendBookingUpdateNotification flow
+
       setIsBookingConfirmed(true);
     } finally {
       setIsLoading(false);
@@ -385,8 +387,8 @@ const App: React.FC = () => {
                 }, 100);
               }}
               onTierSelect={(tier) => {
-                setPreselectedTier(tier);
-                setActiveStep(1);
+                // ✅ FIX: Chiama direttamente handleTierSelect invece di mostrare TierSelector
+                handleTierSelect(tier);
                 setTimeout(() => {
                   formCardRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
                 }, 100);

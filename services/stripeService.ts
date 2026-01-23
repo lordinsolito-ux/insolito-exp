@@ -17,7 +17,10 @@ export const stripeService = {
                     amount: booking.estimatedPrice,
                     customerEmail: booking.email,
                     customerName: booking.name,
-                    description: `Incarico Fiduciario Insolito Privé - ${booking.date}`
+                    description: `Incarico Fiduciario Insolito Privé - ${booking.date}`,
+                    // ⚠️ NUOVI CAMPI per tier-based pricing:
+                    tier: booking.tier || null,
+                    hours: booking.hours || null
                 }
             });
 
