@@ -37,7 +37,7 @@ const Investment: React.FC<InvestmentProps> = ({ selectedTier, onBookClick, onTi
     };
 
     return (
-        <section id="investment-section" className="bg-black text-white py-20 md:py-32 px-6 md:px-12 lg:px-24 font-sans relative overflow-hidden z-20 border-t border-white/5">
+        <section id="investment-section" className="bg-black text-white font-sans relative overflow-hidden z-20 border-t border-white/5" style={{ padding: 'var(--space-l) var(--space-m)' }}>
             <div className="absolute inset-0 bg-noise opacity-[0.03] pointer-events-none"></div>
 
             {/* HERO SECTION */}
@@ -47,7 +47,10 @@ const Investment: React.FC<InvestmentProps> = ({ selectedTier, onBookClick, onTi
                     <span className="text-[9px] md:text-[10px] font-mono text-white/30 uppercase tracking-[0.4em] md:tracking-[0.5em]">Investment</span>
                 </div>
 
-                <h2 className="text-4xl md:text-7xl font-accent uppercase font-bold tracking-tighter leading-tight">
+                <h2
+                    style={{ fontSize: 'var(--text-title-xl)' }}
+                    className="font-accent uppercase font-bold tracking-tighter leading-tight"
+                >
                     Il tuo tempo <br /><span className="text-[var(--milano-bronzo)]">non ha prezzo.</span>
                 </h2>
                 <h3 className="text-xl md:text-4xl font-display italic text-white/80">
@@ -172,7 +175,10 @@ const Investment: React.FC<InvestmentProps> = ({ selectedTier, onBookClick, onTi
 
             {/* FINAL CTA */}
             <div className="max-w-4xl mx-auto text-center relative z-10 py-16 md:py-32 border-y border-white/5 bg-black px-6">
-                <h2 className="text-4xl md:text-6xl font-accent uppercase font-bold tracking-tighter mb-8 text-white">
+                <h2
+                    style={{ fontSize: 'var(--text-title-lg)' }}
+                    className="font-accent uppercase font-bold tracking-tighter mb-8 text-white"
+                >
                     Il tuo tempo <br /> non torna indietro.
                 </h2>
                 <p className="text-xl font-display text-white/60 italic mb-12">

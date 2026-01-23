@@ -22,7 +22,8 @@ const TheGuardian: React.FC<TheGuardianProps> = ({ onStoryClick }) => {
     return (
         <section
             ref={containerRef}
-            className="relative py-12 md:py-32 px-6 md:px-24 overflow-hidden bg-[#F9F7F4] text-[#1a1a1a] transition-colors duration-1000"
+            className="relative overflow-hidden bg-[#F9F7F4] text-[#1a1a1a] transition-colors duration-1000"
+            style={{ padding: 'var(--space-l) var(--space-m)' }}
         >
             {/* Background Texture - Subtle Paper Grain */}
             <div className="absolute inset-0 opacity-[0.03] pointer-events-none mix-blend-multiply"
@@ -39,7 +40,10 @@ const TheGuardian: React.FC<TheGuardianProps> = ({ onStoryClick }) => {
                     {/* Brand Origin Title */}
                     <div className="space-y-3 md:space-y-4">
                         <span className="text-[#D4AF37] font-mono text-[9px] md:text-[10px] uppercase tracking-[0.4em] md:tracking-[0.5em] block">{t('guardian.label')}</span>
-                        <h2 className="text-2xl md:text-5xl font-accent text-black uppercase tracking-tighter leading-[0.9]">
+                        <h2
+                            style={{ fontSize: 'var(--text-title-md)' }}
+                            className="font-accent text-black uppercase tracking-tighter leading-[0.9]"
+                        >
                             {t('guardian.title')}<br />{t('guardian.title_highlight')}
                         </h2>
                         <div className="h-px w-12 md:w-16 bg-[#D4AF37] mx-auto mt-4 md:mt-6"></div>

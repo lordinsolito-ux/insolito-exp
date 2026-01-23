@@ -2,13 +2,16 @@ import React from 'react';
 
 const NarrativeSpread: React.FC = () => {
     return (
-        <section id="essence" className="py-16 px-12 md:px-24 space-y-16 bg-transparent relative z-20 overflow-hidden">
+        <section id="essence" className="relative z-20 overflow-hidden bg-transparent" style={{ padding: 'var(--space-l) var(--space-m)', gap: 'var(--space-l)' }}>
             {/* Spread 1: The Vision */}
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center max-w-7xl mx-auto">
                 <div className="lg:col-span-12 xl:col-span-5 space-y-10 animate-reveal">
                     <div className="space-y-4">
                         <span className="text-[var(--milano-bronzo)] font-mono text-[10px] uppercase tracking-[0.5em] block">Status: [LIVE]</span>
-                        <h2 className="text-5xl md:text-7xl font-accent text-white leading-tight tracking-tighter uppercase font-bold">
+                        <h2
+                            style={{ fontSize: 'var(--text-title-lg)' }}
+                            className="font-accent text-white leading-tight tracking-tighter uppercase font-bold"
+                        >
                             Conosco quella<br /><span className="text-[var(--milano-bronzo)]">sensazione.</span>
                         </h2>
                     </div>
@@ -77,7 +80,12 @@ const NarrativeSpread: React.FC = () => {
                     </div>
                 </div>
                 <div className="lg:col-span-12 xl:col-span-7 flex flex-col justify-center space-y-12 order-1 xl:order-2">
-                    <h3 className="text-5xl md:text-7xl font-accent text-white tracking-tighter font-bold uppercase">Non Siamo Qui per <br /><span className="text-[var(--milano-bronzo)]">Impressionarti.</span></h3>
+                    <h3
+                        style={{ fontSize: 'var(--text-title-lg)' }}
+                        className="font-accent text-white tracking-tighter font-bold uppercase"
+                    >
+                        Non Siamo Qui per <br /><span className="text-[var(--milano-bronzo)]">Impressionarti.</span>
+                    </h3>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-10 pt-8 border-t border-white/5">
                         <div className="space-y-4">
                             <h4 className="text-[var(--milano-bronzo)] font-mono text-[10px] tracking-[0.5em] uppercase">The Silence Protocol</h4>

@@ -12,12 +12,21 @@
   --oro-lucido: var(--milano-bronzo);
   --bronzo-profondo: var(--milano-ghiaccio);
 
-  /* SPACING SYSTEM - CLAMP BASED */
+  /* SPACING SYSTEM - CLAMP BASED (INTELLIGENT SPACING) */
   --space-xs: clamp(0.5rem, 1vw, 0.75rem);
   --space-s: clamp(1rem, 2vw, 1.5rem);
-  --space-m: clamp(2rem, 4vw, 3rem);
-  --space-l: clamp(4rem, 8vw, 6rem);
-  --space-xl: clamp(6rem, 12vw, 10rem);
+  --space-m: clamp(2rem, 4.5vw, 4rem);
+  --space-l: clamp(4rem, 9vw, 8rem);
+  --space-xl: clamp(6rem, 15vw, 12rem);
+
+  /* FLUID TYPOGRAPHY - INTELLIGENT SCALING */
+  --text-hero: clamp(3rem, 12vw, 10rem);
+  --text-title-xl: clamp(2.5rem, 10vw, 8rem);
+  --text-title-lg: clamp(2rem, 7vw, 5rem);
+  --text-title-md: clamp(1.5rem, 5vw, 3rem);
+  --text-body-lg: clamp(1.1rem, 1.5vw, 1.4rem);
+  --text-body-md: clamp(0.9rem, 1.25vw, 1.1rem);
+  --text-mono-xs: clamp(0.6rem, 0.8vw, 0.75rem);
 }
 
 @layer base {
@@ -90,11 +99,13 @@
 
   /* PEARL INPUTS - MASSIVE FOCUS */
   .pearl-input {
-    @apply border-b-2 border-black/10 py-8 px-8 transition-all duration-700 outline-none w-full block;
+    @apply border-b-2 border-black/10 transition-all duration-700 outline-none w-full block;
+    padding: var(--space-s) var(--space-m);
     background-color: rgba(0, 0, 0, 0.02) !important;
     color: #000000 !important;
     font-family: 'IBM Plex Mono', monospace;
-    @apply text-[14px] uppercase tracking-[0.2em];
+    font-size: var(--text-body-md);
+    @apply uppercase tracking-[0.2em];
     border-radius: 0;
   }
 
@@ -109,7 +120,8 @@
 
   /* PEARL VAULT - ATTACHMENT AREA */
   .pearl-vault {
-    @apply border-2 border-dashed border-black/5 bg-black/[0.01] p-10 transition-all duration-700;
+    @apply border-2 border-dashed border-black/5 bg-black/[0.01] transition-all duration-700;
+    padding: var(--space-m);
     @apply flex flex-col items-center justify-center gap-4 text-center cursor-pointer;
   }
 

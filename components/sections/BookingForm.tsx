@@ -140,18 +140,19 @@ const BookingForm: React.FC<BookingFormProps> = ({
                                     exit={{ opacity: 0, x: -20 }}
                                     className="space-y-16 lg:space-y-20"
                                 >
-                                    <div className="space-y-6 text-center md:text-left border-b border-black/5 pb-12">
-                                        <h3 className="text-5xl md:text-7xl lg:text-8xl font-display pearl-title tracking-tighter">
+                                    <div className="space-y-6 text-center md:text-left border-b border-black/5" style={{ paddingBottom: 'var(--space-m)' }}>
+                                        <h3
+                                            style={{ fontSize: 'var(--text-title-xl)' }}
+                                            className="font-display pearl-title tracking-tighter leading-[0.9]"
+                                        >
                                             Missione <span className="text-[var(--milano-bronzo)]">Fiduciaria</span>
                                         </h3>
                                         <div className="h-px w-32 bg-gradient-to-r from-[var(--milano-bronzo)] to-black/5 mx-auto md:mx-0"></div>
                                     </div>
 
-                                    <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-24 items-start">
-
-                                        {/* LEFT COLUMN: OBJECTIVES & VAULT (2/3) */}
-                                        <div className="lg:col-span-7 space-y-16">
-                                            <div className="space-y-8">
+                                    <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-24 items-start">
+                                        <div className="lg:col-span-7 space-y-12 md:space-y-16">
+                                            <div className="space-y-6 md:space-y-8">
                                                 <div className="flex items-center gap-4">
                                                     <Target className="w-5 h-5 text-[var(--milano-bronzo)]" />
                                                     <h4 className="text-[11px] font-mono uppercase tracking-[0.5em] pearl-content">Obiettivi Operativi</h4>
@@ -163,7 +164,8 @@ const BookingForm: React.FC<BookingFormProps> = ({
                                                         name="assistanceDescription"
                                                         onBlur={onInputBlur}
                                                         placeholder="Specifichi qui gli obiettivi della missione d'élite..."
-                                                        className="pearl-input min-h-[300px] text-[15px] leading-relaxed p-10 bg-black/[0.01] border-2 border-black/5 focus:bg-white transition-all shadow-inner"
+                                                        className="pearl-input min-h-[250px] md:min-h-[350px] text-[15px] leading-relaxed bg-black/[0.01] border-2 border-black/5 focus:bg-white transition-all shadow-inner"
+                                                        style={{ padding: 'var(--space-s) var(--space-m)' }}
                                                     />
                                                     {validationErrors.assistanceDescription && (
                                                         <p className="text-red-600/90 text-[10px] mt-4 font-mono uppercase tracking-widest font-bold">{validationErrors.assistanceDescription}</p>

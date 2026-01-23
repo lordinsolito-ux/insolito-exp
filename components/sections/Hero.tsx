@@ -86,7 +86,10 @@ const Hero: React.FC<HeroProps> = ({ isScrolled, onAdminLogin, onArchiveClick, o
                     >
                         {t('hero.tagline')}
                     </motion.p>
-                    <h1 className="text-4xl md:text-[8rem] font-accent text-white tracking-tighter leading-none font-black uppercase max-w-[90vw] md:max-w-none">
+                    <h1
+                        style={{ fontSize: 'var(--text-hero)' }}
+                        className="font-accent text-white tracking-tighter leading-none font-black uppercase max-w-[95vw] md:max-w-none"
+                    >
                         {t('hero.headline1')}<br />
                         <motion.span
                             initial={{ opacity: 0 }}
@@ -106,7 +109,10 @@ const Hero: React.FC<HeroProps> = ({ isScrolled, onAdminLogin, onArchiveClick, o
                     className="flex flex-col items-center gap-6 md:gap-8"
                 >
                     <div className="w-px h-16 md:h-24 bg-gradient-to-b from-[var(--milano-bronzo)] to-transparent"></div>
-                    <h2 className="text-xl md:text-5xl font-display text-white italic tracking-wide">
+                    <h2
+                        style={{ fontSize: 'var(--text-title-md)' }}
+                        className="font-display text-white italic tracking-wide text-center"
+                    >
                         {t('hero.subheadline')} <span className="text-[var(--milano-bronzo)] border-b border-[var(--milano-bronzo)]/30">{t('hero.subheadline_highlight')}</span>
                     </h2>
                 </motion.div>
