@@ -101,7 +101,7 @@ const LegalSeal = () => {
     const { t } = useTranslation();
 
     return (
-        <div className="text-[9px] text-[#8C8C8C] font-sans font-medium leading-relaxed max-w-sm tracking-wide">
+        <div className="text-[9px] text-[#8C8C8C] font-sans font-medium leading-relaxed tracking-wide mx-auto">
             <p className="uppercase text-[#D4AF37] mb-1 tracking-widest">{t('guardian.seal_title')}</p>
             <p>{t('guardian.seal_company')}</p>
             <p>{t('guardian.seal_address')}</p>
