@@ -299,7 +299,12 @@ const BookingForm: React.FC<BookingFormProps> = ({
                                 >
                                     {/* Simplified profile content to save space but kept original logic */}
                                     <div className="space-y-6 text-center md:text-left">
-                                        <h3 className="text-4xl md:text-6xl font-display pearl-title tracking-tight">Profilo <span className="text-[var(--milano-bronzo)]">Fiduciario</span></h3>
+                                        <h3
+                                            style={{ fontSize: 'var(--text-title-lg)' }}
+                                            className="font-display pearl-title tracking-tight"
+                                        >
+                                            Profilo <span className="text-[var(--milano-bronzo)]">Fiduciario</span>
+                                        </h3>
                                         <div className="h-px w-24 bg-[var(--milano-bronzo)] mx-auto md:mx-0"></div>
                                     </div>
 
@@ -335,7 +340,12 @@ const BookingForm: React.FC<BookingFormProps> = ({
                                     className="space-y-16"
                                 >
                                     <div className="space-y-6 text-center md:text-left">
-                                        <h3 className="text-4xl md:text-6xl font-display pearl-title tracking-tight">Revisione <span className="text-[var(--milano-bronzo)]">Incarico</span></h3>
+                                        <h3
+                                            style={{ fontSize: 'var(--text-title-lg)' }}
+                                            className="font-display pearl-title tracking-tight"
+                                        >
+                                            Revisione <span className="text-[var(--milano-bronzo)]">Incarico</span>
+                                        </h3>
                                         <div className="h-px w-24 bg-[var(--milano-bronzo)] mx-auto md:mx-0"></div>
                                     </div>
 
