@@ -109,19 +109,19 @@ const BookingForm: React.FC<BookingFormProps> = ({
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     exit={{ opacity: 0 }}
-                    className="fixed inset-0 z-[200] flex items-center justify-center bg-black/95 backdrop-blur-xl p-0 md:p-6 lg:p-12 overflow-y-auto"
+                    className="fixed inset-0 z-[200] flex items-start justify-center bg-black/95 backdrop-blur-xl p-0 md:p-6 lg:p-12 overflow-y-auto"
                 >
                     <motion.div
                         initial={{ opacity: 0, scale: 0.98, y: 10 }}
                         animate={{ opacity: 1, scale: 1, y: 0 }}
                         exit={{ opacity: 0, scale: 0.98, y: 10 }}
                         transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-                        className={`relative w-full max-w-3xl min-h-[80vh] md:min-h-0 rounded-none md:rounded-lg overflow-hidden transition-all duration-1000 shadow-2xl ${activeStep >= 2 ? 'pearl-monolith border-none' : 'luxury-monolith border border-white/10'}`}
+                        className={`relative w-full max-w-4xl mt-24 md:mt-32 rounded-none md:rounded-lg overflow-hidden transition-all duration-1000 shadow-2xl mb-12 ${activeStep >= 2 ? 'pearl-monolith border-none' : 'luxury-monolith border border-white/10'}`}
                     >
                         {/* CLOSE BUTTON - ARCHITECTURAL PRECISION */}
                         <button
                             onClick={onClose}
-                            className={`absolute top-4 right-4 md:top-6 md:right-6 z-[210] p-2 group transition-all duration-700 ${activeStep >= 2 ? 'text-black/20 hover:text-black' : 'text-white/20 hover:text-white'}`}
+                            className={`absolute top-4 right-4 md:top-6 md:right-6 z-[210] p-2 group transition-all duration-700 ${activeStep >= 2 ? 'text-black/40 hover:text-black' : 'text-white/40 hover:text-white'}`}
                         >
                             <X className="w-5 h-5 md:w-6 md:h-6 transition-transform group-hover:rotate-90 duration-700" strokeWidth={1} />
                         </button>
@@ -131,7 +131,7 @@ const BookingForm: React.FC<BookingFormProps> = ({
                         <div className="relative z-10 w-full">
                             <StepIndicator currentStep={activeStep} />
 
-                            <div className="p-6 md:p-10 lg:p-12">
+                            <div className="p-6 md:p-12 lg:p-16">
                                 <AnimatePresence mode="wait">
                                     {/* STEP 1: PROTOCOLLO (TIER) */}
                                     {activeStep === 1 && (
@@ -160,75 +160,88 @@ const BookingForm: React.FC<BookingFormProps> = ({
                                             initial={{ opacity: 0, x: 20 }}
                                             animate={{ opacity: 1, x: 0 }}
                                             exit={{ opacity: 0, x: -20 }}
-                                            className="space-y-8 md:space-y-12"
+                                            className="space-y-10 md:space-y-14"
                                         >
-                                            <div className="space-y-4 text-center md:text-left border-b border-black/5 pb-6">
+                                            <div className="space-y-4 text-center md:text-left border-b border-black/10 pb-6">
                                                 <h3
                                                     style={{ fontSize: 'var(--text-title-md)' }}
-                                                    className="font-display pearl-title tracking-tighter leading-tight"
+                                                    className="font-display pearl-title tracking-tighter leading-tight text-black"
                                                 >
                                                     Missione <span className="text-[var(--milano-bronzo)]">Fiduciaria</span>
                                                 </h3>
                                             </div>
 
-                                            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-                                                <div className="lg:col-span-12 space-y-10">
-                                                    <div className="space-y-4">
-                                                        <div className="flex items-center gap-3">
-                                                            <Target className="w-4 h-4 text-[var(--milano-bronzo)]" />
-                                                            <h4 className="text-[9px] font-mono uppercase tracking-[0.4em] pearl-content">Obiettivi Operativi</h4>
-                                                        </div>
-                                                        <textarea
-                                                            value={formData.assistanceDescription || ''}
-                                                            onChange={(e) => onInputChange(e)}
-                                                            name="assistanceDescription"
-                                                            onBlur={onInputBlur}
-                                                            placeholder="Specifichi gli obiettivi..."
-                                                            className="pearl-input min-h-[180px] text-[13px] leading-relaxed bg-black/[0.01] border border-black/5 focus:bg-white transition-all shadow-inner"
-                                                            style={{ padding: 'var(--space-s)' }}
-                                                        />
+                                            <div className="space-y-10">
+                                                {/* RECTANGULAR TEXTAREA - FULL WIDTH */}
+                                                <div className="space-y-4">
+                                                    <div className="flex items-center gap-3">
+                                                        <Target className="w-4 h-4 text-[var(--milano-bronzo)]" />
+                                                        <h4 className="text-[10px] font-mono uppercase tracking-[0.4em] text-black font-bold">Obiettivi Operativi</h4>
                                                     </div>
+                                                    <textarea
+                                                        value={formData.assistanceDescription || ''}
+                                                        onChange={(e) => onInputChange(e)}
+                                                        name="assistanceDescription"
+                                                        onBlur={onInputBlur}
+                                                        placeholder="Specifichi dettagliatamente gli obiettivi della missione..."
+                                                        className="pearl-input w-full min-h-[140px] text-[14px] leading-relaxed bg-black/[0.02] border border-black/10 focus:bg-white focus:border-[var(--milano-bronzo)] transition-all shadow-inner text-black p-6"
+                                                    />
+                                                </div>
 
-                                                    <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                                                        <div className="space-y-6 p-6 bg-black/[0.02] border border-black/5 rounded-sm">
-                                                            <div className="flex items-center gap-3">
-                                                                <Calendar className="w-4 h-4 text-[var(--milano-bronzo)]" />
-                                                                <h4 className="text-[9px] font-mono uppercase tracking-[0.4em] pearl-content">Finestra</h4>
+                                                <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12">
+                                                    {/* FINESTRA TEMPORALE */}
+                                                    <div className="space-y-6 p-6 bg-black/[0.03] border border-black/5 rounded-sm">
+                                                        <div className="flex items-center gap-3">
+                                                            <Calendar className="w-4 h-4 text-[var(--milano-bronzo)]" />
+                                                            <h4 className="text-[10px] font-mono uppercase tracking-[0.4em] text-black font-bold">Finestra</h4>
+                                                        </div>
+                                                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                                            <div className="space-y-2">
+                                                                <label className="text-[8px] font-mono uppercase text-black/40">Data</label>
+                                                                <input type="date" name="date" value={formData.date} onChange={onInputChange} className="pearl-input !p-3 !text-[12px] !bg-white border-black/10 text-black" style={{ colorScheme: 'light' }} />
                                                             </div>
-                                                            <div className="space-y-4">
-                                                                <input type="date" name="date" value={formData.date} onChange={onInputChange} className="pearl-input !p-3 !text-[11px]" style={{ colorScheme: 'light' }} />
-                                                                <select name="time" value={formData.time} onChange={onInputChange} disabled={!formData.date} className="pearl-input !p-3 !text-[11px]">
+                                                            <div className="space-y-2">
+                                                                <label className="text-[8px] font-mono uppercase text-black/40">Orario</label>
+                                                                <select name="time" value={formData.time} onChange={onInputChange} disabled={!formData.date} className="pearl-input !p-3 !text-[12px] !bg-white border-black/10 text-black">
                                                                     <option value="">DEBUTTO</option>
                                                                     {availableSlots.map(s => <option key={s} value={s}>{s}</option>)}
                                                                 </select>
                                                             </div>
                                                         </div>
+                                                    </div>
 
-                                                        <div className="space-y-6">
-                                                            <div className="flex items-center gap-3">
-                                                                <ShieldCheck className="w-4 h-4 text-[var(--milano-bronzo)]" />
-                                                                <h4 className="text-[9px] font-mono uppercase tracking-[0.4em] pearl-content">Caveau</h4>
+                                                    {/* CAVEAU ALLEGATI - RECTANGULAR */}
+                                                    <div className="space-y-6">
+                                                        <div className="flex items-center gap-3">
+                                                            <ShieldCheck className="w-4 h-4 text-[var(--milano-bronzo)]" />
+                                                            <h4 className="text-[10px] font-mono uppercase tracking-[0.4em] text-black font-bold">Caveau</h4>
+                                                        </div>
+                                                        <div
+                                                            onClick={() => fileInputRef.current?.click()}
+                                                            className="pearl-vault !py-8 !px-6 cursor-pointer border-dashed border-2 border-black/10 hover:border-[var(--milano-bronzo)] transition-all bg-black/[0.01] flex items-center justify-center gap-4 group"
+                                                        >
+                                                            <Paperclip className="w-5 h-5 text-black/40 group-hover:text-[var(--milano-bronzo)] transition-colors" />
+                                                            <div className="text-left">
+                                                                <span className="text-[10px] font-mono uppercase tracking-widest text-black font-bold block">Allega Media</span>
+                                                                <span className="text-[8px] font-mono text-black/30 block mt-1 uppercase">PDF, Video, Foto, Audio</span>
                                                             </div>
-                                                            <div onClick={() => fileInputRef.current?.click()} className="pearl-vault !p-6 cursor-pointer">
-                                                                <Paperclip className="w-5 h-5 text-black/20" />
-                                                                <span className="text-[8px] font-mono uppercase tracking-widest text-black/40">Allega Media</span>
-                                                                <input type="file" ref={fileInputRef} onChange={handleFileChange} multiple className="hidden" />
-                                                            </div>
-                                                            <div className="flex flex-wrap gap-2">
-                                                                {formData.attachments?.slice(0, 3).map((file, idx) => (
-                                                                    <div key={idx} className="attachment-chip !px-2 !py-1 text-[8px]">
-                                                                        <span className="truncate max-w-[80px]">{file.name}</span>
-                                                                    </div>
-                                                                ))}
-                                                            </div>
+                                                            <input type="file" ref={fileInputRef} onChange={handleFileChange} multiple className="hidden" />
+                                                        </div>
+                                                        <div className="flex flex-wrap gap-2">
+                                                            {formData.attachments?.map((file, idx) => (
+                                                                <div key={idx} className="attachment-chip !px-3 !py-1.5 text-[9px] bg-black/5 border border-black/10 text-black flex items-center gap-2">
+                                                                    <span className="truncate max-w-[120px] font-medium">{file.name}</span>
+                                                                    <X className="w-3 h-3 cursor-pointer hover:text-red-500" onClick={(e) => { e.stopPropagation(); onRemoveAttachment(idx); }} />
+                                                                </div>
+                                                            ))}
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
 
-                                            <div className="flex justify-between pt-8 border-t border-black/5">
-                                                <button onClick={onPrevStep} className="text-[9px] font-mono uppercase tracking-widest text-black/30 hover:text-black transition-colors">Indietro</button>
-                                                <button onClick={onNextStep} className="btn-monumental scale-90 px-12">Prosegui</button>
+                                            <div className="flex justify-between pt-10 border-t border-black/10">
+                                                <button onClick={onPrevStep} className="text-[10px] font-mono uppercase tracking-widest text-black/60 hover:text-black transition-colors font-bold">Indietro</button>
+                                                <button onClick={onNextStep} className="btn-monumental !bg-black !text-white hover:!bg-[var(--milano-bronzo)] transition-all shadow-xl px-16">Prosegui</button>
                                             </div>
                                         </motion.div>
                                     )}
@@ -268,9 +281,9 @@ const BookingForm: React.FC<BookingFormProps> = ({
                                                 </div>
                                             </div>
 
-                                            <div className="flex justify-between pt-8 border-t border-black/5">
-                                                <button onClick={onPrevStep} className="text-[9px] font-mono uppercase tracking-widest text-black/30 hover:text-black transition-colors">Indietro</button>
-                                                <button onClick={onNextStep} className="btn-monumental scale-90 px-12">Revisione</button>
+                                            <div className="flex justify-between pt-8 border-t border-black/10">
+                                                <button onClick={onPrevStep} className="text-[10px] font-mono uppercase tracking-widest text-black/60 hover:text-black transition-colors font-bold">Indietro</button>
+                                                <button onClick={onNextStep} className="btn-monumental !bg-black !text-white hover:!bg-[var(--milano-bronzo)] transition-all shadow-xl px-16">Revisione</button>
                                             </div>
                                         </motion.div>
                                     )}
@@ -284,7 +297,7 @@ const BookingForm: React.FC<BookingFormProps> = ({
                                             exit={{ opacity: 0, x: -20 }}
                                             className="space-y-8 md:space-y-10"
                                         >
-                                            <div className="space-y-4 text-center md:text-left border-b border-black/5 pb-6">
+                                            <div className="space-y-4 text-center md:text-left border-b border-black/10 pb-6">
                                                 <h3
                                                     style={{ fontSize: 'var(--text-title-md)' }}
                                                     className="font-display pearl-title tracking-tight text-black"
@@ -293,39 +306,41 @@ const BookingForm: React.FC<BookingFormProps> = ({
                                                 </h3>
                                             </div>
 
-                                            <div className="p-8 border border-[var(--milano-bronzo)]/20 bg-black/[0.01] rounded-sm space-y-8">
+                                            <div className="p-8 border border-[var(--milano-bronzo)]/30 bg-black/[0.02] rounded-sm space-y-8 shadow-sm">
                                                 <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8">
                                                     <div className="space-y-1">
-                                                        <p className="text-[8px] font-mono text-[var(--milano-bronzo)] uppercase tracking-widest font-bold">Identità</p>
-                                                        <p className="text-[13px] font-accent text-black uppercase truncate">{formData.name}</p>
+                                                        <p className="text-[9px] font-mono text-[var(--milano-bronzo)] uppercase tracking-widest font-bold">Identità</p>
+                                                        <p className="text-[14px] font-accent text-black uppercase truncate font-bold">{formData.name}</p>
                                                     </div>
                                                     <div className="space-y-1">
-                                                        <p className="text-[8px] font-mono text-[var(--milano-bronzo)] uppercase tracking-widest font-bold">Piano</p>
-                                                        <p className="text-[13px] font-accent text-black uppercase">{formData.tier}</p>
+                                                        <p className="text-[9px] font-mono text-[var(--milano-bronzo)] uppercase tracking-widest font-bold">Piano</p>
+                                                        <p className="text-[14px] font-accent text-black uppercase font-bold">{formData.tier}</p>
                                                     </div>
                                                     <div className="space-y-1 md:col-span-2">
-                                                        <p className="text-[8px] font-mono text-[var(--milano-bronzo)] uppercase tracking-widest font-bold">Attivazione</p>
-                                                        <p className="text-[13px] font-accent text-black uppercase">{formData.date} — {formData.time}</p>
+                                                        <p className="text-[9px] font-mono text-[var(--milano-bronzo)] uppercase tracking-widest font-bold">Attivazione</p>
+                                                        <p className="text-[14px] font-accent text-black uppercase font-bold">{formData.date} — {formData.time}</p>
                                                     </div>
                                                 </div>
                                             </div>
 
                                             <div className="flex flex-col items-center gap-8 pt-4">
-                                                <label className="flex items-center gap-3 cursor-pointer group">
+                                                <label className="flex items-center gap-4 cursor-pointer group">
                                                     <input type="checkbox" checked={termsAccepted} onChange={(e) => onToggleTerms(e.target.checked)} className="hidden" />
-                                                    <div className={`w-5 h-5 border flex items-center justify-center transition-all ${termsAccepted ? 'bg-black border-black shadow-lg' : 'border-black/20 group-hover:border-black/40'}`}>
-                                                        {termsAccepted && <Check className="w-3 h-3 text-white" />}
+                                                    <div className={`w-6 h-6 border-2 flex items-center justify-center transition-all ${termsAccepted ? 'bg-black border-black shadow-[0_0_15px_rgba(0,0,0,0.1)]' : 'border-black/20 group-hover:border-black/40'}`}>
+                                                        {termsAccepted && <Check className="w-4 h-4 text-white" />}
                                                     </div>
-                                                    <span className="text-[9px] font-mono text-black/30 uppercase tracking-[0.2em] group-hover:text-black transition-colors">Accetto il Protocollo Legale</span>
+                                                    <span className="text-[10px] font-mono text-black/60 uppercase tracking-[0.2em] group-hover:text-black transition-colors font-bold">Accetto il Protocollo Legale</span>
                                                 </label>
 
                                                 <button
                                                     onClick={onSubmit}
                                                     disabled={!termsAccepted || isLoading}
-                                                    className="btn-monumental scale-95 w-full md:w-auto px-16 py-5 shadow-2xl active:scale-[0.98]"
+                                                    className="btn-monumental !bg-black !text-white hover:!bg-[var(--milano-bronzo)] w-full md:w-auto px-20 py-6 shadow-2xl active:scale-[0.98] transition-all"
                                                 >
                                                     {isLoading ? 'INVIO...' : 'INVIA RICHIESTA FIDUCIARIA'}
                                                 </button>
+
+                                                <button onClick={onPrevStep} className="text-[10px] font-mono uppercase tracking-widest text-black/40 hover:text-black transition-colors font-medium">Modifica Dati</button>
                                             </div>
                                         </motion.div>
                                     )}
