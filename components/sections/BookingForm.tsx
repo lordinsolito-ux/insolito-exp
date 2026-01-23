@@ -146,7 +146,7 @@ const BookingForm: React.FC<BookingFormProps> = ({
                                         </div>
 
                                         <div className="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-20">
-                                            {/* SCHEDULE & DURATION */}
+                                            {/* COLUMN 1: SCHEDULE & DURATION */}
                                             <div className="space-y-10">
                                                 <div className="flex items-center gap-4 mb-2">
                                                     <Calendar className="w-4 h-4 text-[var(--milano-bronzo)]" />
@@ -186,50 +186,51 @@ const BookingForm: React.FC<BookingFormProps> = ({
                                                         {validationErrors.time && <p className="text-red-600 text-[10px] mt-2 font-mono uppercase tracking-widest font-bold">{validationErrors.time}</p>}
                                                     </div>
                                                 </div>
+                                            </div>
 
-                                                {/* TIER RECAP */}
-                                                <div className="space-y-10">
-                                                    <div className="flex items-center gap-4 mb-2">
-                                                        <Star className="w-4 h-4 text-[var(--milano-bronzo)]" />
-                                                        <h4 className={`text-[10px] font-mono uppercase tracking-[0.5em] ${activeStep >= 2 ? 'pearl-content' : 'opacity-40'}`}>Protocollo Selezionato</h4>
-                                                    </div>
-                                                    {formData.tier && (
-                                                        <div className="p-10 border-2 border-[var(--milano-bronzo)]/30 bg-black/[0.02] shadow-[0_20px_40px_rgba(0,0,0,0.05)]">
-                                                            <div className="flex items-start gap-8">
-                                                                <div className="w-16 h-16 rounded-full border-2 border-[var(--milano-bronzo)] flex items-center justify-center shrink-0">
-                                                                    <Check className="w-8 h-8 text-[var(--milano-bronzo)]" />
-                                                                </div>
-                                                                <div>
-                                                                    <p className="text-[10px] font-mono text-[var(--milano-bronzo)] uppercase tracking-[0.4em] font-bold mb-2">Status: Confermato</p>
-                                                                    <p className="text-4xl font-accent text-[var(--antracite-elite)] uppercase tracking-tight">
-                                                                        {formData.tier}
-                                                                    </p>
-                                                                    <p className="text-[11px] font-mono text-black/70 uppercase tracking-widest mt-4 leading-relaxed font-bold">
-                                                                        {formData.tier === 'elite' ? 'Copertura Mensile Illimitata' : `${getTierRates(formData.tier as TierType).minHours} ore di assistenza incluse`}
-                                                                    </p>
-                                                                </div>
+                                            {/* COLUMN 2: TIER RECAP */}
+                                            <div className="space-y-10">
+                                                <div className="flex items-center gap-4 mb-2">
+                                                    <Star className="w-4 h-4 text-[var(--milano-bronzo)]" />
+                                                    <h4 className={`text-[10px] font-mono uppercase tracking-[0.5em] ${activeStep >= 2 ? 'pearl-content' : 'opacity-40'}`}>Protocollo Selezionato</h4>
+                                                </div>
+                                                {formData.tier && (
+                                                    <div className="p-10 border-2 border-[var(--milano-bronzo)]/30 bg-black/[0.02] shadow-[0_20px_40px_rgba(0,0,0,0.05)]">
+                                                        <div className="flex items-start gap-8">
+                                                            <div className="w-16 h-16 rounded-full border-2 border-[var(--milano-bronzo)] flex items-center justify-center shrink-0">
+                                                                <Check className="w-8 h-8 text-[var(--milano-bronzo)]" />
+                                                            </div>
+                                                            <div>
+                                                                <p className="text-[10px] font-mono text-[var(--milano-bronzo)] uppercase tracking-[0.4em] font-bold mb-2">Status: Confermato</p>
+                                                                <p className="text-4xl font-accent text-[var(--antracite-elite)] uppercase tracking-tight">
+                                                                    {formData.tier}
+                                                                </p>
+                                                                <p className="text-[11px] font-mono text-black/70 uppercase tracking-widest mt-4 leading-relaxed font-bold">
+                                                                    {formData.tier === 'elite' ? 'Copertura Mensile Illimitata' : `${getTierRates(formData.tier as TierType).minHours} ore di assistenza incluse`}
+                                                                </p>
                                                             </div>
                                                         </div>
-                                                    )}
-                                                </div>
+                                                    </div>
+                                                )}
                                             </div>
                                         </div>
+                                    </div>
 
-                                        <div className="flex flex-col md:flex-row justify-between gap-6 pt-12 border-t border-black/5">
-                                            <button
-                                                onClick={onPrevStep}
-                                                className="flex items-center justify-center gap-3 px-10 py-5 text-[10px] font-mono uppercase tracking-[0.3em] font-bold text-black/40 hover:text-black transition-colors"
-                                            >
-                                                <ArrowLeft className="w-4 h-4" />
-                                                Indietro
-                                            </button>
-                                            <button
-                                                onClick={onNextStep}
-                                                className="btn-monumental"
-                                            >
-                                                Prosegui
-                                            </button>
-                                        </div>
+                                    <div className="flex flex-col md:flex-row justify-between gap-6 pt-12 border-t border-black/5">
+                                        <button
+                                            onClick={onPrevStep}
+                                            className="flex items-center justify-center gap-3 px-10 py-5 text-[10px] font-mono uppercase tracking-[0.3em] font-bold text-black/40 hover:text-black transition-colors"
+                                        >
+                                            <ArrowLeft className="w-4 h-4" />
+                                            Indietro
+                                        </button>
+                                        <button
+                                            onClick={onNextStep}
+                                            className="btn-monumental"
+                                        >
+                                            Prosegui
+                                        </button>
+                                    </div>
                                 </motion.div>
                             )}
 
