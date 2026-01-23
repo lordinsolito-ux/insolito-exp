@@ -1,6 +1,6 @@
 import React from 'react';
 import { TierType } from '../types';
-import { Check } from 'lucide-react';
+import { Check, Zap, Star, Crown } from 'lucide-react';
 
 interface TierSelectorProps {
     selectedTier: TierType | null;
@@ -10,141 +10,138 @@ interface TierSelectorProps {
 
 interface TierCardData {
     type: TierType;
-    emoji: string;
+    icon: React.ElementType;
     name: string;
     price: string;
     duration: string;
+    description: string;
     features: string[];
     badge?: string;
-    gradient: string;
+    highlighted?: boolean;
 }
 
 const TIER_DATA: TierCardData[] = [
     {
         type: 'essentials' as TierType,
-        emoji: '⚡',
+        icon: Zap,
         name: 'Essentials',
-        price: '€180/h',
-        duration: 'Min 3 ore',
+        price: '€180/ORA',
+        duration: 'MINIMO 3H CONSECUTIVE',
+        description: 'Per chi esige un coordinamento impeccabile delle proprie necessità quotidiane.',
         features: [
-            'Coordinamento Logistico Base',
-            'Presidio Variabili Standard',
-            'Assistenza Continuativa'
+            'PRESIDIO LOGISTICO ATTIVO',
+            'ASSISTENZA DIRETTA MICHAEL',
+            'PUNTUALITÀ MILLIMETRICA'
         ],
-        gradient: 'from-blue-500/20 to-blue-600/20'
+        badge: 'START HERE'
     },
     {
         type: 'signature' as TierType,
-        emoji: '💎',
+        icon: Star,
         name: 'Signature',
-        price: '€280/h',
-        duration: 'Min 4 ore',
+        price: '€280/ORA',
+        duration: 'MINIMO 4H CONSECUTIVE',
+        description: 'La massima espressione della serenità logistica: l\'imprevisto smette di esistere.',
         features: [
-            'Tutto di Essentials +',
-            'Protocollo Backup Automatico',
-            'Guardian Notturno',
-            'Priorità di Risposta'
+            'TUTTO DI ESSENTIALS, PIÙ:',
+            'PROTOCOLLO BACKUP AUTOMATICO',
+            'REATTIVITÀ LAST-MINUTE (4H)',
+            'GUARDIAN NOTTURNO'
         ],
-        badge: '73% Clienti',
-        gradient: 'from-gold-500/20 to-gold-600/20'
+        badge: '73% CLIENTI',
+        highlighted: true
     },
     {
         type: 'elite' as TierType,
-        emoji: '👑',
+        icon: Crown,
         name: 'Elite Retainer',
-        price: '€6.000/mese',
-        duration: 'Illimitato',
+        price: '€6.000/MESE',
+        duration: '24/7/365 ILLIMITATO',
+        description: 'Per chi non vuole più pensare a "posso chiamarlo?".',
         features: [
-            'Tutto di Signature +',
-            'Linea Diretta H24',
-            'Team Dedicato',
-            'Disponibilità Senza Limiti'
+            'LINEA DIRETTA PRIORITARIA H24',
+            'NESSUN LIMITE DI ORE',
+            'COORDINAMENTO TEAM DEDICATO'
         ],
-        badge: 'Invitation Only',
-        gradient: 'from-purple-500/20 to-purple-600/20'
+        badge: 'INVITATION ONLY'
     }
 ];
 
 export const TierSelector: React.FC<TierSelectorProps> = ({ selectedTier, onSelectTier, t }) => {
     return (
-        <div className="space-y-6">
-            <div className="text-center">
-                <h3 className="text-3xl md:text-4xl font-display text-white tracking-tight italic mb-2">
-                    Scegli il Tuo <span className="text-[var(--milano-bronzo)]">Tier</span>
+        <div className="space-y-12">
+            <div className="text-center space-y-4">
+                <h3 className="text-2xl md:text-3xl font-display text-white tracking-widest italic uppercase">
+                    Protocollo <span className="text-[var(--milano-bronzo)]">Selezione</span>
                 </h3>
-                <p className="text-gray-400 text-sm">Seleziona il livello di assistenza che fa per te</p>
+                <div className="h-px w-24 bg-[var(--milano-bronzo)]/30 mx-auto"></div>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                 {TIER_DATA.map((tier) => {
                     const isSelected = selectedTier === tier.type;
+                    const Icon = tier.icon;
 
                     return (
                         <button
                             key={tier.type}
                             onClick={() => onSelectTier(tier.type)}
-                            className={`relative group text-left p-6 rounded-xl border-2 transition-all duration-300 ${isSelected
-                                ? 'border-[var(--milano-bronzo)] bg-gradient-to-br ' + tier.gradient + ' shadow-[0_0_30px_rgba(212,175,55,0.3)]'
-                                : 'border-white/10 bg-white/5 hover:border-white/30 hover:bg-white/10'
+                            className={`relative group flex flex-col p-8 md:p-10 border transition-all duration-700 text-left ${isSelected
+                                ? 'border-[var(--milano-bronzo)] bg-[var(--milano-bronzo)]/[0.03] shadow-[0_30px_60px_-15px_rgba(139,115,85,0.2)] scale-[1.02]'
+                                : 'border-white/5 bg-white/[0.02] hover:border-white/20'
                                 }`}
                         >
                             {/* Badge */}
                             {tier.badge && (
-                                <div className="absolute -top-3 right-4 px-3 py-1 bg-[var(--milano-bronzo)] text-black text-[10px] font-bold uppercase tracking-wider rounded-full">
+                                <div className={`absolute top-0 right-0 px-4 py-1.5 text-[8px] font-mono font-bold uppercase tracking-[0.2em] ${tier.highlighted ? 'bg-[var(--milano-bronzo)] text-white' : 'bg-white/10 text-white/40'}`}>
                                     {tier.badge}
                                 </div>
                             )}
 
-                            {/* Selected Indicator */}
-                            {isSelected && (
-                                <div className="absolute -top-3 -left-3 w-8 h-8 bg-[var(--milano-bronzo)] rounded-full flex items-center justify-center shadow-lg">
-                                    <Check className="w-5 h-5 text-black" />
-                                </div>
-                            )}
-
-                            {/* Content */}
-                            <div className="space-y-4">
-                                {/* Header */}
-                                <div>
-                                    <div className="text-4xl mb-2">{tier.emoji}</div>
-                                    <h4 className="text-xl font-bold text-white mb-1">{tier.name}</h4>
-                                    <div className="flex items-baseline gap-2">
-                                        <div className="text-2xl font-bold text-[var(--milano-bronzo)]">{tier.price}</div>
-                                        <div className="text-xs text-gray-500 uppercase tracking-wider">{tier.duration}</div>
+                            <div className="space-y-10 flex-1">
+                                <div className="space-y-4">
+                                    <div className="flex justify-between items-start">
+                                        <h4 className="text-2xl md:text-3xl font-accent text-white tracking-tighter uppercase">{tier.name}</h4>
+                                        <Icon className={`w-6 h-6 ${isSelected ? 'text-[var(--milano-bronzo)]' : 'text-white/20'}`} />
                                     </div>
+                                    <p className="text-[9px] font-mono text-white/30 uppercase leading-relaxed tracking-wider h-12">
+                                        {tier.description}
+                                    </p>
                                 </div>
 
-                                {/* Features */}
-                                <ul className="space-y-2">
-                                    {tier.features.map((feature, idx) => (
-                                        <li key={idx} className="flex items-start gap-2 text-sm text-gray-300">
-                                            <span className="text-[var(--milano-bronzo)] mt-0.5">•</span>
-                                            <span>{feature}</span>
-                                        </li>
-                                    ))}
-                                </ul>
+                                <div className="py-10 border-y border-white/5 group-hover:border-[var(--milano-bronzo)]/20 transition-colors duration-700">
+                                    <div className="text-4xl md:text-5xl font-accent text-white tracking-tighter mb-2">{tier.price}</div>
+                                    <div className="text-[8px] font-mono text-white/30 tracking-[0.3em] uppercase">{tier.duration}</div>
+                                </div>
 
-                                {/* Legal Note */}
-                                {tier.type === 'essentials' && (
-                                    <div className="pt-3 border-t border-white/10">
-                                        <p className="text-[9px] text-gray-500 italic leading-relaxed">
-                                            Assistenza professionale ai sensi Art. 2222 C.C. - ATECO 96.99.99
-                                        </p>
-                                    </div>
-                                )}
+                                <div className="space-y-6">
+                                    <ul className="space-y-4">
+                                        {tier.features.map((feature, idx) => (
+                                            <li key={idx} className="flex items-center gap-3 text-[10px] font-mono text-white/60 tracking-wider">
+                                                <Check className="w-3 h-3 text-[var(--milano-bronzo)] shrink-0" />
+                                                <span>{feature}</span>
+                                            </li>
+                                        ))}
+                                    </ul>
+                                </div>
                             </div>
 
-                            {/* Hover Effect */}
-                            <div className="absolute inset-0 rounded-xl bg-gradient-to-br from-[var(--milano-bronzo)]/0 to-[var(--milano-bronzo)]/0 group-hover:from-[var(--milano-bronzo)]/5 group-hover:to-[var(--milano-bronzo)]/10 transition-all duration-300 pointer-events-none" />
+                            {/* Selection Effect Indicator */}
+                            <div className={`mt-10 py-4 border text-[10px] font-accent uppercase tracking-[0.4em] transition-all duration-700 text-center ${isSelected
+                                ? 'bg-[var(--milano-bronzo)] border-[var(--milano-bronzo)] text-white'
+                                : 'border-white/10 text-white/40 group-hover:border-white/30 group-hover:text-white'
+                                }`}>
+                                {isSelected ? 'Protocollo Attivo' : 'Seleziona Protocollo'}
+                            </div>
                         </button>
                     );
                 })}
             </div>
 
             {/* Legal Disclaimer */}
-            <div className="mt-6 p-4 bg-white/5 border border-white/10 rounded-lg">
-                <p className="text-[10px] text-gray-400 leading-relaxed text-center">
-                    <strong className="text-white">Nota Legale:</strong> Il compenso remunera esclusivamente servizi di lifestyle management, coordinamento logistico e assistenza continuativa.
+            <div className="mt-6 p-8 border border-white/5 bg-white/[0.01]">
+                <p className="text-[9px] font-mono text-white/25 leading-relaxed text-center uppercase tracking-widest">
+                    <strong className="text-white/40">Nota Legale:</strong> Il compenso remunera esclusivamente servizi di lifestyle management, coordinamento logistico e assistenza continuativa.
                     L'eventuale supporto alla mobilità è prestazione meramente accessoria e strumentale all'assistenza globale, non scindibile dalla stessa (Art. 2222 C.C.).
                 </p>
             </div>

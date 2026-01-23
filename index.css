@@ -7,6 +7,8 @@
   --milano-cemento: #3A3A3A;
   --milano-bronzo: #8B7355;
   --milano-ghiaccio: #F8F8F8;
+  --perla-seta: #FDFCF8;
+  --antracite-elite: #1A1A1A;
   --oro-lucido: var(--milano-bronzo);
   --bronzo-profondo: var(--milano-ghiaccio);
 
@@ -70,17 +72,43 @@
     box-shadow: 0 40px 100px -20px rgba(0, 0, 0, 0.8);
   }
 
+  /* PEARL MONOLITH EXCLUSIVE */
+  .pearl-monolith {
+    @apply bg-[var(--perla-seta)] border-none relative overflow-hidden text-[var(--antracite-elite)];
+    box-shadow: 0 50px 100px -20px rgba(0, 0, 0, 0.2);
+  }
+
+  /* PEARL INPUTS - HIGH CONTRAST */
+  .pearl-input {
+    @apply border-b border-[var(--antracite-elite)]/10 py-5 px-6 transition-all duration-700 outline-none w-full block;
+    background-color: transparent !important;
+    color: var(--antracite-elite) !important;
+    font-family: 'IBM Plex Mono', monospace;
+    @apply text-[11px] uppercase tracking-[0.2em];
+    border-radius: 0;
+  }
+
+  .pearl-input:focus {
+    border-b-color: var(--milano-bronzo) !important;
+  }
+
+  .pearl-input::placeholder {
+    color: rgba(0, 0, 0, 0.2) !important;
+  }
+
+  /* Browser Autofill Fix - Pearl Mode */
+  .pearl-input:-webkit-autofill {
+    -webkit-text-fill-color: var(--antracite-elite) !important;
+    -webkit-box-shadow: 0 0 0px 1000px var(--perla-seta) inset !important;
+  }
+
   /* ELITE INPUTS - IMPERIAL OVERRIDE */
   .elite-input {
     @apply border-b border-white/10 py-5 px-6 transition-all duration-700 outline-none w-full block;
     background-color: #0a0a0a !important;
-    /* Force black background */
     color: #F8F8F8 !important;
-    /* Force ivory text */
     font-family: 'IBM Plex Mono', monospace;
     @apply text-[11px] uppercase tracking-[0.2em];
-    appearance: none;
-    -webkit-appearance: none;
     border-radius: 0;
   }
 

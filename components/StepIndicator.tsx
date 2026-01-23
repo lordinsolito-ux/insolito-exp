@@ -15,7 +15,7 @@ export const StepIndicator: React.FC<StepIndicatorProps> = ({ currentStep }) => 
   const progressPercentage = ((currentStep - 1) / (steps.length - 1)) * 100;
 
   return (
-    <div className="bg-transparent border-b border-[var(--oro-lucido)]/10 backdrop-blur-3xl">
+    <div className={`transition-colors duration-1000 border-b ${currentStep >= 2 ? 'bg-transparent border-[var(--antracite-elite)]/5' : 'bg-transparent border-[var(--oro-lucido)]/10 backdrop-blur-3xl'}`}>
       <div className="max-w-4xl mx-auto px-12 py-12">
         <div className="flex items-center justify-between relative">
           {/* Architectural Baseline */}
@@ -46,8 +46,11 @@ export const StepIndicator: React.FC<StepIndicatorProps> = ({ currentStep }) => 
 
                 <span className={`
                   absolute top-8 text-[9px] font-accent uppercase tracking-[1em] transition-all duration-1000 whitespace-nowrap
-                  ${isActive ? 'text-[var(--oro-lucido)] font-bold' : 'text-[var(--oro-lucido)]/20'}
-                  ${isCurrent ? 'opacity-100 text-[var(--oro-lucido)]' : 'opacity-40'}
+                  ${isActive
+                    ? (currentStep >= 2 ? 'text-[var(--antracite-elite)] font-bold' : 'text-[var(--oro-lucido)] font-bold')
+                    : (currentStep >= 2 ? 'text-[var(--antracite-elite)]/30' : 'text-[var(--oro-lucido)]/20')
+                  }
+                  ${isCurrent ? 'opacity-100' : 'opacity-40'}
                 `}>
                   {step.label}
                 </span>

@@ -68,8 +68,8 @@ const BookingForm = forwardRef<HTMLDivElement, BookingFormProps>(({
         <section id="booking-section" className="relative py-24 md:py-32 overflow-hidden bg-black">
             <div className="absolute inset-0 bg-noise opacity-[0.03] pointer-events-none"></div>
 
-            <div className="max-w-5xl mx-auto px-6 relative z-10">
-                <div ref={ref} className="luxury-monolith rounded-sm overflow-hidden border border-white/10 shadow-[0_50px_100px_-20px_rgba(0,0,0,0.9)] bg-black/40 backdrop-blur-3xl">
+            <div className="max-w-6xl mx-auto px-6 relative z-10">
+                <div ref={ref} className={`rounded-sm overflow-hidden transition-all duration-1000 ${activeStep >= 2 ? 'pearl-monolith' : 'luxury-monolith shadow-[0_50px_100px_-20px_rgba(0,0,0,0.9)] bg-black/40 border-white/10'}`}>
                     <StepIndicator currentStep={activeStep} />
 
                     <div className="p-8 md:p-20">
@@ -106,91 +106,95 @@ const BookingForm = forwardRef<HTMLDivElement, BookingFormProps>(({
                                         <div className="h-px w-24 bg-gradient-to-r from-[var(--milano-bronzo)] to-transparent mx-auto md:mx-0"></div>
                                     </div>
 
-                                    <div className="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-20">
-                                        {/* MISSION DESCRIPTION */}
+                                    <div className="space-y-16">
+                                        {/* MISSION DESCRIPTION - NOW DOMINANT */}
                                         <div className="space-y-10">
                                             <div className="flex items-center gap-4 mb-2">
                                                 <Target className="w-4 h-4 text-[var(--milano-bronzo)]" />
-                                                <h4 className="text-[10px] font-mono text-white/40 uppercase tracking-[0.5em]">Protocollo di Missione</h4>
+                                                <h4 className="text-[10px] font-mono opacity-40 uppercase tracking-[0.5em]">Obiettivi Operativi</h4>
                                             </div>
-                                            <div className="space-y-6">
-                                                <div className="group relative">
-                                                    <label className="text-[9px] font-mono text-white/40 uppercase tracking-[0.3em] mb-4 block">
-                                                        Obiettivi dell'Incarico *
-                                                    </label>
-                                                    <textarea
-                                                        value={formData.assistanceDescription || ''}
-                                                        onChange={(e) => onInputChange(e)}
-                                                        name="assistanceDescription"
-                                                        onBlur={onInputBlur}
-                                                        placeholder="Specifichi gli obiettivi della missione: coordinamento agende, assistenza fiduciaria, presidio logistico o gestione di variabili operative complesse. L'eccellenza risiede nei dettagli della Sua richiesta."
-                                                        className="elite-input min-h-[160px] resize-none text-[11px]"
-                                                        rows={6}
-                                                    />
-                                                    {validationErrors.assistanceDescription && (
-                                                        <p className="text-red-500/80 text-[9px] mt-2 font-mono uppercase tracking-widest">
-                                                            {validationErrors.assistanceDescription}
-                                                        </p>
-                                                    )}
-                                                    <p className="text-[8px] text-white/20 mt-4 leading-relaxed font-mono uppercase tracking-tight">
-                                                        Focus: L'accuratezza della descrizione definisce la qualità del presidio logistico.
+                                            <div className="group relative">
+                                                <label className="text-[9px] font-mono opacity-40 uppercase tracking-[0.3em] mb-4 block">
+                                                    Dettagli della Missione *
+                                                </label>
+                                                <textarea
+                                                    value={formData.assistanceDescription || ''}
+                                                    onChange={(e) => onInputChange(e)}
+                                                    name="assistanceDescription"
+                                                    onBlur={onInputBlur}
+                                                    placeholder="Specifichi gli obiettivi della missione: coordinamento agende, assistenza fiduciaria, presidio logistico o gestione di variabili operative complesse. L'eccellenza risiede nei dettagli della Sua richiesta."
+                                                    className="pearl-input min-h-[200px] resize-none text-[13px] leading-relaxed"
+                                                    rows={8}
+                                                />
+                                                {validationErrors.assistanceDescription && (
+                                                    <p className="text-red-500/80 text-[9px] mt-2 font-mono uppercase tracking-widest">
+                                                        {validationErrors.assistanceDescription}
                                                     </p>
-                                                </div>
+                                                )}
                                             </div>
                                         </div>
 
-                                        {/* SCHEDULE & DURATION */}
-                                        <div className="space-y-10">
-                                            <div className="flex items-center gap-4 mb-2">
-                                                <Calendar className="w-4 h-4 text-[var(--milano-bronzo)]" />
-                                                <h4 className="text-[10px] font-mono text-white/40 uppercase tracking-[0.5em]">Finestra Operativa</h4>
-                                            </div>
-                                            <div className="space-y-6">
-                                                <div className="group relative">
-                                                    <label className="text-[9px] font-mono text-white/40 uppercase tracking-[0.3em] mb-2 block">Data di Attivazione</label>
-                                                    <input
-                                                        type="date"
-                                                        name="date"
-                                                        value={formData.date}
-                                                        onChange={onInputChange}
-                                                        min={new Date().toISOString().split('T')[0]}
-                                                        className="elite-input"
-                                                        style={{ colorScheme: 'dark' }}
-                                                    />
-                                                    {validationErrors.date && <p className="text-red-500/80 text-[9px] mt-2 font-mono uppercase tracking-widest">{validationErrors.date}</p>}
+                                        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-20">
+                                            {/* SCHEDULE & DURATION */}
+                                            <div className="space-y-10">
+                                                <div className="flex items-center gap-4 mb-2">
+                                                    <Calendar className="w-4 h-4 text-[var(--milano-bronzo)]" />
+                                                    <h4 className="text-[10px] font-mono opacity-40 uppercase tracking-[0.5em]">Finestra Operativa</h4>
                                                 </div>
-                                                <div className="group relative">
-                                                    <label className="text-[9px] font-mono text-white/40 uppercase tracking-[0.3em] mb-2 block">Debutto Temporale del Presidio</label>
-                                                    <select
-                                                        name="time"
-                                                        value={formData.time}
-                                                        onChange={onInputChange}
-                                                        disabled={!formData.date}
-                                                        className={`elite-input ${!formData.date ? 'opacity-30 cursor-not-allowed' : 'bg-[#0a0a0a]'}`}
-                                                    >
-                                                        <option value="" className="bg-[#0a0a0a]">
-                                                            {!formData.date ? 'SBLOCCA FINESTRA SCEGLIENDO DATA' : 'DEFINISCI DEBUTTO'}
-                                                        </option>
-                                                        {availableSlots.map(s => <option key={s} value={s} className="bg-[#0a0a0a]">{s} {isNightService(s) ? '(NIGHT)' : ''}</option>)}
-                                                    </select>
-                                                    <div className="absolute right-4 top-[70%] -translate-y-1/2 pointer-events-none">
-                                                        <Clock className={`w-4 h-4 ${!formData.date ? 'text-white/5' : 'text-[var(--milano-bronzo)]/40'}`} />
+                                                <div className="space-y-8">
+                                                    <div className="group relative">
+                                                        <label className="text-[9px] font-mono opacity-40 uppercase tracking-[0.3em] mb-2 block">Data di Attivazione</label>
+                                                        <input
+                                                            type="date"
+                                                            name="date"
+                                                            value={formData.date}
+                                                            onChange={onInputChange}
+                                                            min={new Date().toISOString().split('T')[0]}
+                                                            className="pearl-input"
+                                                            style={{ colorScheme: 'light' }}
+                                                        />
+                                                        {validationErrors.date && <p className="text-red-500/80 text-[9px] mt-2 font-mono uppercase tracking-widest">{validationErrors.date}</p>}
                                                     </div>
-                                                    {validationErrors.time && <p className="text-red-500/80 text-[9px] mt-2 font-mono uppercase tracking-widest">{validationErrors.time}</p>}
+                                                    <div className="group relative">
+                                                        <label className="text-[9px] font-mono opacity-40 uppercase tracking-[0.3em] mb-2 block">Debutto Temporale del Presidio</label>
+                                                        <select
+                                                            name="time"
+                                                            value={formData.time}
+                                                            onChange={onInputChange}
+                                                            disabled={!formData.date}
+                                                            className={`pearl-input ${!formData.date ? 'opacity-30 cursor-not-allowed' : ''}`}
+                                                        >
+                                                            <option value="">
+                                                                {!formData.date ? 'SBLOCCA FINESTRA SCEGLIENDO DATA' : 'DEFINISCI DEBUTTO'}
+                                                            </option>
+                                                            {availableSlots.map(s => <option key={s} value={s}>{s} {isNightService(s) ? '(NIGHT)' : ''}</option>)}
+                                                        </select>
+                                                        <div className="absolute right-4 top-[70%] -translate-y-1/2 pointer-events-none">
+                                                            <Clock className={`w-4 h-4 ${!formData.date ? 'opacity-5' : 'text-[var(--milano-bronzo)]/40'}`} />
+                                                        </div>
+                                                        {validationErrors.time && <p className="text-red-500/80 text-[9px] mt-2 font-mono uppercase tracking-widest">{validationErrors.time}</p>}
+                                                    </div>
                                                 </div>
+                                            </div>
 
+                                            {/* TIER RECAP */}
+                                            <div className="space-y-10">
+                                                <div className="flex items-center gap-4 mb-2">
+                                                    <Star className="w-4 h-4 text-[var(--milano-bronzo)]" />
+                                                    <h4 className="text-[10px] font-mono opacity-40 uppercase tracking-[0.5em]">Protocollo Selezionato</h4>
+                                                </div>
                                                 {formData.tier && (
-                                                    <div className="p-6 bg-[var(--milano-bronzo)]/10 border border-[var(--milano-bronzo)]/30 rounded-sm shadow-[0_0_20px_rgba(212,175,55,0.05)]">
-                                                        <div className="flex items-start gap-4">
-                                                            <div className="w-10 h-10 rounded-full bg-[var(--milano-bronzo)]/20 flex items-center justify-center shrink-0">
-                                                                <Star className="w-5 h-5 text-[var(--milano-bronzo)]" />
+                                                    <div className="p-8 border-2 border-[var(--milano-bronzo)]/20 bg-white/50 backdrop-blur-sm">
+                                                        <div className="flex items-start gap-6">
+                                                            <div className="w-12 h-12 rounded-full border border-[var(--milano-bronzo)]/30 flex items-center justify-center shrink-0">
+                                                                <Check className="w-6 h-6 text-[var(--milano-bronzo)]" />
                                                             </div>
                                                             <div>
-                                                                <p className="text-[9px] font-mono text-[var(--milano-bronzo)] uppercase tracking-[0.3em] font-bold mb-1">Protocollo Attivo</p>
-                                                                <p className="text-lg font-accent text-white uppercase tracking-wider">
+                                                                <p className="text-[10px] font-mono text-[var(--milano-bronzo)] uppercase tracking-[0.4em] font-bold mb-1">Status: Confermato</p>
+                                                                <p className="text-2xl font-accent text-[var(--antracite-elite)] uppercase tracking-tight">
                                                                     {formData.tier}
                                                                 </p>
-                                                                <p className="text-[8px] font-mono text-white/40 uppercase tracking-widest mt-1">
+                                                                <p className="text-[9px] font-mono opacity-50 uppercase tracking-widest mt-2 leading-relaxed">
                                                                     {formData.tier === 'elite' ? 'Copertura Mensile Illimitata' : `${getTierRates(formData.tier as TierType).minHours} ore di assistenza incluse`}
                                                                 </p>
                                                             </div>
