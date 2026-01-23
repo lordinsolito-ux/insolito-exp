@@ -79,9 +79,9 @@ const NarrativeSpread: React.FC = () => {
                         </div>
                     </div>
                 </div>
-                <div className="lg:col-span-12 xl:col-span-7 flex flex-col justify-center space-y-12 order-1 xl:order-2">
+                <div className="lg:col-span-12 xl:col-span-7 flex flex-col justify-center space-y-12 order-1 xl:order-2 text-center">
                     <h3
-                        style={{ fontSize: 'var(--text-title-lg)' }}
+                        style={{ fontSize: 'var(--text-title-lg)', lineHeight: '1.1' }}
                         className="font-accent text-white tracking-tighter font-bold uppercase"
                     >
                         Non Siamo Qui per <br /><span className="text-[var(--milano-bronzo)]">Impressionarti.</span>
