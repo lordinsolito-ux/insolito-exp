@@ -109,8 +109,8 @@ export const TierSelector: React.FC<TierSelectorProps> = ({ selectedTier, onSele
                                     </p>
                                 </div>
 
-                                <div className="py-10 border-y border-white/5 group-hover:border-[var(--milano-bronzo)]/20 transition-colors duration-700">
-                                    <div className="text-4xl md:text-5xl font-accent text-white tracking-tighter mb-2">{tier.price}</div>
+                                <div className="py-10 border-y border-white/5 group-hover:border-[var(--milano-bronzo)]/20 transition-colors duration-700 overflow-hidden">
+                                    <div className="text-3xl md:text-4xl lg:text-5xl font-accent text-white tracking-tighter mb-2 truncate whitespace-nowrap">{tier.price}</div>
                                     <div className="text-[8px] font-mono text-white/30 tracking-[0.3em] uppercase">{tier.duration}</div>
                                 </div>
 

@@ -158,8 +158,8 @@ const Investment: React.FC<InvestmentProps> = ({ onBookClick, onTierSelect }) =>
                             <p className="text-[10px] md:text-[11px] font-mono text-white/40 uppercase tracking-widest leading-relaxed">Per Chi Non Vuole Più Pensare a "Posso Chiamarlo?".</p>
                         </div>
 
-                        <div className="mb-8 p-6 bg-black/40 border border-white/5 text-center">
-                            <span className="block text-2xl md:text-3xl font-bold text-white mb-1">€6.000/mese</span>
+                        <div className="mb-8 p-6 bg-black/40 border border-white/5 text-center overflow-hidden">
+                            <span className="block text-xl md:text-2xl lg:text-3xl font-bold text-white mb-1 truncate whitespace-nowrap">€6.000/mese</span>
                             <span className="text-[9px] md:text-[10px] uppercase tracking-widest text-white/40">24/7/365 Illimitato</span>
                         </div>
 

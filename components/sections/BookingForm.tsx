@@ -60,12 +60,19 @@ const BookingForm: React.FC<BookingFormProps> = ({
 }) => {
     const ref = useRef<HTMLDivElement>(null);
 
+    // Scroll to section top on step change if it's the monolith
+    useEffect(() => {
+        if (activeStep >= 2) {
+            ref.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+    }, [activeStep]);
+
     return (
         <section id="booking-section" className="relative py-24 md:py-32 overflow-hidden bg-black">
             <div className="absolute inset-0 bg-noise opacity-[0.03] pointer-events-none"></div>
 
             <div className="max-w-6xl mx-auto px-6 relative z-10">
-                <div ref={ref} className={`rounded-sm overflow-hidden transition-all duration-1000 ${activeStep >= 2 ? 'pearl-monolith' : 'luxury-monolith shadow-[0_50px_100px_-20px_rgba(0,0,0,0.9)] bg-black/40 border-white/10'}`}>
+                <div ref={ref} className={`rounded-sm overflow-hidden transition-all duration-1000 ${activeStep >= 2 ? 'pearl-monolith pt-32 md:pt-40' : 'luxury-monolith shadow-[0_50px_100px_-20px_rgba(0,0,0,0.9)] bg-black/40 border-white/10'}`}>
                     <StepIndicator currentStep={activeStep} />
 
                     <div className="p-8 md:p-20">
@@ -108,23 +115,23 @@ const BookingForm: React.FC<BookingFormProps> = ({
                                     initial={{ opacity: 0, x: 20 }}
                                     animate={{ opacity: 1, x: 0 }}
                                     exit={{ opacity: 0, x: -20 }}
-                                    className="space-y-16"
+                                    className="space-y-16 lg:space-y-24"
                                 >
                                     <div className="space-y-6 text-center md:text-left">
-                                        <h3 className={`text-5xl md:text-7xl font-display tracking-tight ${activeStep >= 2 ? 'pearl-title' : 'text-white italic'}`}>
+                                        <h3 className={`text-5xl md:text-7xl lg:text-8xl font-display tracking-tighter ${activeStep >= 2 ? 'pearl-title' : 'text-white italic'}`}>
                                             Missione <span className="text-[var(--milano-bronzo)]">Fiduciaria</span>
                                         </h3>
-                                        <div className={`h-px w-24 bg-gradient-to-r ${activeStep >= 2 ? 'from-[var(--milano-bronzo)] to-white' : 'from-[var(--milano-bronzo)] to-transparent'} mx-auto md:mx-0`}></div>
+                                        <div className={`h-px w-32 bg-gradient-to-r ${activeStep >= 2 ? 'from-[var(--milano-bronzo)] to-[var(--antracite-elite)]' : 'from-[var(--milano-bronzo)] to-transparent'} mx-auto md:mx-0`}></div>
                                     </div>
 
-                                    <div className="space-y-16">
-                                        {/* MISSION DESCRIPTION - NOW DOMINANT */}
-                                        <div className="space-y-10">
+                                    <div className="space-y-20 lg:space-y-32">
+                                        {/* MISSION DESCRIPTION - MASSIVE WIDTH */}
+                                        <div className="space-y-10 w-full block">
                                             <div className="flex items-center gap-4 mb-2">
-                                                <Target className="w-4 h-4 text-[var(--milano-bronzo)]" />
-                                                <h4 className={`text-[10px] font-mono uppercase tracking-[0.5em] ${activeStep >= 2 ? 'pearl-content' : 'opacity-40'}`}>Obiettivi Operativi</h4>
+                                                <Target className="w-5 h-5 text-[var(--milano-bronzo)]" />
+                                                <h4 className={`text-[11px] font-mono uppercase tracking-[0.5em] ${activeStep >= 2 ? 'pearl-content' : 'opacity-40'}`}>Obiettivi Operativi</h4>
                                             </div>
-                                            <div className="group relative">
+                                            <div className="relative w-full block">
                                                 <label className={`text-[10px] font-mono uppercase tracking-[0.3em] mb-4 block ${activeStep >= 2 ? 'pearl-content opacity-60' : 'opacity-40'}`}>
                                                     Dettagli della Missione *
                                                 </label>
@@ -134,8 +141,8 @@ const BookingForm: React.FC<BookingFormProps> = ({
                                                     name="assistanceDescription"
                                                     onBlur={onInputBlur}
                                                     placeholder="Specifichi qui, con la massima precisione, gli obiettivi e le necessità dell'incarico fiduciario. L'eccellenza risiede nel dettaglio."
-                                                    className="pearl-input min-h-[400px] resize-none text-[15px] leading-relaxed shadow-[inset_0_2px_10px_rgba(0,0,0,0.02)]"
-                                                    rows={12}
+                                                    className="pearl-input min-h-[500px] w-full block resize-none text-[16px] md:text-[18px] leading-[1.8] shadow-[inset_0_2px_10px_rgba(0,0,0,0.02)] border-x-0 border-t-0 p-8"
+                                                    rows={15}
                                                 />
                                                 {validationErrors.assistanceDescription && (
                                                     <p className="text-red-600/90 text-[10px] mt-4 font-mono uppercase tracking-widest font-bold">
@@ -145,14 +152,14 @@ const BookingForm: React.FC<BookingFormProps> = ({
                                             </div>
                                         </div>
 
-                                        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-20">
+                                        <div className="grid grid-cols-1 md:grid-cols-2 gap-16 lg:gap-32 w-full">
                                             {/* COLUMN 1: SCHEDULE & DURATION */}
-                                            <div className="space-y-10">
+                                            <div className="space-y-12">
                                                 <div className="flex items-center gap-4 mb-2">
-                                                    <Calendar className="w-4 h-4 text-[var(--milano-bronzo)]" />
-                                                    <h4 className={`text-[10px] font-mono uppercase tracking-[0.5em] ${activeStep >= 2 ? 'pearl-content' : 'opacity-40'}`}>Finestra Operativa</h4>
+                                                    <Calendar className="w-5 h-5 text-[var(--milano-bronzo)]" />
+                                                    <h4 className={`text-[11px] font-mono uppercase tracking-[0.5em] ${activeStep >= 2 ? 'pearl-content' : 'opacity-40'}`}>Finestra Operativa</h4>
                                                 </div>
-                                                <div className="space-y-8">
+                                                <div className="space-y-10">
                                                     <div className="group relative">
                                                         <label className={`text-[10px] font-mono uppercase tracking-[0.3em] mb-2 block ${activeStep >= 2 ? 'pearl-content opacity-60' : 'opacity-40'}`}>Data di Attivazione</label>
                                                         <input
@@ -161,7 +168,7 @@ const BookingForm: React.FC<BookingFormProps> = ({
                                                             value={formData.date}
                                                             onChange={onInputChange}
                                                             min={new Date().toISOString().split('T')[0]}
-                                                            className="pearl-input"
+                                                            className="pearl-input w-full"
                                                             style={{ colorScheme: 'light' }}
                                                         />
                                                         {validationErrors.date && <p className="text-red-600 text-[10px] mt-2 font-mono uppercase tracking-widest font-bold">{validationErrors.date}</p>}
@@ -173,7 +180,7 @@ const BookingForm: React.FC<BookingFormProps> = ({
                                                             value={formData.time}
                                                             onChange={onInputChange}
                                                             disabled={!formData.date}
-                                                            className={`pearl-input ${!formData.date ? 'opacity-30 cursor-not-allowed' : ''}`}
+                                                            className={`pearl-input w-full ${!formData.date ? 'opacity-30 cursor-not-allowed' : ''}`}
                                                         >
                                                             <option value="">
                                                                 {!formData.date ? 'SBLOCCA FINESTRA SCEGLIENDO DATA' : 'DEFINISCI DEBUTTO'}
@@ -189,23 +196,23 @@ const BookingForm: React.FC<BookingFormProps> = ({
                                             </div>
 
                                             {/* COLUMN 2: TIER RECAP */}
-                                            <div className="space-y-10">
+                                            <div className="space-y-12">
                                                 <div className="flex items-center gap-4 mb-2">
-                                                    <Star className="w-4 h-4 text-[var(--milano-bronzo)]" />
-                                                    <h4 className={`text-[10px] font-mono uppercase tracking-[0.5em] ${activeStep >= 2 ? 'pearl-content' : 'opacity-40'}`}>Protocollo Selezionato</h4>
+                                                    <Star className="w-5 h-5 text-[var(--milano-bronzo)]" />
+                                                    <h4 className={`text-[11px] font-mono uppercase tracking-[0.5em] ${activeStep >= 2 ? 'pearl-content' : 'opacity-40'}`}>Protocollo Selezionato</h4>
                                                 </div>
                                                 {formData.tier && (
-                                                    <div className="p-10 border-2 border-[var(--milano-bronzo)]/30 bg-black/[0.02] shadow-[0_20px_40px_rgba(0,0,0,0.05)]">
-                                                        <div className="flex items-start gap-8">
-                                                            <div className="w-16 h-16 rounded-full border-2 border-[var(--milano-bronzo)] flex items-center justify-center shrink-0">
-                                                                <Check className="w-8 h-8 text-[var(--milano-bronzo)]" />
+                                                    <div className="p-10 lg:p-14 border-2 border-[var(--milano-bronzo)]/30 bg-black/[0.02] shadow-[0_30px_60px_rgba(0,0,0,0.05)] w-full">
+                                                        <div className="flex items-start gap-10">
+                                                            <div className="w-20 h-20 rounded-full border-2 border-[var(--milano-bronzo)] flex items-center justify-center shrink-0">
+                                                                <Check className="w-10 h-10 text-[var(--milano-bronzo)]" />
                                                             </div>
-                                                            <div>
-                                                                <p className="text-[10px] font-mono text-[var(--milano-bronzo)] uppercase tracking-[0.4em] font-bold mb-2">Status: Confermato</p>
-                                                                <p className="text-4xl font-accent text-[var(--antracite-elite)] uppercase tracking-tight">
+                                                            <div className="flex-1 min-w-0">
+                                                                <p className="text-[10px] font-mono text-[var(--milano-bronzo)] uppercase tracking-[0.4em] font-bold mb-3">Status: Confermato</p>
+                                                                <p className="text-4xl md:text-5xl lg:text-6xl font-accent text-[var(--antracite-elite)] uppercase tracking-tight break-words">
                                                                     {formData.tier}
                                                                 </p>
-                                                                <p className="text-[11px] font-mono text-black/70 uppercase tracking-widest mt-4 leading-relaxed font-bold">
+                                                                <p className="text-[12px] font-mono text-black/70 uppercase tracking-widest mt-6 leading-relaxed font-bold">
                                                                     {formData.tier === 'elite' ? 'Copertura Mensile Illimitata' : `${getTierRates(formData.tier as TierType).minHours} ore di assistenza incluse`}
                                                                 </p>
                                                             </div>
@@ -216,17 +223,17 @@ const BookingForm: React.FC<BookingFormProps> = ({
                                         </div>
                                     </div>
 
-                                    <div className="flex flex-col md:flex-row justify-between gap-6 pt-12 border-t border-black/5">
+                                    <div className="flex flex-col md:flex-row justify-between gap-6 pt-16 border-t border-black/5">
                                         <button
                                             onClick={onPrevStep}
-                                            className="flex items-center justify-center gap-3 px-10 py-5 text-[10px] font-mono uppercase tracking-[0.3em] font-bold text-black/40 hover:text-black transition-colors"
+                                            className="flex items-center justify-center gap-3 px-12 py-6 text-[11px] font-mono uppercase tracking-[0.3em] font-bold text-black/40 hover:text-black transition-colors"
                                         >
-                                            <ArrowLeft className="w-4 h-4" />
+                                            <ArrowLeft className="w-5 h-5" />
                                             Indietro
                                         </button>
                                         <button
                                             onClick={onNextStep}
-                                            className="btn-monumental"
+                                            className="btn-monumental px-20"
                                         >
                                             Prosegui
                                         </button>
