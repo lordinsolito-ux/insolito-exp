@@ -270,8 +270,8 @@ const App: React.FC = () => {
         if (!formData.assistanceDescription?.trim()) {
           errors.assistanceDescription = 'Descrivi la natura dell\'incarico';
           isValid = false;
-        } else if (formData.assistanceDescription.length < 30) {
-          errors.assistanceDescription = 'La descrizione deve essere di almeno 30 caratteri per garantire un servizio d\'eccellenza';
+        } else if (formData.assistanceDescription.length < 10) {
+          errors.assistanceDescription = 'La descrizione deve essere di almeno 10 caratteri per garantire un servizio d\'eccellenza';
           isValid = false;
         }
       } else {

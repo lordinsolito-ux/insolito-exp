@@ -185,8 +185,13 @@ const BookingForm: React.FC<BookingFormProps> = ({
                                                         name="assistanceDescription"
                                                         onBlur={onInputBlur}
                                                         placeholder="Specifichi gli obiettivi..."
-                                                        className="pearl-input w-full min-h-[100px] text-[13px] leading-relaxed bg-black/[0.02] border border-black/10 focus:bg-white focus:border-[var(--milano-bronzo)] transition-all shadow-inner text-black p-4"
+                                                        className={`pearl-input w-full min-h-[100px] text-[13px] leading-relaxed bg-black/[0.02] border focus:bg-white focus:border-[var(--milano-bronzo)] transition-all shadow-inner text-black p-4 ${validationErrors.assistanceDescription ? 'border-red-500 bg-red-50/10' : 'border-black/10'}`}
                                                     />
+                                                    {validationErrors.assistanceDescription && (
+                                                        <p className="text-[9px] font-mono text-red-500 uppercase tracking-widest mt-1 flex items-center gap-1">
+                                                            <AlertCircle className="w-3 h-3" /> {validationErrors.assistanceDescription}
+                                                        </p>
+                                                    )}
                                                 </div>
 
                                                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8">
@@ -197,11 +202,17 @@ const BookingForm: React.FC<BookingFormProps> = ({
                                                             <h4 className="text-[9px] font-mono uppercase tracking-[0.4em] text-black font-bold">Finestra</h4>
                                                         </div>
                                                         <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                                                            <input type="date" name="date" value={formData.date} onChange={onInputChange} className="pearl-input !p-2.5 !text-[11px] !bg-white border-black/10 text-black shadow-sm [&::-webkit-calendar-picker-indicator]:opacity-100 [&::-webkit-calendar-picker-indicator]:brightness-0 [&::-webkit-calendar-picker-indicator]:cursor-pointer" style={{ colorScheme: 'light' }} />
-                                                            <select name="time" value={formData.time} onChange={onInputChange} disabled={!formData.date} className="pearl-input !p-2.5 !text-[11px] !bg-white border-black/10 text-black shadow-sm">
-                                                                <option value="">DEBUTTO</option>
-                                                                {availableSlots.map(s => <option key={s} value={s}>{s}</option>)}
-                                                            </select>
+                                                            <div className="space-y-1">
+                                                                <input type="date" name="date" value={formData.date} onChange={onInputChange} className={`pearl-input !p-2.5 !text-[11px] !bg-white text-black shadow-sm [&::-webkit-calendar-picker-indicator]:opacity-100 [&::-webkit-calendar-picker-indicator]:brightness-0 [&::-webkit-calendar-picker-indicator]:cursor-pointer w-full ${validationErrors.date ? 'border-red-500' : 'border-black/10'}`} style={{ colorScheme: 'light' }} />
+                                                                {validationErrors.date && <p className="text-[8px] font-mono text-red-500 uppercase">Richiesto</p>}
+                                                            </div>
+                                                            <div className="space-y-1">
+                                                                <select name="time" value={formData.time} onChange={onInputChange} disabled={!formData.date} className={`pearl-input !p-2.5 !text-[11px] !bg-white text-black shadow-sm w-full ${validationErrors.time ? 'border-red-500' : 'border-black/10'}`}>
+                                                                    <option value="">DEBUTTO</option>
+                                                                    {availableSlots.map(s => <option key={s} value={s}>{s}</option>)}
+                                                                </select>
+                                                                {validationErrors.time && <p className="text-[8px] font-mono text-red-500 uppercase">Richiesto</p>}
+                                                            </div>
                                                         </div>
                                                     </div>
 
