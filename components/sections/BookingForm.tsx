@@ -116,7 +116,7 @@ const BookingForm: React.FC<BookingFormProps> = ({
                         animate={{ opacity: 1, scale: 1, y: 0 }}
                         exit={{ opacity: 0, scale: 0.98, y: 10 }}
                         transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-                        className={`relative w-full max-w-4xl mt-24 md:mt-32 rounded-none md:rounded-lg overflow-hidden transition-all duration-1000 shadow-2xl mb-12 ${activeStep >= 2 ? 'pearl-monolith border-none' : 'luxury-monolith border border-white/10'}`}
+                        className={`relative w-full max-w-3xl mt-24 md:mt-32 rounded-none md:rounded-lg overflow-hidden transition-all duration-1000 shadow-2xl mb-12 ${activeStep >= 2 ? 'pearl-monolith border-none border-2 border-black/5' : 'luxury-monolith border border-white/10'}`}
                     >
                         {/* CLOSE BUTTON - ARCHITECTURAL PRECISION */}
                         <button
@@ -131,7 +131,7 @@ const BookingForm: React.FC<BookingFormProps> = ({
                         <div className="relative z-10 w-full">
                             <StepIndicator currentStep={activeStep} />
 
-                            <div className="p-6 md:p-12 lg:p-16">
+                            <div className="p-6 md:p-8 lg:p-10">
                                 <AnimatePresence mode="wait">
                                     {/* STEP 1: PROTOCOLLO (TIER) */}
                                     {activeStep === 1 && (
@@ -241,7 +241,7 @@ const BookingForm: React.FC<BookingFormProps> = ({
                                             </div>
 
                                             <div className="flex justify-between pt-10 border-t border-black/10">
-                                                <button onClick={onPrevStep} className="text-[10px] font-mono uppercase tracking-widest text-black/60 hover:text-black transition-colors font-bold">Indietro</button>
+                                                <button onClick={onPrevStep} className="text-[10px] font-mono uppercase tracking-widest text-black/80 hover:text-black transition-colors font-bold">Indietro</button>
                                                 <button onClick={onNextStep} className="btn-monumental !bg-black !text-white hover:!bg-[var(--milano-bronzo)] transition-all shadow-xl px-16">Prosegui</button>
                                             </div>
                                         </motion.div>
@@ -283,7 +283,7 @@ const BookingForm: React.FC<BookingFormProps> = ({
                                             </div>
 
                                             <div className="flex justify-between pt-8 border-t border-black/10">
-                                                <button onClick={onPrevStep} className="text-[10px] font-mono uppercase tracking-widest text-black/60 hover:text-black transition-colors font-bold">Indietro</button>
+                                                <button onClick={onPrevStep} className="text-[10px] font-mono uppercase tracking-widest text-black/80 hover:text-black transition-colors font-bold">Indietro</button>
                                                 <button onClick={onNextStep} className="btn-monumental !bg-black !text-white hover:!bg-[var(--milano-bronzo)] transition-all shadow-xl px-16">Revisione</button>
                                             </div>
                                         </motion.div>
@@ -341,7 +341,7 @@ const BookingForm: React.FC<BookingFormProps> = ({
                                                     {isLoading ? 'INVIO...' : 'INVIA RICHIESTA FIDUCIARIA'}
                                                 </button>
 
-                                                <button onClick={onPrevStep} className="text-[10px] font-mono uppercase tracking-widest text-black/40 hover:text-black transition-colors font-medium">Modifica Dati</button>
+                                                <button onClick={onPrevStep} className="text-[10px] font-mono uppercase tracking-widest text-black/60 hover:text-black transition-colors font-bold">Modifica Dati</button>
                                             </div>
                                         </motion.div>
                                     )}
