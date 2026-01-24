@@ -196,7 +196,9 @@ export const checkAvailability = async (date: string): Promise<string[]> => {
   const busySlots: string[] = [];
   const theoreticalSlots = generateTimeSlots(date);
 
-  const daysBookings = bookings.filter(b => b.date === date && (b.status === 'confirmed' || b.status === 'pending'));
+  // Intelligent Scheduling: Consider confirmed, pending, requested, and proposed as "booked" to prevent overlaps
+  const busyStatuses = ['confirmed', 'pending', 'requested', 'proposed'];
+  const daysBookings = bookings.filter(b => b.date === date && busyStatuses.includes(b.status));
   const ASSUMED_DURATION = 60;
 
   theoreticalSlots.forEach(slotTime => {
@@ -250,8 +252,10 @@ export const checkBookingConflict = (newBooking: BookingFormData, existingBookin
   const newStart = parseDateTime(newBooking.date, newBooking.time);
   const newEnd = new Date(newStart.getTime() + (newBooking.duration || 60) * 60000);
 
+  const busyStatuses = ['confirmed', 'pending', 'requested', 'proposed'];
+
   return existingBookings.some(existing => {
-    if (existing.status !== 'confirmed' && existing.status !== 'pending') return false;
+    if (!busyStatuses.includes(existing.status)) return false;
     if (existing.date !== newBooking.date) return false;
 
     const existingStart = parseDateTime(existing.date, existing.time);

@@ -40,12 +40,6 @@ export interface BookingRow {
     payment_method: string;
     estimated_price: number;
 
-    // Tier-Based Pricing (New)
-    tier: string | null;
-    hours: number | null;
-    hourly_rate: number | null;
-    assistance_description: string | null;
-
     // Metadata
     vehicle_preference: string | null;
     contact_method: string;
@@ -74,10 +68,6 @@ export const rowToBookingRecord = (row: BookingRow): any => ({
     specialRequests: row.special_requests || '',
     paymentMethod: row.payment_method,
     estimatedPrice: row.estimated_price,
-    tier: row.tier as any,
-    hours: row.hours || 0,
-    hourlyRate: row.hourly_rate || 0,
-    assistanceDescription: row.assistance_description || '',
     vehiclePreference: row.vehicle_preference,
     contactMethod: row.contact_method,
     isVIP: row.is_vip,
@@ -104,10 +94,6 @@ export const bookingToRow = (booking: any): Partial<BookingRow> => ({
     special_requests: booking.specialRequests || null,
     payment_method: booking.paymentMethod || 'cash',
     estimated_price: booking.estimatedPrice || 0,
-    tier: booking.tier || null,
-    hours: booking.hours || null,
-    hourly_rate: booking.hourlyRate || null,
-    assistance_description: booking.assistanceDescription || null,
     vehicle_preference: booking.vehiclePreference || null,
     contact_method: booking.contactMethod || 'whatsapp',
     is_vip: booking.isVIP || false,
