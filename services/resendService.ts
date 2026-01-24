@@ -170,64 +170,74 @@ export const sendFiduciaryProposal = async (booking: BookingRecord): Promise<boo
     return false;
   }
 
+  const firstName = booking.name.split(' ')[0];
+  const bookingCode = booking.id?.slice(-6).toUpperCase() || 'REF-PENDING';
+
   const html = `
-    <div style="font-family: serif; color: #1a1a1a; max-width: 600px; margin: 20px auto; padding: 60px; background: #ffffff; border: 1px solid #D4AF37;">
-      <div style="text-align: center; margin-bottom: 50px;">
-        <h1 style="letter-spacing: 10px; font-weight: 300; margin: 0; text-transform: uppercase;">INSOLITO PRIVÉ</h1>
-        <div style="width: 40px; height: 1px; background: #D4AF37; margin: 20px auto;"></div>
-        <p style="letter-spacing: 3px; font-size: 9px; color: #D4AF37; text-transform: uppercase;">The Guardian of your Lifestyle</p>
+    <div style="font-family: serif; color: #1a1a1a; max-width: 600px; margin: 20px auto; padding: 60px; background: #ffffff; border: 1px solid #D4AF37; box-shadow: 0 20px 50px rgba(0,0,0,0.1);">
+      <div style="text-align: center; margin-bottom: 60px;">
+        <h1 style="letter-spacing: 12px; font-weight: 300; margin: 0; text-transform: uppercase; font-size: 28px;">INSOLITO PRIVÉ</h1>
+        <div style="width: 50px; height: 1px; background: #D4AF37; margin: 25px auto;"></div>
+        <p style="letter-spacing: 4px; font-size: 10px; color: #D4AF37; text-transform: uppercase; font-style: italic;">The Guardian of your Lifestyle</p>
       </div>
+
+      <p style="font-size: 18px; line-height: 1.8; margin-bottom: 30px;">Egregio <strong>${firstName}</strong>,</p>
       
-      <p style="font-size: 16px; line-height: 1.8;">Egregio <strong>${booking.name}</strong>,</p>
-      <p style="font-size: 15px; line-height: 1.8;">In merito alla Sua richiesta del <strong>${booking.date} @ ${booking.time}</strong>, abbiamo il piacere di sottoporLe la Proposta Fiduciaria definitiva per il Suo incarico.</p>
-      
-      <div style="background: #fdfdfd; padding: 40px; border-left: 3px solid #D4AF37; margin: 40px 0;">
-        <p style="font-size: 11px; text-transform: uppercase; color: #888; letter-spacing: 2px; margin-bottom: 15px;">Dettaglio Mandato</p>
-        <p style="font-size: 14px; margin-bottom: 10px;"><strong>Servizio:</strong> ${booking.tier ? `TIER ${booking.tier.toUpperCase()}` : (booking.serviceType || 'Elite Liaison')}</p>
-        <p style="font-size: 14px; margin: 0;"><strong>Onorario Professionale:</strong> €${booking.estimatedPrice}</p>
+      <p style="font-size: 15px; line-height: 1.8; color: #444;">
+        È un onore sottoporLe la Proposta Fiduciaria definitiva per il Suo incarico. In merito alla Sua richiesta del <strong>${booking.date} @ ${booking.time}</strong>, abbiamo predisposto l'architettura logistica necessaria per garantirLe l'impeccabilità richiesta.
+      </p>
+
+      <div style="margin: 50px 0; padding: 40px; background: #fcfbf7; border: 1px solid #efece3; position: relative;">
+        <h3 style="font-size: 11px; text-transform: uppercase; letter-spacing: 3px; color: #888; margin-bottom: 25px; border-bottom: 1px solid #efece3; padding-bottom: 10px;">Dettaglio Proposta</h3>
+        <p style="margin: 0 0 15px 0; font-size: 14px;"><strong>Codice Mandato:</strong> <span style="letter-spacing: 2px; color: #D4AF37;">${bookingCode}</span></p>
+        <p style="margin: 0 0 15px 0; font-size: 14px;"><strong>Servizio:</strong> ${booking.tier ? `TIER ${booking.tier.toUpperCase()}` : (booking.serviceType || 'Elite Liaison')}</p>
+        <p style="margin: 0 0 15px 0; font-size: 14px;"><strong>Pianificazione:</strong> ${booking.date} @ ${booking.time}</p>
+        <p style="margin: 0; font-size: 14px;"><strong>Onorario Professionale:</strong> €${booking.estimatedPrice}</p>
       </div>
 
       <div style="text-align: center; margin: 60px 0;">
-        <a href="${booking.stripeLink}" style="background: #000; color: #D4AF37; padding: 22px 50px; text-decoration: none; font-size: 13px; font-weight: bold; letter-spacing: 3px; border: 1px solid #D4AF37; display: inline-block;">
+        <p style="font-size: 13px; color: #888; margin-bottom: 30px; font-style: italic;">Per attivare il protocollo e garantire la disponibilità, La preghiamo di perfezionare il mandato tramite il link sicuro sottostante:</p>
+        <a href="${booking.stripeLink}" style="background: #000; color: #D4AF37; padding: 22px 50px; text-decoration: none; font-size: 13px; font-weight: bold; letter-spacing: 4px; border: 1px solid #D4AF37; display: inline-block; box-shadow: 0 10px 30px rgba(0,0,0,0.15);">
           PERFEZIONA IL MANDATO
         </a>
       </div>
 
-      <p style="font-size: 13px; color: #666; font-style: italic; line-height: 1.8; text-align: center;">
+      <p style="font-size: 14px; text-align: center; font-style: italic; color: #666; margin-top: 40px;">
         "Il vero lusso è la certezza di un'esecuzione impeccabile."
       </p>
-      
-      <div style="margin-top: 80px; border-top: 1px solid #efefef; padding-top: 30px; font-size: 10px; color: #aaa; text-align: center; letter-spacing: 1px;">
-        <p>MICHAEL JARA | LIFESTYLE GUARDIAN</p>
-        <p>MILANO - LONDON - DUBAI</p>
+
+      <div style="margin-top: 80px; text-align: center; border-top: 1px solid #eee; padding-top: 40px;">
+        <p style="font-size: 11px; letter-spacing: 2px; color: #aaa; margin: 0;">MICHAEL JARA | LIFESTYLE GUARDIAN</p>
+        <p style="font-size: 9px; letter-spacing: 1px; color: #ccc; margin-top: 5px;">MILANO - LONDON - DUBAI</p>
       </div>
     </div>
   `;
 
   return await dispatchEmail({
     to: booking.email,
-    subject: `PROPOSTA FIDUCIARIA: Incarico del ${booking.date}`,
+    subject: `PROPOSTA FIDUCIARIA: Incarico del ${booking.date} | INSOLITO PRIVÉ`,
     html
   });
 };
+
 
 /**
  * Send Completion and Oblivion notification (Phase 26)
  */
 export const sendCompletionAndOblivion = async (booking: BookingRecord): Promise<boolean> => {
   const html = `
-    <div style="font-family: serif; color: #fff; background: #000; padding: 60px; text-align: center;">
-      <h1 style="letter-spacing: 5px; font-style: italic; color: #D4AF37;">INSOLITO PRIVÉ</h1>
-      <h2 style="font-size: 12px; text-transform: uppercase; letter-spacing: 4px; border-bottom: 1px solid #333; padding-bottom: 20px; margin-bottom: 40px;">Certificato di Oblio Logistico</h2>
-      <p style="font-size: 16px; color: #ccc;">Egregio <strong>${booking.name}</strong>,</p>
-      <p style="color: #888;">Il mandato del <strong>${booking.date}</strong> è stato eseguito con successo.</p>
-      <p style="margin: 40px 0; color: #ccc; font-style: italic; line-height: 1.8;">
-        "Il vero lusso conclude se stesso nel silenzio."<br>
+  < div style = "font-family: serif; color: #fff; background: #000; padding: 60px; text-align: center;" >
+    <h1 style="letter-spacing: 5px; font-style: italic; color: #D4AF37;" > INSOLITO PRIVÉ </h1>
+      < h2 style = "font-size: 12px; text-transform: uppercase; letter-spacing: 4px; border-bottom: 1px solid #333; padding-bottom: 20px; margin-bottom: 40px;" > Certificato di Oblio Logistico </h2>
+        < p style = "font-size: 16px; color: #ccc;" > Egregio < strong > ${booking.name} </strong>,</p >
+          <p style="color: #888;" > Il mandato del < strong > ${booking.date} </strong> è stato eseguito con successo.</p >
+            <p style="margin: 40px 0; color: #ccc; font-style: italic; line-height: 1.8;" >
+              "Il vero lusso conclude se stesso nel silenzio."<br>
         Come da protocollo fiduciario, i Suoi dati logistici sono stati rimossi dai nostri sistemi operativi attivi.
       </p>
-      <p style="font-size: 12px; color: #555;">Speriamo di aver servito i Suoi standard con la dovuta discrezione.</p>
+  < p style = "font-size: 12px; color: #555;" > Speriamo di aver servito i Suoi standard con la dovuta discrezione.</p>
     </div>
-  `;
+      `;
 
   return await dispatchEmail({
     to: booking.email,
@@ -241,25 +251,25 @@ export const sendCompletionAndOblivion = async (booking: BookingRecord): Promise
  */
 export const sendModificationRequest = async (booking: BookingRecord, customReason?: string): Promise<boolean> => {
   const html = `
-    <div style="font-family: serif; color: #1a1a1a; padding: 40px; border: 1px solid #D4AF37; background: #fff;">
-      <h1 style="text-align: center; letter-spacing: 3px; font-style: italic;">INSOLITO PRIVÉ</h1>
-      <p style="font-size: 16px; margin-top: 40px;">Egregio <strong>${booking.name}</strong>,</p>
-      <p>La contattiamo in merito al mandato previsto per il <strong>${booking.date} @ ${booking.time}</strong>.</p>
-      
-      <div style="background: #fff9e6; padding: 20px; border-left: 4px solid #D4AF37; margin: 30px 0;">
-        <p style="font-weight: bold; margin-bottom: 10px;">Comunicazione di Servizio:</p>
-        <p style="font-style: italic;">${customReason || "A causa di variabili logistiche esterne (condizioni meteo avverse o criticità stradali improvvise), siamo costretti a richiederLe una ricalibrazione dell'orario o della data del mandato."}</p>
-      </div>
+  < div style = "font-family: serif; color: #1a1a1a; padding: 40px; border: 1px solid #D4AF37; background: #fff;" >
+    <h1 style="text-align: center; letter-spacing: 3px; font-style: italic;" > INSOLITO PRIVÉ </h1>
+      < p style = "font-size: 16px; margin-top: 40px;" > Egregio < strong > ${booking.name} </strong>,</p >
+        <p>La contattiamo in merito al mandato previsto per il < strong > ${booking.date} @${booking.time} </strong>.</p >
 
-      <p>Il Suo Guardian La contatterà a breve via WhatsApp per coordinare la nuova pianificazione fiduciaria.</p>
-      
-      <p style="font-size: 12px; color: #666; font-style: italic; margin-top: 40px;">"La sicurezza è il primo pilastro dell'esclusività."</p>
-    </div>
-  `;
+          <div style="background: #fff9e6; padding: 20px; border-left: 4px solid #D4AF37; margin: 30px 0;" >
+            <p style="font-weight: bold; margin-bottom: 10px;" > Comunicazione di Servizio: </p>
+              < p style = "font-style: italic;" > ${customReason || "A causa di variabili logistiche esterne (condizioni meteo avverse o criticità stradali improvvise), siamo costretti a richiederLe una ricalibrazione dell'orario o della data del mandato."} </p>
+                </div>
+
+                < p > Il Suo Guardian La contatterà a breve via WhatsApp per coordinare la nuova pianificazione fiduciaria.</p>
+
+                  < p style = "font-size: 12px; color: #666; font-style: italic; margin-top: 40px;" > "La sicurezza è il primo pilastro dell'esclusività." </p>
+                    </div>
+                      `;
 
   return await dispatchEmail({
     to: booking.email,
-    subject: `REVISIONE LOGISTICA: Protocollo ${booking.id?.slice(-6).toUpperCase()}`,
+    subject: `REVISIONE LOGISTICA: Protocollo ${booking.id?.slice(-6).toUpperCase()} `,
     html
   });
 };
