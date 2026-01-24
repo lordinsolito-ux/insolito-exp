@@ -130,14 +130,23 @@ export const saveBooking = async (
       const row = bookingToRow(bookingWithTimestamp);
 
       if (isNewBooking) {
+        // Strip ID from the insertion payload to let Supabase generate it (prevents 400 errors)
+        const { id: _, ...rowWithoutId } = row;
+
         const { data, error } = await supabase
           .from('bookings')
-          .insert(row)
+          .insert(rowWithoutId)
           .select()
           .single();
 
         if (error) {
-          console.error('Supabase insert error:', error);
+          console.error('❌ Supabase insert error:', {
+            message: error.message,
+            hint: error.hint,
+            details: error.details,
+            path: error.code,
+            payload: rowWithoutId
+          });
           throw error;
         }
 
@@ -149,7 +158,13 @@ export const saveBooking = async (
           .eq('id', booking.id);
 
         if (error) {
-          console.error('Supabase update error:', error);
+          console.error('❌ Supabase update error:', {
+            message: error.message,
+            hint: error.hint,
+            details: error.details,
+            code: error.code,
+            payload: row
+          });
           throw error;
         }
 

@@ -12,67 +12,67 @@ interface BookingConfirmationProps {
 export const BookingConfirmation: React.FC<BookingConfirmationProps> = ({ formData, onReset }) => {
   const serviceName = formData.tier ? `${formData.tier.toUpperCase()}` : (SERVICE_TYPES.find(s => s.id === formData.serviceType)?.name || 'LIFESTYLE MANAGEMENT');
 
-  return (
-    <div className="min-h-screen bg-black text-gray-200 font-sans flex items-center justify-center p-4 relative overflow-hidden">
-      {/* Background Elements */}
-      <div className="absolute inset-0 z-0 pointer-events-none">
-        <div className="absolute inset-0 bg-black"></div>
-        <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(circle_at_50%_50%,_rgba(58,58,58,0.3),_transparent_70%)]"></div>
-        <div className="absolute inset-0 bg-noise opacity-[0.05]"></div>
-      </div>
+  const handleWhatsAppNotify = () => {
+    const message = `Salve Michael, ho appena inviato una richiesta di disponibilità via web per il servizio ${serviceName} il ${new Date(formData.date).toLocaleDateString()}. Nome: ${formData.name}. In attesa di riscontro.`;
+    window.open(`https://wa.me/393456157070?text=${encodeURIComponent(message)}`, '_blank');
+  };
 
-      <div className="relative z-10 bg-black/80 backdrop-blur-3xl border border-white/10 rounded-sm shadow-2xl max-w-lg w-full p-8 md:p-12 text-center animate-fade-in">
-        <div className="flex justify-center mb-10">
-          <div className="w-24 h-24 rounded-full bg-[var(--milano-bronzo)]/5 border border-[var(--milano-bronzo)]/20 flex items-center justify-center shadow-[0_0_50px_rgba(139,115,85,0.1)] relative">
-            <Clock className="w-10 h-10 text-[var(--milano-bronzo)] animate-pulse" />
+  return (
+    <div className="min-h-screen bg-black/40 backdrop-blur-md flex items-center justify-center p-6 z-[300]">
+      <div className="relative bg-black border border-white/10 rounded-sm shadow-2xl max-w-sm w-full p-6 md:p-8 text-center animate-reveal overflow-hidden">
+        {/* Abstract Background Decoration */}
+        <div className="absolute top-0 right-0 w-32 h-32 bg-[var(--milano-bronzo)]/5 blur-3xl rounded-full -mr-16 -mt-16 pointer-events-none" />
+
+        <div className="flex justify-center mb-6">
+          <div className="w-16 h-16 rounded-full bg-[var(--milano-bronzo)]/5 border border-[var(--milano-bronzo)]/20 flex items-center justify-center relative">
+            <Clock className="w-6 h-6 text-[var(--milano-bronzo)] animate-pulse" />
             <div className="absolute top-0 right-0">
-              <span className="flex h-3 w-3">
+              <span className="flex h-2 w-2">
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[var(--milano-bronzo)] opacity-75"></span>
-                <span className="relative inline-flex rounded-full h-3 w-3 bg-[var(--milano-bronzo)]"></span>
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-[var(--milano-bronzo)]"></span>
               </span>
             </div>
           </div>
         </div>
 
-        <h2 className="text-4xl font-display text-white italic mb-2 tracking-tight">Richiesta in Analisi</h2>
-        <div className="inline-block bg-[var(--milano-bronzo)]/10 text-[var(--milano-bronzo)] border border-[var(--milano-bronzo)]/20 px-4 py-1.5 rounded-sm text-[10px] uppercase font-bold tracking-[0.3em] mb-10">
-          Status: Verifica Disponibilità Fiduciaria
+        <h2 className="text-xl md:text-2xl font-display text-white italic mb-1 tracking-tight">Richiesta in Analisi</h2>
+        <div className="inline-block bg-[var(--milano-bronzo)]/10 text-[var(--milano-bronzo)] border border-[var(--milano-bronzo)]/20 px-3 py-1 rounded-sm text-[8px] uppercase font-bold tracking-[0.2em] mb-6">
+          Status: Verifica Disponibilità
         </div>
 
-        <p className="text-gray-400 text-sm mb-12 font-light leading-relaxed font-sans uppercase tracking-widest text-[10px]">
-          Grazie, <span className="text-white font-bold">{formData.name}</span>. La sua richiesta di accesso è stata registrata con successo.
-          Il nostro team sta verificando la fattibilità logistica dell'incarico.
-        </p>
-
-        <div className="space-y-5 text-left bg-white/[0.02] p-8 rounded-sm border border-white/5 mb-10">
-          <div className="flex justify-between items-center border-b border-white/5 pb-3">
-            <span className="text-[9px] font-mono text-white/30 uppercase tracking-[0.3em]">Servizio</span>
-            <span className="text-sm text-white/80 font-accent uppercase">{serviceName}</span>
+        <div className="space-y-3 text-left bg-white/[0.02] p-5 rounded-sm border border-white/5 mb-6">
+          <div className="flex justify-between items-center border-b border-white/5 pb-2">
+            <span className="text-[8px] font-mono text-white/30 uppercase tracking-widest">Servizio</span>
+            <span className="text-xs text-white/80 font-accent uppercase">{serviceName}</span>
           </div>
-          <div className="flex justify-between items-center border-b border-white/5 pb-3">
-            <span className="text-[9px] font-mono text-white/30 uppercase tracking-[0.3em]">Data & Inizio</span>
-            <span className="text-sm text-white/80 font-accent uppercase">{new Date(formData.date).toLocaleDateString()} @ {formData.time}</span>
+          <div className="flex justify-between items-center border-b border-white/5 pb-2">
+            <span className="text-[8px] font-mono text-white/30 uppercase tracking-widest">Inizio</span>
+            <span className="text-xs text-white/80 font-accent uppercase">{new Date(formData.date).toLocaleDateString()} @ {formData.time}</span>
           </div>
           <div className="flex justify-between items-center">
-            <span className="text-[9px] font-mono text-white/30 uppercase tracking-[0.3em]">Onorario</span>
-            <span className="text-[var(--milano-bronzo)] font-accent text-2xl tracking-tighter">€{formData.estimatedPrice}</span>
+            <span className="text-[8px] font-mono text-white/30 uppercase tracking-widest">Onorario</span>
+            <span className="text-[var(--milano-bronzo)] font-accent text-lg tracking-tighter">€{formData.estimatedPrice}</span>
           </div>
         </div>
 
-        <div className="flex gap-4 mb-10 bg-white/[0.01] p-6 rounded-sm text-left border-l-2 border-[var(--milano-bronzo)]">
-          <AlertCircle className="w-5 h-5 text-[var(--milano-bronzo)] shrink-0 mt-0.5" />
-          <div className="text-[10px] font-mono text-white/40 uppercase tracking-widest leading-relaxed">
-            <strong className="text-white block mb-2">Cosa succede ora?</strong>
-            Analizzeremo i dettagli della sua missione. In caso di esito positivo, riceverà via email una proposta formale contenente il link di pagamento Stripe per confermare definitivamente l'intervento.
-          </div>
+        <div className="space-y-3">
+          <button
+            onClick={handleWhatsAppNotify}
+            className="w-full py-4 bg-[var(--milano-bronzo)] text-white font-accent text-[9px] uppercase tracking-[0.3em] hover:brightness-110 transition-all shadow-lg flex items-center justify-center gap-3"
+          >
+            Avvisa il Guardian via WhatsApp
+          </button>
+          <button
+            onClick={onReset}
+            className="w-full py-4 bg-white/5 text-white/40 hover:text-white font-mono text-[9px] uppercase tracking-[0.3em] transition-all"
+          >
+            Tornare alla Home
+          </button>
         </div>
 
-        <button
-          onClick={onReset}
-          className="w-full py-6 bg-white text-black font-accent text-[11px] uppercase tracking-[0.4em] hover:bg-[var(--milano-bronzo)] hover:text-white transition-all duration-700 shadow-xl"
-        >
-          <Home className="w-4 h-4 inline-block mr-3 -mt-1" /> Tornare alla Home
-        </button>
+        <p className="mt-6 text-[8px] font-mono text-white/20 uppercase tracking-widest leading-relaxed">
+          In caso di esito positivo, riceverà via email la proposta formale con il link di pagamento.
+        </p>
       </div>
     </div>
   );
