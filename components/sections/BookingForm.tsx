@@ -208,7 +208,7 @@ const BookingForm: React.FC<BookingFormProps> = ({
                                                             </div>
                                                             <div className="space-y-1">
                                                                 <select name="time" value={formData.time} onChange={onInputChange} disabled={!formData.date} className={`pearl-input !p-2.5 !text-[11px] !bg-black/[0.02] text-black shadow-sm w-full ${validationErrors.time ? 'border-red-500' : 'border-black/5'}`}>
-                                                                    <option value="">DEBUTTO</option>
+                                                                    <option value="">ORA DI INCONTRO</option>
                                                                     {availableSlots.map(s => <option key={s} value={s}>{s}</option>)}
                                                                 </select>
                                                                 {validationErrors.time && <p className="text-[8px] font-mono text-red-500 uppercase">Richiesto</p>}

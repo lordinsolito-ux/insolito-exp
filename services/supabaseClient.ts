@@ -45,6 +45,7 @@ export interface BookingRow {
     contact_method: string;
     is_vip: boolean;
     stripe_link: string | null;
+    attachment_urls: string[] | null;
 }
 
 // Helper to convert DB row to BookingRecord
@@ -72,6 +73,7 @@ export const rowToBookingRecord = (row: BookingRow): any => ({
     contactMethod: row.contact_method,
     isVIP: row.is_vip,
     stripeLink: row.stripe_link || undefined,
+    attachmentUrls: row.attachment_urls || [],
 });
 
 // Helper to convert BookingRecord to DB row format
@@ -98,4 +100,5 @@ export const bookingToRow = (booking: any): Partial<BookingRow> => ({
     contact_method: booking.contactMethod || 'whatsapp',
     is_vip: booking.isVIP || false,
     stripe_link: booking.stripeLink || null,
+    attachment_urls: booking.attachmentUrls?.length ? booking.attachmentUrls : null,
 });

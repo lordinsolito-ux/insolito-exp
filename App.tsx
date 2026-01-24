@@ -195,7 +195,7 @@ const App: React.FC = () => {
       if (formData.date) {
         const theoreticalSlots = generateTimeSlots(formData.date);
         try {
-          const busySlots = await checkAvailability(formData.date);
+          const busySlots = await checkAvailability(formData.date, formData.duration || 60);
           if (isMounted) {
             const finalSlots = theoreticalSlots.filter(t => !busySlots.includes(t));
             setAvailableSlots(finalSlots);
@@ -210,7 +210,7 @@ const App: React.FC = () => {
     };
     fetchSlots();
     return () => { isMounted = false; };
-  }, [formData.date]);
+  }, [formData.date, formData.duration]);
 
   // Handlers
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {

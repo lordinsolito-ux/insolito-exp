@@ -111,6 +111,44 @@ export const fetchAllBookings = async (): Promise<BookingRecord[]> => {
 };
 
 /**
+ * Uploads attachments to Supabase Storage and returns their public URLs
+ */
+export const uploadAttachments = async (files: File[], bookingId: string): Promise<string[]> => {
+  if (!isSupabaseConfigured() || !files.length) return [];
+
+  const urls: string[] = [];
+
+  for (const file of files) {
+    const fileExt = file.name.split('.').pop();
+    const fileName = `${bookingId}/${Date.now()}-${Math.random().toString(36).substring(7)}.${fileExt}`;
+    const filePath = `mission-files/${fileName}`;
+
+    try {
+      const { error: uploadError } = await supabase.storage
+        .from('attachments') // Using 'attachments' bucket
+        .upload(filePath, file);
+
+      if (uploadError) {
+        console.error(`❌ Upload error for ${file.name}:`, uploadError);
+        continue;
+      }
+
+      const { data } = supabase.storage
+        .from('attachments')
+        .getPublicUrl(filePath);
+
+      if (data?.publicUrl) {
+        urls.push(data.publicUrl);
+      }
+    } catch (e) {
+      console.error(`❌ Exception during upload of ${file.name}:`, e);
+    }
+  }
+
+  return urls;
+};
+
+/**
  * Saves a new booking to Supabase
  */
 export const saveBooking = async (
@@ -119,8 +157,17 @@ export const saveBooking = async (
   forceCloudUpdate: boolean = false,
   reason?: string
 ): Promise<void> => {
+  let updatedBooking = { ...booking };
+
+  // Handle file uploads for new bookings
+  if (isNewBooking && booking.attachments?.length) {
+    console.log(`📂 Uploading ${booking.attachments.length} attachments...`);
+    const urls = await uploadAttachments(booking.attachments, booking.id || Date.now().toString());
+    updatedBooking.attachmentUrls = urls;
+  }
+
   const bookingWithTimestamp = {
-    ...booking,
+    ...updatedBooking,
     timestamp: new Date().toISOString()
   };
 
@@ -189,8 +236,10 @@ export const saveBooking = async (
 
 /**
  * Checks availability by syncing with Supabase
+ * @param date The date to check
+ * @param requestedDuration Duration in minutes of the new potential booking
  */
-export const checkAvailability = async (date: string): Promise<string[]> => {
+export const checkAvailability = async (date: string, requestedDuration: number = 60): Promise<string[]> => {
   const bookings = await fetchAllBookings();
 
   const busySlots: string[] = [];
@@ -203,7 +252,8 @@ export const checkAvailability = async (date: string): Promise<string[]> => {
 
   theoreticalSlots.forEach(slotTime => {
     const slotStart = parseDateTime(date, slotTime);
-    const slotEnd = new Date(slotStart.getTime() + ASSUMED_DURATION * 60000);
+    // The slot is "busy" if there's an overlap for the WHOLE duration required by the client
+    const slotEnd = new Date(slotStart.getTime() + requestedDuration * 60000);
 
     for (const booking of daysBookings) {
       if (booking.email === 'admin@block') {
@@ -221,12 +271,10 @@ export const checkAvailability = async (date: string): Promise<string[]> => {
 
         const [blockStartH, blockStartM] = blockStartTime.split(':').map(Number);
         const [blockEndH, blockEndM] = blockEndTime.split(':').map(Number);
-        const [slotH, slotM] = slotTime.split(':').map(Number);
-        const slotMinutes = slotH * 60 + slotM;
-        const blockStartMinutes = blockStartH * 60 + blockStartM;
-        const blockEndMinutes = blockEndH * 60 + blockEndM;
+        const blockStartParsed = parseDateTime(date, `${blockStartH.toString().padStart(2, '0')}:${blockStartM.toString().padStart(2, '0')}`);
+        const blockEndParsed = parseDateTime(date, `${blockEndH.toString().padStart(2, '0')}:${blockEndM.toString().padStart(2, '0')}`);
 
-        if (slotMinutes >= blockStartMinutes && slotMinutes < blockEndMinutes) {
+        if (isOverlapping(slotStart, slotEnd, blockStartParsed, blockEndParsed)) {
           busySlots.push(slotTime);
           break;
         }

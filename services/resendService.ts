@@ -42,18 +42,37 @@ async function dispatchEmail(payload: { to: string, subject: string, html: strin
  * Send new booking notification to admin
  */
 export const sendAdminNotification = async (booking: BookingRecord): Promise<boolean> => {
+  const attachmentsHtml = booking.attachmentUrls?.length
+    ? `<div style="margin-top: 30px; padding: 20px; background: #fafafa; border-top: 1px solid #D4AF37;">
+        <p style="font-size: 11px; font-weight: bold; text-transform: uppercase; color: #888; letter-spacing: 1px;">Documentazione Allegata:</p>
+        <ul style="list-style: none; padding: 0; margin: 10px 0;">
+          ${booking.attachmentUrls.map((url, i) => `<li style="margin-bottom: 8px;"><a href="${url}" style="color: #D4AF37; text-decoration: none; font-size: 12px;">&rarr; Vedi Allegato ${i + 1}</a></li>`).join('')}
+        </ul>
+       </div>`
+    : '';
+
   const html = `
-    <div style="font-family: 'Playfair Display', serif; color: #1a1a1a; padding: 40px; background: #fafafa; border: 1px solid #ddd;">
-      <h1 style="color: #D4AF37; font-style: italic; border-bottom: 2px solid #D4AF37; padding-bottom: 10px; text-transform: uppercase; letter-spacing: 2px;">Nuovo Mandato Fiduciario</h1>
-      <p style="font-size: 16px;">Egregio Guardian, un nuovo protocollo è stato sottoscritto da <strong>${booking.name}</strong>.</p>
-      <div style="background: white; padding: 20px; border-left: 4px solid #D4AF37; margin: 20px 0;">
-        <p><strong>Servizio:</strong> ${booking.tier || booking.serviceType}</p>
-        <p><strong>Pianificazione:</strong> ${booking.date} @ ${booking.time}</p>
-        <p><strong>Onorario Stimato:</strong> €${booking.estimatedPrice}</p>
+    <div style="font-family: serif; color: #1a1a1a; max-width: 600px; margin: 20px auto; padding: 60px; background: #ffffff; border: 1px solid #f0f0f0; box-shadow: 0 10px 30px rgba(0,0,0,0.05);">
+      <div style="text-align: center; margin-bottom: 50px;">
+        <h1 style="letter-spacing: 8px; font-weight: 300; margin: 0; text-transform: uppercase; font-size: 24px;">INSOLITO PRIVÉ</h1>
+        <div style="width: 30px; height: 1px; background: #D4AF37; margin: 20px auto;"></div>
+        <p style="letter-spacing: 3px; font-size: 9px; color: #D4AF37; text-transform: uppercase;">Nuovo Mandato Fiduciario</p>
       </div>
-      <p style="margin-top: 30px; font-size: 12px; color: #888; border-top: 1px solid #eee; padding-top: 15px;">
-        Accedere alla Dashboard God Mode per l'analisi di fattibilità logistica.
-      </p>
+
+      <p style="font-size: 15px; line-height: 1.8;">Egregio Guardian,</p>
+      <p style="font-size: 15px; line-height: 1.8;">Un nuovo protocollo di assistenza è stato sottoscritto da <strong>${booking.name}</strong>.</p>
+      
+      <div style="margin: 40px 0; padding: 30px; border-left: 2px solid #D4AF37; background: #fdfdfd;">
+        <p style="margin: 0 0 10px 0; font-size: 13px;"><strong>Servizio:</strong> ${booking.tier ? booking.tier.toUpperCase() : (booking.serviceType || 'Lifestyle Management')}</p>
+        <p style="margin: 0 0 10px 0; font-size: 13px;"><strong>Pianificazione:</strong> ${booking.date} @ ${booking.time}</p>
+        <p style="margin: 0; font-size: 13px;"><strong>Onorario Stimato:</strong> €${booking.estimatedPrice}</p>
+      </div>
+
+      ${attachmentsHtml}
+
+      <div style="margin-top: 50px; text-align: center;">
+        <p style="font-size: 11px; color: #999; font-style: italic;">Accedere alla Dashboard God Mode per l'analisi logistica.</p>
+      </div>
     </div>
   `;
 
@@ -122,34 +141,35 @@ export const sendFiduciaryProposal = async (booking: BookingRecord): Promise<boo
   }
 
   const html = `
-    <div style="font-family: 'Playfair Display', serif; color: #000; padding: 50px; background: #fff; border: 1px solid #D4AF37;">
-      <div style="text-align: center; margin-bottom: 40px;">
-        <h1 style="letter-spacing: 5px; font-weight: 300; margin: 0;">INSOLITO PRIVÉ</h1>
-        <p style="letter-spacing: 2px; font-size: 10px; color: #D4AF37; text-transform: uppercase;">The Guardian of your Lifestyle</p>
+    <div style="font-family: serif; color: #1a1a1a; max-width: 600px; margin: 20px auto; padding: 60px; background: #ffffff; border: 1px solid #D4AF37;">
+      <div style="text-align: center; margin-bottom: 50px;">
+        <h1 style="letter-spacing: 10px; font-weight: 300; margin: 0; text-transform: uppercase;">INSOLITO PRIVÉ</h1>
+        <div style="width: 40px; height: 1px; background: #D4AF37; margin: 20px auto;"></div>
+        <p style="letter-spacing: 3px; font-size: 9px; color: #D4AF37; text-transform: uppercase;">The Guardian of your Lifestyle</p>
       </div>
       
-      <p style="font-size: 16px;">Egregio <strong>${booking.name}</strong>,</p>
-      <p>In merito alla Sua richiesta del <strong>${booking.date} @ ${booking.time}</strong>, abbiamo il piacere di sottoporLe la Proposta Fiduciaria definitiva.</p>
+      <p style="font-size: 16px; line-height: 1.8;">Egregio <strong>${booking.name}</strong>,</p>
+      <p style="font-size: 15px; line-height: 1.8;">In merito alla Sua richiesta del <strong>${booking.date} @ ${booking.time}</strong>, abbiamo il piacere di sottoporLe la Proposta Fiduciaria definitiva per il Suo incarico.</p>
       
-      <div style="background: #fafafa; padding: 30px; border-left: 2px solid #D4AF37; margin: 40px 0;">
-        <p style="font-size: 14px; text-transform: uppercase; color: #888; margin-bottom: 10px;">Mandato d'Ufficio</p>
-        <p><strong>Servizio:</strong> ${booking.tier ? `Tier ${booking.tier.toUpperCase()}` : booking.serviceType}</p>
-        <p><strong>Onorario Professionale:</strong> €${booking.estimatedPrice}</p>
+      <div style="background: #fdfdfd; padding: 40px; border-left: 3px solid #D4AF37; margin: 40px 0;">
+        <p style="font-size: 11px; text-transform: uppercase; color: #888; letter-spacing: 2px; margin-bottom: 15px;">Dettaglio Mandato</p>
+        <p style="font-size: 14px; margin-bottom: 10px;"><strong>Servizio:</strong> ${booking.tier ? `TIER ${booking.tier.toUpperCase()}` : (booking.serviceType || 'Elite Liaison')}</p>
+        <p style="font-size: 14px; margin: 0;"><strong>Onorario Professionale:</strong> €${booking.estimatedPrice}</p>
       </div>
 
-      <div style="text-align: center; margin: 50px 0;">
-        <a href="${booking.stripeLink}" style="background: #000; color: #D4AF37; padding: 20px 40px; text-decoration: none; font-size: 14px; font-weight: bold; letter-spacing: 2px; border: 1px solid #D4AF37;">
-          SOTTOSCRIVI IL MANDATO (STRIPE)
+      <div style="text-align: center; margin: 60px 0;">
+        <a href="${booking.stripeLink}" style="background: #000; color: #D4AF37; padding: 22px 50px; text-decoration: none; font-size: 13px; font-weight: bold; letter-spacing: 3px; border: 1px solid #D4AF37; display: inline-block;">
+          PERFEZIONA IL MANDATO
         </a>
       </div>
 
-      <p style="font-size: 13px; color: #666; line-height: 1.6;">
-        La sottoscrizione tramite il link protetto Stripe costituisce accettazione formale del mandato e garantisce la priorità assoluta per la fascia oraria indicata.
+      <p style="font-size: 13px; color: #666; font-style: italic; line-height: 1.8; text-align: center;">
+        "Il vero lusso è la certezza di un'esecuzione impeccabile."
       </p>
       
-      <div style="margin-top: 60px; border-top: 1px solid #eee; padding-top: 20px; font-size: 11px; color: #999;">
-        <p>Michael Jara | Lifestyle Guardian</p>
-        <p>Milano - London - Dubai</p>
+      <div style="margin-top: 80px; border-top: 1px solid #efefef; padding-top: 30px; font-size: 10px; color: #aaa; text-align: center; letter-spacing: 1px;">
+        <p>MICHAEL JARA | LIFESTYLE GUARDIAN</p>
+        <p>MILANO - LONDON - DUBAI</p>
       </div>
     </div>
   `;

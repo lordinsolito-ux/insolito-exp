@@ -110,6 +110,7 @@ export interface BookingFormData {
   hasPets: boolean;
 
   attachments?: File[]; // Optional: support for mission-critical documents
+  attachmentUrls?: string[]; // Public URLs for uploaded attachments
   estimatedPrice: number;
   priceBreakdown: PriceBreakdown; // Store detailed pricing
 }
