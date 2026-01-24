@@ -26,7 +26,7 @@ serve(async (req) => {
     }
 
     try {
-        const { bookingId, amount, customerEmail, customerName, description, tier, hours } = await req.json()
+        const { bookingId, amount, customerEmail, customerName, description, tier, hours, returnUrl } = await req.json()
 
         // Determina quale Price ID usare in base al tier
         let priceId: string;
@@ -67,7 +67,7 @@ serve(async (req) => {
             line_items: [{ price: priceId, quantity: quantity }],
             after_completion: {
                 type: 'redirect',
-                redirect: { url: 'https://insolitoprive.it/grazie' }
+                redirect: { url: `${returnUrl || 'https://insolitoprive.it'}/grazie` }
             },
             metadata: {
                 bookingId,
