@@ -279,7 +279,7 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({ isOpen, onClose 
             const bDate = new Date(b.date);
             const price = Number(b.estimatedPrice) || 0;
 
-            if (b.status === 'pending') pending++;
+            if (b.status === 'pending' || b.status === 'requested') pending++;
             if (b.status === 'confirmed') {
                 totalRev += price;
 
