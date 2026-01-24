@@ -22,7 +22,7 @@ type ViewMode = 'overview' | 'bookings' | 'analytics' | 'calendar' | 'blocktime'
 // --- COMPONENTS ---
 
 // 1. Sidebar Component (Desktop)
-const Sidebar = ({ currentView, setView, onClose }: { currentView: ViewMode, setView: (v: ViewMode) => void, onClose: () => void }) => (
+const Sidebar = ({ currentView, setView, onClose, isCloudMode }: { currentView: ViewMode, setView: (v: ViewMode) => void, onClose: () => void, isCloudMode: boolean }) => (
     <div className="hidden md:flex w-64 bg-black/90 border-r border-white/5 flex-col py-6 z-20 backdrop-blur-xl h-full">
         {/* Logo Area */}
         <div className="mb-10 px-6 flex items-center gap-3">
@@ -46,11 +46,11 @@ const Sidebar = ({ currentView, setView, onClose }: { currentView: ViewMode, set
 
         {/* Bottom Actions */}
         <div className="mt-auto px-3 space-y-2">
-            <div className="px-4 py-3 bg-gray-900/50 rounded-lg border border-white/5 mb-4">
-                <div className="text-[10px] text-gray-500 uppercase tracking-widest mb-1">System Status</div>
-                <div className="flex items-center gap-2 text-xs text-green-400">
-                    <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse" />
-                    Operational
+            <div className={`px-4 py-3 ${isCloudMode ? 'bg-gold-900/40 border-gold-500/30' : 'bg-red-900/20 border-red-500/20'} rounded-lg border mb-4`}>
+                <div className="text-[10px] text-gray-500 uppercase tracking-widest mb-1">Database Mode</div>
+                <div className={`flex items-center gap-2 text-[10px] font-bold ${isCloudMode ? 'text-gold-400' : 'text-red-400'}`}>
+                    <div className={`w-2 h-2 ${isCloudMode ? 'bg-gold-500 animate-pulse' : 'bg-red-500'} rounded-full shadow-[0_0_8px_rgba(212,175,55,0.4)]`} />
+                    {isCloudMode ? 'SUPABASE NATIVE ACTIVE' : 'LOCAL BACKUP ONLY'}
                 </div>
             </div>
             <button onClick={onClose} className="w-full flex items-center gap-3 p-3 text-gray-500 hover:text-red-400 hover:bg-red-900/10 rounded-lg transition-all group">
@@ -242,7 +242,8 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({ isOpen, onClose 
         if (isOpen) {
             loadBookings();
             setIsCloudMode(isCloudConfigured());
-            const interval = setInterval(loadBookings, 180000); // Increased to 3 minutes to reduce Make.com load
+            console.log("💎 [God Mode] Admin Dashboard initialized with Supabase:", isCloudConfigured());
+            const interval = setInterval(loadBookings, 180000); // 3-minute auto-refresh cycle
             return () => clearInterval(interval);
         }
     }, [isOpen]);
@@ -1387,45 +1388,50 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({ isOpen, onClose 
                 </div>
             )}
 
-            {/* Sidebar (Desktop) */}
-            <Sidebar currentView={view} setView={setView} onClose={onClose} />
+            <div className="flex h-screen bg-black overflow-hidden font-sans">
+                {/* Desktop Sidebar */}
+                <Sidebar
+                    currentView={view}
+                    setView={setView}
+                    onClose={onClose}
+                    isCloudMode={isCloudMode}
+                />
+                <div className="flex-1 flex flex-col min-w-0 bg-[#070707] relative overflow-hidden bg-[url('https://images.unsplash.com/photo-1493238792000-8113da705763?q=80&w=2070&auto=format&fit=crop')] bg-cover bg-center">
+                    <div className="absolute inset-0 bg-black/80 backdrop-blur-sm" /> {/* Overlay */}
 
-            {/* Main Content */}
-            <div className="flex-1 flex flex-col h-[100dvh] overflow-hidden bg-[url('https://images.unsplash.com/photo-1493238792000-8113da705763?q=80&w=2070&auto=format&fit=crop')] bg-cover bg-center">
-                <div className="absolute inset-0 bg-black/80 backdrop-blur-sm" /> {/* Overlay */}
-
-                {/* Top Bar */}
-                <div className="relative z-10 h-16 border-b border-white/5 flex items-center justify-between px-4 md:px-8 bg-black/40 backdrop-blur-md shrink-0">
-                    <div className="flex items-center gap-4 text-xs text-gray-400">
-                        <span className="flex items-center gap-2">
-                            {isCloudMode ? <Wifi className="w-3 h-3 text-green-500" /> : <WifiOff className="w-3 h-3 text-red-500" />}
-                            <span className="hidden md:inline">{isCloudMode ? 'Cloud Sync Active' : 'Local Storage Mode'}</span>
-                        </span>
-                        <span className="hidden md:block w-1 h-1 bg-gray-600 rounded-full" />
-                        <span className="hidden md:block">Last Updated: {lastUpdated.toLocaleTimeString()}</span>
-                    </div>
-                    <div className="flex items-center gap-4">
-                        <button className="p-2 text-gray-400 hover:text-white transition-colors relative">
-                            <Bell className="w-5 h-5" />
-                            {stats.pending > 0 && <span className="absolute top-1.5 right-1.5 w-2 h-2 bg-red-500 rounded-full animate-pulse" />}
-                        </button>
-                        <div className="w-8 h-8 rounded-full bg-gold-600 flex items-center justify-center text-black font-bold text-xs">
-                            AD
+                    {/* Top Bar */}
+                    <div className="relative z-10 h-16 border-b border-white/5 flex items-center justify-between px-4 md:px-8 bg-black/40 backdrop-blur-md shrink-0">
+                        <div className="flex items-center gap-4 text-xs text-gray-400">
+                            <span className="flex items-center gap-2">
+                                {isCloudMode ? <Wifi className="w-3 h-3 text-green-500" /> : <WifiOff className="w-3 h-3 text-red-500" />}
+                                <span className="hidden md:inline">{isCloudMode ? 'Cloud Sync Active' : 'Local Storage Mode'}</span>
+                            </span>
+                            <span className="hidden md:block w-1 h-1 bg-gray-600 rounded-full" />
+                            <span className="hidden md:block">Last Updated: {lastUpdated.toLocaleTimeString()}</span>
+                        </div>
+                        <div className="flex items-center gap-4">
+                            <button className="p-2 text-gray-400 hover:text-white transition-colors relative">
+                                <Bell className="w-5 h-5" />
+                                {stats.pending > 0 && <span className="absolute top-1.5 right-1.5 w-2 h-2 bg-red-500 rounded-full animate-pulse" />}
+                            </button>
+                            <div className="w-8 h-8 rounded-full bg-gold-600 flex items-center justify-center text-black font-bold text-xs">
+                                AD
+                            </div>
                         </div>
                     </div>
-                </div>
 
-                {/* View Content */}
-                <div className="relative z-10 flex-1 overflow-y-auto overflow-x-hidden p-4 md:p-8 pb-24 md:pb-8 scroll-smooth">
-                    {view === 'overview' && renderOverview()}
-                    {view === 'bookings' && renderBookings()}
-                    {view === 'analytics' && renderAnalytics()}
-                    {view === 'calendar' && renderCalendar()}
-                    {view === 'blocktime' && renderBlockTime()}
-                </div>
+                    {/* View Content */}
+                    <div className="relative z-10 flex-1 overflow-y-auto overflow-x-hidden p-4 md:p-8 pb-24 md:pb-8 scroll-smooth">
+                        {view === 'overview' && renderOverview()}
+                        {view === 'bookings' && renderBookings()}
+                        {view === 'analytics' && renderAnalytics()}
+                        {view === 'calendar' && renderCalendar()}
+                        {view === 'blocktime' && renderBlockTime()}
+                    </div>
 
-                {/* Bottom Nav (Mobile) */}
-                <BottomNav currentView={view} setView={setView} onClose={onClose} />
+                    {/* Bottom Nav (Mobile) */}
+                    <BottomNav currentView={view} setView={setView} onClose={onClose} />
+                </div>
             </div>
         </div>
     );
