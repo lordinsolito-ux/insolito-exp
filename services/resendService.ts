@@ -185,3 +185,31 @@ export const sendCompletionAndOblivion = async (booking: BookingRecord): Promise
     html
   });
 };
+
+/**
+ * Send modification/reschedule request to client (Weather/Technical)
+ */
+export const sendModificationRequest = async (booking: BookingRecord, customReason?: string): Promise<boolean> => {
+  const html = `
+    <div style="font-family: serif; color: #1a1a1a; padding: 40px; border: 1px solid #D4AF37; background: #fff;">
+      <h1 style="text-align: center; letter-spacing: 3px; font-style: italic;">INSOLITO PRIVÉ</h1>
+      <p style="font-size: 16px; margin-top: 40px;">Egregio <strong>${booking.name}</strong>,</p>
+      <p>La contattiamo in merito al mandato previsto per il <strong>${booking.date} @ ${booking.time}</strong>.</p>
+      
+      <div style="background: #fff9e6; padding: 20px; border-left: 4px solid #D4AF37; margin: 30px 0;">
+        <p style="font-weight: bold; margin-bottom: 10px;">Comunicazione di Servizio:</p>
+        <p style="font-style: italic;">${customReason || "A causa di variabili logistiche esterne (condizioni meteo avverse o criticità stradali improvvise), siamo costretti a richiederLe una ricalibrazione dell'orario o della data del mandato."}</p>
+      </div>
+
+      <p>Il Suo Guardian La contatterà a breve via WhatsApp per coordinare la nuova pianificazione fiduciaria.</p>
+      
+      <p style="font-size: 12px; color: #666; font-style: italic; margin-top: 40px;">"La sicurezza è il primo pilastro dell'esclusività."</p>
+    </div>
+  `;
+
+  return await dispatchEmail({
+    to: booking.email,
+    subject: `REVISIONE LOGISTICA: Protocollo ${booking.id?.slice(-6).toUpperCase()}`,
+    html
+  });
+};
