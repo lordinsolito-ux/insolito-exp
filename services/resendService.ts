@@ -92,19 +92,96 @@ export const sendClientConfirmation = async (booking: BookingRecord): Promise<bo
 };
 
 /**
- * Additional service functions can be added here following the same dispatch pattern.
+ * Send decline notification to client
  */
-export const sendClientDecline = async (booking: BookingRecord) => {
-  // Implementation similar to above...
-  return false;
+export const sendClientDecline = async (booking: BookingRecord): Promise<boolean> => {
+  const html = `
+    <div style="font-family: serif; color: #1a1a1a; padding: 40px; text-align: center; border: 1px solid #eee;">
+      <h1 style="letter-spacing: 3px; font-style: italic;">INSOLITO PRIVÉ</h1>
+      <p style="font-size: 16px; margin-top: 40px;">Egregio <strong>${booking.name}</strong>,</p>
+      <p>La ringraziamo per aver preso in considerazione il nostro Club fiduciario.</p>
+      <p style="margin: 30px 0;">Siamo spiacenti di doverLa informare che in data <strong>${booking.date}</strong> non disponiamo della capacità logistica necessaria per soddisfare i Suoi standard requisiti.</p>
+      <p style="font-size: 12px; color: #666; font-style: italic;">L'esclusività risiede anche nella trasparenza del limite.</p>
+    </div>
+  `;
+
+  return await dispatchEmail({
+    to: booking.email,
+    subject: `AGGIORNAMENTO PROTOCOLLO | INSOLITO PRIVÉ`,
+    html
+  });
 };
 
-export const sendFiduciaryProposal = async (booking: BookingRecord) => {
-  // Implementation similar to above...
-  return false;
+/**
+ * Send Fiduciary Proposal with Stripe Link (Phase 26)
+ */
+export const sendFiduciaryProposal = async (booking: BookingRecord): Promise<boolean> => {
+  if (!booking.stripeLink) {
+    console.error('❌ Proposta non inviabile: manca il link di pagamento Stripe.');
+    return false;
+  }
+
+  const html = `
+    <div style="font-family: 'Playfair Display', serif; color: #000; padding: 50px; background: #fff; border: 1px solid #D4AF37;">
+      <div style="text-align: center; margin-bottom: 40px;">
+        <h1 style="letter-spacing: 5px; font-weight: 300; margin: 0;">INSOLITO PRIVÉ</h1>
+        <p style="letter-spacing: 2px; font-size: 10px; color: #D4AF37; text-transform: uppercase;">The Guardian of your Lifestyle</p>
+      </div>
+      
+      <p style="font-size: 16px;">Egregio <strong>${booking.name}</strong>,</p>
+      <p>In merito alla Sua richiesta del <strong>${booking.date} @ ${booking.time}</strong>, abbiamo il piacere di sottoporLe la Proposta Fiduciaria definitiva.</p>
+      
+      <div style="background: #fafafa; padding: 30px; border-left: 2px solid #D4AF37; margin: 40px 0;">
+        <p style="font-size: 14px; text-transform: uppercase; color: #888; margin-bottom: 10px;">Mandato d'Ufficio</p>
+        <p><strong>Servizio:</strong> ${booking.tier ? `Tier ${booking.tier.toUpperCase()}` : booking.serviceType}</p>
+        <p><strong>Onorario Professionale:</strong> €${booking.estimatedPrice}</p>
+      </div>
+
+      <div style="text-align: center; margin: 50px 0;">
+        <a href="${booking.stripeLink}" style="background: #000; color: #D4AF37; padding: 20px 40px; text-decoration: none; font-size: 14px; font-weight: bold; letter-spacing: 2px; border: 1px solid #D4AF37;">
+          SOTTOSCRIVI IL MANDATO (STRIPE)
+        </a>
+      </div>
+
+      <p style="font-size: 13px; color: #666; line-height: 1.6;">
+        La sottoscrizione tramite il link protetto Stripe costituisce accettazione formale del mandato e garantisce la priorità assoluta per la fascia oraria indicata.
+      </p>
+      
+      <div style="margin-top: 60px; border-top: 1px solid #eee; padding-top: 20px; font-size: 11px; color: #999;">
+        <p>Michael Jara | Lifestyle Guardian</p>
+        <p>Milano - London - Dubai</p>
+      </div>
+    </div>
+  `;
+
+  return await dispatchEmail({
+    to: booking.email,
+    subject: `PROPOSTA FIDUCIARIA: Incarico del ${booking.date}`,
+    html
+  });
 };
 
-export const sendCompletionAndOblivion = async (booking: BookingRecord) => {
-  // Implementation similar to above...
-  return false;
+/**
+ * Send Completion and Oblivion notification (Phase 26)
+ */
+export const sendCompletionAndOblivion = async (booking: BookingRecord): Promise<boolean> => {
+  const html = `
+    <div style="font-family: serif; color: #fff; background: #000; padding: 60px; text-align: center;">
+      <h1 style="letter-spacing: 5px; font-style: italic; color: #D4AF37;">INSOLITO PRIVÉ</h1>
+      <h2 style="font-size: 12px; text-transform: uppercase; letter-spacing: 4px; border-bottom: 1px solid #333; padding-bottom: 20px; margin-bottom: 40px;">Certificato di Oblio Logistico</h2>
+      <p style="font-size: 16px; color: #ccc;">Egregio <strong>${booking.name}</strong>,</p>
+      <p style="color: #888;">Il mandato del <strong>${booking.date}</strong> è stato eseguito con successo.</p>
+      <p style="margin: 40px 0; color: #ccc; font-style: italic; line-height: 1.8;">
+        "Il vero lusso conclude se stesso nel silenzio."<br>
+        Come da protocollo fiduciario, i Suoi dati logistici sono stati rimossi dai nostri sistemi operativi attivi.
+      </p>
+      <p style="font-size: 12px; color: #555;">Speriamo di aver servito i Suoi standard con la dovuta discrezione.</p>
+    </div>
+  `;
+
+  return await dispatchEmail({
+    to: booking.email,
+    subject: `COMPLETAMENTO MANDATO | INSOLITO PRIVÉ`,
+    html
+  });
 };

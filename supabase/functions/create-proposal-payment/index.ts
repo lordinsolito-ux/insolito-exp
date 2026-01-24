@@ -1,4 +1,5 @@
 import { serve } from "https://deno.land/std@0.168.0/http/server.ts"
+// NOTE: Deploy this function using: npx supabase functions deploy create-proposal-payment --no-verify-jwt
 import { createClient } from 'https://esm.sh/@supabase/supabase-js@2'
 import Stripe from 'https://esm.sh/stripe@11.1.0?target=deno'
 
