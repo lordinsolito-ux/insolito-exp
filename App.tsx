@@ -397,7 +397,7 @@ const App: React.FC = () => {
         onPhilosophy={() => document.getElementById('essence')?.scrollIntoView({ behavior: 'smooth' })}
         onVision={() => setIsVisionOpen(true)}
         onServices={() => investmentRef.current?.scrollIntoView({ behavior: 'smooth' })}
-        onInquire={() => { setActiveStep(1); setIsBookingModalOpen(true); }}
+        onInquire={() => investmentRef.current?.scrollIntoView({ behavior: 'smooth' })}
       />
 
       {isBookingConfirmed ? (
@@ -414,7 +414,7 @@ const App: React.FC = () => {
             isScrolled={isScrolled}
             onAdminLogin={() => setShowAdminLogin(true)}
             onArchiveClick={() => setShowHistory(true)}
-            onEnterClick={() => { setActiveStep(1); setIsBookingModalOpen(true); }}
+            onEnterClick={() => investmentRef.current?.scrollIntoView({ behavior: 'smooth' })}
           />
 
           <main className="bg-transparent relative z-10">
