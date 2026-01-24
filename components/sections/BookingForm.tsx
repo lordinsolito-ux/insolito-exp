@@ -46,6 +46,7 @@ interface BookingFormProps {
     onRemoveAttachment: (index: number) => void;
     onSubmit: (e: React.FormEvent) => void;
     isNightService: (time: string) => boolean;
+    onHoursChange: (hours: number) => void;
 }
 
 const BookingForm: React.FC<BookingFormProps> = ({
@@ -70,10 +71,15 @@ const BookingForm: React.FC<BookingFormProps> = ({
     onAddAttachments,
     onRemoveAttachment,
     onSubmit,
-    isNightService
+    isNightService,
+    onHoursChange
 }) => {
     const ref = useRef<HTMLDivElement>(null);
     const fileInputRef = useRef<HTMLInputElement>(null);
+
+    // Get min hours to populate duration selector
+    const tierRates = formData.tier ? getTierRates(formData.tier) : { minHours: 1 };
+    const hourOptions = Array.from({ length: 10 }, (_, i) => tierRates.minHours + i);
 
     // Scroll lock and focus
     useEffect(() => {
@@ -201,14 +207,20 @@ const BookingForm: React.FC<BookingFormProps> = ({
                                                             <Calendar className="w-3.5 h-3.5 text-[var(--milano-bronzo)]" />
                                                             <h4 className="text-[9px] font-mono uppercase tracking-[0.4em] text-black font-bold">Pianificazione</h4>
                                                         </div>
-                                                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                                                        <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
                                                             <div className="space-y-1">
                                                                 <input type="date" name="date" value={formData.date} onChange={onInputChange} className={`pearl-input !p-2.5 !text-[11px] !bg-black/[0.02] text-black shadow-sm [&::-webkit-calendar-picker-indicator]:opacity-100 [&::-webkit-calendar-picker-indicator]:brightness-0 [&::-webkit-calendar-picker-indicator]:cursor-pointer w-full ${validationErrors.date ? 'border-red-500' : 'border-black/5'}`} style={{ colorScheme: 'light' }} />
                                                                 {validationErrors.date && <p className="text-[8px] font-mono text-red-500 uppercase">Richiesto</p>}
                                                             </div>
                                                             <div className="space-y-1">
+                                                                <select name="hours" value={formData.hours || tierRates.minHours} onChange={(e) => onHoursChange(Number(e.target.value))} className="pearl-input !p-2.5 !text-[11px] !bg-black/[0.02] text-black shadow-sm w-full border-black/5">
+                                                                    {hourOptions.map(h => <option key={h} value={h}>{h} ORE</option>)}
+                                                                </select>
+                                                                <p className="text-[8px] font-mono text-black/30 uppercase">Durata</p>
+                                                            </div>
+                                                            <div className="space-y-1">
                                                                 <select name="time" value={formData.time} onChange={onInputChange} disabled={!formData.date} className={`pearl-input !p-2.5 !text-[11px] !bg-black/[0.02] text-black shadow-sm w-full ${validationErrors.time ? 'border-red-500' : 'border-black/5'}`}>
-                                                                    <option value="">ORA DI INCONTRO</option>
+                                                                    <option value="">ORA INCONTRO</option>
                                                                     {availableSlots.map(s => <option key={s} value={s}>{s}</option>)}
                                                                 </select>
                                                                 {validationErrors.time && <p className="text-[8px] font-mono text-red-500 uppercase">Richiesto</p>}

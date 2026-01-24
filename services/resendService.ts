@@ -65,6 +65,7 @@ export const sendAdminNotification = async (booking: BookingRecord): Promise<boo
       <div style="margin: 40px 0; padding: 30px; border-left: 2px solid #D4AF37; background: #fdfdfd;">
         <p style="margin: 0 0 10px 0; font-size: 13px;"><strong>Servizio:</strong> ${booking.tier ? booking.tier.toUpperCase() : (booking.serviceType || 'Lifestyle Management')}</p>
         <p style="margin: 0 0 10px 0; font-size: 13px;"><strong>Pianificazione:</strong> ${booking.date} @ ${booking.time}</p>
+        <p style="margin: 0 0 10px 0; font-size: 13px;"><strong>Durata Mandato:</strong> ${booking.hours || (booking.duration ? booking.duration / 60 : 0)} ORE</p>
         <p style="margin: 0; font-size: 13px;"><strong>Onorario Stimato:</strong> €${booking.estimatedPrice}</p>
       </div>
 

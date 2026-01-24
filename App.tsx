@@ -332,6 +332,23 @@ const App: React.FC = () => {
 
   const handleResetApp = () => { setIsBookingConfirmed(false); setActiveStep(1); setFormData(INITIAL_FORM_STATE); setRouteInfo(null); setTermsAccepted(false); };
 
+  const handleHoursChange = (hours: number) => {
+    setFormData(prev => {
+      const rate = prev.hourlyRate || 0;
+      return {
+        ...prev,
+        hours: hours,
+        duration: hours * 60,
+        estimatedPrice: hours * rate,
+        priceBreakdown: {
+          ...prev.priceBreakdown,
+          total: hours * rate,
+          baseFare: hours * rate
+        }
+      };
+    });
+  };
+
   const handleSubmit = async () => {
     setIsLoading(true);
     try {
@@ -437,6 +454,7 @@ const App: React.FC = () => {
               onPrevStep={handlePrevStep}
               onNextStep={handleNextStep}
               onSelectTier={handleTierSelect}
+              onHoursChange={handleHoursChange}
               onAddAttachments={handleAddAttachments}
               onRemoveAttachment={handleRemoveAttachment}
               onSubmit={handleSubmit}
