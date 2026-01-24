@@ -1,5 +1,7 @@
 import { BookingRecord } from '../types';
 
+// --- VERSION: 1.0.1 (GOLD STANDARD) ---
+
 // --- CONFIGURATION ---
 const SUPABASE_URL = import.meta.env.VITE_SUPABASE_URL;
 const EDGE_FUNCTION_NAME = 'send-notification';
