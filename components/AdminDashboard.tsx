@@ -3,7 +3,7 @@ import {
     X, Check, XCircle, Calendar, Clock, User, Phone, MapPin, Search,
     TrendingUp, DollarSign, Briefcase, AlertOctagon, RefreshCw, Wifi,
     WifiOff, BarChart3, ChevronLeft, ChevronRight, Edit2, Save,
-    LayoutDashboard, List, PieChart, Settings, LogOut, Bell, Filter, FileText
+    LayoutDashboard, List, PieChart, Settings, LogOut, Bell, Filter, FileText, Paperclip
 } from 'lucide-react';
 import { BookingRecord } from '../types';
 import { sendBookingUpdateNotification, fetchAllBookings, saveBooking, isCloudConfigured } from '../services/bookingService';
@@ -627,6 +627,22 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({ isOpen, onClose 
                                     </div>
                                 </div>
 
+                                {/* Attachments (Mobile) */}
+                                {booking.attachmentUrls && booking.attachmentUrls.length > 0 && (
+                                    <div className="pt-3 border-t border-white/5 space-y-2">
+                                        <div className="text-[9px] text-gold-500 uppercase tracking-widest flex items-center gap-2">
+                                            <Paperclip className="w-3 h-3" /> Documents
+                                        </div>
+                                        <div className="flex flex-wrap gap-2">
+                                            {booking.attachmentUrls.map((url, i) => (
+                                                <a key={i} href={url} target="_blank" rel="noreferrer" className="text-[10px] text-white/60 hover:text-white bg-white/5 px-2 py-1 rounded transition-colors truncate max-w-[150px]">
+                                                    Doc {i + 1}
+                                                </a>
+                                            ))}
+                                        </div>
+                                    </div>
+                                )}
+
                                 {/* Route */}
                                 <div className="space-y-2">
                                     <div className="flex items-start gap-2">
@@ -708,6 +724,7 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({ isOpen, onClose 
                                 <th className="p-4 text-[10px] uppercase tracking-widest text-gray-500 font-medium">Date & Time</th>
                                 <th className="p-4 text-[10px] uppercase tracking-widest text-gray-500 font-medium">Route</th>
                                 <th className="p-4 text-[10px] uppercase tracking-widest text-gray-500 font-medium">Price</th>
+                                <th className="p-4 text-[10px] uppercase tracking-widest text-gray-500 font-medium">Docs</th>
                                 <th className="p-4 text-[10px] uppercase tracking-widest text-gray-500 font-medium text-right">Actions</th>
                             </tr>
                         </thead>
@@ -762,6 +779,19 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({ isOpen, onClose 
                                     <td className="p-4">
                                         <div className="font-mono text-gold-400 text-sm">€{booking.estimatedPrice}</div>
                                         <div className="text-[9px] text-gray-600 uppercase">{booking.paymentMethod}</div>
+                                    </td>
+                                    <td className="p-4">
+                                        {booking.attachmentUrls && booking.attachmentUrls.length > 0 ? (
+                                            <div className="flex gap-2">
+                                                {booking.attachmentUrls.map((url, i) => (
+                                                    <a key={i} href={url} target="_blank" rel="noreferrer" className="text-gold-500 hover:text-white transition-colors" title={`Vedi Allegato ${i + 1}`}>
+                                                        <Paperclip className="w-3.5 h-3.5" />
+                                                    </a>
+                                                ))}
+                                            </div>
+                                        ) : (
+                                            <span className="text-gray-700">-</span>
+                                        )}
                                     </td>
                                     <td className="p-4 text-right">
                                         <div className="flex justify-end gap-1">

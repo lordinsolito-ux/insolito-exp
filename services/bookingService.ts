@@ -220,7 +220,7 @@ export const saveBooking = async (
 
       // Trigger notification (prepared for Resend integration)
       if (isNewBooking || forceCloudUpdate) {
-        await sendBookingUpdateNotification(booking, booking.status as any, reason);
+        await sendBookingUpdateNotification(bookingWithTimestamp, bookingWithTimestamp.status as any, reason);
       }
     } catch (e) {
       console.error("Failed to save to Supabase", e);
