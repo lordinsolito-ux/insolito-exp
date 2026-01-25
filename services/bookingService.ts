@@ -252,24 +252,34 @@ export const saveBooking = async (
 };
 
 /**
- * Physically deletes a booking from Supabase
+ * Physically deletes a booking from Supabase using direct RPC
  */
 export const deleteBooking = async (id: string): Promise<boolean> => {
   if (isSupabaseConfigured()) {
     try {
-      const { error } = await supabase
-        .from('bookings')
-        .delete()
-        .eq('id', id);
+      // Use RPC to bypass potential client-side issues
+      const { data, error } = await supabase.rpc('delete_booking_by_id', { booking_id: id });
 
-      if (error) throw error;
+      if (error) {
+        console.error('RPC delete_booking_by_id error:', error);
+        // Fallback to standard delete
+        const { error: deleteError } = await supabase
+          .from('bookings')
+          .delete()
+          .eq('id', id);
+
+        if (deleteError) throw deleteError;
+      }
 
       console.log(`🗑️ Deleted booking ${id} from Supabase`);
 
-      // Update local cache
-      const currentList = await fetchAllBookings();
-      const updatedList = currentList.filter(b => b.id !== id);
-      localStorage.setItem('insolito_bookings', JSON.stringify(updatedList));
+      // Update local cache immediately
+      const localStored = localStorage.getItem('insolito_bookings');
+      if (localStored) {
+        const currentList = JSON.parse(localStored) as BookingRecord[];
+        const updatedList = currentList.filter(b => b.id !== id);
+        localStorage.setItem('insolito_bookings', JSON.stringify(updatedList));
+      }
 
       return true;
     } catch (e) {
@@ -281,21 +291,26 @@ export const deleteBooking = async (id: string): Promise<boolean> => {
 };
 
 /**
- * Deletes all bookings for system reset
+ * Deletes all bookings for system reset using direct RPC
  */
 export const deleteAllBookings = async (): Promise<boolean> => {
   if (isSupabaseConfigured()) {
     try {
-      // Robust way to target all rows in Supabase: use a filter that is always true
-      // 'id' is never the zero UUID for our actual records
-      const { error } = await supabase
-        .from('bookings')
-        .delete()
-        .neq('id', '00000000-0000-0000-0000-000000000000');
+      // Use RPC to bypass potential client-side issues
+      const { data, error } = await supabase.rpc('delete_all_bookings');
 
-      if (error) throw error;
+      if (error) {
+        console.error('RPC delete_all_bookings error:', error);
+        // Fallback to standard delete with explicit filter
+        const { error: deleteError } = await supabase
+          .from('bookings')
+          .delete()
+          .neq('id', '00000000-0000-0000-0000-000000000000');
 
-      console.log(`🗑️ RESET: All bookings deleted from Supabase`);
+        if (deleteError) throw deleteError;
+      }
+
+      console.log(`🗑️ RESET: All bookings deleted from Supabase. Rows affected: ${data || 'unknown'}`);
       localStorage.setItem('insolito_bookings', JSON.stringify([]));
       return true;
     } catch (e) {
