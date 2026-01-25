@@ -183,6 +183,7 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({ isOpen, onClose 
     const [editingBooking, setEditingBooking] = useState<BookingRecord | null>(null);
     const [rescheduleDate, setRescheduleDate] = useState('');
     const [rescheduleTime, setRescheduleTime] = useState('');
+    const [rescheduleDuration, setRescheduleDuration] = useState(60);
 
     // Calendar State
     const [calendarDate, setCalendarDate] = useState(new Date());
@@ -401,6 +402,7 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({ isOpen, onClose 
         setEditingBooking(booking);
         setRescheduleDate(booking.date);
         setRescheduleTime(booking.time);
+        setRescheduleDuration(booking.duration || (booking.hours ? booking.hours * 60 : 60));
         setRescheduleReason(''); // Reset reason
     };
 
@@ -413,6 +415,7 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({ isOpen, onClose 
                 ...editingBooking,
                 date: rescheduleDate,
                 time: rescheduleTime,
+                duration: rescheduleDuration,
                 status: 'rescheduled' as any // Keep as rescheduled/pending
             };
 
@@ -1464,6 +1467,18 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({ isOpen, onClose 
                                     className="w-full bg-black/40 border border-white/10 rounded p-3 text-white focus:border-gold-500 outline-none"
                                     style={{ colorScheme: 'dark' }}
                                 />
+                            </div>
+                            <div>
+                                <label className="text-[10px] uppercase tracking-widest text-gray-500 mb-1 block">New Duration</label>
+                                <select
+                                    value={rescheduleDuration}
+                                    onChange={(e) => setRescheduleDuration(Number(e.target.value))}
+                                    className="w-full bg-black/40 border border-white/10 rounded p-3 text-white focus:border-gold-500 outline-none text-sm"
+                                >
+                                    {[30, 60, 90, 120, 150, 180, 210, 240, 300, 360, 480, 720].map(mins => (
+                                        <option key={mins} value={mins} className="bg-black">{mins / 60} Ore ({mins} min)</option>
+                                    ))}
+                                </select>
                             </div>
                             <div>
                                 <label className="text-[10px] uppercase tracking-widest text-gray-500 mb-1 block">Reason for Change (Optional)</label>

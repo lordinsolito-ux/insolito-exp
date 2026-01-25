@@ -412,8 +412,8 @@ export const sendBookingUpdateNotification = async (
 
     // For rescheduled bookings
     if (status === 'rescheduled') {
-      console.log('📅 Reschedule notification ready');
-      return true;
+      console.log('📅 Sending modification/reschedule email to client...');
+      return await resendService.sendModificationRequest(booking, reason);
     }
 
     return true;
