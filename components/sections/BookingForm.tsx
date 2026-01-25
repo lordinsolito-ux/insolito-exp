@@ -30,7 +30,6 @@ interface BookingFormProps {
     formData: BookingFormData;
     validationErrors: ValidationErrors;
     availableSlots: string[];
-    termsAccepted: boolean;
     isLoading: boolean;
     t: (key: string) => string;
     onInputChange: (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => void;
@@ -38,7 +37,9 @@ interface BookingFormProps {
     onInputBlur: () => void;
     onPaymentMethodChange: (method: PaymentMethod) => void;
     onToggleTerms: (accepted: boolean) => void;
-    onShowTerms: () => void;
+    onToggleContract: (accepted: boolean) => void;
+    onToggleWaiver: (accepted: boolean) => void;
+    onShowTerms: (title: string, content: string) => void;
     onPrevStep: () => void;
     onNextStep: () => void;
     onSelectTier: (tier: TierType) => void;
@@ -57,7 +58,6 @@ const BookingForm: React.FC<BookingFormProps> = ({
     formData,
     validationErrors,
     availableSlots,
-    termsAccepted,
     isLoading,
     t,
     onInputChange,
@@ -65,6 +65,8 @@ const BookingForm: React.FC<BookingFormProps> = ({
     onInputBlur,
     onPaymentMethodChange,
     onToggleTerms,
+    onToggleContract,
+    onToggleWaiver,
     onShowTerms,
     onPrevStep,
     onNextStep,
@@ -361,29 +363,67 @@ const BookingForm: React.FC<BookingFormProps> = ({
                                                 </div>
                                             </div>
 
-                                            <div className="flex flex-col items-center gap-6 pt-2">
-                                                <div className="flex flex-col items-center gap-4">
-                                                    <label className="flex items-center gap-3 cursor-pointer group">
-                                                        <input type="checkbox" checked={termsAccepted} onChange={(e) => onToggleTerms(e.target.checked)} className="hidden" />
-                                                        <div className={`w-5 h-5 border-2 flex items-center justify-center transition-all ${termsAccepted ? 'bg-black border-black/10 shadow-md' : 'border-black/20 group-hover:border-black/40'}`}>
-                                                            {termsAccepted && <Check className="w-3.5 h-3.5 text-white" />}
-                                                        </div>
-                                                        <span className="text-[9px] font-mono text-black/60 uppercase tracking-[0.2em] group-hover:text-black transition-colors font-bold">Accetto l'Impegno di Riservatezza</span>
-                                                    </label>
-                                                    <button
-                                                        onClick={onShowTerms}
-                                                        className="text-[8px] font-mono text-[var(--milano-bronzo)] hover:text-black transition-colors uppercase tracking-[0.3em] underline underline-offset-4"
-                                                    >
-                                                        Visualizza Accordo Digitale
-                                                    </button>
+                                            <div className="flex flex-col items-center gap-8 pt-4">
+                                                <div className="w-full space-y-4 max-w-sm mx-auto">
+                                                    {/* Terms & Privacy */}
+                                                    <div className="flex flex-col items-center gap-2">
+                                                        <label className="flex items-center gap-3 cursor-pointer group">
+                                                            <input type="checkbox" checked={formData.acceptedTerms} onChange={(e) => onToggleTerms(e.target.checked)} className="hidden" />
+                                                            <div className={`w-5 h-5 border-2 flex items-center justify-center transition-all ${formData.acceptedTerms ? 'bg-black border-black/10 shadow-md' : 'border-black/20 group-hover:border-black/40'}`}>
+                                                                {formData.acceptedTerms && <Check className="w-3.5 h-3.5 text-white" />}
+                                                            </div>
+                                                            <span className="text-[9px] font-mono text-black/60 uppercase tracking-[0.2em] group-hover:text-black transition-colors font-bold">Impegno di Riservatezza</span>
+                                                        </label>
+                                                        <button onClick={() => onShowTerms("Politica sulla Riservatezza Estrema", "Insolito Privé opera sotto rigoroso vincolo di segretezza fiduciaria. Nessun dato relativo agli spostamenti, incontri o conversazioni avvenute durante il servizio sarà mai registrato, divulgato o ceduto a terzi, salvo obblighi di legge. La tua privacy è l'asset principale del nostro servizio.")} className="text-[8px] font-mono text-[var(--milano-bronzo)] hover:text-black transition-colors uppercase tracking-[0.3em] underline underline-offset-4">Visualizza Privacy Policy</button>
+                                                    </div>
+
+                                                    {/* Contratto d'Opera */}
+                                                    <div className="flex flex-col items-center gap-2">
+                                                        <label className="flex items-center gap-3 cursor-pointer group">
+                                                            <input type="checkbox" checked={formData.acceptedContract} onChange={(e) => onToggleContract(e.target.checked)} className="hidden" />
+                                                            <div className={`w-5 h-5 border-2 flex items-center justify-center transition-all ${formData.acceptedContract ? 'bg-black border-black/10 shadow-md' : 'border-black/20 group-hover:border-black/40'}`}>
+                                                                {formData.acceptedContract && <Check className="w-3.5 h-3.5 text-white" />}
+                                                            </div>
+                                                            <span className="text-[9px] font-mono text-black/60 uppercase tracking-[0.2em] group-hover:text-black transition-colors font-bold">Accetto Contratto d'Opera</span>
+                                                        </label>
+                                                        <button onClick={() => {
+                                                            const { LEGAL_CONTENT } = require('../../legalContent');
+                                                            const content = LEGAL_CONTENT.contratto.getFilledContract({
+                                                                name: formData.name,
+                                                                phone: formData.phone,
+                                                                tier: formData.tier || '',
+                                                                hours: formData.hours || 0,
+                                                                date: formData.date,
+                                                                time: formData.time,
+                                                                price: formData.estimatedPrice
+                                                            });
+                                                            onShowTerms("Contratto d'Opera - Lifestyle Management", content);
+                                                        }} className="text-[8px] font-mono text-[var(--milano-bronzo)] hover:text-black transition-colors uppercase tracking-[0.3em] underline underline-offset-4">Visualizza Contratto Personalizzato</button>
+                                                    </div>
+
+                                                    {/* Liberatoria/Manleva */}
+                                                    <div className="flex flex-col items-center gap-2">
+                                                        <label className="flex items-center gap-3 cursor-pointer group">
+                                                            <input type="checkbox" checked={formData.acceptedWaiver} onChange={(e) => onToggleWaiver(e.target.checked)} className="hidden" />
+                                                            <div className={`w-5 h-5 border-2 flex items-center justify-center transition-all ${formData.acceptedWaiver ? 'bg-black border-black/10 shadow-md' : 'border-black/20 group-hover:border-black/40'}`}>
+                                                                {formData.acceptedWaiver && <Check className="w-3.5 h-3.5 text-white" />}
+                                                            </div>
+                                                            <span className="text-[9px] font-mono text-black/60 uppercase tracking-[0.2em] group-hover:text-black transition-colors font-bold">Accetto Liberatoria e Manleva</span>
+                                                        </label>
+                                                        <button onClick={() => {
+                                                            const { LEGAL_CONTENT } = require('../../legalContent');
+                                                            const content = LEGAL_CONTENT.liberatoria.getFilledLiberatoria(formData.name);
+                                                            onShowTerms("Liberatoria e Manleva", content);
+                                                        }} className="text-[8px] font-mono text-[var(--milano-bronzo)] hover:text-black transition-colors uppercase tracking-[0.3em] underline underline-offset-4">Visualizza Liberatoria</button>
+                                                    </div>
                                                 </div>
 
                                                 <button
                                                     onClick={onSubmit}
-                                                    disabled={!termsAccepted || isLoading}
-                                                    className={`btn-monumental !bg-black !text-white hover:!bg-[var(--milano-bronzo)] w-full md:w-auto px-16 py-4 shadow-2xl active:scale-[0.98] transition-all ${conflictError ? 'border-red-500 ring-2 ring-red-500/20' : ''}`}
+                                                    disabled={!formData.acceptedTerms || !formData.acceptedContract || !formData.acceptedWaiver || isLoading}
+                                                    className={`btn-monumental !bg-black !text-white hover:!bg-[var(--milano-bronzo)] w-full md:w-auto px-16 py-4 shadow-2xl active:scale-[0.98] transition-all ${conflictError ? 'border-red-500 ring-2 ring-red-500/20' : ''} ${(!formData.acceptedTerms || !formData.acceptedContract || !formData.acceptedWaiver) ? 'opacity-50 cursor-not-allowed grayscale' : ''}`}
                                                 >
-                                                    {isLoading ? 'INVIO...' : 'RICHIEDI DISPONIBILITÀ'}
+                                                    {isLoading ? 'INVIO IN CORSO...' : 'RICHIEDI DISPONIBILITÀ'}
                                                 </button>
 
                                                 {conflictError && (

@@ -46,6 +46,10 @@ export interface BookingRow {
     is_vip: boolean;
     stripe_link: string | null;
     attachment_urls: string[] | null;
+    accepted_terms: boolean;
+    accepted_contract: boolean;
+    accepted_waiver: boolean;
+    legal_acceptance_timestamp: string | null;
 }
 
 // Helper to convert DB row to BookingRecord
@@ -75,6 +79,10 @@ export const rowToBookingRecord = (row: BookingRow): any => ({
     isVIP: row.is_vip,
     stripeLink: row.stripe_link || undefined,
     attachmentUrls: row.attachment_urls || [],
+    acceptedTerms: !!row.accepted_terms,
+    acceptedContract: !!row.accepted_contract,
+    acceptedWaiver: !!row.accepted_waiver,
+    legalAcceptanceTimestamp: row.legal_acceptance_timestamp || undefined,
 });
 
 // Helper to convert BookingRecord to DB row format
@@ -102,4 +110,8 @@ export const bookingToRow = (booking: any): Partial<BookingRow> => ({
     is_vip: booking.isVIP || false,
     stripe_link: booking.stripeLink || null,
     attachment_urls: booking.attachmentUrls?.length ? booking.attachmentUrls : null,
+    accepted_terms: booking.acceptedTerms || false,
+    accepted_contract: booking.acceptedContract || false,
+    accepted_waiver: booking.acceptedWaiver || false,
+    legal_acceptance_timestamp: booking.legalAcceptanceTimestamp || new Date().toISOString(),
 });

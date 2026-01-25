@@ -59,14 +59,10 @@ const Footer: React.FC<FooterProps> = ({
                     <div className="space-y-4">
                         <p className="text-[10px] text-white/40 tracking-widest uppercase leading-tight">{BUSINESS_INFO.address}</p>
                         <p className="text-[10px] text-white/40 tracking-widest uppercase">{BUSINESS_INFO.email}</p>
-                        <button
-                            onClick={onAdminLoginClick}
-                            className="text-[8px] font-accent text-gold/20 hover:text-gold transition-colors tracking-[0.4em] uppercase"
-                        >
-                            Member Login
-                        </button>
+                        <p className="text-[8px] text-white/20 tracking-widest uppercase">P.IVA {BUSINESS_INFO.piva}</p>
                     </div>
                 </div>
+
             </div>
 
             <div className="mt-12 pt-6 border-t border-[var(--milano-bronzo)]/5 flex flex-col md:flex-row justify-between items-center gap-6 relative z-10">

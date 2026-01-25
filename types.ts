@@ -109,6 +109,12 @@ export interface BookingFormData {
   paymentMethod: PaymentMethod;
   hasPets: boolean;
 
+  // Legal Compliance
+  acceptedTerms: boolean; // General terms
+  acceptedContract: boolean; // Contratto d'Opera
+  acceptedWaiver: boolean; // Liberatoria/Manleva
+  legalAcceptanceTimestamp?: string;
+
   attachments?: File[]; // Optional: support for mission-critical documents
   attachmentUrls?: string[]; // Public URLs for uploaded attachments
   estimatedPrice: number;

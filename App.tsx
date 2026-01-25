@@ -69,6 +69,9 @@ const INITIAL_FORM_STATE: BookingFormData = {
   phone: '',
   paymentMethod: 'cash',
   hasPets: false,
+  acceptedTerms: false,
+  acceptedContract: false,
+  acceptedWaiver: false,
   attachments: [],
   priceBreakdown: { total: 0, baseFare: 0, distanceFare: 0, nightSurcharge: 0, petFee: 0, stopFee: 0, serviceMultiplier: 1 }
 };
@@ -99,7 +102,6 @@ const App: React.FC = () => {
   const [availableSlots, setAvailableSlots] = useState<string[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [isCalculatingRoute, setIsCalculatingRoute] = useState(false);
-  const [termsAccepted, setTermsAccepted] = useState(false);
   const [routeInfo, setRouteInfo] = useState<RouteInfo | null>(null);
   const [hasShownRouteModal, setHasShownRouteModal] = useState(false);
   const [bookingConflictError, setBookingConflictError] = useState<string | null>(null);
@@ -350,7 +352,7 @@ const App: React.FC = () => {
     }));
   };
 
-  const handleResetApp = () => { setIsBookingConfirmed(false); setActiveStep(1); setFormData(INITIAL_FORM_STATE); setRouteInfo(null); setTermsAccepted(false); };
+  const handleResetApp = () => { setIsBookingConfirmed(false); setActiveStep(1); setFormData(INITIAL_FORM_STATE); setRouteInfo(null); };
 
   const handleHoursChange = (hours: number) => {
     setFormData(prev => {
@@ -500,15 +502,16 @@ const App: React.FC = () => {
               formData={formData}
               validationErrors={validationErrors}
               availableSlots={availableSlots}
-              termsAccepted={termsAccepted}
               isLoading={isLoading}
               t={t}
               onInputChange={handleInputChange}
               onLocationSearch={handleLocationSearch}
               onInputBlur={triggerRouteCalc}
               onPaymentMethodChange={(m) => setFormData(p => ({ ...p, paymentMethod: m }))}
-              onToggleTerms={setTermsAccepted}
-              onShowTerms={() => setShowTerms(true)}
+              onToggleTerms={(val) => setFormData(p => ({ ...p, acceptedTerms: val }))}
+              onToggleContract={(val) => setFormData(p => ({ ...p, acceptedContract: val }))}
+              onToggleWaiver={(val) => setFormData(p => ({ ...p, acceptedWaiver: val }))}
+              onShowTerms={(title, content) => { setCurrentLegalContent({ title, content }); setShowLegalModal(true); }}
               onPrevStep={handlePrevStep}
               onNextStep={handleNextStep}
               onSelectTier={handleTierSelect}
