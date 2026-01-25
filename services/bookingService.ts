@@ -253,8 +253,8 @@ export const checkAvailability = async (date: string, requestedDuration: number 
 
   theoreticalSlots.forEach(slotTime => {
     const slotStart = parseDateTime(date, slotTime);
-    // Every 30-minute slot is checked against all existing bookings of that day
-    const slotEnd = new Date(slotStart.getTime() + 30 * 60000); // Check the specific slot window
+    // The slot is "busy" if there's an overlap for the WHOLE duration required by the client
+    const slotEnd = new Date(slotStart.getTime() + requestedDuration * 60000);
 
     for (const booking of daysBookings) {
       if (booking.email === 'admin@block') {
