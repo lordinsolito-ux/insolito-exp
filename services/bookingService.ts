@@ -71,7 +71,21 @@ const isOverlapping = (startA: Date, endA: Date, startB: Date, endB: Date) => {
 };
 
 const parseDateTime = (dateStr: string, timeStr: string): Date => {
-  return new Date(`${dateStr}T${timeStr}:00`);
+  if (!dateStr || !timeStr) return new Date();
+  // Ensure time format is HH:mm:ss for ISO compliance
+  // If time already has seconds (HH:mm:ss), use as is. If HH:mm, add :00
+  const parts = timeStr.split(':');
+  let cleanTime = timeStr;
+  if (parts.length === 2) cleanTime = `${timeStr}:00`;
+
+  const isoString = `${dateStr}T${cleanTime}`;
+  const date = new Date(isoString);
+
+  if (isNaN(date.getTime())) {
+    console.warn(`⚠️ Invalid Date detected: ${isoString}. Falling back to basic parsing.`);
+    return new Date();
+  }
+  return date;
 };
 
 // --- CORE DATA FUNCTIONS (SUPABASE ONLY) ---
@@ -99,14 +113,16 @@ export const fetchAllBookings = async (): Promise<BookingRecord[]> => {
         return bookings;
       }
 
-      // Return empty array if no data (not an error)
       return [];
     } catch (e) {
       console.warn("Supabase fetch failed, using local backup", e);
+      // Only fallback to local if Supabase actually THREW an error (connection issue)
+      const localStored = localStorage.getItem('insolito_bookings');
+      return localStored ? JSON.parse(localStored) : [];
     }
   }
 
-  // Fallback to LocalStorage
+  // Fallback if no cloud is configured
   const localStored = localStorage.getItem('insolito_bookings');
   return localStored ? JSON.parse(localStored) : [];
 };
@@ -270,11 +286,12 @@ export const deleteBooking = async (id: string): Promise<boolean> => {
 export const deleteAllBookings = async (): Promise<boolean> => {
   if (isSupabaseConfigured()) {
     try {
-      // Supabase requires a filter for delete, using 'gt' on id to target all UUIDs
+      // Robust way to target all rows in Supabase: use a filter that is always true
+      // 'id' is never the zero UUID for our actual records
       const { error } = await supabase
         .from('bookings')
         .delete()
-        .not('id', 'is', null); // Robust way to target all rows
+        .neq('id', '00000000-0000-0000-0000-000000000000');
 
       if (error) throw error;
 
