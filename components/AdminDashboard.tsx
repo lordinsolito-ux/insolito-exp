@@ -513,7 +513,11 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({ isOpen, onClose 
             vehiclePreference: undefined,
             specialRequests: '',
             contactMethod: 'whatsapp',
-            hasPets: false
+            hasPets: false,
+            acceptedTerms: true,
+            acceptedContract: true,
+            acceptedWaiver: true,
+            legalAcceptanceTimestamp: new Date().toISOString()
         };
 
         // Save to DB (with isNewBooking=true to sync to cloud)
