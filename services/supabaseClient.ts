@@ -26,6 +26,7 @@ export interface BookingRow {
 
     // Service Details
     service_type: string;
+    tier: string | null;
     pickup_location: string;
     destination: string;
     stops: string[] | null;
@@ -62,6 +63,7 @@ export const rowToBookingRecord = (row: BookingRow): any => ({
     phone: row.phone,
     countryCode: row.country_code,
     serviceType: row.service_type,
+    tier: row.tier || undefined,
     pickupLocation: row.pickup_location,
     destination: row.destination,
     stops: row.stops || [],
@@ -94,6 +96,7 @@ export const bookingToRow = (booking: any): Partial<BookingRow> => ({
     phone: booking.phone || '',
     country_code: booking.countryCode || '+39',
     service_type: booking.serviceType || 'lifestyle_management',
+    tier: booking.tier || null,
     pickup_location: booking.pickupLocation || '',
     destination: booking.destination || '',
     stops: booking.stops?.length > 0 ? booking.stops : null,

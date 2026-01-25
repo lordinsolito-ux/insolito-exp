@@ -4,8 +4,23 @@ export const LEGAL_CONTENT = {
     content: "Il presente servizio è un contratto di ASSISTENZA ALLA PERSONA (Cod. Civ. 2222 e s.g.g.). Il Fornitore opera come Lifestyle Manager e non come vettore di trasporto. Il veicolo utilizzato è da intendersi esclusivamente come 'strumento di lavoro accessorio' di proprietà del prestatore per l'espletamento delle funzioni di assistenza, coordinamento e sicurezza personale. La tariffazione è calcolata su base oraria per la disponibilità professionale e non per chilometraggio o tratta. Accettando questo servizio, il Cliente dichiara di essere consapevole che NON sta usufruendo di un servizio di Noleggio Con Conducente (NCC) o Taxi, bensì di una consulenza logistica privata."
   },
   privacy: {
-    title: "Politica sulla Riservatezza Estrema",
-    content: "Insolito Privé opera sotto rigoroso vincolo di segretezza fiduciaria. Nessun dato relativo agli spostamenti, incontri o conversazioni avvenute durante il servizio sarà mai registrato, divulgato o ceduto a terzi, salvo obblighi di legge. La tua privacy è l'asset principale del nostro servizio."
+    title: "Politica sulla Riservatezza Estrema & NDA",
+    content: `ACCORDO DI RISERVATEZZA E PROTEZIONE DATI (NDA)
+    
+1. NATURA DEL VINCOLO
+Insolito Privé opera sotto un regime di segretezza assoluta. Ogni informazione acquisita durante l'espletamento del mandato — inclusi spostamenti, identità degli accompagnatori, luoghi visitati e contenuti delle conversazioni — è protetta dal vincolo di segretezza professionale.
+
+2. TRATTAMENTO DATI (GDPR)
+Ai sensi del Regolamento UE 2016/679, i dati personali del Committente sono trattati esclusivamente per finalità amministrative e contabili. Insolito Privé non conserva registri storici degli spostamenti oltre il tempo tecnico necessario alla fatturazione, garantendo il "Diritto all'Oblio" immediato al termine della missione.
+
+3. DIVIETO DI DIVULGAZIONE (NON-DISCLOSURE)
+Il Prestatore si impegna a non rivelare a terzi, né ora né in futuro, alcun dettaglio relativo alla vita privata o professionale del Committente. Tale impegno è esteso a eventuali collaboratori o personale di supporto, che agiscono sotto la diretta responsabilità del titolare.
+
+4. SICUREZZA DIGITALE
+I dati di contatto e i documenti allegati sono custoditi in infrastrutture crittografate ad accesso limitato. Nessun dato viene ceduto, venduto o utilizzato per finalità di marketing o profilazione.
+
+5. ACCETTAZIONE
+La sottoscrizione digitale del presente accordo costituisce impegno d'onore e vincolo legale tra le parti.`
   },
   cookie: {
     title: "Cookie Policy",
