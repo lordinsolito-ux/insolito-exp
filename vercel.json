@@ -1,0 +1,12 @@
+{
+    "rewrites": [
+        {
+            "source": "/grazie",
+            "destination": "/index.html"
+        },
+        {
+            "source": "/(.*)",
+            "destination": "/index.html"
+        }
+    ]
+}

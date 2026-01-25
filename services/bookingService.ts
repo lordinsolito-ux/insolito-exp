@@ -253,8 +253,8 @@ export const checkAvailability = async (date: string, requestedDuration: number 
 
   theoreticalSlots.forEach(slotTime => {
     const slotStart = parseDateTime(date, slotTime);
-    // The slot is "busy" if there's an overlap for the WHOLE duration required by the client
-    const slotEnd = new Date(slotStart.getTime() + requestedDuration * 60000);
+    // Every 30-minute slot is checked against all existing bookings of that day
+    const slotEnd = new Date(slotStart.getTime() + 30 * 60000); // Check the specific slot window
 
     for (const booking of daysBookings) {
       if (booking.email === 'admin@block') {
@@ -281,8 +281,11 @@ export const checkAvailability = async (date: string, requestedDuration: number 
         }
       } else {
         const bookingStart = parseDateTime(booking.date, booking.time);
-        const bookingEnd = new Date(bookingStart.getTime() + (booking.duration || 60) * 60000);
+        // Calculate real end time based on hours or duration
+        const durationMinutes = (booking.hours ? booking.hours * 60 : (booking.duration || 60));
+        const bookingEnd = new Date(bookingStart.getTime() + durationMinutes * 60000);
 
+        // If the 30-min slot falls inside an existing booking range, it's busy
         if (isOverlapping(slotStart, slotEnd, bookingStart, bookingEnd)) {
           busySlots.push(slotTime);
           break;

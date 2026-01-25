@@ -102,10 +102,25 @@ const App: React.FC = () => {
   const [routeInfo, setRouteInfo] = useState<RouteInfo | null>(null);
   const [hasShownRouteModal, setHasShownRouteModal] = useState(false);
   const [bookingConflictError, setBookingConflictError] = useState<string | null>(null);
+  const [isThankYouPage, setIsThankYouPage] = useState(false);
+  const [thankYouData, setThankYouData] = useState<{ name?: string, tier?: string, price?: string }>({});
   // Startup log for verification
   useEffect(() => {
     console.log("%cINSOLITO PRIVÉ - VIRAL READY 1.0", "color: #8B7355; font-size: 20px; font-weight: bold;");
     console.log("Shadow Parallax & Cinematic Grain: ACTIVE");
+
+    // SPA Routing for /grazie
+    const path = window.location.pathname;
+    if (path === '/grazie') {
+      const params = new URLSearchParams(window.location.search);
+      setThankYouData({
+        name: params.get('name') || undefined,
+        tier: params.get('tier') || undefined,
+        price: params.get('price') || undefined
+      });
+      setIsThankYouPage(true);
+      setShowIntro(false);
+    }
   }, []);
 
   const [preselectedTier, setPreselectedTier] = useState<TierType | null>(null);
@@ -400,7 +415,45 @@ const App: React.FC = () => {
         onInquire={() => investmentRef.current?.scrollIntoView({ behavior: 'smooth' })}
       />
 
-      {isBookingConfirmed ? (
+      {isThankYouPage ? (
+        <div className="fixed inset-0 bg-black z-[1000] flex items-center justify-center p-6">
+          <div className="relative bg-[#050505] border border-[var(--milano-bronzo)]/20 rounded-sm shadow-[0_40px_100px_rgba(0,0,0,1)] max-w-[500px] w-full p-12 text-center animate-reveal">
+            <div className="flex justify-center mb-10">
+              <div className="w-20 h-20 rounded-full bg-white/[0.01] border border-[var(--milano-bronzo)]/30 flex items-center justify-center">
+                <CheckCircle className="w-8 h-8 text-[var(--milano-bronzo)]" strokeWidth={1} />
+              </div>
+            </div>
+
+            <h1 className="text-3xl font-display text-white italic mb-4 tracking-tight">Mandato Perfezionato</h1>
+            <div className="inline-block bg-[var(--milano-bronzo)]/10 text-[var(--milano-bronzo)] border border-[var(--milano-bronzo)]/20 px-6 py-2 rounded-sm text-[9px] uppercase font-bold tracking-[0.5em] mb-10">
+              Protocollo Fiduciario Attivo
+            </div>
+
+            <div className="text-gray-300 font-light leading-relaxed font-sans uppercase tracking-[0.15em] text-[11px] mb-12">
+              Egregio <span className="text-white font-bold italic">{thankYouData.name || 'Michael'}</span>, <br />
+              Il Suo mandato {thankYouData.tier ? <span className="text-[var(--milano-bronzo)] font-bold">{thankYouData.tier.toUpperCase()}</span> : ''} è stato attivato con successo. <br />
+              Abbiamo ricevuto l&apos;onorario di <span className="text-white font-bold italic">€{thankYouData.price || '---'}</span> e la Sua pratica è ora in fase di esecuzione impeccabile.
+            </div>
+
+            <div className="bg-white/[0.03] p-8 rounded-sm border border-white/5 mb-10 text-left">
+              <p className="text-[9px] font-mono text-white/40 uppercase tracking-[0.2em] mb-4">Prossimi Passaggi:</p>
+              <ul className="space-y-4 text-[10px] text-gray-400 font-light uppercase tracking-widest">
+                <li className="flex gap-4"><span className="text-[var(--milano-bronzo)]">01.</span> Il Suo Lifestyle Guardian La contatterà in via riservata.</li>
+                <li className="flex gap-4"><span className="text-[var(--milano-bronzo)]">02.</span> Riceverà via email il Certificato di Presa in Carico.</li>
+                <li className="flex gap-4"><span className="text-[var(--milano-bronzo)]">03.</span> La logistica operativa è ora silenziata a Suo favore.</li>
+              </ul>
+            </div>
+
+            <button
+              onClick={() => { window.location.href = '/'; }}
+              className="w-full py-5 bg-[var(--milano-bronzo)] text-white font-accent text-[10px] uppercase tracking-[0.5em] hover:brightness-110 transition-all shadow-2xl mb-4"
+            >
+              Ritorna alla Digital Hall
+            </button>
+            <p className="text-[8px] font-mono text-white/20 uppercase tracking-widest">Insolito Privé - Milano - London - Dubai</p>
+          </div>
+        </div>
+      ) : isBookingConfirmed ? (
         <BookingConfirmation formData={formData} onReset={handleResetApp} />
       ) : (
         <div className={`min-h-screen bg-black text-[#F8F8F8] font-sans relative overflow-x-hidden transition-opacity duration-[2000ms] ${showIntro ? 'opacity-0' : 'opacity-100'}`}>

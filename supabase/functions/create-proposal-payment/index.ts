@@ -67,7 +67,9 @@ serve(async (req) => {
             line_items: [{ price: priceId, quantity: quantity }],
             after_completion: {
                 type: 'redirect',
-                redirect: { url: `${returnUrl || 'https://insolitoprive.it'}/grazie` }
+                redirect: {
+                    url: `${returnUrl || 'https://insolitoprive.it'}/grazie?name=${encodeURIComponent(customerName)}&tier=${encodeURIComponent(tier || 'lifestyle')}&price=${amount}`
+                }
             },
             metadata: {
                 bookingId,
