@@ -226,18 +226,18 @@ export const sendFiduciaryProposal = async (booking: BookingRecord): Promise<boo
  */
 export const sendCompletionAndOblivion = async (booking: BookingRecord): Promise<boolean> => {
   const html = `
-  < div style = "font-family: serif; color: #fff; background: #000; padding: 60px; text-align: center;" >
-    <h1 style="letter-spacing: 5px; font-style: italic; color: #D4AF37;" > INSOLITO PRIVÉ </h1>
-      < h2 style = "font-size: 12px; text-transform: uppercase; letter-spacing: 4px; border-bottom: 1px solid #333; padding-bottom: 20px; margin-bottom: 40px;" > Certificato di Oblio Logistico </h2>
-        < p style = "font-size: 16px; color: #ccc;" > Egregio < strong > ${booking.name} </strong>,</p >
-          <p style="color: #888;" > Il mandato del < strong > ${booking.date} </strong> è stato eseguito con successo.</p >
-            <p style="margin: 40px 0; color: #ccc; font-style: italic; line-height: 1.8;" >
-              "Il vero lusso conclude se stesso nel silenzio."<br>
+    <div style="font-family: serif; color: #fff; background: #000; padding: 60px; text-align: center;">
+      <h1 style="letter-spacing: 5px; font-style: italic; color: #D4AF37;">INSOLITO PRIVÉ</h1>
+      <h2 style="font-size: 12px; text-transform: uppercase; letter-spacing: 4px; border-bottom: 1px solid #333; padding-bottom: 20px; margin-bottom: 40px;">Certificato di Oblio Logistico</h2>
+      <p style="font-size: 16px; color: #ccc;">Egregio <strong>${booking.name}</strong>,</p>
+      <p style="color: #888;">Il mandato del <strong>${booking.date}</strong> è stato eseguito con successo.</p>
+      <p style="margin: 40px 0; color: #ccc; font-style: italic; line-height: 1.8;">
+        "Il vero lusso conclude se stesso nel silenzio."<br>
         Come da protocollo fiduciario, i Suoi dati logistici sono stati rimossi dai nostri sistemi operativi attivi.
       </p>
-  < p style = "font-size: 12px; color: #555;" > Speriamo di aver servito i Suoi standard con la dovuta discrezione.</p>
+      <p style="font-size: 12px; color: #555;">Speriamo di aver servito i Suoi standard con la dovuta discrezione.</p>
     </div>
-      `;
+  `;
 
   return await dispatchEmail({
     to: booking.email,
@@ -251,25 +251,22 @@ export const sendCompletionAndOblivion = async (booking: BookingRecord): Promise
  */
 export const sendModificationRequest = async (booking: BookingRecord, customReason?: string): Promise<boolean> => {
   const html = `
-  < div style = "font-family: serif; color: #1a1a1a; padding: 40px; border: 1px solid #D4AF37; background: #fff;" >
-    <h1 style="text-align: center; letter-spacing: 3px; font-style: italic;" > INSOLITO PRIVÉ </h1>
-      < p style = "font-size: 16px; margin-top: 40px;" > Egregio < strong > ${booking.name} </strong>,</p >
-        <p>La contattiamo in merito al mandato previsto per il < strong > ${booking.date} @${booking.time} </strong>.</p >
-
-          <div style="background: #fff9e6; padding: 20px; border-left: 4px solid #D4AF37; margin: 30px 0;" >
-            <p style="font-weight: bold; margin-bottom: 10px;" > Comunicazione di Servizio: </p>
-              < p style = "font-style: italic;" > ${customReason || "A causa di variabili logistiche esterne (condizioni meteo avverse o criticità stradali improvvise), siamo costretti a richiederLe una ricalibrazione dell'orario o della data del mandato."} </p>
-                </div>
-
-                < p > Il Suo Guardian La contatterà a breve via WhatsApp per coordinare la nuova pianificazione fiduciaria.</p>
-
-                  < p style = "font-size: 12px; color: #666; font-style: italic; margin-top: 40px;" > "La sicurezza è il primo pilastro dell'esclusività." </p>
-                    </div>
-                      `;
+    <div style="font-family: serif; color: #1a1a1a; padding: 40px; border: 1px solid #D4AF37; background: #fff;">
+      <h1 style="text-align: center; letter-spacing: 3px; font-style: italic;">INSOLITO PRIVÉ</h1>
+      <p style="font-size: 16px; margin-top: 40px;">Egregio <strong>${booking.name}</strong>,</p>
+      <p>La contattiamo in merito al mandato previsto per il <strong>${booking.date} @ ${booking.time}</strong>.</p>
+      <div style="background: #fff9e6; padding: 20px; border-left: 4px solid #D4AF37; margin: 30px 0;">
+        <p style="font-weight: bold; margin-bottom: 10px;">Comunicazione di Servizio:</p>
+        <p style="font-style: italic;">${customReason || "A causa di variabili logistiche esterne (condizioni meteo avverse o criticità stradali improvvise), siamo costretti a richiederLe una ricalibrazione dell'orario o della data del mandato."}</p>
+      </div>
+      <p>Il Suo Guardian La contatterà a breve via WhatsApp per coordinare la nuova pianificazione fiduciaria.</p>
+      <p style="font-size: 12px; color: #666; font-style: italic; margin-top: 40px;">"La sicurezza è il primo pilastro dell'esclusività."</p>
+    </div>
+  `;
 
   return await dispatchEmail({
     to: booking.email,
-    subject: `REVISIONE LOGISTICA: Protocollo ${booking.id?.slice(-6).toUpperCase()} `,
+    subject: `REVISIONE LOGISTICA: Protocollo ${booking.id?.slice(-6).toUpperCase()}`,
     html
   });
 };
