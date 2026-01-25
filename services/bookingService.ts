@@ -236,6 +236,60 @@ export const saveBooking = async (
 };
 
 /**
+ * Physically deletes a booking from Supabase
+ */
+export const deleteBooking = async (id: string): Promise<boolean> => {
+  if (isSupabaseConfigured()) {
+    try {
+      const { error } = await supabase
+        .from('bookings')
+        .delete()
+        .eq('id', id);
+
+      if (error) throw error;
+
+      console.log(`🗑️ Deleted booking ${id} from Supabase`);
+
+      // Update local cache
+      const currentList = await fetchAllBookings();
+      const updatedList = currentList.filter(b => b.id !== id);
+      localStorage.setItem('insolito_bookings', JSON.stringify(updatedList));
+
+      return true;
+    } catch (e) {
+      console.error("Failed to delete from Supabase", e);
+      return false;
+    }
+  }
+  return false;
+};
+
+/**
+ * Deletes all bookings for system reset
+ */
+export const deleteAllBookings = async (): Promise<boolean> => {
+  if (isSupabaseConfigured()) {
+    try {
+      // Supabase requires a filter for delete, using 'not.is.null' on id to target all
+      const { error } = await supabase
+        .from('bookings')
+        .delete()
+        .neq('id', '00000000-0000-0000-0000-000000000000'); // Targeted delete all
+
+      if (error) throw error;
+
+      console.log(`🗑️ RESET: All bookings deleted from Supabase`);
+      localStorage.setItem('insolito_bookings', JSON.stringify([]));
+      return true;
+    } catch (e) {
+      console.error("Failed to reset Supabase", e);
+      return false;
+    }
+  }
+  return false;
+};
+
+/**
  * Checks availability by syncing with Supabase
  * @param date The date to check
  * @param requestedDuration Duration in minutes of the new potential booking

@@ -3,10 +3,19 @@ import {
     X, Check, XCircle, Calendar, Clock, User, Phone, MapPin, Search,
     TrendingUp, DollarSign, Briefcase, AlertOctagon, RefreshCw, Wifi,
     WifiOff, BarChart3, ChevronLeft, ChevronRight, Edit2, Save,
-    LayoutDashboard, List, PieChart, Settings, LogOut, Bell, Filter, FileText, Paperclip
+    LayoutDashboard, List, PieChart, Settings, LogOut, Bell, Filter, FileText, Paperclip,
+    Trash2, AlertTriangle
 } from 'lucide-react';
 import { BookingRecord } from '../types';
-import { sendBookingUpdateNotification, fetchAllBookings, saveBooking, isCloudConfigured } from '../services/bookingService';
+import {
+    sendBookingUpdateNotification,
+    fetchAllBookings,
+    saveBooking,
+    isCloudConfigured,
+    deleteBooking,
+    deleteAllBookings
+} from '../services/bookingService';
+import { supabase, isSupabaseConfigured, rowToBookingRecord, bookingToRow } from '../services/supabaseClient';
 import { generateInvoiceHTML } from '../services/invoiceService';
 import { stripeService } from '../services/stripeService';
 import { BUSINESS_INFO } from '../legalContent';
@@ -243,8 +252,23 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({ isOpen, onClose 
             loadBookings();
             setIsCloudMode(isCloudConfigured());
             console.log("💎 [God Mode] Admin Dashboard initialized with Supabase:", isCloudConfigured());
-            const interval = setInterval(loadBookings, 180000); // 3-minute auto-refresh cycle
-            return () => clearInterval(interval);
+
+            // --- REALTIME SUBSCRIPTION ---
+            // This makes the Dashboard "Intelligent" by listening to ALL changes in the database
+            const channel = supabase
+                .channel('admin-dashboard-changes')
+                .on('postgres_changes', { event: '*', table: 'bookings', schema: 'public' }, (payload) => {
+                    console.log('🔄 Realtime Change Detected:', payload.eventType);
+                    loadBookings(); // Intelligent Refresh for all sections (Overview, Analytics, etc.)
+                })
+                .subscribe();
+
+            const interval = setInterval(loadBookings, 180000); // 3-minute auto-refresh cycle backup
+
+            return () => {
+                clearInterval(interval);
+                supabase.removeChannel(channel);
+            };
         }
     }, [isOpen]);
 
@@ -343,6 +367,34 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({ isOpen, onClose 
 
     const handleMarkExecuted = async (id: string) => {
         await handleStatusUpdate(id, 'executed');
+    };
+
+    const handleDeleteBooking = async (id: string) => {
+        if (!confirm('Sei sicuro di voler eliminare DEFINITIVAMENTE questa prenotazione dal database? Questa azione non è reversibile.')) return;
+
+        setIsProcessing(id);
+        const success = await deleteBooking(id);
+        if (success) {
+            setBookings(prev => prev.filter(b => b.id !== id));
+        } else {
+            alert('Errore durante l\'eliminazione. Riprova più tardi.');
+        }
+        setIsProcessing(null);
+    };
+
+    const handleResetDashboard = async () => {
+        if (!confirm('⚠️ ATTENZIONE: Stai per ELIMINARE TUTTE le prenotazioni dal database per un reset totale di produzione. Confermi?')) return;
+        if (!confirm('Sei ASSOLUTAMENTE sicuro? Tutti i dati andranno persi.')) return;
+
+        setIsLoading(true);
+        const success = await deleteAllBookings();
+        if (success) {
+            setBookings([]);
+            alert('🚀 Reset completato. Database pulito e pronto per la produzione.');
+        } else {
+            alert('Errore durante il reset del database.');
+        }
+        setIsLoading(false);
     };
 
     const openReschedule = (booking: BookingRecord) => {
@@ -492,6 +544,14 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({ isOpen, onClose 
                     <p className="text-gray-400 text-xs md:text-sm">Welcome back, Admin.</p>
                 </div>
                 <div className="flex gap-2">
+                    <button
+                        onClick={handleResetDashboard}
+                        className="flex items-center gap-2 px-3 py-2 bg-red-900/20 hover:bg-red-600 text-red-400 hover:text-white rounded-lg transition-all border border-red-500/20 text-[10px] font-bold uppercase tracking-widest"
+                        title="Reset Database (Delete All)"
+                    >
+                        <Trash2 className="w-4 h-4" />
+                        <span className="hidden md:inline">Reset Hub</span>
+                    </button>
                     <button onClick={loadBookings} className="p-2 bg-gray-800 rounded-lg hover:bg-gray-700 transition-colors border border-white/5">
                         <RefreshCw className={`w-5 h-5 text-gold-400 ${isLoading ? 'animate-spin' : ''}`} />
                     </button>
@@ -709,6 +769,13 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({ isOpen, onClose 
                                     >
                                         <Edit2 className="w-4 h-4" />
                                     </button>
+                                    <button
+                                        onClick={() => handleDeleteBooking(booking.id)}
+                                        disabled={isProcessing === booking.id}
+                                        className="p-2 bg-red-900/20 hover:bg-red-600 text-red-400 hover:text-white rounded transition-colors"
+                                    >
+                                        <Trash2 className="w-4 h-4" />
+                                    </button>
                                 </div>
                             </div>
                         ))}
@@ -850,6 +917,14 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({ isOpen, onClose 
                                                 title="Reschedule / Edit"
                                             >
                                                 <Edit2 className="w-3 h-3" />
+                                            </button>
+                                            <button
+                                                onClick={() => handleDeleteBooking(booking.id)}
+                                                disabled={isProcessing === booking.id}
+                                                className="p-1.5 text-gray-600 hover:text-red-500 transition-colors"
+                                                title="Delete Record"
+                                            >
+                                                <Trash2 className="w-3 h-3" />
                                             </button>
                                         </div>
                                     </td>
