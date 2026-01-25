@@ -76,7 +76,7 @@ export const sendAdminNotification = async (booking: BookingRecord): Promise<boo
         <div style="margin-bottom: 15px;">
           <a href="${window.location.origin}/protocollo?id=${booking.id}&doc=contract" style="display: block; margin-bottom: 8px; font-size: 12px; color: #000; text-decoration: none;">☑️ <strong>Contratto d'Opera</strong> &rarr; <span style="color: #D4AF37; text-decoration: underline;">Leggi Copia Conforme</span></a>
           <a href="${window.location.origin}/protocollo?id=${booking.id}&doc=waiver" style="display: block; margin-bottom: 8px; font-size: 12px; color: #000; text-decoration: none;">☑️ <strong>Liberatoria/Manleva</strong> &rarr; <span style="color: #D4AF37; text-decoration: underline;">Leggi Copia Conforme</span></a>
-          <p style="margin: 0; font-size: 12px; color: #666;">☑️ <strong>Privacy & TOS Accepted</strong></p>
+          <a href="${window.location.origin}/protocollo?id=${booking.id}&doc=privacy" style="display: block; margin-bottom: 8px; font-size: 12px; color: #000; text-decoration: none;">☑️ <strong>Privacy & TOS</strong> &rarr; <span style="color: #D4AF37; text-decoration: underline;">Leggi Copia Conforme</span></a>
         </div>
         <p style="margin: 15px 0 0 0; font-size: 10px; color: #999; font-family: monospace;">Signed at: ${booking.legalAcceptanceTimestamp || booking.timestamp || new Date().toISOString()}</p>
       </div>
@@ -128,7 +128,7 @@ export const sendClientConfirmation = async (booking: BookingRecord): Promise<bo
         <div style="margin-bottom: 15px;">
           <a href="${window.location.origin}/protocollo?id=${booking.id}&doc=contract" style="display: block; margin-bottom: 8px; font-size: 12px; color: #000; text-decoration: none;">☑️ <strong>Contratto d'Opera</strong> &rarr; <span style="color: #D4AF37; text-decoration: underline;">Leggi Copia Conforme</span></a>
           <a href="${window.location.origin}/protocollo?id=${booking.id}&doc=waiver" style="display: block; margin-bottom: 8px; font-size: 12px; color: #000; text-decoration: none;">☑️ <strong>Liberatoria/Manleva</strong> &rarr; <span style="color: #D4AF37; text-decoration: underline;">Leggi Copia Conforme</span></a>
-          <p style="margin: 0; font-size: 12px; color: #666;">☑️ <strong>Privacy & TOS Accepted</strong></p>
+          <a href="${window.location.origin}/protocollo?id=${booking.id}&doc=privacy" style="display: block; margin-bottom: 8px; font-size: 12px; color: #000; text-decoration: none;">☑️ <strong>Privacy & TOS</strong> &rarr; <span style="color: #D4AF37; text-decoration: underline;">Leggi Copia Conforme</span></a>
         </div>
         <p style="margin: 15px 0 0 0; font-size: 10px; color: #999; font-family: monospace;">Signed at: ${booking.legalAcceptanceTimestamp || booking.timestamp || new Date().toISOString()}</p>
       </div>

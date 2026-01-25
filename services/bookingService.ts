@@ -240,7 +240,11 @@ export const saveBooking = async (
           throw error;
         }
 
-        console.log(`✅ Saved new booking to Supabase:`, data?.id);
+        if (data) {
+          console.log(`✅ Saved new booking to Supabase:`, data?.id);
+          // CRITICAL: Update the ID with the real UUID from Supabase for notifications
+          bookingWithTimestamp.id = data.id;
+        }
       } else {
         const { error } = await supabase
           .from('bookings')

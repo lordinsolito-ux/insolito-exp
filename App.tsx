@@ -152,9 +152,12 @@ const App: React.FC = () => {
                 time: booking.time,
                 price: booking.estimatedPrice
               });
-            } else {
+            } else if (docType === 'waiver') {
               title = LEGAL_CONTENT.liberatoria.title;
               content = LEGAL_CONTENT.liberatoria.getFilledLiberatoria(booking.name);
+            } else if (docType === 'privacy') {
+              title = LEGAL_CONTENT.privacy.title;
+              content = LEGAL_CONTENT.privacy.content;
             }
 
             setProtocolData({ title, content });
