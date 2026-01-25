@@ -22,6 +22,7 @@ import { BookingFormData, ValidationErrors, ServiceTypeId, TierType, PaymentMeth
 import { StepIndicator } from '../StepIndicator';
 import { getTierRates } from '../../services/tierHelpers';
 import { TierSelector } from '../TierSelector';
+import { LEGAL_CONTENT } from '../../legalContent';
 
 interface BookingFormProps {
     isOpen: boolean;
@@ -387,7 +388,6 @@ const BookingForm: React.FC<BookingFormProps> = ({
                                                             <span className="text-[9px] font-mono text-black/60 uppercase tracking-[0.2em] group-hover:text-black transition-colors font-bold">Accetto Contratto d'Opera</span>
                                                         </label>
                                                         <button onClick={() => {
-                                                            const { LEGAL_CONTENT } = require('../../legalContent');
                                                             const content = LEGAL_CONTENT.contratto.getFilledContract({
                                                                 name: formData.name,
                                                                 phone: formData.phone,
@@ -397,7 +397,7 @@ const BookingForm: React.FC<BookingFormProps> = ({
                                                                 time: formData.time,
                                                                 price: formData.estimatedPrice
                                                             });
-                                                            onShowTerms("Contratto d'Opera - Lifestyle Management", content);
+                                                            onShowTerms(LEGAL_CONTENT.contratto.title, content);
                                                         }} className="text-[8px] font-mono text-[var(--milano-bronzo)] hover:text-black transition-colors uppercase tracking-[0.3em] underline underline-offset-4">Visualizza Contratto Personalizzato</button>
                                                     </div>
 
@@ -411,9 +411,8 @@ const BookingForm: React.FC<BookingFormProps> = ({
                                                             <span className="text-[9px] font-mono text-black/60 uppercase tracking-[0.2em] group-hover:text-black transition-colors font-bold">Accetto Liberatoria e Manleva</span>
                                                         </label>
                                                         <button onClick={() => {
-                                                            const { LEGAL_CONTENT } = require('../../legalContent');
                                                             const content = LEGAL_CONTENT.liberatoria.getFilledLiberatoria(formData.name);
-                                                            onShowTerms("Liberatoria e Manleva", content);
+                                                            onShowTerms(LEGAL_CONTENT.liberatoria.title, content);
                                                         }} className="text-[8px] font-mono text-[var(--milano-bronzo)] hover:text-black transition-colors uppercase tracking-[0.3em] underline underline-offset-4">Visualizza Liberatoria</button>
                                                     </div>
                                                 </div>
