@@ -47,6 +47,7 @@ interface BookingFormProps {
     onSubmit: (e: React.FormEvent) => void;
     isNightService: (time: string) => boolean;
     onHoursChange: (hours: number) => void;
+    conflictError?: string | null;
 }
 
 const BookingForm: React.FC<BookingFormProps> = ({
@@ -72,7 +73,8 @@ const BookingForm: React.FC<BookingFormProps> = ({
     onRemoveAttachment,
     onSubmit,
     isNightService,
-    onHoursChange
+    onHoursChange,
+    conflictError
 }) => {
     const ref = useRef<HTMLDivElement>(null);
     const fileInputRef = useRef<HTMLInputElement>(null);
@@ -379,10 +381,21 @@ const BookingForm: React.FC<BookingFormProps> = ({
                                                 <button
                                                     onClick={onSubmit}
                                                     disabled={!termsAccepted || isLoading}
-                                                    className="btn-monumental !bg-black !text-white hover:!bg-[var(--milano-bronzo)] w-full md:w-auto px-16 py-4 shadow-2xl active:scale-[0.98] transition-all"
+                                                    className={`btn-monumental !bg-black !text-white hover:!bg-[var(--milano-bronzo)] w-full md:w-auto px-16 py-4 shadow-2xl active:scale-[0.98] transition-all ${conflictError ? 'border-red-500 ring-2 ring-red-500/20' : ''}`}
                                                 >
                                                     {isLoading ? 'INVIO...' : 'RICHIEDI DISPONIBILITÀ'}
                                                 </button>
+
+                                                {conflictError && (
+                                                    <motion.div
+                                                        initial={{ opacity: 0, y: -10 }}
+                                                        animate={{ opacity: 1, y: 0 }}
+                                                        className="flex items-center gap-2 p-4 bg-red-50 border border-red-200 rounded-sm text-red-700 text-[10px] font-mono uppercase tracking-widest mt-2"
+                                                    >
+                                                        <AlertCircle className="w-4 h-4 text-red-500" />
+                                                        <span>{conflictError}</span>
+                                                    </motion.div>
+                                                )}
 
                                                 <button onClick={onPrevStep} className="text-[10px] font-mono uppercase tracking-widest text-black/80 hover:text-black transition-colors font-bold">Modifica Dati</button>
                                             </div>

@@ -235,6 +235,9 @@ const App: React.FC = () => {
     if (validationErrors[name as keyof ValidationErrors]) {
       setValidationErrors(prev => ({ ...prev, [name]: undefined }));
     }
+    if (bookingConflictError) {
+      setBookingConflictError(null);
+    }
   };
 
   const handleLocationSearch = async (type: 'pickup' | 'destination' | 'stop', value: string, index?: number) => {
@@ -330,6 +333,7 @@ const App: React.FC = () => {
     setActiveStep(2);
     setPreselectedTier(null);
     setIsBookingModalOpen(true);
+    setBookingConflictError(null);
   };
 
   const handleAddAttachments = (files: File[]) => {
@@ -513,6 +517,7 @@ const App: React.FC = () => {
               onRemoveAttachment={handleRemoveAttachment}
               onSubmit={handleSubmit}
               isNightService={isNightService}
+              conflictError={bookingConflictError}
             />
           </main>
 

@@ -64,6 +64,7 @@ export const rowToBookingRecord = (row: BookingRow): any => ({
     date: row.date,
     time: row.time,
     duration: row.duration,
+    hours: Math.floor(row.duration / 60), // Derived or explicit
     passengers: row.passengers,
     hasPets: row.has_pets,
     specialRequests: row.special_requests || '',

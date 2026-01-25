@@ -147,6 +147,7 @@
         "success": "Richiesta Confermata!",
         "error": "Qualcosa è andato storto. Riprova.",
         "request_booking": "Richiedi Disponibilità",
+        "conflict_error": "Slot non disponibile: l'orario richiesto è già coperto da un mandato attivo. La preghiamo di selezionare un altro slot o contattarci via WhatsApp.",
         "admin_access": "Accesso Admin"
     },
     "modal": {

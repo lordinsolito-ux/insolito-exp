@@ -92,7 +92,7 @@ export const fetchAllBookings = async (): Promise<BookingRecord[]> => {
         throw error;
       }
 
-      if (data && data.length > 0) {
+      if (data) {
         console.log(`✅ Fetched ${data.length} bookings from Supabase`);
         const bookings = data.map(rowToBookingRecord);
         localStorage.setItem('insolito_bookings', JSON.stringify(bookings));
@@ -270,11 +270,11 @@ export const deleteBooking = async (id: string): Promise<boolean> => {
 export const deleteAllBookings = async (): Promise<boolean> => {
   if (isSupabaseConfigured()) {
     try {
-      // Supabase requires a filter for delete, using 'not.is.null' on id to target all
+      // Supabase requires a filter for delete, using 'gt' on id to target all UUIDs
       const { error } = await supabase
         .from('bookings')
         .delete()
-        .neq('id', '00000000-0000-0000-0000-000000000000'); // Targeted delete all
+        .not('id', 'is', null); // Robust way to target all rows
 
       if (error) throw error;
 
