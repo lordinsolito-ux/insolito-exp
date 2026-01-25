@@ -52,7 +52,7 @@ serve(async (req) => {
                 // We'll use the send-notification function via internal fetch to avoid duplication
                 const firstName = booking.name.split(' ')[0]
                 const bookingCode = booking.id?.slice(-6).toUpperCase() || 'REF-PENDING'
-                const adminEmail = "michael@insolitoprive.it" // Ideally fetched from env
+                const adminEmail = "insolitoprive@gmail.com"
 
                 const clientHtml = `
                     <div style="font-family: serif; color: #1a1a1a; max-width: 600px; margin: 20px auto; padding: 60px; background: #ffffff; border: 1px solid #D4AF37; box-shadow: 0 20px 50px rgba(0,0,0,0.1);">

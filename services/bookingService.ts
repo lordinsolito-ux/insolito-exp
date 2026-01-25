@@ -1,5 +1,6 @@
 import { BookingFormData, BookingRecord } from "../types";
 import { supabase, isSupabaseConfigured, rowToBookingRecord, bookingToRow } from "./supabaseClient";
+import * as resendService from './resendService';
 
 // Check data source
 export const isCloudConfigured = (): boolean => {
@@ -322,43 +323,34 @@ export const sendBookingUpdateNotification = async (
   reason?: string
 ): Promise<boolean> => {
   try {
-    // Import resend service
-    const {
-      sendAdminNotification,
-      sendClientConfirmation,
-      sendClientDecline,
-      sendFiduciaryProposal,
-      sendCompletionAndOblivion
-    } = await import('./resendService');
-
     // For new bookings (pending/requested), notify admin only
     if (status === 'pending' || status === 'requested') {
       console.log(`📧 Sending admin notification for new booking (${status})...`);
-      return await sendAdminNotification(booking);
+      return await resendService.sendAdminNotification(booking);
     }
 
     // For proposed mandates (Phase 26), notify client
     if (status === 'proposed') {
       console.log('💎 Sending Fiduciary Proposal to client...');
-      return await sendFiduciaryProposal(booking);
+      return await resendService.sendFiduciaryProposal(booking);
     }
 
     // For executed mandates (Phase 26), notify client
     if (status === 'executed') {
       console.log('🔏 Sending Completion & Oblivion email to client...');
-      return await sendCompletionAndOblivion(booking);
+      return await resendService.sendCompletionAndOblivion(booking);
     }
 
     // For confirmed bookings, notify client
     if (status === 'confirmed') {
       console.log('✅ Sending confirmation email to client...');
-      return await sendClientConfirmation(booking);
+      return await resendService.sendClientConfirmation(booking);
     }
 
     // For declined bookings, notify client
     if (status === 'declined') {
       console.log('⚠️ Sending decline notification to client...');
-      return await sendClientDecline(booking);
+      return await resendService.sendClientDecline(booking);
     }
 
     // For rescheduled bookings
