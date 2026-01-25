@@ -45,7 +45,7 @@ import { TierSelector } from './components/TierSelector';
 // Services
 import { searchLocations, calculateRoute, calculatePrice } from './services/googleMapsService';
 import { getCachedRoute, cacheRoute } from './services/routeCache';
-import { generateTimeSlots, checkAvailability, checkBookingConflict, saveBooking, fetchAllBookings } from './services/bookingService';
+import { generateTimeSlots, checkAvailability, checkBookingConflict, saveBooking, fetchAllBookings, fetchBookingById } from './services/bookingService';
 import { getTierRates } from './services/tierHelpers';
 import { LEGAL_CONTENT } from './legalContent';
 
@@ -94,6 +94,8 @@ const App: React.FC = () => {
   const [isVisionOpen, setIsVisionOpen] = useState(false);
   const [isGhostMode, setIsGhostMode] = useState(false);
   const [isBookingModalOpen, setIsBookingModalOpen] = useState(false);
+  const [isProtocolView, setIsProtocolView] = useState(false);
+  const [protocolData, setProtocolData] = useState<{ title: string, content: string } | null>(null);
 
   // Form States
   const [activeStep, setActiveStep] = useState(1);
@@ -123,6 +125,44 @@ const App: React.FC = () => {
       });
       setIsThankYouPage(true);
       setShowIntro(false);
+    }
+
+    // Protocol Routing: /protocollo?id=XXX&doc=contract|waiver
+    if (path === '/protocollo') {
+      const params = new URLSearchParams(window.location.search);
+      const id = params.get('id');
+      const docType = params.get('doc');
+
+      if (id) {
+        setShowIntro(false);
+        setIsLoading(true);
+        fetchBookingById(id).then(booking => {
+          if (booking) {
+            let title = "";
+            let content = "";
+
+            if (docType === 'contract') {
+              title = LEGAL_CONTENT.contratto.title;
+              content = LEGAL_CONTENT.contratto.getFilledContract({
+                name: booking.name,
+                phone: booking.phone,
+                tier: booking.tier || '',
+                hours: booking.hours || 0,
+                date: booking.date,
+                time: booking.time,
+                price: booking.estimatedPrice
+              });
+            } else {
+              title = LEGAL_CONTENT.liberatoria.title;
+              content = LEGAL_CONTENT.liberatoria.getFilledLiberatoria(booking.name);
+            }
+
+            setProtocolData({ title, content });
+            setIsProtocolView(true);
+          }
+          setIsLoading(false);
+        });
+      }
     }
   }, []);
 
@@ -451,14 +491,61 @@ const App: React.FC = () => {
               </ul>
             </div>
 
-            <button
-              onClick={() => { window.location.href = '/'; }}
-              className="w-full py-5 bg-[var(--milano-bronzo)] text-white font-accent text-[10px] uppercase tracking-[0.5em] hover:brightness-110 transition-all shadow-2xl mb-4"
-            >
-              Ritorna alla Digital Hall
-            </button>
-            <p className="text-[8px] font-mono text-white/20 uppercase tracking-widest">Insolito Privé - Milano - London - Dubai</p>
+            <button onClick={() => window.location.href = '/'} className="btn-monumental scale-90 px-12">Torna alla Home</button>
           </div>
+        </div>
+      ) : isProtocolView && protocolData ? (
+        <div className="min-h-screen bg-[#050505] p-4 md:p-12 flex flex-col items-center">
+          <div className="w-full max-w-3xl bg-white p-8 md:p-16 shadow-2xl rounded-sm text-black">
+            <div className="flex justify-between items-start border-b-2 border-[var(--milano-bronzo)] pb-8 mb-10">
+              <div>
+                <h1 className="text-2xl font-display italic tracking-tighter">INSOLITO PRIVÉ</h1>
+                <p className="text-[10px] font-mono uppercase tracking-[0.4em] text-gray-400 mt-2">Protocollo Fiduciario Certificato</p>
+              </div>
+              <div className="text-right">
+                <p className="text-[9px] font-mono uppercase tracking-widest text-gray-400">Data Documento</p>
+                <p className="text-[11px] font-bold">{new Date().toLocaleDateString('it-IT')}</p>
+              </div>
+            </div>
+
+            <h2 className="text-xl font-bold uppercase tracking-[0.2em] mb-8 text-center border-b border-gray-100 pb-4">{protocolData.title}</h2>
+
+            <div
+              className="prose prose-sm max-w-none text-gray-800 leading-relaxed font-sans"
+              dangerouslySetInnerHTML={{ __html: protocolData.content.replace(/\n/g, '<br/>') }}
+            />
+
+            <div className="mt-16 pt-8 border-t border-gray-100 flex justify-between items-end">
+              <div className="space-y-1">
+                <p className="text-[8px] font-mono uppercase tracking-widest text-gray-400">Verifica Digitale</p>
+                <div className="flex items-center gap-2">
+                  <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse"></div>
+                  <span className="text-[10px] font-bold font-mono">INTEGRITY CERTIFIED</span>
+                </div>
+              </div>
+              <div className="text-right">
+                <p className="text-[10px] font-serif italic">Michael Jara</p>
+                <p className="text-[8px] font-mono uppercase tracking-tighter text-gray-400">The Lifestyle Guardian</p>
+              </div>
+            </div>
+          </div>
+
+          <div className="mt-8 no-print flex gap-4">
+            <button onClick={() => window.print()} className="px-8 py-3 bg-[var(--milano-bronzo)] text-white text-[10px] font-bold uppercase tracking-[0.3em] hover:brightness-110 transition-all shadow-xl">
+              Scarica / Stampa PDF
+            </button>
+            <button onClick={() => window.location.href = '/'} className="px-8 py-3 bg-white/5 text-white/50 text-[10px] font-bold uppercase tracking-[0.3em] hover:text-white transition-all">
+              Torna al Sito
+            </button>
+          </div>
+
+          <style>{`
+            @media print {
+              .no-print { display: none !important; }
+              body { background: white !important; }
+              .cinematic-grain { display: none !important; }
+            }
+          `}</style>
         </div>
       ) : isBookingConfirmed ? (
         <BookingConfirmation formData={formData} onReset={handleResetApp} />

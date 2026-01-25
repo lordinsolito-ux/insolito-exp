@@ -73,9 +73,11 @@ export const sendAdminNotification = async (booking: BookingRecord): Promise<boo
 
       <div style="margin-top: 40px; padding: 25px; border: 1px dashed #D4AF37; background: #fafafa;">
         <h4 style="margin: 0 0 15px 0; font-size: 11px; text-transform: uppercase; letter-spacing: 2px; color: #D4AF37;">Proof of Legal Consent:</h4>
-        <p style="margin: 0 0 8px 0; font-size: 12px;">☑️ <strong>Privacy & TOS Accepted</strong></p>
-        <p style="margin: 0 0 8px 0; font-size: 12px;">☑️ <strong>Contratto d'Opera Accepted</strong></p>
-        <p style="margin: 0 0 8px 0; font-size: 12px;">☑️ <strong>Liberatoria/Manleva Accepted</strong></p>
+        <div style="margin-bottom: 15px;">
+          <a href="${window.location.origin}/protocollo?id=${booking.id}&doc=contract" style="display: block; margin-bottom: 8px; font-size: 12px; color: #000; text-decoration: none;">☑️ <strong>Contratto d'Opera</strong> &rarr; <span style="color: #D4AF37; text-decoration: underline;">Leggi Copia Conforme</span></a>
+          <a href="${window.location.origin}/protocollo?id=${booking.id}&doc=waiver" style="display: block; margin-bottom: 8px; font-size: 12px; color: #000; text-decoration: none;">☑️ <strong>Liberatoria/Manleva</strong> &rarr; <span style="color: #D4AF37; text-decoration: underline;">Leggi Copia Conforme</span></a>
+          <p style="margin: 0; font-size: 12px; color: #666;">☑️ <strong>Privacy & TOS Accepted</strong></p>
+        </div>
         <p style="margin: 15px 0 0 0; font-size: 10px; color: #999; font-family: monospace;">Signed at: ${booking.legalAcceptanceTimestamp || booking.timestamp || new Date().toISOString()}</p>
       </div>
 
@@ -119,6 +121,16 @@ export const sendClientConfirmation = async (booking: BookingRecord): Promise<bo
         <p style="margin: 0 0 15px 0; font-size: 14px;"><strong>Servizio:</strong> ${booking.tier ? booking.tier.toUpperCase() : (booking.serviceType || 'Lifestyle Management')}</p>
         <p style="margin: 0 0 15px 0; font-size: 14px;"><strong>Data & Ora:</strong> ${booking.date} @ ${booking.time}</p>
         <p style="margin: 0; font-size: 14px;"><strong>Onorario Stimato:</strong> €${booking.estimatedPrice}</p>
+      </div>
+
+      <div style="margin-top: 40px; padding: 25px; border: 1px dashed #D4AF37; background: #fafafa;">
+        <h4 style="margin: 0 0 15px 0; font-size: 11px; text-transform: uppercase; letter-spacing: 2px; color: #D4AF37;">Proof of Legal Consent:</h4>
+        <div style="margin-bottom: 15px;">
+          <a href="${window.location.origin}/protocollo?id=${booking.id}&doc=contract" style="display: block; margin-bottom: 8px; font-size: 12px; color: #000; text-decoration: none;">☑️ <strong>Contratto d'Opera</strong> &rarr; <span style="color: #D4AF37; text-decoration: underline;">Leggi Copia Conforme</span></a>
+          <a href="${window.location.origin}/protocollo?id=${booking.id}&doc=waiver" style="display: block; margin-bottom: 8px; font-size: 12px; color: #000; text-decoration: none;">☑️ <strong>Liberatoria/Manleva</strong> &rarr; <span style="color: #D4AF37; text-decoration: underline;">Leggi Copia Conforme</span></a>
+          <p style="margin: 0; font-size: 12px; color: #666;">☑️ <strong>Privacy & TOS Accepted</strong></p>
+        </div>
+        <p style="margin: 15px 0 0 0; font-size: 10px; color: #999; font-family: monospace;">Signed at: ${booking.legalAcceptanceTimestamp || booking.timestamp || new Date().toISOString()}</p>
       </div>
 
       <div style="background: #000; color: #D4AF37; padding: 40px; text-align: center; margin-bottom: 50px;">

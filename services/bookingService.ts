@@ -128,6 +128,32 @@ export const fetchAllBookings = async (): Promise<BookingRecord[]> => {
 };
 
 /**
+ * Fetches a single booking by its ID
+ */
+export const fetchBookingById = async (id: string): Promise<BookingRecord | null> => {
+  if (isSupabaseConfigured()) {
+    try {
+      const { data, error } = await supabase
+        .from('bookings')
+        .select('*')
+        .eq('id', id)
+        .single();
+
+      if (error) {
+        console.error(`❌ Supabase fetch error for ID ${id}:`, error);
+        return null;
+      }
+
+      return data ? rowToBookingRecord(data) : null;
+    } catch (e) {
+      console.error(`❌ Failed to fetch booking ${id}:`, e);
+      return null;
+    }
+  }
+  return null;
+};
+
+/**
  * Uploads attachments to Supabase Storage and returns their public URLs
  */
 export const uploadAttachments = async (files: File[], bookingId: string): Promise<string[]> => {
