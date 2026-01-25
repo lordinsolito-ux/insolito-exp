@@ -7,7 +7,7 @@ interface IntroSplashProps {
 const IntroSplash: React.FC<IntroSplashProps> = ({ onFinish }) => {
     const [step, setStep] = useState(0); // 0: Start Button, 1: Black Silence, 2: Typewriter, 3: Logo Reveal, 4: Finish
     const [displayText, setDisplayText] = useState("");
-    const fullText = "Il vero lusso non è quello che vedi. È l'arte di scomparire per lasciare posto alla tua libertà.";
+    const fullText = "Il vero lusso non è quello che vedi. È l'arte di scomparire per lasciare spazio alla tua libertà.";
     const audioRef = useRef<HTMLAudioElement | null>(null);
     const audioSrc = "https://www.dropbox.com/scl/fi/trkgfjejfgayjdkgqvt75/Drive-in-Style.mp3?rlkey=ep7dkuq7hl7swnpys0m1p7c6a&e=1&st=ccy55v2q&raw=1";
 
